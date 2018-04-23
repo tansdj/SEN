@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace SHSApplication.Business_Layer
-{
+{//This is a new comment
     public class Client
     {
         private string idNr;
