@@ -46,11 +46,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business Layer\Address.cs" />
     <Compile Include="Business Layer\Billing.cs" />
     <Compile Include="Business Layer\Client.cs" />
     <Compile Include="Business Layer\ClientProductConfiguration.cs" />
     <Compile Include="Business Layer\ClientProducts.cs" />
     <Compile Include="Business Layer\Configuration.cs" />
+    <Compile Include="Business Layer\Contact.cs" />
     <Compile Include="Business Layer\PaymentDetails.cs" />
     <Compile Include="Business Layer\Product.cs" />
     <Compile Include="Business Layer\SystemComponents.cs" />
@@ -74,6 +76,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

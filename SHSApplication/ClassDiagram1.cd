@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SHSApplication.Business_Layer.Address">
+    <Position X="0.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAMgAAACAAAAAAAAIAAAAAAAAAQAAA=</HashCode>
+      <FileName>Business Layer\Address.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SHSApplication.Business_Layer.Billing">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABEAAAAAAAgAAAAEgBAAAAAAAAAAAYABkAAAAQAAAAA=</HashCode>
+      <FileName>Business Layer\Billing.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SHSApplication.Business_Layer.Client">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASBAAAEAAAIAAAEiAAEAAQABAQEAIAAAAAAAAAAAQA=</HashCode>
+      <FileName>Business Layer\Client.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SHSApplication.Business_Layer.ClientProductConfiguration">
+    <Position X="11" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAEgAABAAAAAEAAAIBAgAAAACAAIAA=</HashCode>
+      <FileName>Business Layer\ClientProductConfiguration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SHSApplication.Business_Layer.ClientProducts">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAAAAEgAAAIAAAAAAAAIIAgAAAAAAAIAA=</HashCode>
+      <FileName>Business Layer\ClientProducts.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SHSApplication.Business_Layer.Configuration">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAEAAgAAAEoBAAAIQQAAAEAoAAAAAIAAAAIAA=</HashCode>
+      <FileName>Business Layer\Configuration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SHSApplication.Business_Layer.Contact">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAEAkgABAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Business Layer\Contact.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SHSApplication.Business_Layer.PaymentDetails">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQQAAAEEAAAAQAAEgGABAAAAAAAAAIAAgAAAQAAAAAA=</HashCode>
+      <FileName>Business Layer\PaymentDetails.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SHSApplication.Business_Layer.Product">
+    <Position X="9.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAQgAAQEAAAgAAAEoAACAAQAAEAEAIAAAAAIAAAgKAA=</HashCode>
+      <FileName>Business Layer\Product.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SHSApplication.Business_Layer.SystemComponents">
+    <Position X="7.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAgAAQEqAAEAAAAAEAAAIBAAABAAAAAQAA=</HashCode>
+      <FileName>Business Layer\SystemComponents.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SHSApplication.Business_Layer.TechnicalDetails">
+    <Position X="2.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAACAAAEhAgAAAAAQEAAAIFAAABAAAAAQAA=</HashCode>
+      <FileName>Business Layer\TechnicalDetails.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SHSApplication.Business_Layer.TechnicalLog">
+    <Position X="4" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACBAgAAgAIAAAAAEgAAAAEAAAABAAIABgAAAAQAAAAA=</HashCode>
+      <FileName>Business Layer\TechnicalLog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SHSApplication.Business_Layer.Technicians">
+    <Position X="5.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAAAAEgAAEAEQQBABEAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Business Layer\Technicians.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SHSApplication.Form1" Collapsed="true">
+    <Position X="14.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAACAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Form1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SHSApplication.Program" Collapsed="true">
+    <Position X="15.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SHSApplication.Properties.Resources">
+    <Position X="13.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SHSApplication.Properties.Settings">
+    <Position X="15.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
