@@ -11,10 +11,26 @@ namespace SHSApplication.Business_Layer
         private string techId;
         private string name;
         private string surname;
+        private Address techAddress;
+        private Contact techContact;
+
+       
 
         public Technicians()
         {
 
+        }
+        public Contact TechContact
+        {
+            get { return techContact; }
+            set { techContact = value; }
+        }
+
+
+        public Address TechAddress
+        {
+            get { return techAddress; }
+            set { techAddress = value; }
         }
 
         public string Surname

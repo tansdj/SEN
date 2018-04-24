@@ -9,8 +9,8 @@ namespace SHSApplication.Business_Layer
     public class TechnicalLog
     {
         private string eventId;
-        private string clientId;
-        private string techId;
+        private Client techLog_client;
+        private Technicians techLog_tech;
         private DateTime date;
         private string remarks;
 
@@ -33,17 +33,17 @@ namespace SHSApplication.Business_Layer
         }
 
 
-        public string TechId
+        public Technicians TechLog_Tech
         {
-            get { return techId; }
-            set { techId = value; }
+            get { return techLog_tech; }
+            set { techLog_tech = value; }
         }
 
 
-        public string ClientId
+        public Client TechLog_Client
         {
-            get { return clientId; }
-            set { clientId = value; }
+            get { return techLog_client; }
+            set { techLog_client = value; }
         }
 
 

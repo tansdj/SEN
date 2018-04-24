@@ -13,10 +13,27 @@ namespace SHSApplication.Business_Layer
         private string surname;      
         private string paymentMethod;
         private string status;
+        private Address clientAddress;
+        private Contact clientContact;
+
+        
 
         public Client()
         {
 
+        }
+
+        public Contact ClientContact
+        {
+            get { return clientContact; }
+            set { clientContact = value; }
+        }
+
+
+        public Address ClientAddress
+        {
+            get { return clientAddress; }
+            set { clientAddress = value; }
         }
 
         public string Status

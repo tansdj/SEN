@@ -12,7 +12,7 @@ namespace SHSApplication.Business_Layer
         private string configId;
         private string name;
         private string description;
-        private string productCode;
+        private SystemComponents configuration_component;
         private double addCost;
 
         public Configuration()
@@ -27,10 +27,10 @@ namespace SHSApplication.Business_Layer
         }
 
 
-        public string ProductCode
+        public SystemComponents Configuration_Component
         {
-            get { return productCode; }
-            set { productCode = value; }
+            get { return configuration_component; }
+            set { configuration_component = value; }
         }
 
 

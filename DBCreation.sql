@@ -1,5 +1,13 @@
-CREATE DATABASE
-();
+CREATE DATABASE SHSDb
+ON
+(NAME = shsdata1,
+ FILENAME = 'C:\Users\Tanya\Documents\BC\BC 3rd Year\SEN321\SHSApplication\shsdata1.mdf',
+ SIZE = 200MB,
+ MAXSIZE = UNLIMITED,
+ FILEGROWTH = 10%)
+ LOG ON
+ (NAME = shslog1,
+  FILENAME = 'C:\Users\Tanya\Documents\BC\BC 3rd Year\SEN321\SHSApplication\shslog1.ldf');
 
 CREATE TABLE tblClient
 (ClientCount INT IDENTITY,
@@ -24,8 +32,7 @@ CREATE TABLE tblClient
   )
 
   CREATE TABLE tblPaymentDetails
-  (DetCount INT IDENTITY,
-   PaymentDetId INT IDENTITY PRIMARY KEY,
+  (PaymentDetId INT IDENTITY PRIMARY KEY,
    ClientIdNr VARCHAR(13) FOREIGN KEY REFERENCES tblClient(IdNr),
    AccNr VARCHAR(20) NOT NULL,
    Bank VARCHAR(15) NOT NULL,
@@ -39,8 +46,12 @@ CREATE TABLE tblClient
 	ProdDescription VARCHAR(200) NOT NULL,
 	BasePrice SMALLMONEY NOT NULL DEFAULT 0,
 	ProdStatus VARCHAR(15) NOT NULL,
-	ProdCategory VARCHAR(30) NOT NULL
 	)
+
+	CREATE TABLE tblProductFunctions
+	(FunctionCount INT IDENTITY,
+	 ProductCode VARCHAR(10) FOREIGN KEY REFERENCES tblProducts(ProductCode),
+	 ProdFunction VARCHAR(200) NOT NULL)
 
 	CREATE TABLE tblClientProducts
 	(ClientProdCount INT IDENTITY,
@@ -54,23 +65,21 @@ CREATE TABLE tblClient
 	 ConfigurationCode VARCHAR(10) PRIMARY KEY,
 	 ConfigName VARCHAR(20) NOT NULL,
 	 ConfigDesc VARCHAR(200) NOT NULL,
-	 ProductCode VARCHAR(10) FOREIGN KEY REFERENCES tblProducts(ProductCode),
+	 ComponentCode VARCHAR(10) FOREIGN KEY REFERENCES tblSystemComponents(ComponentCode),
 	 AddCost SMALLMONEY NOT NULL DEFAULT 0
 	 )
 
-	CREATE TABLE tblClientProductConfiguration
-	(ClientProdConfigCount INT IDENTITY,
+	CREATE TABLE tblClientCompConfiguration
+	(ClientConfigCount INT IDENTITY,
 	 ClientId VARCHAR(13) FOREIGN KEY REFERENCES tblClient(IdNr),
-	 ProductCode VARCHAR(10) FOREIGN KEY REFERENCES tblProducts(ProductCode),
 	 ConfigCode VARCHAR(10) FOREIGN KEY REFERENCES tblConfiguration(ConfigurationCode),
-	 PRIMARY KEY(ClientId,ProductCode,ConfigCode)
+	 PRIMARY KEY(ClientId,ConfigCode)
 	 )
 
 	CREATE TABLE tblSystemComponents
 	(CompCount INT IDENTITY,
 	 ComponentCode VARCHAR(10) PRIMARY KEY,
 	 ProductCode VARCHAR(10) FOREIGN KEY REFERENCES tblProducts(ProductCode),
-	 ConfigCode VARCHAR(10) FOREIGN KEY REFERENCES tblConfiguration(ConfigurationCode),
 	 CompDesc VARCHAR(200) NOT NULL
 	 )
 
@@ -91,7 +100,6 @@ CREATE TABLE tblClient
 	 
 	CREATE TABLE tblTechnicalDetails
 	(DetailId INT IDENTITY PRIMARY KEY,
-	 ProductCode VARCHAR(10) FOREIGN KEY REFERENCES tblProducts(ProductCode),
 	 ConfigCode VARCHAR(10) FOREIGN KEY REFERENCES tblConfiguration(ConfigurationCode),
 	 DocPath VARCHAR(200) NOT NULL
 	 ) 

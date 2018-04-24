@@ -8,7 +8,7 @@ namespace SHSApplication.Business_Layer
 {
     public class PaymentDetails
     {
-        private string clientId;
+        private Client paymentDet_client;
         private string accNr;
         private string bank;
         private string branchCode;
@@ -39,10 +39,10 @@ namespace SHSApplication.Business_Layer
         }
 
 
-        public string ClientId
+        public Client PaymentDet_Client
         {
-            get { return clientId; }
-            set { clientId = value; }
+            get { return paymentDet_client; }
+            set { paymentDet_client = value; }
         }
 
         public override bool Equals(object obj)

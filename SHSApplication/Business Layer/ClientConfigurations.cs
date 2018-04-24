@@ -6,35 +6,26 @@ using System.Threading.Tasks;
 
 namespace SHSApplication.Business_Layer
 {
-    class ClientProductConfiguration
+    class ClientConfigurations
     {
-        private string clientId;
-        private string productCode;
-        private string configCode;
+        private Client clientConfigurations_client;
+        private Configuration clientConfigurations_configuration;
 
-        public ClientProductConfiguration()
+        public ClientConfigurations()
         {
-
+           
         }
 
-        public string ConfigCode
+        public Configuration ClientConfigurations_Configuration
         {
-            get { return configCode; }
-            set { configCode = value; }
+            get { return clientConfigurations_configuration; }
+            set { clientConfigurations_configuration = value; }
         }
 
-
-        public string ProductCode
+        public Client ClientConfigurations_Client
         {
-            get { return productCode; }
-            set { productCode = value; }
-        }
-
-
-        public string ClientId
-        {
-            get { return clientId; }
-            set { clientId = value; }
+            get { return clientConfigurations_client; }
+            set { clientConfigurations_client = value; }
         }
 
         public override bool Equals(object obj)

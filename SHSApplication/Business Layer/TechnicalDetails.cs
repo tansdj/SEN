@@ -9,8 +9,7 @@ namespace SHSApplication.Business_Layer
     public class TechnicalDetails
     {
         private string detailId;
-        private string prodCode;
-        private string configCode;
+        private Configuration techDet_config;
         private string docPath;
 
         public TechnicalDetails()
@@ -25,17 +24,10 @@ namespace SHSApplication.Business_Layer
         }
 
 
-        public string ConfigCode
+        public Configuration TechDet_Config
         {
-            get { return configCode; }
-            set { configCode = value; }
-        }
-
-
-        public string ProdCode
-        {
-            get { return prodCode; }
-            set { prodCode = value; }
+            get { return techDet_config; }
+            set { techDet_config = value; }
         }
 
 

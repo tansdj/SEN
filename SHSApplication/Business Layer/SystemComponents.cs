@@ -10,7 +10,6 @@ namespace SHSApplication.Business_Layer
     {
         private string compCode;
         private string prodCode;
-        private string configCode;
         private string description;
 
         public SystemComponents()
@@ -23,14 +22,6 @@ namespace SHSApplication.Business_Layer
             get { return description; }
             set { description = value; }
         }
-
-
-        public string ConfigCode
-        {
-            get { return configCode; }
-            set { configCode = value; }
-        }
-
 
         public string ProdCode
         {

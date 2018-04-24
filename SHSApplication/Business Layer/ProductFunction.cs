@@ -6,27 +6,27 @@ using System.Threading.Tasks;
 
 namespace SHSApplication.Business_Layer
 {
-    public class ClientProducts
+    public class ProductFunction
     {
-        private Client clientProducts_client;
-        private Product clientProducts_product;
+        private Product productFunc_product;
+        private string prodFunction;
 
-        public ClientProducts()
+        public ProductFunction()
         {
 
         }
 
-        public Product ClientProducts_Product
+        public string ProdFunction
         {
-            get { return clientProducts_product; }
-            set { clientProducts_product = value; }
+            get { return prodFunction; }
+            set { prodFunction = value; }
         }
 
 
-        public Client ClientProducts_Client
+        public Product ProductFunc_Product
         {
-            get { return clientProducts_client; }
-            set { clientProducts_client = value; }
+            get { return productFunc_product; }
+            set { productFunc_product = value; }
         }
 
         public override bool Equals(object obj)
@@ -44,9 +44,7 @@ namespace SHSApplication.Business_Layer
             return base.ToString();
         }
 
-        public void addNewClientProduct() { }
-
-        public void removeClientProduct() { }
+        public void addFunction() { }
 
     }
 }

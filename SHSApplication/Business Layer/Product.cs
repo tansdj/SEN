@@ -13,19 +13,12 @@ namespace SHSApplication.Business_Layer
         private string description;
         private double basePrice;
         private string status;
-        private string category;
+        
 
         public Product()
         {
 
         }
-
-        public string Category
-        {
-            get { return category; }
-            set { category = value; }
-        }
-
 
         public string Status
         {
