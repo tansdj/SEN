@@ -9,16 +9,26 @@ ON
  (NAME = shslog1,
   FILENAME = 'C:\Users\Tanya\Documents\BC\BC 3rd Year\SEN321\SHSApplication\shslog1.ldf');
 
+CREATE TABLE tblAddress
+(AddressId VARCHAR(5) PRIMARY KEY,
+ AddressLine1 VARCHAR(30) NOT NULL,
+ AddressLine2 VARCHAR(30) NOT NULL,
+ City VARCHAR(20) NOT NULL
+)
+
+CREATE TABLE tblContact
+(ContactId VARCHAR(5) PRIMARY KEY,
+ Cell VARCHAR(10) NOT NULL,
+ Email VARCHAR(50) NOT NULL
+ )
+
 CREATE TABLE tblClient
 (ClientCount INT IDENTITY,
  IdNr VARCHAR(13) PRIMARY KEY,
  ClientName VARCHAR(50) NOT NULL,
  ClientSurname VARCHAR(50) NOT NULL,
- AddressLine1 VARCHAR(30) NOT NULL,
- AddressLine2 VARCHAR(30) NOT NULL,
- City VARCHAR(20) NOT NULL,
- Cell VARCHAR(10) NOT NULL,
- Email VARCHAR(50) NOT NULL,
+ AddressId VARCHAR(5) FOREIGN KEY REFERENCES tblAddress(AddressId),
+ ContactId VARCHAR(5) FOREIGN KEY REFERENCES tblContact(ContactId),
  PaymentMethod VARCHAR(30) NOT NULL,
  ClientStatus VARCHAR(20) NOT NULL
  )
@@ -45,7 +55,19 @@ CREATE TABLE tblClient
 	ProdName VARCHAR(20) NOT NULL,
 	ProdDescription VARCHAR(200) NOT NULL,
 	BasePrice SMALLMONEY NOT NULL DEFAULT 0,
-	ProdStatus VARCHAR(15) NOT NULL,
+	ProdStatus VARCHAR(15) NOT NULL
+	)
+
+   CREATE TABLE tblVendors
+   (VendorCode VARCHAR(10) PRIMARY KEY,
+    VendorName VARCHAR(30) NOT NULL,
+	AddressId VARCHAR(5) FOREIGN KEY REFERENCES tblAddress(AddressId),
+	ContactId VARCHAR(5) FOREIGN KEY REFERENCES tblContact(ContactId)
+	)
+
+	CREATE TABLE tblProductVendors
+	(ProductCode VARCHAR(10) FOREIGN KEY REFERENCES tblProducts(ProductCode),
+	 VendorCode VARCHAR(10) FOREIGN KEY REFERENCES tblVendors(VendorCode)
 	)
 
 	CREATE TABLE tblProductFunctions
@@ -59,6 +81,13 @@ CREATE TABLE tblClient
 	 ProductCode VARCHAR(10) FOREIGN KEY REFERENCES tblProducts(ProductCode),
 	 PRIMARY KEY(ClientIdNr,ProductCode)
 	)
+
+	CREATE TABLE tblSystemComponents
+	(CompCount INT IDENTITY,
+	 ComponentCode VARCHAR(10) PRIMARY KEY,
+	 ProductCode VARCHAR(10) FOREIGN KEY REFERENCES tblProducts(ProductCode),
+	 CompDesc VARCHAR(200) NOT NULL
+	 )
 
 	CREATE TABLE tblConfiguration
 	(ConfigCount INT IDENTITY,
@@ -76,18 +105,13 @@ CREATE TABLE tblClient
 	 PRIMARY KEY(ClientId,ConfigCode)
 	 )
 
-	CREATE TABLE tblSystemComponents
-	(CompCount INT IDENTITY,
-	 ComponentCode VARCHAR(10) PRIMARY KEY,
-	 ProductCode VARCHAR(10) FOREIGN KEY REFERENCES tblProducts(ProductCode),
-	 CompDesc VARCHAR(200) NOT NULL
-	 )
-
 	CREATE TABLE tblTechnicians
 	(TechCount INT IDENTITY,
 	 TechId VARCHAR(13) PRIMARY KEY,
 	 TechName VARCHAR(20) NOT NULL,
-	 TechSurname VARCHAR(20) NOT NULL
+	 TechSurname VARCHAR(20) NOT NULL,
+	 ContactId VARCHAR(5) FOREIGN KEY REFERENCES tblContact(ContactId),
+	 AddressId VARCHAR(5) FOREIGN KEY REFERENCES tblAddress(AddressId)
 	 )
 
 	CREATE TABLE tblTechnicalLog
