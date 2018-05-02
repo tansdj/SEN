@@ -9,15 +9,32 @@ ON
  (NAME = shslog1,
   FILENAME = 'C:\Users\Tanya\Documents\BC\BC 3rd Year\SEN321\SHSApplication\shslog1.ldf');
 
+DROP TABLE tblPaymentDetails;
+DROP TABLE tblBilling;
+DROP TABLE tblTechnicalDetails
+DROP TABLE tblTechnicalLog;
+DROP TABLE tblTechnicians;
+DROP TABLE tblClientProducts;
+DROP TABLE tblClientCompConfiguration;
+DROP TABLE tblConfiguration;
+DROP TABLE tblSystemComponents;
+DROP TABLE tblClient;
+DROP TABLE tblProductFunctions;
+DROP TABLE tblVendors;
+DROP TABLE tblProductVendors;
+DROP TABLE tblContact;
+DROP TABLE tblAddress;
+DROP TABLE tblProducts;
+
 CREATE TABLE tblAddress
-(AddressId VARCHAR(5) PRIMARY KEY,
+(AddressId VARCHAR(17) PRIMARY KEY,
  AddressLine1 VARCHAR(30) NOT NULL,
  AddressLine2 VARCHAR(30) NOT NULL,
  City VARCHAR(20) NOT NULL
 )
 
 CREATE TABLE tblContact
-(ContactId VARCHAR(5) PRIMARY KEY,
+(ContactId VARCHAR(17) PRIMARY KEY,
  Cell VARCHAR(10) NOT NULL,
  Email VARCHAR(50) NOT NULL
  )
@@ -27,8 +44,8 @@ CREATE TABLE tblClient
  IdNr VARCHAR(13) PRIMARY KEY,
  ClientName VARCHAR(50) NOT NULL,
  ClientSurname VARCHAR(50) NOT NULL,
- AddressId VARCHAR(5) FOREIGN KEY REFERENCES tblAddress(AddressId),
- ContactId VARCHAR(5) FOREIGN KEY REFERENCES tblContact(ContactId),
+ AddressId VARCHAR(17) FOREIGN KEY REFERENCES tblAddress(AddressId),
+ ContactId VARCHAR(17) FOREIGN KEY REFERENCES tblContact(ContactId),
  PaymentMethod VARCHAR(30) NOT NULL,
  ClientStatus VARCHAR(20) NOT NULL
  )
@@ -61,8 +78,8 @@ CREATE TABLE tblClient
    CREATE TABLE tblVendors
    (VendorCode VARCHAR(10) PRIMARY KEY,
     VendorName VARCHAR(30) NOT NULL,
-	AddressId VARCHAR(5) FOREIGN KEY REFERENCES tblAddress(AddressId),
-	ContactId VARCHAR(5) FOREIGN KEY REFERENCES tblContact(ContactId)
+	AddressId VARCHAR(17) FOREIGN KEY REFERENCES tblAddress(AddressId),
+	ContactId VARCHAR(17) FOREIGN KEY REFERENCES tblContact(ContactId)
 	)
 
 	CREATE TABLE tblProductVendors
@@ -110,8 +127,9 @@ CREATE TABLE tblClient
 	 TechId VARCHAR(13) PRIMARY KEY,
 	 TechName VARCHAR(20) NOT NULL,
 	 TechSurname VARCHAR(20) NOT NULL,
-	 ContactId VARCHAR(5) FOREIGN KEY REFERENCES tblContact(ContactId),
-	 AddressId VARCHAR(5) FOREIGN KEY REFERENCES tblAddress(AddressId)
+	 ContactId VARCHAR(17) FOREIGN KEY REFERENCES tblContact(ContactId),
+	 AddressId VARCHAR(17) FOREIGN KEY REFERENCES tblAddress(AddressId),
+	 TechStatus VARCHAR(10) NOT NULL
 	 )
 
 	CREATE TABLE tblTechnicalLog

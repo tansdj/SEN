@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SHSApplication.Business_Layer
 {
-    public class Configuration
+    public class Configurations
     {
 
         private string configId;
@@ -15,7 +15,7 @@ namespace SHSApplication.Business_Layer
         private SystemComponents configuration_component;
         private double addCost;
 
-        public Configuration()
+        public Configurations()
         {
 
         }

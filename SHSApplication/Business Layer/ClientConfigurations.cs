@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace SHSApplication.Business_Layer
 {
-    class ClientConfigurations
+    public class ClientConfigurations
     {
         private Client clientConfigurations_client;
-        private Configuration clientConfigurations_configuration;
+        private Configurations clientConfigurations_configuration;
 
         public ClientConfigurations()
         {
            
         }
 
-        public Configuration ClientConfigurations_Configuration
+        public Configurations ClientConfigurations_Configuration
         {
             get { return clientConfigurations_configuration; }
             set { clientConfigurations_configuration = value; }

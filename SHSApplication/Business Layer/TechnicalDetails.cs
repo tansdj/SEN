@@ -8,8 +8,8 @@ namespace SHSApplication.Business_Layer
 {
     public class TechnicalDetails
     {
-        private string detailId;
-        private Configuration techDet_config;
+        private int detailId;
+        private Configurations techDet_config;
         private string docPath;
 
         public TechnicalDetails()
@@ -24,14 +24,14 @@ namespace SHSApplication.Business_Layer
         }
 
 
-        public Configuration TechDet_Config
+        public Configurations TechDet_Config
         {
             get { return techDet_config; }
             set { techDet_config = value; }
         }
 
 
-        public string DetailId
+        public int DetailId
         {
             get { return detailId; }
             set { detailId = value; }
@@ -53,8 +53,6 @@ namespace SHSApplication.Business_Layer
         }
 
         public void addDetail() { }
-
-        public void updateDetail() { }
 
         public void removeDetail() { }
     }
