@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ServerSide;
 
 namespace SHSApplication.Business_Layer
 {
@@ -15,9 +16,13 @@ namespace SHSApplication.Business_Layer
         private string status;
         
 
-        public Product()
+        public Product(string productCode, string name, string description, double basePrice, string status)
         {
-
+            this.ProductCode = productCode;
+            this.Name = name;
+            this.Description = description;
+            this.BasePrice = basePrice;
+            this.Status = status;
         }
 
         public string Status
@@ -56,12 +61,22 @@ namespace SHSApplication.Business_Layer
 
         public override bool Equals(object obj)
         {
-            return base.Equals(obj);
+            if (obj==null)
+            {
+                return false;
+            }
+
+            Product p = obj as Product;
+            if ((object)p==null)
+            {
+                return false;
+            }
+            return (this.ProductCode==p.ProductCode)&&(this.Name==p.Name)&&(this.Description==p.Description)&&(this.BasePrice==p.BasePrice)&&(this.Status==p.Status);
         }
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return this.ProductCode.GetHashCode()^this.Name.GetHashCode()^this.Description.GetHashCode()^this.BasePrice.GetHashCode()^this.Status.GetHashCode();
         }
 
         public override string ToString()

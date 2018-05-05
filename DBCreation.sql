@@ -20,21 +20,21 @@ DROP TABLE tblConfiguration;
 DROP TABLE tblSystemComponents;
 DROP TABLE tblClient;
 DROP TABLE tblProductFunctions;
-DROP TABLE tblVendors;
 DROP TABLE tblProductVendors;
+DROP TABLE tblVendors;
 DROP TABLE tblContact;
 DROP TABLE tblAddress;
 DROP TABLE tblProducts;
 
 CREATE TABLE tblAddress
-(AddressId VARCHAR(17) PRIMARY KEY,
+(pAddressId VARCHAR(17) PRIMARY KEY,
  AddressLine1 VARCHAR(30) NOT NULL,
  AddressLine2 VARCHAR(30) NOT NULL,
  City VARCHAR(20) NOT NULL
 )
 
 CREATE TABLE tblContact
-(ContactId VARCHAR(17) PRIMARY KEY,
+(pContactId VARCHAR(17) PRIMARY KEY,
  Cell VARCHAR(10) NOT NULL,
  Email VARCHAR(50) NOT NULL
  )
@@ -44,8 +44,8 @@ CREATE TABLE tblClient
  IdNr VARCHAR(13) PRIMARY KEY,
  ClientName VARCHAR(50) NOT NULL,
  ClientSurname VARCHAR(50) NOT NULL,
- AddressId VARCHAR(17) FOREIGN KEY REFERENCES tblAddress(AddressId),
- ContactId VARCHAR(17) FOREIGN KEY REFERENCES tblContact(ContactId),
+ AddressId VARCHAR(17) FOREIGN KEY REFERENCES tblAddress(pAddressId),
+ ContactId VARCHAR(17) FOREIGN KEY REFERENCES tblContact(pContactId),
  PaymentMethod VARCHAR(30) NOT NULL,
  ClientStatus VARCHAR(20) NOT NULL
  )
@@ -78,13 +78,8 @@ CREATE TABLE tblClient
    CREATE TABLE tblVendors
    (VendorCode VARCHAR(10) PRIMARY KEY,
     VendorName VARCHAR(30) NOT NULL,
-	AddressId VARCHAR(17) FOREIGN KEY REFERENCES tblAddress(AddressId),
-	ContactId VARCHAR(17) FOREIGN KEY REFERENCES tblContact(ContactId)
-	)
-
-	CREATE TABLE tblProductVendors
-	(ProductCode VARCHAR(10) FOREIGN KEY REFERENCES tblProducts(ProductCode),
-	 VendorCode VARCHAR(10) FOREIGN KEY REFERENCES tblVendors(VendorCode)
+	AddressId VARCHAR(17) FOREIGN KEY REFERENCES tblAddress(pAddressId),
+	ContactId VARCHAR(17) FOREIGN KEY REFERENCES tblContact(pContactId)
 	)
 
 	CREATE TABLE tblProductFunctions
@@ -105,6 +100,12 @@ CREATE TABLE tblClient
 	 ProductCode VARCHAR(10) FOREIGN KEY REFERENCES tblProducts(ProductCode),
 	 CompDesc VARCHAR(200) NOT NULL
 	 )
+	 CREATE TABLE tblComponentVendors
+	(CompVendorCount INT IDENTITY,
+	 ComponentCode VARCHAR(10) FOREIGN KEY REFERENCES tblSystemComponents(ComponentCode),
+	 VendorCode VARCHAR(10) FOREIGN KEY REFERENCES tblVendors(VendorCode)
+	 PRIMARY KEY(ComponentCode,VendorCode)
+	)
 
 	CREATE TABLE tblConfiguration
 	(ConfigCount INT IDENTITY,
@@ -127,8 +128,8 @@ CREATE TABLE tblClient
 	 TechId VARCHAR(13) PRIMARY KEY,
 	 TechName VARCHAR(20) NOT NULL,
 	 TechSurname VARCHAR(20) NOT NULL,
-	 ContactId VARCHAR(17) FOREIGN KEY REFERENCES tblContact(ContactId),
-	 AddressId VARCHAR(17) FOREIGN KEY REFERENCES tblAddress(AddressId),
+	 ContactId VARCHAR(17) FOREIGN KEY REFERENCES tblContact(pContactId),
+	 AddressId VARCHAR(17) FOREIGN KEY REFERENCES tblAddress(pAddressId),
 	 TechStatus VARCHAR(10) NOT NULL
 	 )
 

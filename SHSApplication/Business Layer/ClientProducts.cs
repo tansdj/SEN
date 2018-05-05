@@ -11,9 +11,10 @@ namespace SHSApplication.Business_Layer
         private Client clientProducts_client;
         private Product clientProducts_product;
 
-        public ClientProducts()
+        public ClientProducts(Client clientProducts_client, Product clientProducts_product)
         {
-
+            this.ClientProducts_Client = clientProducts_client;
+            this.ClientProducts_Product = clientProducts_product;
         }
 
         public Product ClientProducts_Product
@@ -31,12 +32,22 @@ namespace SHSApplication.Business_Layer
 
         public override bool Equals(object obj)
         {
-            return base.Equals(obj);
+            if (obj==null)
+            {
+                return false;
+            }
+
+            ClientProducts cp = obj as ClientProducts;
+            if ((object)cp==null)
+            {
+                return false;
+            }
+            return (this.ClientProducts_Client==cp.ClientProducts_Client)&&(this.ClientProducts_Product==cp.ClientProducts_Product);
         }
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return this.ClientProducts_Client.GetHashCode()^this.ClientProducts_Product.GetHashCode();
         }
 
         public override string ToString()

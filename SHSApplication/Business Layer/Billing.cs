@@ -13,10 +13,15 @@ namespace SHSApplication.Business_Layer
         private double amountDue;
         private double amountPaid;
 
-        public Billing()
+        public Billing(string clientId, DateTime date, double amountDue, double amountPaid)
         {
-
+            this.ClientId = clientId;
+            this.Date = date;
+            this.AmountDue = amountDue;
+            this.AmountPaid = amountPaid;
         }
+
+        public Billing(){}
 
         public double AmountPaid
         {
@@ -47,12 +52,22 @@ namespace SHSApplication.Business_Layer
 
         public override bool Equals(object obj)
         {
-            return base.Equals(obj);
+            if (obj==null)
+            {
+                return false;
+            }
+
+            Billing b = obj as Billing;
+            if ((object)b==null)
+            {
+                return false;
+            }
+            return (this.ClientId==b.ClientId)&&(this.Date==b.Date)&&(this.AmountDue==b.AmountDue)&&(this.AmountPaid==b.AmountPaid);
         }
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return this.ClientId.GetHashCode()^this.Date.GetHashCode()^this.AmountDue.GetHashCode()^this.AmountPaid.GetHashCode();
         }
 
         public override string ToString()

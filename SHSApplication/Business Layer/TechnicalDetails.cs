@@ -12,9 +12,11 @@ namespace SHSApplication.Business_Layer
         private Configurations techDet_config;
         private string docPath;
 
-        public TechnicalDetails()
+        public TechnicalDetails(int detailId, Configurations techDet_config, string docPath)
         {
-
+            this.DetailId = detailId;
+            this.TechDet_Config = techDet_config;
+            this.DocPath = docPath;
         }
 
         public string DocPath
@@ -39,12 +41,22 @@ namespace SHSApplication.Business_Layer
 
         public override bool Equals(object obj)
         {
-            return base.Equals(obj);
+            if (obj==null)
+            {
+                return false;
+            }
+
+            TechnicalDetails td = obj as TechnicalDetails;
+            if ((object)td==null)
+            {
+                return false;
+            }
+            return (this.DetailId==td.DetailId)&&(this.TechDet_Config==td.TechDet_Config)&&(this.DocPath==td.DocPath);
         }
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return this.DetailId.GetHashCode()^this.TechDet_Config.GetHashCode()^this.DocPath.GetHashCode();
         }
 
         public override string ToString()

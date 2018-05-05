@@ -8,13 +8,23 @@ namespace SHSApplication.Business_Layer
 {
     public class Address
     {
+        private string addressId;
         private string addressLine1;
         private string addressLine2;
         private string city;
 
-        public Address()
+        public Address(string addressId, string addressLine1, string addressLine2, string city)
         {
+            this.AddressId = addressId;
+            this.AddressLine1 = addressLine1;
+            this.AddressLine2 = addressLine2;
+            this.City = city;
+        }
 
+        public string AddressId
+        {
+            get { return addressId; }
+            set { addressId = value; }
         }
 
         public string City
@@ -39,12 +49,22 @@ namespace SHSApplication.Business_Layer
 
         public override bool Equals(object obj)
         {
-            return base.Equals(obj);
+            if (obj==null)
+            {
+                return false;
+            }
+
+            Address a = obj as Address;
+            if ((object)a==null)
+            {
+                return false;
+            }
+            return (this.AddressId==a.AddressId)&&(this.AddressLine1==a.AddressLine1)&&(this.AddressLine2==a.AddressLine2)&&(this.City==a.City);
         }
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return this.AddressId.GetHashCode()^this.AddressLine1.GetHashCode()^this.AddressLine2.GetHashCode()^this.City.GetHashCode();
         }
 
         public override string ToString()

@@ -17,7 +17,7 @@
   <Class Name="SHSApplication.Business_Layer.Client">
     <Position X="11" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgSJAAAEAAAIAAAEiAAEAAQABAQGAIgAAAAAAAAAAQA=</HashCode>
+      <HashCode>AASBAAAEAAAAAAAEgAAAAAAAAAQAAIAAAAAAAAAAAQA=</HashCode>
       <FileName>Business Layer\Client.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -35,11 +35,11 @@
       <FileName>Business Layer\ClientProducts.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SHSApplication.Business_Layer.Configuration">
+  <Class Name="SHSApplication.Business_Layer.Configurations">
     <Position X="14.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAEAAgAAAEoBAAAIQQAAAEAoIAAAAKAAAAAAA=</HashCode>
-      <FileName>Business Layer\Configuration.cs</FileName>
+      <FileName>Business Layer\Configurations.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SHSApplication.Business_Layer.Contact">
@@ -73,14 +73,14 @@
   <Class Name="SHSApplication.Business_Layer.SystemComponents">
     <Position X="7.5" Y="4.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAABAAAAAAgAAQEqAAEAAAAAAAAAIAAAABAAAAAQAA=</HashCode>
+      <HashCode>AAAABAABAAAgAAQEqAAEAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
       <FileName>Business Layer\SystemComponents.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SHSApplication.Business_Layer.TechnicalDetails">
     <Position X="0.5" Y="4.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAABAAAAAAACAAAEhAgAAAAAQAgAAIEIAAAAAAAAQAA=</HashCode>
+      <HashCode>AAABAAAAAAACAAAEhAAAAAAAQAgAAIEIAAAAAAAAQAA=</HashCode>
       <FileName>Business Layer\TechnicalDetails.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -94,7 +94,7 @@
   <Class Name="SHSApplication.Business_Layer.Technicians">
     <Position X="4" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CAAAIABAAAAAQAAEgAAEAEQQBABEAIAAAAAAAAgAAAA=</HashCode>
+      <HashCode>AAAAIAAAAAAAAAAEgAAAAAAQAAAAAIAgAAAAIAAAAAA=</HashCode>
       <FileName>Business Layer\Technicians.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -129,6 +129,20 @@
     <Position X="16" Y="0.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SHSApplication.Business_Layer.Person">
+    <Position X="12" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAABAAEgAAEAAQABAAEAJAEAAAAAAAEAAA=</HashCode>
+      <FileName>Business Layer\Person.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SHSApplication.Business_Layer.ComponentVendors">
+    <Position X="14" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAIAAAAAAAAAAAAQAAAAEAAAAAA=</HashCode>
+      <FileName>Business Layer\ComponentVendors.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

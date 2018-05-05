@@ -9,12 +9,14 @@ namespace SHSApplication.Business_Layer
     public class SystemComponents
     {
         private string compCode;
-        private string prodCode;
+        private Product sysComps_product;
         private string description;
 
-        public SystemComponents()
+        public SystemComponents(string compCode, Product sysComps_product, string description)
         {
-
+            this.CompCode = compCode;
+            this.SysComps_Product = sysComps_product;
+            this.Description = description;
         }
 
         public string Description
@@ -23,10 +25,10 @@ namespace SHSApplication.Business_Layer
             set { description = value; }
         }
 
-        public string ProdCode
+        public Product SysComps_Product
         {
-            get { return prodCode; }
-            set { prodCode = value; }
+            get { return sysComps_product; }
+            set { sysComps_product = value; }
         }
 
 
@@ -38,12 +40,22 @@ namespace SHSApplication.Business_Layer
 
         public override bool Equals(object obj)
         {
-            return base.Equals(obj);
+            if (obj==null)
+            {
+                return false;
+            }
+
+            SystemComponents sc = obj as SystemComponents;
+            if ((object)sc==null)
+            {
+                return false;
+            }
+            return (this.CompCode==sc.CompCode)&&(this.Description==sc.Description)&&(this.SysComps_Product==sc.SysComps_Product);
         }
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return this.CompCode.GetHashCode()^this.Description.GetHashCode()^this.SysComps_Product.GetHashCode();
         }
 
         public override string ToString()

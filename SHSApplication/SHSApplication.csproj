@@ -54,9 +54,12 @@
     <Compile Include="Business Layer\Configurations.cs" />
     <Compile Include="Business Layer\Contact.cs" />
     <Compile Include="Business Layer\CustomExceptions.cs" />
+    <Compile Include="HelperLibrabries\DataAccesHelper.cs" />
     <Compile Include="Business Layer\PaymentDetails.cs" />
+    <Compile Include="Business Layer\Person.cs" />
     <Compile Include="Business Layer\Product.cs" />
     <Compile Include="Business Layer\ProductFunction.cs" />
+    <Compile Include="Business Layer\ComponentVendors.cs" />
     <Compile Include="Business Layer\SystemComponents.cs" />
     <Compile Include="Business Layer\TechnicalDetails.cs" />
     <Compile Include="Business Layer\TechnicalLog.cs" />
@@ -94,7 +97,12 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ServerSide\ServerSide.csproj">
+      <Project>{43d0128b-df0b-4b17-805d-cccfa34f2b48}</Project>
+      <Name>ServerSide</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

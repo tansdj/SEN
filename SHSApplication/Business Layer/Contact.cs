@@ -8,12 +8,21 @@ namespace SHSApplication.Business_Layer
 {
     public class Contact
     {
+        private string contactId;
         private string cell;
         private string email;
 
-        public Contact()
+        public Contact(string contactId, string cell, string email)
         {
+            this.ContactId = contactId;
+            this.Cell = cell;
+            this.Email = email;
+        }
 
+        public string ContactId
+        {
+            get { return contactId; }
+            set { contactId = value; }
         }
 
         public string Email
@@ -31,12 +40,22 @@ namespace SHSApplication.Business_Layer
 
         public override bool Equals(object obj)
         {
-            return base.Equals(obj);
+            if (obj==null)
+            {
+                return false;
+            }
+
+            Contact c = obj as Contact;
+            if ((object)c==null)
+            {
+                return false;
+            }
+            return (this.ContactId==c.ContactId)&&(this.Cell==c.Cell)&&(this.Email==c.Email);
         }
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return this.ContactId.GetHashCode()^this.Cell.GetHashCode()^this.Email.GetHashCode();
         }
 
         public override string ToString()

@@ -13,9 +13,12 @@ namespace SHSApplication.Business_Layer
         private string bank;
         private string branchCode;
 
-        public PaymentDetails()
+        public PaymentDetails(Client paymentDet_client, string accNr, string bank, string branchCode)
         {
-
+            this.PaymentDet_Client = paymentDet_client;
+            this.AccNr = accNr;
+            this.Bank = bank;
+            this.BranchCode = branchCode;
         }
 
         public string BranchCode
@@ -47,12 +50,22 @@ namespace SHSApplication.Business_Layer
 
         public override bool Equals(object obj)
         {
-            return base.Equals(obj);
+            if (obj==null)
+            {
+                return false;
+            }
+
+            PaymentDetails pd = obj as PaymentDetails;
+            if ((object)pd==null)
+            {
+                return false;
+            }
+            return (this.PaymentDet_Client==pd.PaymentDet_Client)&&(this.AccNr==pd.AccNr)&&(this.Bank==pd.Bank)&&(this.BranchCode==pd.BranchCode);
         }
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return this.PaymentDet_Client.GetHashCode() ^ this.AccNr.GetHashCode() ^ this.Bank.GetHashCode() ^ this.BranchCode.GetHashCode();
         }
 
         public override string ToString()

@@ -15,9 +15,13 @@ namespace SHSApplication.Business_Layer
         private SystemComponents configuration_component;
         private double addCost;
 
-        public Configurations()
+        public Configurations(string configId, string name, string description, SystemComponents configuration_component, double addCost)
         {
-
+            this.ConfigId = configId;
+            this.Name = name;
+            this.Description = description;
+            this.Configuration_Component = configuration_component;
+            this.AddCost = addCost;
         }
 
         public double AddCost
@@ -56,12 +60,22 @@ namespace SHSApplication.Business_Layer
 
         public override bool Equals(object obj)
         {
-            return base.Equals(obj);
+            if (obj==null)
+            {
+                return false;
+            }
+
+            Configurations c = obj as Configurations;
+            if ((object)c==null)
+            {
+                return false;
+            }
+            return (this.ConfigId==c.ConfigId)&&(this.Name==c.Name)&&(this.Description==c.Description)&&(this.Configuration_Component==c.Configuration_Component)&&(this.AddCost==c.AddCost);
         }
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return this.ConfigId.GetHashCode()^this.Name.GetHashCode()^this.Description.GetHashCode()^this.Configuration_Component.GetHashCode()^this.AddCost.GetHashCode();
         }
 
         public override string ToString()

@@ -3,64 +3,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ServerSide;
+using SHSApplication.HelperLibraries;
 
 namespace SHSApplication.Business_Layer
 {
-    public class Technicians
+    public class Technicians:Person
     {
-        private string techId;
-        private string name;
-        private string surname;
-        private Address techAddress;
-        private Contact techContact;
+        private string status;    
 
-       
-
-        public Technicians()
+        public Technicians(string personId, string name, string surname, Address personAddress, Contact personContact, string status) :base(personId,name, surname,personAddress,personContact)
         {
-
-        }
-        public Contact TechContact
-        {
-            get { return techContact; }
-            set { techContact = value; }
+            this.Status = status;
         }
 
-
-        public Address TechAddress
+        public string Status
         {
-            get { return techAddress; }
-            set { techAddress = value; }
-        }
-
-        public string Surname
-        {
-            get { return surname; }
-            set { surname = value; }
-        }
-
-
-        public string Name
-        {
-            get { return name; }
-            set { name = value; }
-        }
-
-
-        public string TechId
-        {
-            get { return techId; }
-            set { techId = value; }
+            get { return status; }
+            set { status = value; }
         }
 
         public override bool Equals(object obj)
         {
-            return base.Equals(obj);
+            if (obj==null)
+            {
+                return false;
+            }
+
+            Technicians t = obj as Technicians;
+            if ((object)t==null)
+            {
+                return false;
+            }
+            return base.Equals(obj)&&(this.Status==t.Status);
         }
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return base.GetHashCode()^this.Status.GetHashCode();
         }
 
         public override string ToString()
@@ -68,9 +48,62 @@ namespace SHSApplication.Business_Layer
             return base.ToString();
         }
 
-        public void addTech() { }
+        public void AddTech()
+        {
+            Datahandler dh = Datahandler.getData();
+            Dictionary<string, string[]> tech_details = new Dictionary<string, string[]>();
+            Dictionary<string, string[]> addr_details = new Dictionary<string, string[]>();
+            Dictionary<string, string[]> cont_details = new Dictionary<string, string[]>();
+            this.PersonAddress.AddressId = "ADDR" + this.PersonId;
+            this.PersonContact.ContactId = "CONT" + this.PersonId;
 
-        public void removeTech() { }
+            tech_details.Add(DataAccesHelper.techId, new string[] { DataAccesHelper.typeString, this.PersonId });
+            tech_details.Add(DataAccesHelper.techName, new string[] { DataAccesHelper.typeString, this.Name });
+            tech_details.Add(DataAccesHelper.techSurname, new string[] { DataAccesHelper.typeString, this.Surname });
+            tech_details.Add(DataAccesHelper.techAddressId, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressId });
+            tech_details.Add(DataAccesHelper.techContactId, new string[] { DataAccesHelper.typeString, this.PersonContact.ContactId });
+            tech_details.Add(DataAccesHelper.techStatus, new string[] { DataAccesHelper.typeString, this.Status });
+            addr_details.Add(DataAccesHelper.addressId, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressId });
+            addr_details.Add(DataAccesHelper.addrLine1, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressLine1 });
+            addr_details.Add(DataAccesHelper.addrLine2, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressLine2 });
+            addr_details.Add(DataAccesHelper.addrCity, new string[] { DataAccesHelper.typeString, this.PersonAddress.City });
+            cont_details.Add(DataAccesHelper.contactId, new string[] { DataAccesHelper.typeString, this.PersonContact.ContactId });
+            cont_details.Add(DataAccesHelper.contactCell, new string[] { DataAccesHelper.typeString, this.PersonContact.Cell });
+            cont_details.Add(DataAccesHelper.contactEmail, new string[] { DataAccesHelper.typeString, this.PersonContact.Email });
+
+            dh.runQuery(DataAccesHelper.targetAddress,DataAccesHelper.requestInsert, addr_details);
+            dh.runQuery(DataAccesHelper.targetContact, DataAccesHelper.requestInsert, cont_details);
+            dh.runQuery(DataAccesHelper.targetTechnicians, DataAccesHelper.requestInsert, tech_details);
+        }
+
+
+        public void UpdateTech()
+        {
+            Datahandler dh = Datahandler.getData();
+            Dictionary<string, string[]> tech_details = new Dictionary<string, string[]>();
+            Dictionary<string, string[]> addr_details = new Dictionary<string, string[]>();
+            Dictionary<string, string[]> cont_details = new Dictionary<string, string[]>();
+            this.PersonAddress.AddressId = "ADDR" + this.PersonId;
+            this.PersonContact.ContactId = "CONT" + this.PersonId;
+
+            tech_details.Add(DataAccesHelper.techId, new string[] { DataAccesHelper.typeString, this.PersonId });
+            tech_details.Add(DataAccesHelper.techName, new string[] { DataAccesHelper.typeString, this.Name });
+            tech_details.Add(DataAccesHelper.techSurname, new string[] { DataAccesHelper.typeString, this.Surname });
+            tech_details.Add(DataAccesHelper.techAddressId, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressId });
+            tech_details.Add(DataAccesHelper.techContactId, new string[] { DataAccesHelper.typeString, this.PersonContact.ContactId });
+            tech_details.Add(DataAccesHelper.techStatus, new string[] { DataAccesHelper.typeString, this.Status });
+            addr_details.Add(DataAccesHelper.addressId, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressId });
+            addr_details.Add(DataAccesHelper.addrLine1, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressLine1 });
+            addr_details.Add(DataAccesHelper.addrLine2, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressLine2 });
+            addr_details.Add(DataAccesHelper.addrCity, new string[] { DataAccesHelper.typeString, this.PersonAddress.City });
+            cont_details.Add(DataAccesHelper.contactId, new string[] { DataAccesHelper.typeString, this.PersonContact.ContactId });
+            cont_details.Add(DataAccesHelper.contactCell, new string[] { DataAccesHelper.typeString, this.PersonContact.Cell });
+            cont_details.Add(DataAccesHelper.contactEmail, new string[] { DataAccesHelper.typeString, this.PersonContact.Email });
+
+            dh.runQuery(DataAccesHelper.targetAddress, DataAccesHelper.requestUpdate, addr_details,DataAccesHelper.addressId+ " = '"+this.PersonAddress.AddressId+"'");
+            dh.runQuery(DataAccesHelper.targetContact, DataAccesHelper.requestUpdate, cont_details,DataAccesHelper.contactId +" = "+this.PersonContact.ContactId+"'");
+            dh.runQuery(DataAccesHelper.targetTechnicians, DataAccesHelper.requestUpdate, tech_details,DataAccesHelper.techId +" = "+this.PersonId);
+        }
 
     }
 }

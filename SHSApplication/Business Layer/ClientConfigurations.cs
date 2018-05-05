@@ -11,9 +11,10 @@ namespace SHSApplication.Business_Layer
         private Client clientConfigurations_client;
         private Configurations clientConfigurations_configuration;
 
-        public ClientConfigurations()
+        public ClientConfigurations(Client clientConfigurations_client, Configurations clientConfigurations_configuration)
         {
-           
+            this.ClientConfigurations_Client = clientConfigurations_client;
+            this.ClientConfigurations_Configuration = clientConfigurations_configuration;
         }
 
         public Configurations ClientConfigurations_Configuration
@@ -30,12 +31,22 @@ namespace SHSApplication.Business_Layer
 
         public override bool Equals(object obj)
         {
-            return base.Equals(obj);
+            if (obj==null)
+            {
+                return false;
+            }
+
+            ClientConfigurations cc = obj as ClientConfigurations;
+            if ((object)cc==null)
+            {
+                return false;
+            }
+            return (this.ClientConfigurations_Client==cc.ClientConfigurations_Client)&&(this.ClientConfigurations_Configuration==cc.ClientConfigurations_Configuration);
         }
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return this.ClientConfigurations_Client.GetHashCode()^this.ClientConfigurations_Configuration.GetHashCode();
         }
 
         public override string ToString()
