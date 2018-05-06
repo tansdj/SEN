@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ServerSide;
+using SHSApplication.HelperLibraries;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -55,7 +57,38 @@ namespace SHSApplication.Business_Layer
             return base.ToString();
         }
 
-        public void addFunction() { }
+        public void InsertFunction()
+        {
+            Datahandler dh = Datahandler.getData();
+            Dictionary<string, string[]> prodFunc_details = new Dictionary<string, string[]>();
 
+            prodFunc_details.Add(DataAccesHelper.pfProductCode, new string[] { DataAccesHelper.typeString, this.ProductFunc_Product.ProductCode });
+            prodFunc_details.Add(DataAccesHelper.pfFunction, new string[] { DataAccesHelper.typeString, this.ProdFunction });
+
+            dh.runQuery(DataAccesHelper.targetProductFunction, DataAccesHelper.requestInsert, prodFunc_details);
+        }
+
+        public void UpdateFunction()
+        {
+            Datahandler dh = Datahandler.getData();
+            Dictionary<string, string[]> prodFunc_details = new Dictionary<string, string[]>();
+
+            prodFunc_details.Add(DataAccesHelper.pfProductCode, new string[] { DataAccesHelper.typeString, this.ProductFunc_Product.ProductCode });
+            prodFunc_details.Add(DataAccesHelper.pfFunction, new string[] { DataAccesHelper.typeString, this.ProdFunction });
+
+            dh.runQuery(DataAccesHelper.targetProductFunction, DataAccesHelper.requestUpdate, prodFunc_details,DataAccesHelper.pfProductCode+" = '"+this.ProductFunc_Product.ProductCode+"'");
+        }
+
+
+        public void RemoveFunction()
+        {
+            Datahandler dh = Datahandler.getData();
+            Dictionary<string, string[]> prodFunc_details = new Dictionary<string, string[]>();
+
+            prodFunc_details.Add(DataAccesHelper.pfProductCode, new string[] { DataAccesHelper.typeString, this.ProductFunc_Product.ProductCode });
+            prodFunc_details.Add(DataAccesHelper.pfFunction, new string[] { DataAccesHelper.typeString, this.ProdFunction });
+
+            dh.runQuery(DataAccesHelper.targetProductFunction, DataAccesHelper.requestDelete, prodFunc_details, DataAccesHelper.pfProductCode + " = '" + this.ProductFunc_Product.ProductCode + "'");
+        }
     }
 }

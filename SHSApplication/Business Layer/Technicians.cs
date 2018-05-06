@@ -52,8 +52,6 @@ namespace SHSApplication.Business_Layer
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> tech_details = new Dictionary<string, string[]>();
-            Dictionary<string, string[]> addr_details = new Dictionary<string, string[]>();
-            Dictionary<string, string[]> cont_details = new Dictionary<string, string[]>();
             this.PersonAddress.AddressId = "ADDR" + this.PersonId;
             this.PersonContact.ContactId = "CONT" + this.PersonId;
 
@@ -63,16 +61,9 @@ namespace SHSApplication.Business_Layer
             tech_details.Add(DataAccesHelper.techAddressId, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressId });
             tech_details.Add(DataAccesHelper.techContactId, new string[] { DataAccesHelper.typeString, this.PersonContact.ContactId });
             tech_details.Add(DataAccesHelper.techStatus, new string[] { DataAccesHelper.typeString, this.Status });
-            addr_details.Add(DataAccesHelper.addressId, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressId });
-            addr_details.Add(DataAccesHelper.addrLine1, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressLine1 });
-            addr_details.Add(DataAccesHelper.addrLine2, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressLine2 });
-            addr_details.Add(DataAccesHelper.addrCity, new string[] { DataAccesHelper.typeString, this.PersonAddress.City });
-            cont_details.Add(DataAccesHelper.contactId, new string[] { DataAccesHelper.typeString, this.PersonContact.ContactId });
-            cont_details.Add(DataAccesHelper.contactCell, new string[] { DataAccesHelper.typeString, this.PersonContact.Cell });
-            cont_details.Add(DataAccesHelper.contactEmail, new string[] { DataAccesHelper.typeString, this.PersonContact.Email });
 
-            dh.runQuery(DataAccesHelper.targetAddress,DataAccesHelper.requestInsert, addr_details);
-            dh.runQuery(DataAccesHelper.targetContact, DataAccesHelper.requestInsert, cont_details);
+            this.PersonAddress.InsertAddress();
+            this.PersonContact.InsertContact();
             dh.runQuery(DataAccesHelper.targetTechnicians, DataAccesHelper.requestInsert, tech_details);
         }
 
@@ -92,18 +83,31 @@ namespace SHSApplication.Business_Layer
             tech_details.Add(DataAccesHelper.techAddressId, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressId });
             tech_details.Add(DataAccesHelper.techContactId, new string[] { DataAccesHelper.typeString, this.PersonContact.ContactId });
             tech_details.Add(DataAccesHelper.techStatus, new string[] { DataAccesHelper.typeString, this.Status });
-            addr_details.Add(DataAccesHelper.addressId, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressId });
-            addr_details.Add(DataAccesHelper.addrLine1, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressLine1 });
-            addr_details.Add(DataAccesHelper.addrLine2, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressLine2 });
-            addr_details.Add(DataAccesHelper.addrCity, new string[] { DataAccesHelper.typeString, this.PersonAddress.City });
-            cont_details.Add(DataAccesHelper.contactId, new string[] { DataAccesHelper.typeString, this.PersonContact.ContactId });
-            cont_details.Add(DataAccesHelper.contactCell, new string[] { DataAccesHelper.typeString, this.PersonContact.Cell });
-            cont_details.Add(DataAccesHelper.contactEmail, new string[] { DataAccesHelper.typeString, this.PersonContact.Email });
 
-            dh.runQuery(DataAccesHelper.targetAddress, DataAccesHelper.requestUpdate, addr_details,DataAccesHelper.addressId+ " = '"+this.PersonAddress.AddressId+"'");
-            dh.runQuery(DataAccesHelper.targetContact, DataAccesHelper.requestUpdate, cont_details,DataAccesHelper.contactId +" = "+this.PersonContact.ContactId+"'");
-            dh.runQuery(DataAccesHelper.targetTechnicians, DataAccesHelper.requestUpdate, tech_details,DataAccesHelper.techId +" = "+this.PersonId);
+            this.PersonAddress.UpdateAddress();
+            this.PersonContact.UpdateContact();
+            dh.runQuery(DataAccesHelper.targetTechnicians, DataAccesHelper.requestUpdate, tech_details,DataAccesHelper.techId +" = '"+this.PersonId+"'");
         }
 
+        public void RemoveTech()
+        {
+            Datahandler dh = Datahandler.getData();
+            Dictionary<string, string[]> tech_details = new Dictionary<string, string[]>();
+            Dictionary<string, string[]> addr_details = new Dictionary<string, string[]>();
+            Dictionary<string, string[]> cont_details = new Dictionary<string, string[]>();
+            this.PersonAddress.AddressId = "ADDR" + this.PersonId;
+            this.PersonContact.ContactId = "CONT" + this.PersonId;
+
+            tech_details.Add(DataAccesHelper.techId, new string[] { DataAccesHelper.typeString, this.PersonId });
+            tech_details.Add(DataAccesHelper.techName, new string[] { DataAccesHelper.typeString, this.Name });
+            tech_details.Add(DataAccesHelper.techSurname, new string[] { DataAccesHelper.typeString, this.Surname });
+            tech_details.Add(DataAccesHelper.techAddressId, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressId });
+            tech_details.Add(DataAccesHelper.techContactId, new string[] { DataAccesHelper.typeString, this.PersonContact.ContactId });
+            tech_details.Add(DataAccesHelper.techStatus, new string[] { DataAccesHelper.typeString, this.Status });
+
+            dh.runQuery(DataAccesHelper.targetTechnicians, DataAccesHelper.requestDelete, tech_details, DataAccesHelper.techId + " = '" + this.PersonId+"'");
+        }
     }
-}
+
+    }
+

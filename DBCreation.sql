@@ -138,7 +138,8 @@ CREATE TABLE tblClient
 	 ClientIdNr VARCHAR(13) FOREIGN KEY REFERENCES tblClient(IdNr),
 	 TechIdNr VARCHAR(13) FOREIGN KEY REFERENCES tblTechnicians(TechId),
 	 EventDate DATETIME NOT NULL,
-	 Remarks VARCHAR(100) NOT NULL
+	 Remarks VARCHAR(100),
+	 Event_Status VARCHAR(20)
 	 )
 	 
 	CREATE TABLE tblTechnicalDetails
@@ -146,3 +147,12 @@ CREATE TABLE tblClient
 	 ConfigCode VARCHAR(10) FOREIGN KEY REFERENCES tblConfiguration(ConfigurationCode),
 	 DocPath VARCHAR(200) NOT NULL
 	 ) 
+
+	 CREATE TABLE tblUsers
+	 (UserCount INT IDENTITY,
+	  Username VARCHAR(50) NOT NULL,
+	  UserPassword VARCHAR(50) NOT NULL,
+	  UserFirstName VARCHAR(30) NOT NULL,
+	  UserSurname VARCHAR(50) NOT NULL,
+	  UserEmail VARCHAR(100) PRIMARY KEY
+	 )

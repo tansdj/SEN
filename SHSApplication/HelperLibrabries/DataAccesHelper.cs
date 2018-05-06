@@ -31,7 +31,7 @@ namespace SHSApplication.HelperLibraries
         public const string clientContactId = "ContactId";
         public const string clientPaymentMethod = "PaymentMethod";
         public const string clientStatus = "ClientStatus";
-
+   
         public const string targetBilling = "tblBilling";
         public const string billingClientid = "ClientIdNr";
         public const string billingDate = "BillDate";
@@ -71,7 +71,7 @@ namespace SHSApplication.HelperLibraries
         public const string confName = "ConfigName";
         public const string confDesc = "ConfigDesc";
         public const string confCompCode = "ComponentCode";
-        public static string confAddCost = "AddCost";
+        public const string confAddCost = "AddCost";
 
         public const string targetTechnicians = "tblTechnicians";
         public const string techId = "TechId";
@@ -92,6 +92,7 @@ namespace SHSApplication.HelperLibraries
         public const string eventTechId = "TechIdNr";
         public const string eventDate = "EventDate";
         public const string eventRemarks = "Remarks";
+        public const string eventStatus = "Event_Status";
 
         public const string targetClientProducts = "tblClientProducts";
         public const string cpClientId = "ClientIdNr";
@@ -104,6 +105,13 @@ namespace SHSApplication.HelperLibraries
         public const string targetCompVendors = "tblComponentVendors";
         public const string cvCompCode = "ComponentCode";
         public const string cvVendorCode = "VendorCode";
+
+        public const string targetUsers = "tblUsers";
+        public const string uUsername = "Username";
+        public const string uPassword = "UserPassword";
+        public const string uName = "UserFirstName";
+        public const string uSurname = "UserSurname";
+        public const string uEmail = "UserEmail";
 
         public const string typeString = "STRING";
         public const string typeDouble = "DOUBLE";

@@ -11,8 +11,8 @@ namespace Testing
     {
         static void Main(string[] args)
         {
-            Vendor v = new Vendor("", "ABC Stationers", new Address("", "21 Riverside", "Wallmansthal", "Pretoria"), new Contact("", "0798264300", "tansdj@gmail.com"));
-            v.InsertVendor();
+            Vendor v = new Vendor("VENDORABC#", "ABC Stationer", new Address("ADDRESSVENDORABC#", "21 Riverside", "Downbern", "Pretoria"), new Contact("CONTACTVENDORABC#", "0798264300", "tansdj1@gmail.com"));
+            v.UpdateVendor();
             Console.WriteLine(v.ToString());
         }
     }

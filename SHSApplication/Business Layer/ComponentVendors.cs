@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ServerSide;
+using SHSApplication.HelperLibraries;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -52,6 +54,28 @@ namespace SHSApplication.Business_Layer
         public override string ToString()
         {
             return base.ToString();
+        }
+
+        public void InsertComponentVendor()
+        {
+            Datahandler dh = Datahandler.getData();
+            Dictionary<string, string[]> compVend_details = new Dictionary<string, string[]>();
+
+            compVend_details.Add(DataAccesHelper.cvCompCode, new string[] { DataAccesHelper.typeString, this.CvComponents.CompCode});
+            compVend_details.Add(DataAccesHelper.cvVendorCode, new string[] { DataAccesHelper.typeString, this.CvVendor.VendorCode });
+
+            dh.runQuery(DataAccesHelper.targetCompVendors, DataAccesHelper.requestInsert, compVend_details);
+        }
+
+        public void RemoveComponentVendor()
+        {
+            Datahandler dh = Datahandler.getData();
+            Dictionary<string, string[]> compVend_details = new Dictionary<string, string[]>();
+
+            compVend_details.Add(DataAccesHelper.cvCompCode, new string[] { DataAccesHelper.typeString, this.CvComponents.CompCode });
+            compVend_details.Add(DataAccesHelper.cvVendorCode, new string[] { DataAccesHelper.typeString, this.CvVendor.VendorCode });
+
+            dh.runQuery(DataAccesHelper.targetCompVendors, DataAccesHelper.requestDelete, compVend_details,DataAccesHelper.cvCompCode+" = '"+this.CvComponents.CompCode+"' AND "+DataAccesHelper.cvVendorCode+" = '"+this.CvVendor.VendorCode+"'");
         }
 
     }

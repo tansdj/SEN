@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ServerSide;
+using SHSApplication.HelperLibraries;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -83,10 +85,49 @@ namespace SHSApplication.Business_Layer
             return base.ToString();
         }
 
-        public void newConfig() { }
+        public void InsertConfig()
+        {
+            Datahandler dh = Datahandler.getData();
+            Dictionary<string, string[]> conf_details = new Dictionary<string, string[]>();
+            this.ConfigId = "CONFIG"+ this.Name.Substring(0,4).Replace(' ','#').ToUpper();
 
-        public void updateConfig() { }
+            conf_details.Add(DataAccesHelper.confCode, new string[] { DataAccesHelper.typeString, this.ConfigId});
+            conf_details.Add(DataAccesHelper.confName, new string[] { DataAccesHelper.typeString, this.Name });
+            conf_details.Add(DataAccesHelper.confDesc, new string[] { DataAccesHelper.typeString, this.Description });
+            conf_details.Add(DataAccesHelper.confCompCode, new string[] { DataAccesHelper.typeString, this.Configuration_Component.CompCode });
+            conf_details.Add(DataAccesHelper.confAddCost, new string[] { DataAccesHelper.typeDouble, this.AddCost.ToString() });
 
-        public void removeConfig() { }
+            dh.runQuery(DataAccesHelper.targetConfiguration, DataAccesHelper.requestInsert, conf_details);
+        }
+
+        public void UpdateConfig()
+        {
+            Datahandler dh = Datahandler.getData();
+            Dictionary<string, string[]> conf_details = new Dictionary<string, string[]>();
+            this.ConfigId = "CONFIG" + this.Name.Substring(0, 4).Replace(' ', '#').ToUpper();
+
+            conf_details.Add(DataAccesHelper.confCode, new string[] { DataAccesHelper.typeString, this.ConfigId });
+            conf_details.Add(DataAccesHelper.confName, new string[] { DataAccesHelper.typeString, this.Name });
+            conf_details.Add(DataAccesHelper.confDesc, new string[] { DataAccesHelper.typeString, this.Description });
+            conf_details.Add(DataAccesHelper.confCompCode, new string[] { DataAccesHelper.typeString, this.Configuration_Component.CompCode });
+            conf_details.Add(DataAccesHelper.confAddCost, new string[] { DataAccesHelper.typeDouble, this.AddCost.ToString() });
+
+            dh.runQuery(DataAccesHelper.targetConfiguration, DataAccesHelper.requestUpdate, conf_details,DataAccesHelper.confCode+" = '"+this.ConfigId+"'");
+        }
+
+        public void RemoveConfig()
+        {
+            Datahandler dh = Datahandler.getData();
+            Dictionary<string, string[]> conf_details = new Dictionary<string, string[]>();
+            this.ConfigId = "CONFIG" + this.Name.Substring(0, 4).Replace(' ', '#').ToUpper();
+
+            conf_details.Add(DataAccesHelper.confCode, new string[] { DataAccesHelper.typeString, this.ConfigId });
+            conf_details.Add(DataAccesHelper.confName, new string[] { DataAccesHelper.typeString, this.Name });
+            conf_details.Add(DataAccesHelper.confDesc, new string[] { DataAccesHelper.typeString, this.Description });
+            conf_details.Add(DataAccesHelper.confCompCode, new string[] { DataAccesHelper.typeString, this.Configuration_Component.CompCode });
+            conf_details.Add(DataAccesHelper.confAddCost, new string[] { DataAccesHelper.typeDouble, this.AddCost.ToString() });
+
+            dh.runQuery(DataAccesHelper.targetConfiguration, DataAccesHelper.requestDelete, conf_details, DataAccesHelper.confCode + " = '" + this.ConfigId + "'");
+        }
     }
 }

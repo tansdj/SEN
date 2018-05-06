@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ServerSide;
+using SHSApplication.HelperLibraries;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -63,9 +65,44 @@ namespace SHSApplication.Business_Layer
             return base.ToString();
         }
 
-        public void addComponent() { }
+        public void InsertComponent()
+        {
+            Datahandler dh = Datahandler.getData();
+            Dictionary<string, string[]> sysComp_details = new Dictionary<string, string[]>();
+            this.CompCode = "COMP" + this.Description.Substring(0, 6).Replace(' ', '#').ToUpper();
 
-        public void removeComponent() { }
+            sysComp_details.Add(DataAccesHelper.compCode, new string[] { DataAccesHelper.typeString, this.CompCode });
+            sysComp_details.Add(DataAccesHelper.compProdCode, new string[] { DataAccesHelper.typeString, this.SysComps_Product.ProductCode });
+            sysComp_details.Add(DataAccesHelper.compDesc, new string[] { DataAccesHelper.typeString, this.Description });
+
+            dh.runQuery(DataAccesHelper.targetComponents, DataAccesHelper.requestInsert, sysComp_details);
+        }
+
+        public void UpdateComponent()
+        {
+            Datahandler dh = Datahandler.getData();
+            Dictionary<string, string[]> sysComp_details = new Dictionary<string, string[]>();
+            this.CompCode = "COMP" + this.Description.Substring(0, 6).Replace(' ', '#').ToUpper();
+
+            sysComp_details.Add(DataAccesHelper.compCode, new string[] { DataAccesHelper.typeString, this.CompCode });
+            sysComp_details.Add(DataAccesHelper.compProdCode, new string[] { DataAccesHelper.typeString, this.SysComps_Product.ProductCode });
+            sysComp_details.Add(DataAccesHelper.compDesc, new string[] { DataAccesHelper.typeString, this.Description });
+
+            dh.runQuery(DataAccesHelper.targetComponents, DataAccesHelper.requestUpdate, sysComp_details, DataAccesHelper.compCode + " = '" + this.CompCode + "'");
+        }
+
+        public void RemoveComponent()
+        {
+            Datahandler dh = Datahandler.getData();
+            Dictionary<string, string[]> sysComp_details = new Dictionary<string, string[]>();
+            this.CompCode = "COMP" + this.Description.Substring(0, 6).Replace(' ', '#').ToUpper();
+
+            sysComp_details.Add(DataAccesHelper.compCode, new string[] { DataAccesHelper.typeString, this.CompCode });
+            sysComp_details.Add(DataAccesHelper.compProdCode, new string[] { DataAccesHelper.typeString, this.SysComps_Product.ProductCode });
+            sysComp_details.Add(DataAccesHelper.compDesc, new string[] { DataAccesHelper.typeString, this.Description });
+
+            dh.runQuery(DataAccesHelper.targetComponents, DataAccesHelper.requestDelete, sysComp_details,DataAccesHelper.compCode+" = '"+this.CompCode+"'");
+        }
 
 
     }

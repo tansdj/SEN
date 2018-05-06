@@ -89,16 +89,9 @@ namespace SHSApplication.Business_Layer
             vend_details.Add(DataAccesHelper.vendName, new string[] { DataAccesHelper.typeString, this.Name });
             vend_details.Add(DataAccesHelper.vendAddressId, new string[] { DataAccesHelper.typeString, this.VendorAddress.AddressId});
             vend_details.Add(DataAccesHelper.vendContactId, new string[] { DataAccesHelper.typeString, this.VendorContact.ContactId });
-            addr_details.Add(DataAccesHelper.addressId, new string[] { DataAccesHelper.typeString, this.VendorAddress.AddressId });
-            addr_details.Add(DataAccesHelper.addrLine1, new string[] { DataAccesHelper.typeString, this.VendorAddress.AddressLine1 });
-            addr_details.Add(DataAccesHelper.addrLine2, new string[] { DataAccesHelper.typeString, this.VendorAddress.AddressLine2 });
-            addr_details.Add(DataAccesHelper.addrCity, new string[] { DataAccesHelper.typeString, this.VendorAddress.City });
-            cont_details.Add(DataAccesHelper.contactId, new string[] { DataAccesHelper.typeString, this.VendorContact.ContactId });
-            cont_details.Add(DataAccesHelper.contactCell, new string[] { DataAccesHelper.typeString, this.VendorContact.Cell });
-            cont_details.Add(DataAccesHelper.contactEmail, new string[] { DataAccesHelper.typeString, this.VendorContact.Email });
 
-            dh.runQuery(DataAccesHelper.targetAddress, DataAccesHelper.requestInsert, addr_details);
-            dh.runQuery(DataAccesHelper.targetContact, DataAccesHelper.requestInsert, cont_details);
+            this.VendorAddress.InsertAddress();
+            this.VendorContact.InsertContact();
             dh.runQuery(DataAccesHelper.targetVendor, DataAccesHelper.requestInsert, vend_details);
 
         }
@@ -116,17 +109,27 @@ namespace SHSApplication.Business_Layer
             vend_details.Add(DataAccesHelper.vendName, new string[] { DataAccesHelper.typeString, this.Name });
             vend_details.Add(DataAccesHelper.vendAddressId, new string[] { DataAccesHelper.typeString, this.VendorAddress.AddressId });
             vend_details.Add(DataAccesHelper.vendContactId, new string[] { DataAccesHelper.typeString, this.VendorContact.ContactId });
-            addr_details.Add(DataAccesHelper.addressId, new string[] { DataAccesHelper.typeString, this.VendorAddress.AddressId });
-            addr_details.Add(DataAccesHelper.addrLine1, new string[] { DataAccesHelper.typeString, this.VendorAddress.AddressLine1 });
-            addr_details.Add(DataAccesHelper.addrLine2, new string[] { DataAccesHelper.typeString, this.VendorAddress.AddressLine2 });
-            addr_details.Add(DataAccesHelper.addrCity, new string[] { DataAccesHelper.typeString, this.VendorAddress.City });
-            cont_details.Add(DataAccesHelper.contactId, new string[] { DataAccesHelper.typeString, this.VendorContact.ContactId });
-            cont_details.Add(DataAccesHelper.contactCell, new string[] { DataAccesHelper.typeString, this.VendorContact.Cell });
-            cont_details.Add(DataAccesHelper.contactEmail, new string[] { DataAccesHelper.typeString, this.VendorContact.Email });
 
+            this.VendorAddress.UpdateAddress();
+            this.VendorContact.UpdateContact();
             dh.runQuery(DataAccesHelper.targetVendor,DataAccesHelper.requestUpdate, vend_details,DataAccesHelper.vendCode + " = '"+this.VendorCode+"'");
-            dh.runQuery(DataAccesHelper.targetAddress, DataAccesHelper.requestUpdate, addr_details, DataAccesHelper.addressId + " = '" + this.VendorAddress.AddressId + "'");
-            dh.runQuery(DataAccesHelper.targetContact, DataAccesHelper.requestUpdate, cont_details, DataAccesHelper.contactId + " = " + this.VendorContact.ContactId + "'");
+        }
+
+        public void RemoveVendor()
+        {
+            Datahandler dh = Datahandler.getData();
+            Dictionary<string, string[]> vend_details = new Dictionary<string, string[]>();
+            Dictionary<string, string[]> addr_details = new Dictionary<string, string[]>();
+            Dictionary<string, string[]> cont_details = new Dictionary<string, string[]>();
+            this.VendorAddress.AddressId = "ADDRESS" + this.VendorCode;
+            this.VendorContact.ContactId = "CONTACT" + this.VendorCode;
+
+            vend_details.Add(DataAccesHelper.vendCode, new string[] { DataAccesHelper.typeString, this.VendorCode });
+            vend_details.Add(DataAccesHelper.vendName, new string[] { DataAccesHelper.typeString, this.Name });
+            vend_details.Add(DataAccesHelper.vendAddressId, new string[] { DataAccesHelper.typeString, this.VendorAddress.AddressId });
+            vend_details.Add(DataAccesHelper.vendContactId, new string[] { DataAccesHelper.typeString, this.VendorContact.ContactId });
+
+            dh.runQuery(DataAccesHelper.targetVendor, DataAccesHelper.requestDelete, vend_details, DataAccesHelper.vendCode + " = '" + this.VendorCode + "'");
         }
     }
 }

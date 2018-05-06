@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ServerSide;
+using SHSApplication.HelperLibraries;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -54,9 +56,26 @@ namespace SHSApplication.Business_Layer
             return base.ToString();
         }
 
-        public void addClientProductConfig() { }
+        public void InsertClientConfiguration()
+        {
+            Datahandler dh = Datahandler.getData();
+            Dictionary<string, string[]> clientConf_details = new Dictionary<string, string[]>();
 
-        public void removeClientProductConfig() { }
+            clientConf_details.Add(DataAccesHelper.ccClientId, new string[] { DataAccesHelper.typeString, this.ClientConfigurations_Client.PersonId });
+            clientConf_details.Add(DataAccesHelper.ccConfId, new string[] { DataAccesHelper.typeString, this.ClientConfigurations_Configuration.ConfigId });
 
+            dh.runQuery(DataAccesHelper.targetClientConf, DataAccesHelper.requestInsert, clientConf_details);
+        }
+
+        public void RemoveClientConfiguration()
+        {
+            Datahandler dh = Datahandler.getData();
+            Dictionary<string, string[]> clientConf_details = new Dictionary<string, string[]>();
+
+            clientConf_details.Add(DataAccesHelper.ccClientId, new string[] { DataAccesHelper.typeString, this.ClientConfigurations_Client.PersonId });
+            clientConf_details.Add(DataAccesHelper.ccConfId, new string[] { DataAccesHelper.typeString, this.ClientConfigurations_Configuration.ConfigId });
+
+            dh.runQuery(DataAccesHelper.targetClientConf, DataAccesHelper.requestDelete, clientConf_details,DataAccesHelper.ccClientId+" = '"+this.ClientConfigurations_Client.PersonId+"' AND "+DataAccesHelper.ccConfId+" = '"+this.ClientConfigurations_Configuration.ConfigId+"'");
+        }
     }
 }

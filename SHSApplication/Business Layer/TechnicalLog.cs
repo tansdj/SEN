@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ServerSide;
+using SHSApplication.HelperLibraries;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,13 +10,14 @@ namespace SHSApplication.Business_Layer
 {
     public class TechnicalLog
     {
-        private string eventId;
+        private int eventId;
         private Client techLog_client;
         private Technicians techLog_tech;
         private DateTime date;
         private string remarks;
+        private string status;
 
-        public TechnicalLog(string eventId, Client techLog_client, Technicians techLog_tech, DateTime date, string remarks)
+        public TechnicalLog(int eventId, Client techLog_client, Technicians techLog_tech, DateTime date, string remarks)
         {
             this.EventId = eventId;
             this.TechLog_Client = techLog_client;
@@ -22,6 +25,12 @@ namespace SHSApplication.Business_Layer
             this.Date = date;
             this.Remarks = remarks;
         }
+        public string Status
+        {
+            get { return status; }
+            set { status = value; }
+        }
+
 
         public string Remarks
         {
@@ -51,7 +60,7 @@ namespace SHSApplication.Business_Layer
         }
 
 
-        public string EventId
+        public int EventId
         {
             get { return eventId; }
             set { eventId = value; }
@@ -82,7 +91,35 @@ namespace SHSApplication.Business_Layer
             return base.ToString();
         }
 
-        public void logEvent() { }
+        public void LogEvent()
+        {
+            Datahandler dh = Datahandler.getData();
+            Dictionary<string, string[]> tecLog_details = new Dictionary<string, string[]>();
+
+            tecLog_details.Add(DataAccesHelper.eventId, new string[] { DataAccesHelper.typeInt, this.EventId.ToString() });
+            tecLog_details.Add(DataAccesHelper.eventClientId, new string[] { DataAccesHelper.typeString, this.TechLog_Client.PersonId });
+            tecLog_details.Add(DataAccesHelper.eventTechId, new string[] { DataAccesHelper.typeString, this.TechLog_Tech.PersonId });
+            tecLog_details.Add(DataAccesHelper.eventDate, new string[] { DataAccesHelper.typeDateTime, this.Date.ToShortDateString() });
+            tecLog_details.Add(DataAccesHelper.eventRemarks, new string[] { DataAccesHelper.typeString, this.Remarks });
+            tecLog_details.Add(DataAccesHelper.eventStatus, new string[] { DataAccesHelper.typeString, this.Status });
+
+            dh.runQuery(DataAccesHelper.targetTechEvents, DataAccesHelper.requestInsert, tecLog_details);
+        }
+
+        public void UpdateEvent()
+        {
+            Datahandler dh = Datahandler.getData();
+            Dictionary<string, string[]> tecLog_details = new Dictionary<string, string[]>();
+
+            tecLog_details.Add(DataAccesHelper.eventId, new string[] { DataAccesHelper.typeInt, this.EventId.ToString() });
+            tecLog_details.Add(DataAccesHelper.eventClientId, new string[] { DataAccesHelper.typeString, this.TechLog_Client.PersonId });
+            tecLog_details.Add(DataAccesHelper.eventTechId, new string[] { DataAccesHelper.typeString, this.TechLog_Tech.PersonId });
+            tecLog_details.Add(DataAccesHelper.eventDate, new string[] { DataAccesHelper.typeDateTime, this.Date.ToShortDateString() });
+            tecLog_details.Add(DataAccesHelper.eventRemarks, new string[] { DataAccesHelper.typeString, this.Remarks });
+            tecLog_details.Add(DataAccesHelper.eventStatus, new string[] { DataAccesHelper.typeString, this.Status });
+
+            dh.runQuery(DataAccesHelper.targetTechEvents, DataAccesHelper.requestUpdate, tecLog_details,DataAccesHelper.eventId+" = "+this.EventId);
+        }
 
     }
 }

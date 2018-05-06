@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ServerSide;
+using SHSApplication.HelperLibraries;
 
 namespace SHSApplication.Business_Layer
 {
@@ -84,11 +85,35 @@ namespace SHSApplication.Business_Layer
             return base.ToString();
         }
 
-        public void addProduct() { }
+        public void InsertProduct()
+        {
+            Datahandler dh = Datahandler.getData();
+            Dictionary<string, string[]> prod_details = new Dictionary<string, string[]>();
+            this.ProductCode = "PROD" + this.Name.Substring(0, 6).Replace(' ', '#').ToUpper();
 
-        public void upgradeProduct() { }
+            prod_details.Add(DataAccesHelper.prodCode, new string[] { DataAccesHelper.typeString, this.ProductCode });
+            prod_details.Add(DataAccesHelper.prodName, new string[] { DataAccesHelper.typeString, this.Name });
+            prod_details.Add(DataAccesHelper.prodDesc, new string[] { DataAccesHelper.typeString, this.Description });
+            prod_details.Add(DataAccesHelper.prodPrice, new string[] { DataAccesHelper.typeDouble, this.BasePrice.ToString() });
+            prod_details.Add(DataAccesHelper.prodStatus, new string[] { DataAccesHelper.typeString, this.Status });
 
-        public void discontinueProduct() { }
+            dh.runQuery(DataAccesHelper.targetProduct, DataAccesHelper.requestInsert, prod_details);
+        }
+
+        public void UpdateProduct()
+        {
+            Datahandler dh = Datahandler.getData();
+            Dictionary<string, string[]> prod_details = new Dictionary<string, string[]>();
+            this.ProductCode = "PROD" + this.Name.Substring(0, 6).Replace(' ', '#').ToUpper();
+
+            prod_details.Add(DataAccesHelper.prodCode, new string[] { DataAccesHelper.typeString, this.ProductCode });
+            prod_details.Add(DataAccesHelper.prodName, new string[] { DataAccesHelper.typeString, this.Name });
+            prod_details.Add(DataAccesHelper.prodDesc, new string[] { DataAccesHelper.typeString, this.Description });
+            prod_details.Add(DataAccesHelper.prodPrice, new string[] { DataAccesHelper.typeDouble, this.BasePrice.ToString() });
+            prod_details.Add(DataAccesHelper.prodStatus, new string[] { DataAccesHelper.typeString, this.Status });
+
+            dh.runQuery(DataAccesHelper.targetProduct, DataAccesHelper.requestUpdate, prod_details,DataAccesHelper.prodCode+" = '"+this.ProductCode+"'");
+        }
 
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ServerSide;
+using SHSApplication.HelperLibraries;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -55,9 +57,27 @@ namespace SHSApplication.Business_Layer
             return base.ToString();
         }
 
-        public void addNewClientProduct() { }
+        public void InsertClientProduct()
+        {
+            Datahandler dh = Datahandler.getData();
+            Dictionary<string, string[]> clientProd_details = new Dictionary<string, string[]>();
 
-        public void removeClientProduct() { }
+            clientProd_details.Add(DataAccesHelper.cpClientId, new string[] { DataAccesHelper.typeString, this.ClientProducts_Client.PersonId});
+            clientProd_details.Add(DataAccesHelper.cpProductId, new string[] { DataAccesHelper.typeString, this.ClientProducts_Product.ProductCode });
+
+            dh.runQuery(DataAccesHelper.targetClientProducts, DataAccesHelper.requestInsert, clientProd_details);
+        }
+
+        public void RemoveClientProduct()
+        {
+            Datahandler dh = Datahandler.getData();
+            Dictionary<string, string[]> clientProd_details = new Dictionary<string, string[]>();
+
+            clientProd_details.Add(DataAccesHelper.cpClientId, new string[] { DataAccesHelper.typeString, this.ClientProducts_Client.PersonId });
+            clientProd_details.Add(DataAccesHelper.cpProductId, new string[] { DataAccesHelper.typeString, this.ClientProducts_Product.ProductCode });
+
+            dh.runQuery(DataAccesHelper.targetClientProducts, DataAccesHelper.requestDelete, clientProd_details,DataAccesHelper.cpClientId+" = '"+this.ClientProducts_Client.PersonId+"' AND "+DataAccesHelper.cpProductId+" = '"+this.ClientProducts_Product.ProductCode+"'");
+        }
 
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ServerSide;
+using SHSApplication.HelperLibraries;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -70,6 +72,45 @@ namespace SHSApplication.Business_Layer
         public override string ToString()
         {
             return base.ToString();
+        }
+
+        public void InsertAddress()
+        {
+            Datahandler dh = Datahandler.getData();
+            Dictionary<string, string[]> addr_details = new Dictionary<string, string[]>();
+
+            addr_details.Add(DataAccesHelper.addressId, new string[] { DataAccesHelper.typeString, this.AddressId });
+            addr_details.Add(DataAccesHelper.addrLine1, new string[] { DataAccesHelper.typeString, this.AddressLine1 });
+            addr_details.Add(DataAccesHelper.addrLine2, new string[] { DataAccesHelper.typeString, this.AddressLine2 });
+            addr_details.Add(DataAccesHelper.addrCity, new string[] { DataAccesHelper.typeString, this.City });
+
+            dh.runQuery(DataAccesHelper.targetAddress, DataAccesHelper.requestInsert, addr_details);
+        }
+
+        public void UpdateAddress()
+        {
+            Datahandler dh = Datahandler.getData();
+            Dictionary<string, string[]> addr_details = new Dictionary<string, string[]>();
+
+            addr_details.Add(DataAccesHelper.addressId, new string[] { DataAccesHelper.typeString, this.AddressId });
+            addr_details.Add(DataAccesHelper.addrLine1, new string[] { DataAccesHelper.typeString, this.AddressLine1 });
+            addr_details.Add(DataAccesHelper.addrLine2, new string[] { DataAccesHelper.typeString, this.AddressLine2 });
+            addr_details.Add(DataAccesHelper.addrCity, new string[] { DataAccesHelper.typeString, this.City });
+
+            dh.runQuery(DataAccesHelper.targetAddress, DataAccesHelper.requestUpdate, addr_details, DataAccesHelper.addressId + " = '" + this.AddressId + "'");
+        }
+
+        public void RemoveAddress()
+        {
+            Datahandler dh = Datahandler.getData();
+            Dictionary<string, string[]> addr_details = new Dictionary<string, string[]>();
+
+            addr_details.Add(DataAccesHelper.addressId, new string[] { DataAccesHelper.typeString, this.AddressId });
+            addr_details.Add(DataAccesHelper.addrLine1, new string[] { DataAccesHelper.typeString, this.AddressLine1 });
+            addr_details.Add(DataAccesHelper.addrLine2, new string[] { DataAccesHelper.typeString, this.AddressLine2 });
+            addr_details.Add(DataAccesHelper.addrCity, new string[] { DataAccesHelper.typeString, this.City });
+
+            dh.runQuery(DataAccesHelper.targetAddress, DataAccesHelper.requestDelete, addr_details, DataAccesHelper.addressId + " = '" + this.AddressId + "'");
         }
 
     }

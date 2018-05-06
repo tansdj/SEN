@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ServerSide;
+using SHSApplication.HelperLibraries;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -73,6 +75,44 @@ namespace SHSApplication.Business_Layer
             return base.ToString();
         }
 
+        public void InsertPaymentDetail()
+        {
+            Datahandler dh = Datahandler.getData();
+            Dictionary<string, string[]> pay_details = new Dictionary<string, string[]>();
+
+            pay_details.Add(DataAccesHelper.paymentDetClientId, new string[] { DataAccesHelper.typeString, this.PaymentDet_Client.PersonId });
+            pay_details.Add(DataAccesHelper.paymentDetAccNr, new string[] { DataAccesHelper.typeString, this.AccNr });
+            pay_details.Add(DataAccesHelper.paymentDetBank, new string[] { DataAccesHelper.typeString, this.Bank });
+            pay_details.Add(DataAccesHelper.paymentDetBranch, new string[] { DataAccesHelper.typeString, this.BranchCode });
+
+            dh.runQuery(DataAccesHelper.targetPaymentDetails, DataAccesHelper.requestInsert, pay_details);
+        }
+
+        public void UpdatePaymentDetail()
+        {
+            Datahandler dh = Datahandler.getData();
+            Dictionary<string, string[]> pay_details = new Dictionary<string, string[]>();
+
+            pay_details.Add(DataAccesHelper.paymentDetClientId, new string[] { DataAccesHelper.typeString, this.PaymentDet_Client.PersonId });
+            pay_details.Add(DataAccesHelper.paymentDetAccNr, new string[] { DataAccesHelper.typeString, this.AccNr });
+            pay_details.Add(DataAccesHelper.paymentDetBank, new string[] { DataAccesHelper.typeString, this.Bank });
+            pay_details.Add(DataAccesHelper.paymentDetBranch, new string[] { DataAccesHelper.typeString, this.BranchCode });
+
+            dh.runQuery(DataAccesHelper.targetPaymentDetails, DataAccesHelper.requestUpdate, pay_details, DataAccesHelper.paymentDetClientId + " = '" + this.PaymentDet_Client.PersonId + "'");
+        }
+
+        public void RemovePaymnetDetail()
+        {
+            Datahandler dh = Datahandler.getData();
+            Dictionary<string, string[]> pay_details = new Dictionary<string, string[]>();
+
+            pay_details.Add(DataAccesHelper.paymentDetClientId, new string[] { DataAccesHelper.typeString, this.PaymentDet_Client.PersonId });
+            pay_details.Add(DataAccesHelper.paymentDetAccNr, new string[] { DataAccesHelper.typeString, this.AccNr });
+            pay_details.Add(DataAccesHelper.paymentDetBank, new string[] { DataAccesHelper.typeString, this.Bank });
+            pay_details.Add(DataAccesHelper.paymentDetBranch, new string[] { DataAccesHelper.typeString, this.BranchCode });
+
+            dh.runQuery(DataAccesHelper.targetPaymentDetails, DataAccesHelper.requestDelete, pay_details, DataAccesHelper.paymentDetClientId + " = '" + this.PaymentDet_Client.PersonId + "'");
+        }
         public void deductDebit(string clientId) { }
 
         public void reverseDebit(string clientId) { }

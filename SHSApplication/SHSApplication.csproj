@@ -54,6 +54,7 @@
     <Compile Include="Business Layer\Configurations.cs" />
     <Compile Include="Business Layer\Contact.cs" />
     <Compile Include="Business Layer\CustomExceptions.cs" />
+    <Compile Include="Business Layer\User.cs" />
     <Compile Include="HelperLibrabries\DataAccesHelper.cs" />
     <Compile Include="Business Layer\PaymentDetails.cs" />
     <Compile Include="Business Layer\Person.cs" />
