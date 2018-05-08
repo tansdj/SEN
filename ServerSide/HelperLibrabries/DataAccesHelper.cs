@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SHSApplication.HelperLibraries
+namespace Serverside.HelperLibraries
 {
     public static class DataAccesHelper
     {
@@ -112,6 +112,24 @@ namespace SHSApplication.HelperLibraries
         public const string uName = "UserFirstName";
         public const string uSurname = "UserSurname";
         public const string uEmail = "UserEmail";
+
+        public const string QueryGetClients= @"SELECT * FROM tblClient C
+                                              INNER JOIN tblAddress A ON C.AddressId = A.pAddressId
+                                              INNER JOIN tblContact CT ON C.ContactId = CT.pContactId";
+        public const string QueryGetBilling = "";
+        public const string QueryGetClientConfiguration = "";
+        public const string QueryGetClientProducts = "";
+        public const string QueryGetComponentVendors = "";
+        public const string QueryGetConfigurations = "";
+        public const string QueryGetPaymentDetails = "";
+        public const string QueryGetProducts = "";
+        public const string QueryGetProductFunction = "";
+        public const string QueryGetSystemComponents = "";
+        public const string QueryGetTechnicalDetails = "";
+        public const string QueryGetTechnicalLog = "";
+        public const string QueryGetTechnicians = "";
+        public const string QueryGetUsers = "";
+        public const string QueryGetVendors = "";
 
         public const string typeString = "STRING";
         public const string typeDouble = "DOUBLE";

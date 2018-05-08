@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ServerSide;
-using SHSApplication.HelperLibraries;
+using Serverside.HelperLibraries;
+using System.Data;
 
 namespace SHSApplication.Business_Layer
 {
@@ -18,6 +19,11 @@ namespace SHSApplication.Business_Layer
         {
             this.PaymentMethod = paymentMethod;
             this.Status = status;
+        }
+
+        public Client():base()
+        {
+
         }
         public PaymentDetails PD
         {
@@ -61,7 +67,7 @@ namespace SHSApplication.Business_Layer
 
         public override string ToString()
         {
-            return base.ToString();
+            return String.Format("ID: {0}\nName: {1}\nSurname: {2}\nPaymentMethod: {3}\nStatus: {4}\n\nAddress: {5},{6},{7}\nContact: {8},{9}",PersonId,Name,Surname,PaymentMethod,Status,PersonAddress.AddressLine1,PersonAddress.AddressLine2,PersonAddress.City,PersonContact.Cell,PersonContact.Email);
         }
 
         public void NewClientWithPaymentDet(string accNr,string bank,string branchCode)
@@ -166,6 +172,28 @@ namespace SHSApplication.Business_Layer
             client_details.Add(DataAccesHelper.clientContactId, new string[] { DataAccesHelper.typeString, this.PersonContact.ContactId });
 
             dh.runQuery(DataAccesHelper.targetClient, DataAccesHelper.requestDelete, client_details, DataAccesHelper.clientId + " = '" + this.PersonId + "'");
+        }
+
+        public List<Client> GetAllClients()
+        {
+            Datahandler dh = Datahandler.getData();
+            List<Client> clients = new List<Client>();
+            DataTable table = dh.readDataFromDB(DataAccesHelper.QueryGetClients);
+
+            foreach (DataRow item in table.Rows)
+            {
+                Client c = new Client();
+                c.PersonId = item[DataAccesHelper.clientId].ToString();
+                c.Name = item[DataAccesHelper.clientName].ToString();
+                c.Surname = item[DataAccesHelper.clientSurname].ToString();
+                c.PersonAddress = new Address(item[DataAccesHelper.addressId].ToString(), item[DataAccesHelper.addrLine1].ToString(), item[DataAccesHelper.addrLine2].ToString(), item[DataAccesHelper.addrCity].ToString());
+                c.PersonContact = new Contact(item[DataAccesHelper.contactId].ToString(), item[DataAccesHelper.contactCell].ToString(), item[DataAccesHelper.contactEmail].ToString());
+                c.Status = item[DataAccesHelper.clientStatus].ToString();
+                c.PaymentMethod = item[DataAccesHelper.clientPaymentMethod].ToString();
+                clients.Add(c);
+            }
+
+            return clients;
         }
 
     }

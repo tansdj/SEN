@@ -23,6 +23,11 @@ namespace SHSApplication.Business_Layer
             this.PersonContact = personContact;
         }
 
+        public Person()
+        {
+
+        }
+
         public Contact PersonContact
         {
             get { return personContact; }

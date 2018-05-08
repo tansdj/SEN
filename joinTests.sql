@@ -7,8 +7,8 @@ INNER JOIN tblClientCompConfiguration CCC ON CCC.ConfigCode = Conf.Configuration
 WHERE CCC.ClientId = C.IdNr;
 
 SELECT * FROM tblClient C
-INNER JOIN tblAddress A ON C.AddressId = A.AddressId
-INNER JOIN tblContact CT ON C.ContactId = CT.ContactId
+INNER JOIN tblAddress A ON C.AddressId = A.pAddressId
+INNER JOIN tblContact CT ON C.ContactId = CT.pContactId
 INNER JOIN tblPaymentDetails PD ON C.IdNr = PD.ClientIdNr;
 
 SELECT * FROM tblTechnicians T

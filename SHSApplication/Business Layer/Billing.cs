@@ -1,5 +1,5 @@
-﻿using ServerSide;
-using SHSApplication.HelperLibraries;
+﻿using Serverside.HelperLibraries;
+using ServerSide;
 using System;
 using System.Collections.Generic;
 using System.Data;
