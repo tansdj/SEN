@@ -130,16 +130,18 @@ CREATE TABLE tblClient
 	 TechSurname VARCHAR(20) NOT NULL,
 	 ContactId VARCHAR(17) FOREIGN KEY REFERENCES tblContact(pContactId),
 	 AddressId VARCHAR(17) FOREIGN KEY REFERENCES tblAddress(pAddressId),
-	 TechStatus VARCHAR(10) NOT NULL
+	 TechStatus VARCHAR(10) NOT NULL,
+	 SkillLevel VARCHAR(20) NOT NULL
 	 )
 
 	CREATE TABLE tblTechnicalLog
 	(EventId INt IDENTITY PRIMARY KEY,
 	 ClientIdNr VARCHAR(13) FOREIGN KEY REFERENCES tblClient(IdNr),
 	 TechIdNr VARCHAR(13) FOREIGN KEY REFERENCES tblTechnicians(TechId),
-	 EventDate DATETIME NOT NULL,
+	 EventDate DATETIME,
 	 Remarks VARCHAR(100),
-	 Event_Status VARCHAR(20)
+	 Event_Status VARCHAR(20) NOT NULL,
+	 SkillRequired VARCHAR(20) NOT NULL
 	 )
 	 
 	CREATE TABLE tblTechnicalDetails

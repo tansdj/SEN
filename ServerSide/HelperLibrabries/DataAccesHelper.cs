@@ -80,6 +80,7 @@ namespace Serverside.HelperLibraries
         public const string techContactId = "ContactId";
         public const string techAddressId = "AddressId";
         public const string techStatus = "TechStatus";
+        public const string techSkill = "SkillLevel";
 
         public const string targetTechDetail = "tblTechnicalDetails";
         public const string tecDetId = "DetailId";
@@ -93,6 +94,7 @@ namespace Serverside.HelperLibraries
         public const string eventDate = "EventDate";
         public const string eventRemarks = "Remarks";
         public const string eventStatus = "Event_Status";
+        public const string skillReq = "SkillRequired";
 
         public const string targetClientProducts = "tblClientProducts";
         public const string cpClientId = "ClientIdNr";

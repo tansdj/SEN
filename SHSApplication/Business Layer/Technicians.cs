@@ -10,11 +10,18 @@ namespace SHSApplication.Business_Layer
 {
     public class Technicians:Person
     {
-        private string status;    
+        private string status;
+        private string skillLevel;
 
-        public Technicians(string personId, string name, string surname, Address personAddress, Contact personContact, string status) :base(personId,name, surname,personAddress,personContact)
+        public Technicians(string personId, string name, string surname, Address personAddress, Contact personContact, string status, string skillLevel) :base(personId,name, surname,personAddress,personContact)
         {
             this.Status = status;
+            this.SkillLevel = skillLevel;
+        }
+        public string SkillLevel
+        {
+            get { return skillLevel; }
+            set { skillLevel = value; }
         }
 
         public string Status
@@ -35,12 +42,12 @@ namespace SHSApplication.Business_Layer
             {
                 return false;
             }
-            return base.Equals(obj)&&(this.Status==t.Status);
+            return base.Equals(obj)&&(this.Status==t.Status)&&(this.SkillLevel==t.SkillLevel);
         }
 
         public override int GetHashCode()
         {
-            return base.GetHashCode()^this.Status.GetHashCode();
+            return base.GetHashCode()^this.Status.GetHashCode()^this.SkillLevel.GetHashCode();
         }
 
         public override string ToString()
@@ -61,6 +68,7 @@ namespace SHSApplication.Business_Layer
             tech_details.Add(DataAccesHelper.techAddressId, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressId });
             tech_details.Add(DataAccesHelper.techContactId, new string[] { DataAccesHelper.typeString, this.PersonContact.ContactId });
             tech_details.Add(DataAccesHelper.techStatus, new string[] { DataAccesHelper.typeString, this.Status });
+            tech_details.Add(DataAccesHelper.techSkill, new string[] { DataAccesHelper.typeString, this.SkillLevel });
 
             this.PersonAddress.InsertAddress();
             this.PersonContact.InsertContact();
@@ -83,6 +91,7 @@ namespace SHSApplication.Business_Layer
             tech_details.Add(DataAccesHelper.techAddressId, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressId });
             tech_details.Add(DataAccesHelper.techContactId, new string[] { DataAccesHelper.typeString, this.PersonContact.ContactId });
             tech_details.Add(DataAccesHelper.techStatus, new string[] { DataAccesHelper.typeString, this.Status });
+            tech_details.Add(DataAccesHelper.techSkill, new string[] { DataAccesHelper.typeString, this.SkillLevel });
 
             this.PersonAddress.UpdateAddress();
             this.PersonContact.UpdateContact();
@@ -104,6 +113,7 @@ namespace SHSApplication.Business_Layer
             tech_details.Add(DataAccesHelper.techAddressId, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressId });
             tech_details.Add(DataAccesHelper.techContactId, new string[] { DataAccesHelper.typeString, this.PersonContact.ContactId });
             tech_details.Add(DataAccesHelper.techStatus, new string[] { DataAccesHelper.typeString, this.Status });
+            tech_details.Add(DataAccesHelper.techSkill, new string[] { DataAccesHelper.typeString, this.SkillLevel });
 
             dh.runQuery(DataAccesHelper.targetTechnicians, DataAccesHelper.requestDelete, tech_details, DataAccesHelper.techId + " = '" + this.PersonId+"'");
         }

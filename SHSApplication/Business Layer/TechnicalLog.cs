@@ -16,15 +16,24 @@ namespace SHSApplication.Business_Layer
         private DateTime date;
         private string remarks;
         private string status;
+        private string skillRequired;
 
-        public TechnicalLog(int eventId, Client techLog_client, Technicians techLog_tech, DateTime date, string remarks)
+        public TechnicalLog(int eventId, Client techLog_client, Technicians techLog_tech, DateTime date, string remarks, string skillRequired)
         {
             this.EventId = eventId;
             this.TechLog_Client = techLog_client;
             this.TechLog_Tech = techLog_tech;
             this.Date = date;
             this.Remarks = remarks;
+            this.SkillRequired = skillRequired;
         }
+
+        public string SkillRequired
+        {
+            get { return skillRequired; }
+            set { skillRequired = value; }
+        }
+
         public string Status
         {
             get { return status; }
@@ -78,12 +87,12 @@ namespace SHSApplication.Business_Layer
             {
                 return false;
             }
-            return (this.EventId==tl.EventId)&&(this.TechLog_Client==tl.TechLog_Client)&&(this.TechLog_Tech==tl.TechLog_Tech)&&(this.Date==tl.Date)&&(this.Remarks==tl.Remarks);
+            return (this.EventId==tl.EventId)&&(this.TechLog_Client==tl.TechLog_Client)&&(this.TechLog_Tech==tl.TechLog_Tech)&&(this.Date==tl.Date)&&(this.Remarks==tl.Remarks&&(this.SkillRequired==tl.SkillRequired));
         }
 
         public override int GetHashCode()
         {
-            return this.EventId.GetHashCode()^this.TechLog_Client.GetHashCode()^this.TechLog_Tech.GetHashCode()^this.Date.GetHashCode()^this.Remarks.GetHashCode();
+            return this.EventId.GetHashCode()^this.TechLog_Client.GetHashCode()^this.TechLog_Tech.GetHashCode()^this.Date.GetHashCode()^this.Remarks.GetHashCode()^this.SkillRequired.GetHashCode();
         }
 
         public override string ToString()
@@ -102,6 +111,7 @@ namespace SHSApplication.Business_Layer
             tecLog_details.Add(DataAccesHelper.eventDate, new string[] { DataAccesHelper.typeDateTime, this.Date.ToShortDateString() });
             tecLog_details.Add(DataAccesHelper.eventRemarks, new string[] { DataAccesHelper.typeString, this.Remarks });
             tecLog_details.Add(DataAccesHelper.eventStatus, new string[] { DataAccesHelper.typeString, this.Status });
+            tecLog_details.Add(DataAccesHelper.skillReq, new string[] { DataAccesHelper.typeString, this.SkillRequired });
 
             dh.runQuery(DataAccesHelper.targetTechEvents, DataAccesHelper.requestInsert, tecLog_details);
         }
@@ -117,6 +127,7 @@ namespace SHSApplication.Business_Layer
             tecLog_details.Add(DataAccesHelper.eventDate, new string[] { DataAccesHelper.typeDateTime, this.Date.ToShortDateString() });
             tecLog_details.Add(DataAccesHelper.eventRemarks, new string[] { DataAccesHelper.typeString, this.Remarks });
             tecLog_details.Add(DataAccesHelper.eventStatus, new string[] { DataAccesHelper.typeString, this.Status });
+            tecLog_details.Add(DataAccesHelper.skillReq, new string[] { DataAccesHelper.typeString, this.SkillRequired });
 
             dh.runQuery(DataAccesHelper.targetTechEvents, DataAccesHelper.requestUpdate, tecLog_details,DataAccesHelper.eventId+" = "+this.EventId);
         }
