@@ -14,13 +14,20 @@ namespace SHSApplication.Business_Layer
         private string addressLine1;
         private string addressLine2;
         private string city;
+        private string postalCode;
 
-        public Address(string addressId, string addressLine1, string addressLine2, string city)
+        public Address(string addressId, string addressLine1, string addressLine2, string city, string postalCode)
         {
             this.AddressId = addressId;
             this.AddressLine1 = addressLine1;
             this.AddressLine2 = addressLine2;
             this.City = city;
+            this.PostalCode = postalCode;
+        }
+        public string PostalCode
+        {
+            get { return postalCode; }
+            set { postalCode = value; }
         }
 
         public string AddressId
@@ -61,12 +68,12 @@ namespace SHSApplication.Business_Layer
             {
                 return false;
             }
-            return (this.AddressId==a.AddressId)&&(this.AddressLine1==a.AddressLine1)&&(this.AddressLine2==a.AddressLine2)&&(this.City==a.City);
+            return (this.AddressId==a.AddressId)&&(this.AddressLine1==a.AddressLine1)&&(this.AddressLine2==a.AddressLine2)&&(this.City==a.City)&&(this.PostalCode==a.PostalCode);
         }
 
         public override int GetHashCode()
         {
-            return this.AddressId.GetHashCode()^this.AddressLine1.GetHashCode()^this.AddressLine2.GetHashCode()^this.City.GetHashCode();
+            return this.AddressId.GetHashCode()^this.AddressLine1.GetHashCode()^this.AddressLine2.GetHashCode()^this.City.GetHashCode()^this.PostalCode.GetHashCode();
         }
 
         public override string ToString()
@@ -83,6 +90,7 @@ namespace SHSApplication.Business_Layer
             addr_details.Add(DataAccesHelper.addrLine1, new string[] { DataAccesHelper.typeString, this.AddressLine1 });
             addr_details.Add(DataAccesHelper.addrLine2, new string[] { DataAccesHelper.typeString, this.AddressLine2 });
             addr_details.Add(DataAccesHelper.addrCity, new string[] { DataAccesHelper.typeString, this.City });
+            addr_details.Add(DataAccesHelper.addrPostalCode, new string[] { DataAccesHelper.typeString, this.PostalCode });
 
             dh.runQuery(DataAccesHelper.targetAddress, DataAccesHelper.requestInsert, addr_details);
         }
@@ -96,6 +104,7 @@ namespace SHSApplication.Business_Layer
             addr_details.Add(DataAccesHelper.addrLine1, new string[] { DataAccesHelper.typeString, this.AddressLine1 });
             addr_details.Add(DataAccesHelper.addrLine2, new string[] { DataAccesHelper.typeString, this.AddressLine2 });
             addr_details.Add(DataAccesHelper.addrCity, new string[] { DataAccesHelper.typeString, this.City });
+            addr_details.Add(DataAccesHelper.addrPostalCode, new string[] { DataAccesHelper.typeString, this.PostalCode });
 
             dh.runQuery(DataAccesHelper.targetAddress, DataAccesHelper.requestUpdate, addr_details, DataAccesHelper.addressId + " = '" + this.AddressId + "'");
         }
@@ -109,6 +118,7 @@ namespace SHSApplication.Business_Layer
             addr_details.Add(DataAccesHelper.addrLine1, new string[] { DataAccesHelper.typeString, this.AddressLine1 });
             addr_details.Add(DataAccesHelper.addrLine2, new string[] { DataAccesHelper.typeString, this.AddressLine2 });
             addr_details.Add(DataAccesHelper.addrCity, new string[] { DataAccesHelper.typeString, this.City });
+            addr_details.Add(DataAccesHelper.addrPostalCode, new string[] { DataAccesHelper.typeString, this.PostalCode });
 
             dh.runQuery(DataAccesHelper.targetAddress, DataAccesHelper.requestDelete, addr_details, DataAccesHelper.addressId + " = '" + this.AddressId + "'");
         }

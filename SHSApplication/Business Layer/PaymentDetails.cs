@@ -2,6 +2,7 @@
 using ServerSide;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,11 @@ namespace SHSApplication.Business_Layer
             this.AccNr = accNr;
             this.Bank = bank;
             this.BranchCode = branchCode;
+        }
+
+        public PaymentDetails()
+        {
+
         }
 
         public string BranchCode
@@ -112,6 +118,25 @@ namespace SHSApplication.Business_Layer
             pay_details.Add(DataAccesHelper.paymentDetBranch, new string[] { DataAccesHelper.typeString, this.BranchCode });
 
             dh.runQuery(DataAccesHelper.targetPaymentDetails, DataAccesHelper.requestDelete, pay_details, DataAccesHelper.paymentDetClientId + " = '" + this.PaymentDet_Client.PersonId + "'");
+        }
+
+        public List<PaymentDetails> GetAllPaymentDetails()
+        {
+            Datahandler dh = Datahandler.getData();
+            List<PaymentDetails> details = new List<PaymentDetails>();
+            DataTable table = dh.readDataFromDB(DataAccesHelper.QueryGetPaymentDetails);
+
+            foreach (DataRow item in table.Rows)
+            {
+                PaymentDetails pd = new PaymentDetails();
+                pd.AccNr = item[DataAccesHelper.paymentDetAccNr].ToString();
+                pd.Bank = item[DataAccesHelper.paymentDetBank].ToString();
+                pd.BranchCode = item[DataAccesHelper.paymentDetBranch].ToString();
+                pd.PaymentDet_Client = new Client();
+                pd.PaymentDet_Client.PersonId = item[DataAccesHelper.paymentDetClientId].ToString();
+                details.Add(pd);
+            }
+            return details;
         }
         public void deductDebit(string clientId) { }
 

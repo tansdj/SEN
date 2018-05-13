@@ -67,7 +67,7 @@ namespace SHSApplication.Business_Layer
 
         public override string ToString()
         {
-            return String.Format("ID: {0}\nName: {1}\nSurname: {2}\nPaymentMethod: {3}\nStatus: {4}\n\nAddress: {5},{6},{7}\nContact: {8},{9}",PersonId,Name,Surname,PaymentMethod,Status,PersonAddress.AddressLine1,PersonAddress.AddressLine2,PersonAddress.City,PersonContact.Cell,PersonContact.Email);
+            return this.Name + " " + this.Surname + " (" + this.PersonId + ")";
         }
 
         public void NewClientWithPaymentDet(string accNr,string bank,string branchCode)
@@ -153,7 +153,16 @@ namespace SHSApplication.Business_Layer
             this.PersonAddress.UpdateAddress();
             this.PersonContact.UpdateContact();
             dh.runQuery(DataAccesHelper.targetClient, DataAccesHelper.requestUpdate, client_details, DataAccesHelper.clientId + " = '" + this.PersonId + "'");
-            PD.UpdatePaymentDetail();
+            DataTable dt = dh.readDataFromDB(DataAccesHelper.QueryTestForPaymentDet + this.PersonId);
+            if (dt.Rows.Count>0)
+            {
+                PD.UpdatePaymentDetail();
+            }
+            else
+            {
+                PD.InsertPaymentDetail();
+            }
+            
         }
 
         public void RemoveClient()
@@ -186,7 +195,7 @@ namespace SHSApplication.Business_Layer
                 c.PersonId = item[DataAccesHelper.clientId].ToString();
                 c.Name = item[DataAccesHelper.clientName].ToString();
                 c.Surname = item[DataAccesHelper.clientSurname].ToString();
-                c.PersonAddress = new Address(item[DataAccesHelper.addressId].ToString(), item[DataAccesHelper.addrLine1].ToString(), item[DataAccesHelper.addrLine2].ToString(), item[DataAccesHelper.addrCity].ToString());
+                c.PersonAddress = new Address(item[DataAccesHelper.addressId].ToString(), item[DataAccesHelper.addrLine1].ToString(), item[DataAccesHelper.addrLine2].ToString(), item[DataAccesHelper.addrCity].ToString(),item[DataAccesHelper.addrPostalCode].ToString());
                 c.PersonContact = new Contact(item[DataAccesHelper.contactId].ToString(), item[DataAccesHelper.contactCell].ToString(), item[DataAccesHelper.contactEmail].ToString());
                 c.Status = item[DataAccesHelper.clientStatus].ToString();
                 c.PaymentMethod = item[DataAccesHelper.clientPaymentMethod].ToString();

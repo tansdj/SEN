@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ClientSide
 {
-    public partial class frmMain : Form
+    public partial class frmClientManagement : Form
     {
-        public frmMain()
+        public frmClientManagement()
         {
             InitializeComponent();
             this.Size = Screen.PrimaryScreen.WorkingArea.Size;
@@ -20,8 +20,7 @@ namespace ClientSide
 
         private void btnClientManagement_Click(object sender, EventArgs e)
         {
-            frmClientManagement cm = new frmClientManagement();
-            cm.Show();
+
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -33,18 +32,40 @@ namespace ClientSide
         {
             frmProductManagement pm = new frmProductManagement();
             pm.Show();
+            this.Close();
         }
 
         private void btnTecManagement_Click(object sender, EventArgs e)
         {
             frmTechManagement tm = new frmTechManagement();
-            tm.Show(); 
+            tm.Show();
+            this.Close();
         }
 
         private void btnUserManagement_Click(object sender, EventArgs e)
         {
             frmUserManagement um = new frmUserManagement();
             um.Show();
+            this.Close();
+        }
+
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnNewClient_Click(object sender, EventArgs e)
+        {
+            frmNewClient nc = new frmNewClient();
+            nc.Show();
+            this.Close();
+        }
+
+        private void btnEditClient_Click(object sender, EventArgs e)
+        {
+            frmUpdateClient uc = new frmUpdateClient();
+            uc.Show();
+            this.Close();
         }
     }
 }

@@ -17,6 +17,7 @@ namespace Serverside.HelperLibraries
         public const string addrLine1 = "AddressLine1";
         public const string addrLine2 = "AddressLine2";
         public const string addrCity = "City";
+        public const string addrPostalCode = "PostalCode";
 
         public const string targetContact = "tblContact";
         public const string contactId = "pContactId";
@@ -123,7 +124,8 @@ namespace Serverside.HelperLibraries
         public const string QueryGetClientProducts = "";
         public const string QueryGetComponentVendors = "";
         public const string QueryGetConfigurations = "";
-        public const string QueryGetPaymentDetails = "";
+        public const string QueryGetPaymentDetails = "SELECT * FROM tblPaymentDetails";
+        public const string QueryTestForPaymentDet = "SELECT * FROM tblPaymentDetails WHERE ClientIdNr = ";
         public const string QueryGetProducts = "";
         public const string QueryGetProductFunction = "";
         public const string QueryGetSystemComponents = "";

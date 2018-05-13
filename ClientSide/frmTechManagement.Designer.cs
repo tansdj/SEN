@@ -1,6 +1,6 @@
 ﻿namespace ClientSide
 {
-    partial class frmMain
+    partial class frmTechManagement
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTechManagement));
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.btnHome = new System.Windows.Forms.Button();
             this.btnUserManagement = new System.Windows.Forms.Button();
@@ -71,7 +71,7 @@
             this.btnHome.ForeColor = System.Drawing.Color.OrangeRed;
             this.btnHome.Image = ((System.Drawing.Image)(resources.GetObject("btnHome.Image")));
             this.btnHome.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnHome.Location = new System.Drawing.Point(0, 98);
+            this.btnHome.Location = new System.Drawing.Point(0, 108);
             this.btnHome.Name = "btnHome";
             this.btnHome.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnHome.Size = new System.Drawing.Size(243, 50);
@@ -79,6 +79,7 @@
             this.btnHome.Text = "        Home";
             this.btnHome.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnHome.UseVisualStyleBackColor = true;
+            this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
             // 
             // btnUserManagement
             // 
@@ -115,7 +116,6 @@
             this.btnTecManagement.Text = "        Technician Management";
             this.btnTecManagement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnTecManagement.UseVisualStyleBackColor = true;
-            this.btnTecManagement.Click += new System.EventHandler(this.btnTecManagement_Click);
             // 
             // btnProdManagement
             // 
@@ -179,7 +179,7 @@
             this.btnClose.Location = new System.Drawing.Point(845, 0);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(40, 30);
-            this.btnClose.TabIndex = 6;
+            this.btnClose.TabIndex = 7;
             this.btnClose.Text = "X";
             this.btnClose.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnClose.UseVisualStyleBackColor = true;
@@ -206,13 +206,13 @@
             // lblDash
             // 
             this.lblDash.AutoSize = true;
-            this.lblDash.Font = new System.Drawing.Font("Copperplate Gothic Bold", 32F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDash.Font = new System.Drawing.Font("Copperplate Gothic Bold", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDash.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblDash.Location = new System.Drawing.Point(92, 33);
+            this.lblDash.Location = new System.Drawing.Point(92, 37);
             this.lblDash.Name = "lblDash";
-            this.lblDash.Size = new System.Drawing.Size(293, 48);
+            this.lblDash.Size = new System.Drawing.Size(572, 44);
             this.lblDash.TabIndex = 4;
-            this.lblDash.Text = "Dashboard";
+            this.lblDash.Text = "Technician Management";
             // 
             // picLogoSmall
             // 
@@ -236,7 +236,7 @@
             this.picLogo.TabIndex = 2;
             this.picLogo.TabStop = false;
             // 
-            // frmMain
+            // frmTechManagement
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.AutoSize = true;
@@ -246,7 +246,7 @@
             this.Controls.Add(this.pnlMenu);
             this.Controls.Add(this.picLogo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "frmMain";
+            this.Name = "frmTechManagement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmMain";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

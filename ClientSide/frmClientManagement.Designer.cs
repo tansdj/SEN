@@ -1,6 +1,6 @@
 ﻿namespace ClientSide
 {
-    partial class frmMain
+    partial class frmClientManagement
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmClientManagement));
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.btnHome = new System.Windows.Forms.Button();
             this.btnUserManagement = new System.Windows.Forms.Button();
@@ -41,6 +41,9 @@
             this.lblDash = new System.Windows.Forms.Label();
             this.picLogoSmall = new System.Windows.Forms.PictureBox();
             this.picLogo = new System.Windows.Forms.PictureBox();
+            this.btnNewClient = new System.Windows.Forms.Button();
+            this.btnEditClient = new System.Windows.Forms.Button();
+            this.btnCancelClient = new System.Windows.Forms.Button();
             this.pnlMenu.SuspendLayout();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogoSmall)).BeginInit();
@@ -71,7 +74,7 @@
             this.btnHome.ForeColor = System.Drawing.Color.OrangeRed;
             this.btnHome.Image = ((System.Drawing.Image)(resources.GetObject("btnHome.Image")));
             this.btnHome.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnHome.Location = new System.Drawing.Point(0, 98);
+            this.btnHome.Location = new System.Drawing.Point(0, 108);
             this.btnHome.Name = "btnHome";
             this.btnHome.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnHome.Size = new System.Drawing.Size(243, 50);
@@ -79,6 +82,7 @@
             this.btnHome.Text = "        Home";
             this.btnHome.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnHome.UseVisualStyleBackColor = true;
+            this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
             // 
             // btnUserManagement
             // 
@@ -179,7 +183,7 @@
             this.btnClose.Location = new System.Drawing.Point(845, 0);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(40, 30);
-            this.btnClose.TabIndex = 6;
+            this.btnClose.TabIndex = 7;
             this.btnClose.Text = "X";
             this.btnClose.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnClose.UseVisualStyleBackColor = true;
@@ -194,10 +198,10 @@
             this.btnLoginReg.Font = new System.Drawing.Font("Copperplate Gothic Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLoginReg.ForeColor = System.Drawing.Color.OrangeRed;
             this.btnLoginReg.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLoginReg.Location = new System.Drawing.Point(651, 42);
+            this.btnLoginReg.Location = new System.Drawing.Point(650, 42);
             this.btnLoginReg.Name = "btnLoginReg";
             this.btnLoginReg.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnLoginReg.Size = new System.Drawing.Size(234, 50);
+            this.btnLoginReg.Size = new System.Drawing.Size(235, 50);
             this.btnLoginReg.TabIndex = 5;
             this.btnLoginReg.Text = "Login/Register";
             this.btnLoginReg.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
@@ -210,9 +214,9 @@
             this.lblDash.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lblDash.Location = new System.Drawing.Point(92, 33);
             this.lblDash.Name = "lblDash";
-            this.lblDash.Size = new System.Drawing.Size(293, 48);
+            this.lblDash.Size = new System.Drawing.Size(500, 48);
             this.lblDash.TabIndex = 4;
-            this.lblDash.Text = "Dashboard";
+            this.lblDash.Text = "Client Management";
             // 
             // picLogoSmall
             // 
@@ -236,17 +240,73 @@
             this.picLogo.TabIndex = 2;
             this.picLogo.TabStop = false;
             // 
-            // frmMain
+            // btnNewClient
+            // 
+            this.btnNewClient.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnNewClient.AutoSize = true;
+            this.btnNewClient.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnNewClient.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnNewClient.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNewClient.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNewClient.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnNewClient.Location = new System.Drawing.Point(259, 108);
+            this.btnNewClient.Name = "btnNewClient";
+            this.btnNewClient.Size = new System.Drawing.Size(202, 148);
+            this.btnNewClient.TabIndex = 3;
+            this.btnNewClient.Text = "Add new client";
+            this.btnNewClient.UseVisualStyleBackColor = false;
+            this.btnNewClient.Click += new System.EventHandler(this.btnNewClient_Click);
+            // 
+            // btnEditClient
+            // 
+            this.btnEditClient.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnEditClient.AutoSize = true;
+            this.btnEditClient.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnEditClient.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnEditClient.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditClient.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditClient.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnEditClient.Location = new System.Drawing.Point(479, 108);
+            this.btnEditClient.Name = "btnEditClient";
+            this.btnEditClient.Size = new System.Drawing.Size(183, 148);
+            this.btnEditClient.TabIndex = 4;
+            this.btnEditClient.Text = "Edit client";
+            this.btnEditClient.UseVisualStyleBackColor = false;
+            this.btnEditClient.Click += new System.EventHandler(this.btnEditClient_Click);
+            // 
+            // btnCancelClient
+            // 
+            this.btnCancelClient.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCancelClient.AutoSize = true;
+            this.btnCancelClient.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnCancelClient.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnCancelClient.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancelClient.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelClient.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnCancelClient.Location = new System.Drawing.Point(682, 108);
+            this.btnCancelClient.Name = "btnCancelClient";
+            this.btnCancelClient.Size = new System.Drawing.Size(182, 148);
+            this.btnCancelClient.TabIndex = 5;
+            this.btnCancelClient.Text = "Cancel client";
+            this.btnCancelClient.UseVisualStyleBackColor = false;
+            // 
+            // frmClientManagement
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(885, 537);
+            this.Controls.Add(this.btnCancelClient);
+            this.Controls.Add(this.btnEditClient);
+            this.Controls.Add(this.btnNewClient);
             this.Controls.Add(this.pnlTop);
             this.Controls.Add(this.pnlMenu);
             this.Controls.Add(this.picLogo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "frmMain";
+            this.Name = "frmClientManagement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmMain";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -256,6 +316,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picLogoSmall)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -273,6 +334,9 @@
         private System.Windows.Forms.Button btnLoginReg;
         private System.Windows.Forms.Label lblDash;
         private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Button btnNewClient;
+        private System.Windows.Forms.Button btnEditClient;
+        private System.Windows.Forms.Button btnCancelClient;
     }
 }
 
