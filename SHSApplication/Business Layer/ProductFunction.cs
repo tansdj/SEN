@@ -2,6 +2,7 @@
 using ServerSide;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,7 +26,10 @@ namespace SHSApplication.Business_Layer
             set { prodFunction = value; }
         }
 
+        public ProductFunction()
+        {
 
+        }
         public Product ProductFunc_Product
         {
             get { return productFunc_product; }
@@ -89,6 +93,24 @@ namespace SHSApplication.Business_Layer
             prodFunc_details.Add(DataAccesHelper.pfFunction, new string[] { DataAccesHelper.typeString, this.ProdFunction });
 
             dh.runQuery(DataAccesHelper.targetProductFunction, DataAccesHelper.requestDelete, prodFunc_details, DataAccesHelper.pfProductCode + " = '" + this.ProductFunc_Product.ProductCode + "'");
+        }
+
+        public List<ProductFunction> GetAllProductFunctions()
+        {
+            Datahandler dh = Datahandler.getData();
+            List<ProductFunction> prodFunc = new List<ProductFunction>();
+            DataTable table = dh.readDataFromDB(DataAccesHelper.QueryGetProductFunction+this.ProductFunc_Product.ProductCode);
+
+            foreach (DataRow item in table.Rows)
+            {
+                ProductFunction pf = new ProductFunction();
+                pf.ProductFunc_Product = new Product();
+                pf.ProductFunc_Product.ProductCode = item[DataAccesHelper.pfProductCode].ToString();
+                pf.ProdFunction = item[DataAccesHelper.pfFunction].ToString();
+                prodFunc.Add(pf);
+            }
+
+            return prodFunc;
         }
     }
 }

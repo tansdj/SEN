@@ -2,6 +2,7 @@
 using ServerSide;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,10 @@ namespace SHSApplication.Business_Layer
             this.AddCost = addCost;
         }
 
+        public Configurations()
+        {
+
+        }
         public double AddCost
         {
             get { return addCost; }
@@ -128,6 +133,27 @@ namespace SHSApplication.Business_Layer
             conf_details.Add(DataAccesHelper.confAddCost, new string[] { DataAccesHelper.typeDouble, this.AddCost.ToString() });
 
             dh.runQuery(DataAccesHelper.targetConfiguration, DataAccesHelper.requestDelete, conf_details, DataAccesHelper.confCode + " = '" + this.ConfigId + "'");
+        }
+
+        public List<Configurations> GetAllConfigurations()
+        {
+            Datahandler dh = Datahandler.getData();
+            List<Configurations> confs = new List<Configurations>();
+            DataTable table = dh.readDataFromDB(DataAccesHelper.QueryGetConfigurations+ this.Configuration_Component.CompCode);
+
+            foreach (DataRow item in table.Rows)
+            {
+                Configurations c = new Configurations();
+                c.ConfigId = item[DataAccesHelper.confCode].ToString();
+                c.Name = item[DataAccesHelper.confName].ToString();
+                c.Description = item[DataAccesHelper.confDesc].ToString();
+                c.AddCost = Convert.ToDouble(item[DataAccesHelper.confAddCost].ToString());
+                c.Configuration_Component = new SystemComponents();
+                c.Configuration_Component.CompCode = item[DataAccesHelper.confCompCode].ToString();
+                confs.Add(c);
+            }
+
+            return confs;
         }
     }
 }

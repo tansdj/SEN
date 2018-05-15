@@ -2,6 +2,7 @@
 using ServerSide;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,10 @@ namespace SHSApplication.Business_Layer
             this.SkillRequired = skillRequired;
         }
 
+        public TechnicalLog()
+        {
+
+        }
         public string SkillRequired
         {
             get { return skillRequired; }
@@ -130,6 +135,30 @@ namespace SHSApplication.Business_Layer
             tecLog_details.Add(DataAccesHelper.skillReq, new string[] { DataAccesHelper.typeString, this.SkillRequired });
 
             dh.runQuery(DataAccesHelper.targetTechEvents, DataAccesHelper.requestUpdate, tecLog_details,DataAccesHelper.eventId+" = "+this.EventId);
+        }
+
+        public List<TechnicalLog> GetTechnicalLog()
+        {
+            Datahandler dh = Datahandler.getData();
+            List<TechnicalLog> techLog = new List<TechnicalLog>();
+            DataTable table = dh.readDataFromDB(DataAccesHelper.QueryGetTechnicalLog);
+
+            foreach (DataRow item in table.Rows)
+            {
+                TechnicalLog tl = new TechnicalLog();
+                tl.EventId = Convert.ToInt32(item[DataAccesHelper.eventId].ToString());
+                tl.TechLog_Client = new Client();
+                tl.TechLog_Client.PersonId = item[DataAccesHelper.eventClientId].ToString();
+                tl.Date = Convert.ToDateTime(item[DataAccesHelper.eventDate].ToString());
+                tl.Remarks = item[DataAccesHelper.eventRemarks].ToString();
+                tl.SkillRequired = item[DataAccesHelper.skillReq].ToString();
+                tl.Status = item[DataAccesHelper.eventStatus].ToString();
+                tl.TechLog_Tech = new Technicians();
+                tl.TechLog_Tech.PersonId = item[DataAccesHelper.eventTechId].ToString();
+                techLog.Add(tl);
+            }
+
+            return techLog;
         }
 
     }

@@ -23,6 +23,11 @@ namespace SHSApplication.Business_Layer
             this.VendorContact = vendorContact;
         }
 
+        public Vendor()
+        {
+
+        }
+
         public Contact VendorContact
         {
             get { return vendorContact; }

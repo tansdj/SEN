@@ -2,6 +2,7 @@
 using ServerSide;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,10 @@ namespace SHSApplication.Business_Layer
             this.ClientProducts_Product = clientProducts_product;
         }
 
+        public ClientProducts()
+        {
+
+        }
         public Product ClientProducts_Product
         {
             get { return clientProducts_product; }
@@ -77,6 +82,25 @@ namespace SHSApplication.Business_Layer
             clientProd_details.Add(DataAccesHelper.cpProductId, new string[] { DataAccesHelper.typeString, this.ClientProducts_Product.ProductCode });
 
             dh.runQuery(DataAccesHelper.targetClientProducts, DataAccesHelper.requestDelete, clientProd_details,DataAccesHelper.cpClientId+" = '"+this.ClientProducts_Client.PersonId+"' AND "+DataAccesHelper.cpProductId+" = '"+this.ClientProducts_Product.ProductCode+"'");
+        }
+
+        public List<ClientProducts> GetClientProducts()
+        {
+            Datahandler dh = Datahandler.getData();
+            List<ClientProducts> clientProds = new List<ClientProducts>();
+            DataTable table = dh.readDataFromDB(DataAccesHelper.QueryGetClientProducts + this.ClientProducts_Client.PersonId);
+
+            foreach (DataRow item in table.Rows)
+            {
+                ClientProducts cp = new ClientProducts();
+                cp.ClientProducts_Client = new Client();
+                cp.ClientProducts_Client.PersonId = item[DataAccesHelper.cpClientId].ToString();
+                cp.ClientProducts_Product = new Product();
+                cp.ClientProducts_Product.ProductCode = item[DataAccesHelper.cpProductId].ToString();
+                clientProds.Add(cp);
+            }
+
+            return clientProds;
         }
 
     }

@@ -117,13 +117,22 @@ namespace SHSApplication.Business_Layer
             dh.runQuery(DataAccesHelper.targetBilling, DataAccesHelper.requestDelete, billing_details, DataAccesHelper.billingClientid + " = '" + this.Billing_Client.PersonId + "'");
         }
 
-        public List<Billing> monthlyBill(string clientId)
+        public List<Billing> GetClientBilling()
         {
-            string query = "";
             Datahandler dh = Datahandler.getData();
             List<Billing> bill = new List<Billing>();
-            DataTable table = dh.readDataFromDB(query);
+            DataTable table = dh.readDataFromDB(DataAccesHelper.QueryGetBilling+this.Billing_Client.PersonId);
 
+            foreach (DataRow item in table.Rows)
+            {
+                Billing b = new Billing();
+                b.Billing_Client = new Client();
+                b.Billing_Client.PersonId = item[DataAccesHelper.billingClientid].ToString();
+                b.AmountDue = Convert.ToDouble(item[DataAccesHelper.billAmountDue].ToString());
+                b.AmountPaid = Convert.ToDouble(item[DataAccesHelper.billAmountPaid].ToString());
+                b.Date = Convert.ToDateTime(item[DataAccesHelper.billingDate].ToString());
+                bill.Add(b);
+            }
             return bill;
         }
 

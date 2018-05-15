@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ServerSide;
 using Serverside.HelperLibraries;
+using System.Data;
 
 namespace SHSApplication.Business_Layer
 {
@@ -26,6 +27,10 @@ namespace SHSApplication.Business_Layer
             this.Status = status;
         }
 
+        public Product()
+        {
+
+        }
         public string Status
         {
             get { return status; }
@@ -115,5 +120,24 @@ namespace SHSApplication.Business_Layer
             dh.runQuery(DataAccesHelper.targetProduct, DataAccesHelper.requestUpdate, prod_details,DataAccesHelper.prodCode+" = '"+this.ProductCode+"'");
         }
 
+        public List<Product> GetAllProducts()
+        {
+            Datahandler dh = Datahandler.getData();
+            List<Product> products = new List<Product>();
+            DataTable table = dh.readDataFromDB(DataAccesHelper.QueryGetProducts);
+
+            foreach (DataRow item in table.Rows)
+            {
+                Product p = new Product();
+                p.ProductCode = item[DataAccesHelper.prodCode].ToString();
+                p.Name = item[DataAccesHelper.prodName].ToString();
+                p.Description = item[DataAccesHelper.prodDesc].ToString();
+                p.BasePrice = Convert.ToDouble(item[DataAccesHelper.prodPrice].ToString());
+                p.Status = item[DataAccesHelper.prodStatus].ToString();
+                products.Add(p);
+            }
+
+            return products;
+        }
     }
 }

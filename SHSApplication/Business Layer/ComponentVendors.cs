@@ -2,6 +2,7 @@
 using ServerSide;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +25,10 @@ namespace SHSApplication.Business_Layer
             set { cvVendor = value; }
         }
 
+        public ComponentVendors()
+        {
+
+        }
 
         public SystemComponents CvComponents
         {
@@ -76,6 +81,25 @@ namespace SHSApplication.Business_Layer
             compVend_details.Add(DataAccesHelper.cvVendorCode, new string[] { DataAccesHelper.typeString, this.CvVendor.VendorCode });
 
             dh.runQuery(DataAccesHelper.targetCompVendors, DataAccesHelper.requestDelete, compVend_details,DataAccesHelper.cvCompCode+" = '"+this.CvComponents.CompCode+"' AND "+DataAccesHelper.cvVendorCode+" = '"+this.CvVendor.VendorCode+"'");
+        }
+
+        public List<ComponentVendors> GetComponentVendors()
+        {
+            Datahandler dh = Datahandler.getData();
+            List<ComponentVendors> compVends = new List<ComponentVendors>();
+            DataTable table = dh.readDataFromDB(DataAccesHelper.QueryGetComponentVendors + this.CvComponents.CompCode);
+
+            foreach (DataRow item in table.Rows)
+            {
+                ComponentVendors cv = new ComponentVendors();
+                cv.CvComponents = new SystemComponents();
+                cv.CvComponents.CompCode = item[DataAccesHelper.cvCompCode].ToString();
+                cv.CvVendor = new Vendor();
+                cv.CvVendor.VendorCode = item[DataAccesHelper.cvVendorCode].ToString();
+                compVends.Add(cv);
+            }
+
+            return compVends;
         }
 
     }

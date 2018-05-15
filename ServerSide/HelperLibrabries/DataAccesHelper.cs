@@ -119,21 +119,23 @@ namespace Serverside.HelperLibraries
         public const string QueryGetClients= @"SELECT * FROM tblClient C
                                               INNER JOIN tblAddress A ON C.AddressId = A.pAddressId
                                               INNER JOIN tblContact CT ON C.ContactId = CT.pContactId";
-        public const string QueryGetBilling = "";
-        public const string QueryGetClientConfiguration = "";
-        public const string QueryGetClientProducts = "";
-        public const string QueryGetComponentVendors = "";
-        public const string QueryGetConfigurations = "";
+        public const string QueryGetBilling = "SELECT * FROM tblBilling WHERE ClientIdNr = ";
+        public const string QueryGetClientConfiguration = "SELECT * FROM tblClientCompConfiguration WHERE ClientId = ";
+        public const string QueryGetClientProducts = "SELECT * FROM tblClientProducts WHERE ClientIdNr = ";
+        public const string QueryGetComponentVendors = "SELECT * FROM tblComponentVendors WHERE ComponentCode = ";
+        public const string QueryGetConfigurations = "SELECT * FROM tblConfiguration WHERE ComponentCode = ";
         public const string QueryGetPaymentDetails = "SELECT * FROM tblPaymentDetails";
         public const string QueryTestForPaymentDet = "SELECT * FROM tblPaymentDetails WHERE ClientIdNr = ";
-        public const string QueryGetProducts = "";
-        public const string QueryGetProductFunction = "";
-        public const string QueryGetSystemComponents = "";
-        public const string QueryGetTechnicalDetails = "";
-        public const string QueryGetTechnicalLog = "";
-        public const string QueryGetTechnicians = "";
-        public const string QueryGetUsers = "";
-        public const string QueryGetVendors = "";
+        public const string QueryGetProducts = "SELECT * FROM tblProducts";
+        public const string QueryGetProductFunction = "SELECT * FROM tblProductFunctions WHERE ProductCode = ";
+        public const string QueryGetSystemComponents = "SELECT * FROM tblSystemComponents WHERE ProductCode = ";
+        public const string QueryGetTechnicalDetails = "SELECT * FROM tblTechnicalDetails WHERE ConfigCode = ";
+        public const string QueryGetTechnicalLog = "SELECT * FROM tblTechnicalLog";
+        public const string QueryGetTechnicians = @"SELECT * FROM tblTechnicians T
+                                                    INNER JOIN tblAddress A ON T.AddressId = A.pAddressId
+                                                    INNER JOIN tblContact C ON T.ContactId = C.pContactId";
+        public const string QueryGetUsers = "SELECT * FROM tblUsers";
+        public const string QueryGetVendors = "SELECT * FROM tblVendors";
 
         public const string typeString = "STRING";
         public const string typeDouble = "DOUBLE";

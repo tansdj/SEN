@@ -131,6 +131,15 @@ namespace SHSApplication.Business_Layer
             this.PersonAddress.UpdateAddress();
             this.PersonContact.UpdateContact();
             dh.runQuery(DataAccesHelper.targetClient, DataAccesHelper.requestUpdate, client_details,DataAccesHelper.clientId+" = '"+this.PersonId+"'");
+
+            try
+            {
+                PD = new PaymentDetails(this, "", "", "");
+                PD.RemovePaymnetDetail();
+            }
+            catch (Exception)
+            {
+            }
         }
 
         public void UpdateClientWithPaymentDetails(string accNr, string bank, string branchCode)
@@ -155,7 +164,7 @@ namespace SHSApplication.Business_Layer
             dh.runQuery(DataAccesHelper.targetClient, DataAccesHelper.requestUpdate, client_details, DataAccesHelper.clientId + " = '" + this.PersonId + "'");
             DataTable dt = dh.readDataFromDB(DataAccesHelper.QueryTestForPaymentDet + this.PersonId);
             if (dt.Rows.Count>0)
-            {
+            {    
                 PD.UpdatePaymentDetail();
             }
             else

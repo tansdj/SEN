@@ -2,6 +2,7 @@
 using ServerSide;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,10 @@ namespace SHSApplication.Business_Layer
             this.DocPath = docPath;
         }
 
+        public TechnicalDetails()
+        {
+
+        }
         public string DocPath
         {
             get { return docPath; }
@@ -88,6 +93,25 @@ namespace SHSApplication.Business_Layer
             tecDet_details.Add(DataAccesHelper.tecDetDocPath, new string[] { DataAccesHelper.typeString, this.DocPath });
 
             dh.runQuery(DataAccesHelper.targetTechDetail, DataAccesHelper.requestDelete, tecDet_details,DataAccesHelper.tecDetId+" = "+this.DetailId);
+        }
+
+        public List<TechnicalDetails> GetComponentTechDet()
+        {
+            Datahandler dh = Datahandler.getData();
+            List<TechnicalDetails> techDets = new List<TechnicalDetails>();
+            DataTable table = dh.readDataFromDB(DataAccesHelper.QueryGetTechnicalDetails + this.TechDet_Config.ConfigId);
+
+            foreach (DataRow item in table.Rows)
+            {
+                TechnicalDetails td = new TechnicalDetails();
+                td.DetailId = Convert.ToInt32(item[DataAccesHelper.tecDetId].ToString());
+                td.DocPath = item[DataAccesHelper.tecDetDocPath].ToString();
+                td.TechDet_Config = new Configurations();
+                td.TechDet_Config.ConfigId = item[DataAccesHelper.tecDetConfCode].ToString();
+                techDets.Add(td);
+            }
+
+            return techDets;
         }
     }
 }

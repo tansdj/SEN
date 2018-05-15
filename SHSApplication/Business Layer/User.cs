@@ -25,6 +25,11 @@ namespace SHSApplication.Business_Layer
             this.Email = email;
         }
 
+        public User()
+        {
+
+        }
+
         public string Email
         {
             get { return email; }

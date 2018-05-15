@@ -13,23 +13,26 @@ namespace ClientSide
 {
     public partial class frmUpdateClient : Form
     {
-        List<Client> clients = new Client().GetAllClients();
+       
         List<PaymentDetails> details = new PaymentDetails().GetAllPaymentDetails();
+        BindingSource bind1 = new BindingSource();
         public frmUpdateClient()
         {
             InitializeComponent();
             this.Size = Screen.PrimaryScreen.WorkingArea.Size;
-            cmbClients.DataSource = clients;
-            txtId.DataBindings.Add("Text", clients, "PersonId");
-            txtName.DataBindings.Add("Text", clients, "Name");
-            txtSurname.DataBindings.Add("Text", clients, "Surname");
-            cmbPayment.DataBindings.Add("SelectedItem", clients, "PaymentMethod");
-            txtLine1.DataBindings.Add("Text", clients, "PersonAddress.AddressLine1");
-            txtLine2.DataBindings.Add("Text", clients, "PersonAddress.AddressLine2");
-            txtCity.DataBindings.Add("Text", clients, "PersonAddress.City");
-            txtPostalCode.DataBindings.Add("Text", clients, "PersonAddress.PostalCode");
-            txtCell.DataBindings.Add("Text", clients, "PersonContact.Cell");
-            txtEmail.DataBindings.Add("Text", clients, "PersonContact.Email");
+           
+            bind1.DataSource = new Client().GetAllClients();
+            cmbClients.DataSource = bind1;
+            txtId.DataBindings.Add("Text", bind1, "PersonId");
+            txtName.DataBindings.Add("Text", bind1, "Name");
+            txtSurname.DataBindings.Add("Text", bind1, "Surname");
+            cmbPayment.DataBindings.Add("SelectedItem", bind1, "PaymentMethod");
+            txtLine1.DataBindings.Add("Text", bind1, "PersonAddress.AddressLine1");
+            txtLine2.DataBindings.Add("Text", bind1, "PersonAddress.AddressLine2");
+            txtCity.DataBindings.Add("Text", bind1, "PersonAddress.City");
+            txtPostalCode.DataBindings.Add("Text", bind1, "PersonAddress.PostalCode");
+            txtCell.DataBindings.Add("Text", bind1, "PersonContact.Cell");
+            txtEmail.DataBindings.Add("Text", bind1, "PersonContact.Email");
 
         }
 
@@ -76,7 +79,7 @@ namespace ClientSide
 
         private void btnAddClient_Click(object sender, EventArgs e)
         {
-            Client client = new Client(txtId.Text, txtName.Text, txtSurname.Text, new Address("", txtLine1.Text, txtLine2.Text, txtCity.Text, txtPostalCode.Text), new Contact("", txtCell.Text, txtEmail.Text), cmbPayment.SelectedItem.ToString(), "Active");
+            Client client = (Client)bind1.Current;
             if (cmbPayment.SelectedItem.ToString() == "Debit Order")
             {
                 client.UpdateClientWithPaymentDetails(txtAccNr.Text, txtBank.Text, txtBranch.Text);

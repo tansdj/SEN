@@ -2,6 +2,7 @@
 using ServerSide;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,11 @@ namespace SHSApplication.Business_Layer
             this.CompCode = compCode;
             this.SysComps_Product = sysComps_product;
             this.Description = description;
+        }
+
+        public SystemComponents()
+        {
+
         }
 
         public string Description
@@ -104,6 +110,24 @@ namespace SHSApplication.Business_Layer
             dh.runQuery(DataAccesHelper.targetComponents, DataAccesHelper.requestDelete, sysComp_details,DataAccesHelper.compCode+" = '"+this.CompCode+"'");
         }
 
+        public List<SystemComponents> GetSystemComponents()
+        {
+            Datahandler dh = Datahandler.getData();
+            List<SystemComponents> sysComps = new List<SystemComponents>();
+            DataTable table = dh.readDataFromDB(DataAccesHelper.QueryGetSystemComponents+this.SysComps_Product.ProductCode);
+
+            foreach (DataRow item in table.Rows)
+            {
+                SystemComponents sc = new SystemComponents();
+                sc.CompCode = item[DataAccesHelper.compCode].ToString();
+                sc.Description = item[DataAccesHelper.compDesc].ToString();
+                sc.SysComps_Product = new Product();
+                sc.SysComps_Product.ProductCode = item[DataAccesHelper.compProdCode].ToString();
+                sysComps.Add(sc);
+            }
+
+            return sysComps;
+        }
 
     }
 }

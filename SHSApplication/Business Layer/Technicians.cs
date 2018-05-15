@@ -18,6 +18,11 @@ namespace SHSApplication.Business_Layer
             this.Status = status;
             this.SkillLevel = skillLevel;
         }
+
+        public Technicians()
+        {
+
+        }
         public string SkillLevel
         {
             get { return skillLevel; }
