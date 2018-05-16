@@ -2,6 +2,7 @@
 using ServerSide;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -129,6 +130,26 @@ namespace SHSApplication.Business_Layer
             user_details.Add(DataAccesHelper.uEmail, new string[] { DataAccesHelper.typeString, this.Email });
 
             dh.runQuery(DataAccesHelper.targetUsers, DataAccesHelper.requestDelete, user_details, DataAccesHelper.uEmail + " = '" + this.Email + "'");
+        }
+
+        public List<User> GetAllUsers()
+        {
+            Datahandler dh = Datahandler.getData();
+            List<User> users = new List<User>();
+            DataTable table = dh.readDataFromDB(DataAccesHelper.QueryGetUsers);
+
+            foreach (DataRow item in table.Rows)
+            {
+                User u = new User();
+                u.Username = item[DataAccesHelper.uUsername].ToString();
+                u.Password = item[DataAccesHelper.uPassword].ToString();
+                u.Name = item[DataAccesHelper.uName].ToString();
+                u.Surname = item[DataAccesHelper.uSurname].ToString();
+                u.Email = item[DataAccesHelper.uEmail].ToString();
+                users.Add(u);
+            }
+
+            return users;
         }
 
     }

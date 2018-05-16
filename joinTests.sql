@@ -16,5 +16,5 @@ INNER JOIN tblAddress A ON T.AddressId = A.AddressId
 INNER JOIN tblContact C ON T.ContactId = C.ContactId
 
 SELECT * FROM tblVendors V
-INNER JOIN tblAddress A ON V.AddressId = A.AddressId
-INNER JOIN tblContact C ON V.ContactId = C.ContactId
+INNER JOIN tblAddress A ON V.AddressId = A.pAddressId
+INNER JOIN tblContact C ON V.ContactId = C.pContactId

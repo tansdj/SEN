@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Serverside.HelperLibraries
 {
-    public static class DataAccesHelper
+    public struct DataAccesHelper
     {
         public const string requestInsert = "INSERT";
         public const string requestUpdate = "UPDATE";
@@ -135,7 +135,9 @@ namespace Serverside.HelperLibraries
                                                     INNER JOIN tblAddress A ON T.AddressId = A.pAddressId
                                                     INNER JOIN tblContact C ON T.ContactId = C.pContactId";
         public const string QueryGetUsers = "SELECT * FROM tblUsers";
-        public const string QueryGetVendors = "SELECT * FROM tblVendors";
+        public const string QueryGetVendors = @"SELECT * FROM tblVendors V
+                                                INNER JOIN tblAddress A ON V.AddressId = A.pAddressId
+                                                INNER JOIN tblContact C ON V.ContactId = C.pContactId";
 
         public const string typeString = "STRING";
         public const string typeDouble = "DOUBLE";

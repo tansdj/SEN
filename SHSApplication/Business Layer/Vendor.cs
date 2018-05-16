@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ServerSide;
 using Serverside.HelperLibraries;
+using System.Data;
 
 namespace SHSApplication.Business_Layer
 {
@@ -135,6 +136,25 @@ namespace SHSApplication.Business_Layer
             vend_details.Add(DataAccesHelper.vendContactId, new string[] { DataAccesHelper.typeString, this.VendorContact.ContactId });
 
             dh.runQuery(DataAccesHelper.targetVendor, DataAccesHelper.requestDelete, vend_details, DataAccesHelper.vendCode + " = '" + this.VendorCode + "'");
+        }
+
+        public List<Vendor> GetAllVendors()
+        {
+            Datahandler dh = Datahandler.getData();
+            List<Vendor> vends = new List<Vendor>();
+            DataTable table = dh.readDataFromDB(DataAccesHelper.QueryGetVendors);
+
+            foreach (DataRow item in table.Rows)
+            {
+                Vendor v = new Vendor();
+                v.VendorCode = item[DataAccesHelper.vendCode].ToString();
+                v.Name = item[DataAccesHelper.vendName].ToString();
+                v.VendorAddress = new Address(item[DataAccesHelper.addressId].ToString(), item[DataAccesHelper.addrLine1].ToString(), item[DataAccesHelper.addrLine2].ToString(), item[DataAccesHelper.addrCity].ToString(), item[DataAccesHelper.addrPostalCode].ToString());
+                v.VendorContact = new Contact(item[DataAccesHelper.contactId].ToString(), item[DataAccesHelper.contactCell].ToString(), item[DataAccesHelper.contactEmail].ToString());
+                vends.Add(v);
+            }
+
+            return vends;
         }
     }
 }

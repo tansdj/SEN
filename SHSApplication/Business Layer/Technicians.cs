@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ServerSide;
 using Serverside.HelperLibraries;
+using System.Data;
 
 namespace SHSApplication.Business_Layer
 {
@@ -121,6 +122,28 @@ namespace SHSApplication.Business_Layer
             tech_details.Add(DataAccesHelper.techSkill, new string[] { DataAccesHelper.typeString, this.SkillLevel });
 
             dh.runQuery(DataAccesHelper.targetTechnicians, DataAccesHelper.requestDelete, tech_details, DataAccesHelper.techId + " = '" + this.PersonId+"'");
+        }
+
+        public List<Technicians> GetAllTechnicians()
+        {
+            Datahandler dh = Datahandler.getData();
+            List<Technicians> techs = new List<Technicians>();
+            DataTable table = dh.readDataFromDB(DataAccesHelper.QueryGetTechnicians);
+
+            foreach (DataRow item in table.Rows)
+            {
+                Technicians t = new Technicians();
+                t.PersonId = item[DataAccesHelper.techId].ToString();
+                t.Name = item[DataAccesHelper.techName].ToString();
+                t.Surname = item[DataAccesHelper.techSurname].ToString();
+                t.PersonAddress = new Address(item[DataAccesHelper.addressId].ToString(), item[DataAccesHelper.addrLine1].ToString(), item[DataAccesHelper.addrLine2].ToString(), item[DataAccesHelper.addrCity].ToString(), item[DataAccesHelper.addrPostalCode].ToString());
+                t.PersonContact = new Contact(item[DataAccesHelper.contactId].ToString(), item[DataAccesHelper.contactCell].ToString(), item[DataAccesHelper.contactEmail].ToString());
+                t.Status = item[DataAccesHelper.techStatus].ToString();
+                t.SkillLevel = item[DataAccesHelper.techSkill].ToString();
+                techs.Add(t);
+            }
+
+            return techs;
         }
     }
 

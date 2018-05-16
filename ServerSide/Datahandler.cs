@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Common;
 using System.Data;
+using ServerSide.HelperLibrabries;
 
 namespace ServerSide
 {
@@ -29,7 +30,7 @@ namespace ServerSide
             return data;
         }
 
-        public void runQuery(string target,string queryType, Dictionary<string,string[]> values,string condition="")
+        public bool runQuery(string target,string queryType, Dictionary<string,string[]> values,string condition="")
         {
             try
             {
@@ -130,10 +131,13 @@ namespace ServerSide
                         adapter.Update(table);
                     }
                 }
+                return true;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                ErrorHandler e = new ErrorHandler(ex);
+                e.PrintError();
+                return false;
             }
         }
 
@@ -152,12 +156,10 @@ namespace ServerSide
                 dataAdapter = new SqlDataAdapter(command);
                 dataAdapter.Fill(dataTable);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                FileHandler file = new FileHandler("FileError.csv");
-                List<string> error = new List<string>();
-                error.Add("A Critical error occurred at:" + DateTime.UtcNow.ToShortDateString());
-                file.WriteToTxt(error);
+                ErrorHandler e = new ErrorHandler(ex);
+                e.PrintError();
             }
             finally
             { connection.Close(); }
