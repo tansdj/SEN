@@ -21,7 +21,9 @@ namespace ClientSide
 
         private void btnClientManagement_Click(object sender, EventArgs e)
         {
-
+            frmClientManagement cm = new frmClientManagement();
+            cm.Show();
+            this.Close();
         }
 
         private void btnClose_Click(object sender, EventArgs e)

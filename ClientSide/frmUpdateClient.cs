@@ -106,7 +106,7 @@ namespace ClientSide
         private void cmbClients_SelectedIndexChanged(object sender, EventArgs e)
         {
             Client current = (Client)cmbClients.SelectedItem;
-            var results = from pd in details where pd.PaymentDet_Client.PersonId == current.PersonId select new { PAccNr = pd.AccNr, PBank = pd.Bank, PBranch = pd.BranchCode };
+            var results = from pd in details where pd.PaymentDet_Client.ClientIdentifier == current.ClientIdentifier select new { PAccNr = pd.AccNr, PBank = pd.Bank, PBranch = pd.BranchCode };
             if (results!=null)
             {
                 foreach (var item in results)

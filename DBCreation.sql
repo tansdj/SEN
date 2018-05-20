@@ -27,7 +27,7 @@ DROP TABLE tblAddress;
 DROP TABLE tblProducts;
 
 CREATE TABLE tblAddress
-(pAddressId nCHAR(17) PRIMARY KEY,
+(pAddressId nCHAR(13) PRIMARY KEY,
  AddressLine1 VARCHAR(30) NOT NULL,
  AddressLine2 VARCHAR(30) NOT NULL,
  City VARCHAR(20) NOT NULL,
@@ -35,25 +35,34 @@ CREATE TABLE tblAddress
 )
 
 CREATE TABLE tblContact
-(pContactId nCHAR(17) PRIMARY KEY,
+(pContactId nCHAR(13) PRIMARY KEY,
  Cell VARCHAR(10) NOT NULL,
  Email VARCHAR(50) NOT NULL
  )
 
 CREATE TABLE tblClient
 (ClientCount INT IDENTITY,
- IdNr nCHAR(13) PRIMARY KEY,
+ ClientIdentifier nCHAR(9) PRIMARY KEY,
+ IdNr nCHAR(13) NOT NULL,
  ClientName VARCHAR(50) NOT NULL,
  ClientSurname VARCHAR(50) NOT NULL,
- AddressId nCHAR(17) FOREIGN KEY REFERENCES tblAddress(pAddressId),
- ContactId nCHAR(17) FOREIGN KEY REFERENCES tblContact(pContactId),
+ AddressId nCHAR(13) FOREIGN KEY REFERENCES tblAddress(pAddressId),
+ ContactId nCHAR(13) FOREIGN KEY REFERENCES tblContact(pContactId),
  PaymentMethod VARCHAR(30) NOT NULL,
  ClientStatus VARCHAR(20) NOT NULL
  )
 
+ CREATE TABLE tblContract
+ (ContractIdentifier nCHAR(12) PRIMARY KEY,
+  ClientId nCHAR(9) FOREIGN KEY REFERENCES tblClient(ClientIdentifier),
+  ServiceLevel VARCHAR(20) NOT NULL,
+  DateOfIssue DATETIME NOT NULL,
+  TermDuration INT NOT NULL
+ )
+
  CREATE TABLE tblBilling
  (BillingId INT IDENTITY PRIMARY KEY,
-  ClientIdNr nCHAR(13) FOREIGN KEY REFERENCES tblClient(IdNr),
+  ClientId nCHAR(9) FOREIGN KEY REFERENCES tblClient(ClientIdentifier),
   BillDate DATETIME NOT NULL,
   AmountDue SMALLMONEY NOT NULL DEFAULT 0,
   AmountPaid SMALLMONEY NOT NULL DEFAULT 0
@@ -61,7 +70,7 @@ CREATE TABLE tblClient
 
   CREATE TABLE tblPaymentDetails
   (PaymentDetId INT IDENTITY PRIMARY KEY,
-   ClientIdNr nCHAR(13) FOREIGN KEY REFERENCES tblClient(IdNr),
+   ClientId nCHAR(9) FOREIGN KEY REFERENCES tblClient(ClientIdentifier),
    AccNr VARCHAR(20) NOT NULL,
    Bank VARCHAR(15) NOT NULL,
    BranchCode VARCHAR(10) NOT NULL
@@ -69,36 +78,38 @@ CREATE TABLE tblClient
 
    CREATE TABLE tblProducts
    (ProductCount INT IDENTITY,
-    ProductCode nCHAR(10) PRIMARY KEY,
+    ProductSerialNr VARCHAR(100) PRIMARY KEY,
 	ProdName VARCHAR(20) NOT NULL,
 	ProdDescription VARCHAR(200) NOT NULL,
 	BasePrice SMALLMONEY NOT NULL DEFAULT 0,
-	ProdStatus VARCHAR(15) NOT NULL
+	ProdStatus VARCHAR(15) NOT NULL,
+	Manufacturer VARCHAR(30) NOT NULL,
+	Model VARCHAR(20) NOT NULL
 	)
 
    CREATE TABLE tblVendors
    (VendorCode nCHAR(10) PRIMARY KEY,
     VendorName VARCHAR(30) NOT NULL,
-	AddressId nCHAR(17) FOREIGN KEY REFERENCES tblAddress(pAddressId),
-	ContactId nCHAR(17) FOREIGN KEY REFERENCES tblContact(pContactId)
+	AddressId nCHAR(13) FOREIGN KEY REFERENCES tblAddress(pAddressId),
+	ContactId nCHAR(13) FOREIGN KEY REFERENCES tblContact(pContactId)
 	)
 
 	CREATE TABLE tblProductFunctions
 	(FunctionCount INT IDENTITY,
-	 ProductCode nCHAR(10) FOREIGN KEY REFERENCES tblProducts(ProductCode),
+	 ProductSerial VARCHAR(100) FOREIGN KEY REFERENCES tblProducts(ProductSerialNr),
 	 ProdFunction VARCHAR(200) NOT NULL)
 
-	CREATE TABLE tblClientProducts
-	(ClientProdCount INT IDENTITY,
-	 ClientIdNr nCHAR(13) FOREIGN KEY REFERENCES tblClient(IdNr),
-	 ProductCode nCHAR(10) FOREIGN KEY REFERENCES tblProducts(ProductCode),
-	 PRIMARY KEY(ClientIdNr,ProductCode)
+	CREATE TABLE tblContractProducts
+	(ContractProdCount INT IDENTITY,
+	 ContractId nCHAR(12) FOREIGN KEY REFERENCES tblContract(ContractIdentifier),
+	 ProductSerial VARCHAR(100) FOREIGN KEY REFERENCES tblProducts(ProductSerialNr),
+	 PRIMARY KEY(ContractId,ProductSerial)
 	)
 
 	CREATE TABLE tblSystemComponents
 	(CompCount INT IDENTITY,
 	 ComponentCode nCHAR(10) PRIMARY KEY,
-	 ProductCode nCHAR(10) FOREIGN KEY REFERENCES tblProducts(ProductCode),
+	 ProductSerial VARCHAR(100) FOREIGN KEY REFERENCES tblProducts(ProductSerialNr),
 	 CompDesc VARCHAR(200) NOT NULL
 	 )
 	 CREATE TABLE tblComponentVendors
@@ -119,7 +130,7 @@ CREATE TABLE tblClient
 
 	CREATE TABLE tblClientCompConfiguration
 	(ClientConfigCount INT IDENTITY,
-	 ClientId nCHAR(13) FOREIGN KEY REFERENCES tblClient(IdNr),
+	 ClientId nCHAR(9) FOREIGN KEY REFERENCES tblClient(ClientIdentifier),
 	 ConfigCode nCHAR(10) FOREIGN KEY REFERENCES tblConfiguration(ConfigurationCode),
 	 PRIMARY KEY(ClientId,ConfigCode)
 	 )
@@ -129,20 +140,45 @@ CREATE TABLE tblClient
 	 TechId nCHAR(13) PRIMARY KEY,
 	 TechName VARCHAR(20) NOT NULL,
 	 TechSurname VARCHAR(20) NOT NULL,
-	 ContactId nCHAR(17) FOREIGN KEY REFERENCES tblContact(pContactId),
-	 AddressId nCHAR(17) FOREIGN KEY REFERENCES tblAddress(pAddressId),
+	 ContactId nCHAR(13) FOREIGN KEY REFERENCES tblContact(pContactId),
+	 AddressId nCHAR(13) FOREIGN KEY REFERENCES tblAddress(pAddressId),
 	 TechStatus VARCHAR(10) NOT NULL,
 	 SkillLevel VARCHAR(20) NOT NULL
 	 )
 
-	CREATE TABLE tblTechnicalLog
+	CREATE TABLE tblCallOperators
+	(OperatorCount INT IDENTITY,
+	 OperatorId nCHAR(13) PRIMARY KEY,
+	 OperatorName VARCHAR(20) NOT NULL,
+	 OperatorSurname VARCHAR(20) NOT NULL,
+	 ContactId nCHAR(13) FOREIGN KEY REFERENCES tblContact(pContactId),
+	 AddressId nCHAR(13) FOREIGN KEY REFERENCES tblAddress(pAddressId),
+	 OperatorStatus VARCHAR(10) NOT NULL,
+	)
+
+	CREATE TABLE tblCallLog
+	(CallId INT IDENTITY PRIMARY KEY,
+	 OperatorId nCHAR(13) FOREIGN KEY REFERENCES tblCallOperators(OperatorId),
+	 ClientId nCHAR(9) FOREIGN KEY REFERENCES tblClient(ClientIdentifier),
+	 StartTime DATETIME,
+	 EndTime DATETIME,
+	 Remarks VARCHAR(100)
+	)
+
+	CREATE TABLE tblRequestedEvents
 	(EventId INt IDENTITY PRIMARY KEY,
-	 ClientIdNr nCHAR(13) FOREIGN KEY REFERENCES tblClient(IdNr),
-	 TechIdNr nCHAR(13) FOREIGN KEY REFERENCES tblTechnicians(TechId),
-	 EventDate DATETIME,
+	 ClientId nCHAR(9) FOREIGN KEY REFERENCES tblClient(ClientIdentifier),
+	 RequestDate DATETIME,
+	 DateCompleted DATETIME,
 	 Remarks VARCHAR(100),
 	 Event_Status VARCHAR(20) NOT NULL,
 	 SkillRequired VARCHAR(20) NOT NULL
+	) 
+
+	CREATE TABLE tblTechnicalLog
+	(EventId INT FOREIGN KEY REFERENCES tblRequestedEvents(EventId),
+	 TechIdNr nCHAR(13) FOREIGN KEY REFERENCES tblTechnicians(TechId),
+	 PRIMARY KEY(EventId,TechIdNr)
 	 )
 	 
 	CREATE TABLE tblTechnicalDetails

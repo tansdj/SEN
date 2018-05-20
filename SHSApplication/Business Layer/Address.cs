@@ -81,47 +81,47 @@ namespace SHSApplication.Business_Layer
             return base.ToString();
         }
 
-        public void InsertAddress()
-        {
-            Datahandler dh = Datahandler.getData();
-            Dictionary<string, string[]> addr_details = new Dictionary<string, string[]>();
+        //public void InsertAddress()
+        //{
+        //    Datahandler dh = Datahandler.getData();
+        //    Dictionary<string, string[]> addr_details = new Dictionary<string, string[]>();
 
-            addr_details.Add(DataAccesHelper.addressId, new string[] { DataAccesHelper.typeString, this.AddressId });
-            addr_details.Add(DataAccesHelper.addrLine1, new string[] { DataAccesHelper.typeString, this.AddressLine1 });
-            addr_details.Add(DataAccesHelper.addrLine2, new string[] { DataAccesHelper.typeString, this.AddressLine2 });
-            addr_details.Add(DataAccesHelper.addrCity, new string[] { DataAccesHelper.typeString, this.City });
-            addr_details.Add(DataAccesHelper.addrPostalCode, new string[] { DataAccesHelper.typeString, this.PostalCode });
+        //    addr_details.Add(DataAccesHelper.addressId, new string[] { DataAccesHelper.typeString, this.AddressId });
+        //    addr_details.Add(DataAccesHelper.addrLine1, new string[] { DataAccesHelper.typeString, this.AddressLine1 });
+        //    addr_details.Add(DataAccesHelper.addrLine2, new string[] { DataAccesHelper.typeString, this.AddressLine2 });
+        //    addr_details.Add(DataAccesHelper.addrCity, new string[] { DataAccesHelper.typeString, this.City });
+        //    addr_details.Add(DataAccesHelper.addrPostalCode, new string[] { DataAccesHelper.typeString, this.PostalCode });
 
-            dh.runQuery(DataAccesHelper.targetAddress, DataAccesHelper.requestInsert, addr_details);
-        }
+        //    dh.runQuery(DataAccesHelper.targetAddress, DataAccesHelper.requestInsert, addr_details);
+        //}
 
-        public void UpdateAddress()
-        {
-            Datahandler dh = Datahandler.getData();
-            Dictionary<string, string[]> addr_details = new Dictionary<string, string[]>();
+        //public void UpdateAddress()
+        //{
+        //    Datahandler dh = Datahandler.getData();
+        //    Dictionary<string, string[]> addr_details = new Dictionary<string, string[]>();
 
-            addr_details.Add(DataAccesHelper.addressId, new string[] { DataAccesHelper.typeString, this.AddressId });
-            addr_details.Add(DataAccesHelper.addrLine1, new string[] { DataAccesHelper.typeString, this.AddressLine1 });
-            addr_details.Add(DataAccesHelper.addrLine2, new string[] { DataAccesHelper.typeString, this.AddressLine2 });
-            addr_details.Add(DataAccesHelper.addrCity, new string[] { DataAccesHelper.typeString, this.City });
-            addr_details.Add(DataAccesHelper.addrPostalCode, new string[] { DataAccesHelper.typeString, this.PostalCode });
+        //    addr_details.Add(DataAccesHelper.addressId, new string[] { DataAccesHelper.typeString, this.AddressId });
+        //    addr_details.Add(DataAccesHelper.addrLine1, new string[] { DataAccesHelper.typeString, this.AddressLine1 });
+        //    addr_details.Add(DataAccesHelper.addrLine2, new string[] { DataAccesHelper.typeString, this.AddressLine2 });
+        //    addr_details.Add(DataAccesHelper.addrCity, new string[] { DataAccesHelper.typeString, this.City });
+        //    addr_details.Add(DataAccesHelper.addrPostalCode, new string[] { DataAccesHelper.typeString, this.PostalCode });
 
-            dh.runQuery(DataAccesHelper.targetAddress, DataAccesHelper.requestUpdate, addr_details, DataAccesHelper.addressId + " = '" + this.AddressId + "'");
-        }
+        //    dh.runQuery(DataAccesHelper.targetAddress, DataAccesHelper.requestUpdate, addr_details, DataAccesHelper.addressId + " = '" + this.AddressId + "'");
+        //}
 
-        public void RemoveAddress()
-        {
-            Datahandler dh = Datahandler.getData();
-            Dictionary<string, string[]> addr_details = new Dictionary<string, string[]>();
+        //public void RemoveAddress()
+        //{
+        //    Datahandler dh = Datahandler.getData();
+        //    Dictionary<string, string[]> addr_details = new Dictionary<string, string[]>();
 
-            addr_details.Add(DataAccesHelper.addressId, new string[] { DataAccesHelper.typeString, this.AddressId });
-            addr_details.Add(DataAccesHelper.addrLine1, new string[] { DataAccesHelper.typeString, this.AddressLine1 });
-            addr_details.Add(DataAccesHelper.addrLine2, new string[] { DataAccesHelper.typeString, this.AddressLine2 });
-            addr_details.Add(DataAccesHelper.addrCity, new string[] { DataAccesHelper.typeString, this.City });
-            addr_details.Add(DataAccesHelper.addrPostalCode, new string[] { DataAccesHelper.typeString, this.PostalCode });
+        //    addr_details.Add(DataAccesHelper.addressId, new string[] { DataAccesHelper.typeString, this.AddressId });
+        //    addr_details.Add(DataAccesHelper.addrLine1, new string[] { DataAccesHelper.typeString, this.AddressLine1 });
+        //    addr_details.Add(DataAccesHelper.addrLine2, new string[] { DataAccesHelper.typeString, this.AddressLine2 });
+        //    addr_details.Add(DataAccesHelper.addrCity, new string[] { DataAccesHelper.typeString, this.City });
+        //    addr_details.Add(DataAccesHelper.addrPostalCode, new string[] { DataAccesHelper.typeString, this.PostalCode });
 
-            dh.runQuery(DataAccesHelper.targetAddress, DataAccesHelper.requestDelete, addr_details, DataAccesHelper.addressId + " = '" + this.AddressId + "'");
-        }
+        //    dh.runQuery(DataAccesHelper.targetAddress, DataAccesHelper.requestDelete, addr_details, DataAccesHelper.addressId + " = '" + this.AddressId + "'");
+        //}
 
     }
 }

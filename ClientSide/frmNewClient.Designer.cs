@@ -309,7 +309,7 @@
             this.gbPersonalInfo.Size = new System.Drawing.Size(619, 321);
             this.gbPersonalInfo.TabIndex = 4;
             this.gbPersonalInfo.TabStop = false;
-            this.gbPersonalInfo.Text = "Personal Information";
+            this.gbPersonalInfo.Text = "Client Information";
             // 
             // gbDebitOrder
             // 

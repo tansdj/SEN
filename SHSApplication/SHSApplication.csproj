@@ -48,12 +48,16 @@
   <ItemGroup>
     <Compile Include="Business Layer\Address.cs" />
     <Compile Include="Business Layer\Billing.cs" />
+    <Compile Include="Business Layer\CallLog.cs" />
+    <Compile Include="Business Layer\CallOperators.cs" />
     <Compile Include="Business Layer\Client.cs" />
-    <Compile Include="Business Layer\ClientConfigurations.cs" />
-    <Compile Include="Business Layer\ClientProducts.cs" />
+    <Compile Include="Business Layer\ContractConfigurations.cs" />
+    <Compile Include="Business Layer\ContractProducts.cs" />
     <Compile Include="Business Layer\Configurations.cs" />
     <Compile Include="Business Layer\Contact.cs" />
+    <Compile Include="Business Layer\Contract.cs" />
     <Compile Include="Business Layer\CustomExceptions.cs" />
+    <Compile Include="Business Layer\TechnicalLog.cs" />
     <Compile Include="Business Layer\User.cs" />
     <Compile Include="Business Layer\PaymentDetails.cs" />
     <Compile Include="Business Layer\Person.cs" />
@@ -62,7 +66,7 @@
     <Compile Include="Business Layer\ComponentVendors.cs" />
     <Compile Include="Business Layer\SystemComponents.cs" />
     <Compile Include="Business Layer\TechnicalDetails.cs" />
-    <Compile Include="Business Layer\TechnicalLog.cs" />
+    <Compile Include="Business Layer\RequestedEvents.cs" />
     <Compile Include="Business Layer\Technicians.cs" />
     <Compile Include="Business Layer\Vendor.cs" />
     <Compile Include="Form1.cs">

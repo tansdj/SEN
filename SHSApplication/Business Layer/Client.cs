@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ServerSide;
 using Serverside.HelperLibraries;
 using System.Data;
+using ServerSide.HelperLibrabries;
 
 namespace SHSApplication.Business_Layer
 {
@@ -14,16 +15,23 @@ namespace SHSApplication.Business_Layer
         private string paymentMethod;
         private string status;
         private PaymentDetails pd;
+        private string clientIdentifier;
 
-        public Client(string personId, string name, string surname, Address personAddress, Contact personContact,string paymentMethod, string status) :base(personId,name,surname,personAddress,personContact)
+        public Client(string personId, string name, string surname, Address personAddress, Contact personContact,string paymentMethod, string status, string clientIdentifier="") :base(personId,name,surname,personAddress,personContact)
         {
             this.PaymentMethod = paymentMethod;
             this.Status = status;
+            this.ClientIdentifier = clientIdentifier;
         }
 
         public Client():base()
         {
 
+        }
+        public string ClientIdentifier
+        {
+            get { return clientIdentifier; }
+            set { clientIdentifier = value; }
         }
         public PaymentDetails PD
         {
@@ -57,12 +65,12 @@ namespace SHSApplication.Business_Layer
             {
                 return false;
             }
-            return base.Equals(obj)&&(this.PaymentMethod==c.PaymentMethod)&&(this.Status==c.Status);
+            return base.Equals(obj)&&(this.PaymentMethod==c.PaymentMethod)&&(this.Status==c.Status)&&(this.ClientIdentifier==c.ClientIdentifier);
         }
 
         public override int GetHashCode()
         {
-            return base.GetHashCode()^this.PaymentMethod.GetHashCode()^this.Status.GetHashCode();
+            return base.GetHashCode()^this.PaymentMethod.GetHashCode()^this.Status.GetHashCode()^this.ClientIdentifier.GetHashCode();
         }
 
         public override string ToString()
@@ -75,71 +83,64 @@ namespace SHSApplication.Business_Layer
             Datahandler dh = Datahandler.getData();
             PD = new PaymentDetails(this, accNr, bank, branchCode);
             Dictionary<string, string[]> client_details = new Dictionary<string, string[]>();
-           
-            this.PersonAddress.AddressId = "ADDR" + this.PersonId;
-            this.PersonContact.ContactId = "CONT" + this.PersonId;
 
-            client_details.Add(DataAccesHelper.clientId, new string[] { DataAccesHelper.typeString, this.PersonId });
-            client_details.Add(DataAccesHelper.clientName, new string[] { DataAccesHelper.typeString, this.Name });
-            client_details.Add(DataAccesHelper.clientSurname, new string[] { DataAccesHelper.typeString, this.Surname });
-            client_details.Add(DataAccesHelper.clientPaymentMethod, new string[] { DataAccesHelper.typeString, this.PaymentMethod });
-            client_details.Add(DataAccesHelper.clientStatus, new string[] { DataAccesHelper.typeString, this.Status });
-            client_details.Add(DataAccesHelper.clientAddrId, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressId });
-            client_details.Add(DataAccesHelper.clientContactId, new string[] { DataAccesHelper.typeString, this.PersonContact.ContactId });     
+            client_details.Add(QueryBuilder.spAddClientWithPaymentDet.sp_id, new string[] { DataAccesHelper.typeString, this.PersonId });
+            client_details.Add(QueryBuilder.spAddClientWithPaymentDet.sp_name, new string[] { DataAccesHelper.typeString, this.Name });
+            client_details.Add(QueryBuilder.spAddClientWithPaymentDet.sp_surname, new string[] { DataAccesHelper.typeString, this.Surname });
+            client_details.Add(QueryBuilder.spAddClientWithPaymentDet.sp_payMethod, new string[] { DataAccesHelper.typeString, this.PaymentMethod });
+            client_details.Add(QueryBuilder.spAddClientWithPaymentDet.sp_status, new string[] { DataAccesHelper.typeString, this.Status });
+            client_details.Add(QueryBuilder.spAddClientWithPaymentDet.sp_addrLine1, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressLine1 });
+            client_details.Add(QueryBuilder.spAddClientWithPaymentDet.sp_addrLine2, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressLine2 });
+            client_details.Add(QueryBuilder.spAddClientWithPaymentDet.sp_city, new string[] { DataAccesHelper.typeString, this.PersonAddress.City });
+            client_details.Add(QueryBuilder.spAddClientWithPaymentDet.sp_postCode, new string[] { DataAccesHelper.typeString, this.PersonAddress.PostalCode });
+            client_details.Add(QueryBuilder.spAddClientWithPaymentDet.sp_cell, new string[] { DataAccesHelper.typeString, this.PersonContact.Cell });
+            client_details.Add(QueryBuilder.spAddClientWithPaymentDet.sp_email, new string[] { DataAccesHelper.typeString, this.PersonContact.Email });
+            client_details.Add(QueryBuilder.spAddClientWithPaymentDet.sp_accNr, new string[] { DataAccesHelper.typeString, this.PD.AccNr });
+            client_details.Add(QueryBuilder.spAddClientWithPaymentDet.sp_bank, new string[] { DataAccesHelper.typeString, this.PD.Bank });
+            client_details.Add(QueryBuilder.spAddClientWithPaymentDet.sp_branch, new string[] { DataAccesHelper.typeString, this.PD.BranchCode });
 
-            this.PersonAddress.InsertAddress();
-            this.PersonContact.InsertContact();
-            dh.runQuery(DataAccesHelper.targetClient, DataAccesHelper.requestInsert, client_details);
-            PD.InsertPaymentDetail();
+            dh.runStoredProcedure(QueryBuilder.spAddClientWithPaymentDet.sp, client_details);
         }
 
         public void NewClient()
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> client_details = new Dictionary<string, string[]>();
-            this.PersonAddress.AddressId = "ADDR" + this.PersonId;
-            this.PersonContact.ContactId = "CONT" + this.PersonId;
 
-            client_details.Add(DataAccesHelper.clientId, new string[] { DataAccesHelper.typeString, this.PersonId });
-            client_details.Add(DataAccesHelper.clientName, new string[] { DataAccesHelper.typeString, this.Name });
-            client_details.Add(DataAccesHelper.clientSurname, new string[] { DataAccesHelper.typeString, this.Surname });
-            client_details.Add(DataAccesHelper.clientPaymentMethod, new string[] { DataAccesHelper.typeString, this.PaymentMethod });
-            client_details.Add(DataAccesHelper.clientStatus, new string[] { DataAccesHelper.typeString, this.Status });
-            client_details.Add(DataAccesHelper.clientAddrId, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressId });
-            client_details.Add(DataAccesHelper.clientContactId, new string[] { DataAccesHelper.typeString, this.PersonContact.ContactId });
+            client_details.Add(QueryBuilder.spAddClientWithoutPaymentDetails.sp_id, new string[] { DataAccesHelper.typeString, this.PersonId });
+            client_details.Add(QueryBuilder.spAddClientWithoutPaymentDetails.sp_name, new string[] { DataAccesHelper.typeString, this.Name });
+            client_details.Add(QueryBuilder.spAddClientWithoutPaymentDetails.sp_surname, new string[] { DataAccesHelper.typeString, this.Surname });
+            client_details.Add(QueryBuilder.spAddClientWithoutPaymentDetails.sp_payMethod, new string[] { DataAccesHelper.typeString, this.PaymentMethod });
+            client_details.Add(QueryBuilder.spAddClientWithoutPaymentDetails.sp_status, new string[] { DataAccesHelper.typeString, this.Status });
+            client_details.Add(QueryBuilder.spAddClientWithoutPaymentDetails.sp_addrLine1, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressLine1 });
+            client_details.Add(QueryBuilder.spAddClientWithoutPaymentDetails.sp_addrLine2, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressLine2 });
+            client_details.Add(QueryBuilder.spAddClientWithoutPaymentDetails.sp_city, new string[] { DataAccesHelper.typeString, this.PersonAddress.City });
+            client_details.Add(QueryBuilder.spAddClientWithoutPaymentDetails.sp_postCode, new string[] { DataAccesHelper.typeString, this.PersonAddress.PostalCode });
+            client_details.Add(QueryBuilder.spAddClientWithoutPaymentDetails.sp_cell, new string[] { DataAccesHelper.typeString, this.PersonContact.Cell });
+            client_details.Add(QueryBuilder.spAddClientWithoutPaymentDetails.sp_email, new string[] { DataAccesHelper.typeString, this.PersonContact.Email });
 
-            this.PersonAddress.InsertAddress();
-            this.PersonContact.InsertContact();
-            dh.runQuery(DataAccesHelper.targetClient, DataAccesHelper.requestInsert, client_details);
+            dh.runStoredProcedure(QueryBuilder.spAddClientWithoutPaymentDetails.sp, client_details);
         }
 
         public void UpdateClient()
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> client_details = new Dictionary<string, string[]>();
-            this.PersonAddress.AddressId = "ADDR" + this.PersonId;
-            this.PersonContact.ContactId = "CONT" + this.PersonId;
 
-            client_details.Add(DataAccesHelper.clientId, new string[] { DataAccesHelper.typeString, this.PersonId });
-            client_details.Add(DataAccesHelper.clientName, new string[] { DataAccesHelper.typeString, this.Name });
-            client_details.Add(DataAccesHelper.clientSurname, new string[] { DataAccesHelper.typeString, this.Surname });
-            client_details.Add(DataAccesHelper.clientPaymentMethod, new string[] { DataAccesHelper.typeString, this.PaymentMethod });
-            client_details.Add(DataAccesHelper.clientStatus, new string[] { DataAccesHelper.typeString, this.Status });
-            client_details.Add(DataAccesHelper.clientAddrId, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressId });
-            client_details.Add(DataAccesHelper.clientContactId, new string[] { DataAccesHelper.typeString, this.PersonContact.ContactId });
+            client_details.Add(QueryBuilder.spUpdateClientWithoutPaymentDetails.sp_identifier, new string[] { DataAccesHelper.typeString, this.ClientIdentifier });
+            client_details.Add(QueryBuilder.spUpdateClientWithoutPaymentDetails.sp_id, new string[] { DataAccesHelper.typeString, this.PersonId });
+            client_details.Add(QueryBuilder.spUpdateClientWithoutPaymentDetails.sp_name, new string[] { DataAccesHelper.typeString, this.Name });
+            client_details.Add(QueryBuilder.spUpdateClientWithoutPaymentDetails.sp_surname, new string[] { DataAccesHelper.typeString, this.Surname });
+            client_details.Add(QueryBuilder.spUpdateClientWithoutPaymentDetails.sp_payMethod, new string[] { DataAccesHelper.typeString, this.PaymentMethod });
+            client_details.Add(QueryBuilder.spUpdateClientWithoutPaymentDetails.sp_status, new string[] { DataAccesHelper.typeString, this.Status });
+            client_details.Add(QueryBuilder.spUpdateClientWithoutPaymentDetails.sp_addrLine1, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressLine1 });
+            client_details.Add(QueryBuilder.spUpdateClientWithoutPaymentDetails.sp_addrLine2, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressLine2 });
+            client_details.Add(QueryBuilder.spUpdateClientWithoutPaymentDetails.sp_city, new string[] { DataAccesHelper.typeString, this.PersonAddress.City });
+            client_details.Add(QueryBuilder.spUpdateClientWithoutPaymentDetails.sp_postCode, new string[] { DataAccesHelper.typeString, this.PersonAddress.PostalCode });
+            client_details.Add(QueryBuilder.spUpdateClientWithoutPaymentDetails.sp_cell, new string[] { DataAccesHelper.typeString, this.PersonContact.Cell });
+            client_details.Add(QueryBuilder.spUpdateClientWithoutPaymentDetails.sp_email, new string[] { DataAccesHelper.typeString, this.PersonContact.Email });
 
-            this.PersonAddress.UpdateAddress();
-            this.PersonContact.UpdateContact();
-            dh.runQuery(DataAccesHelper.targetClient, DataAccesHelper.requestUpdate, client_details,DataAccesHelper.clientId+" = '"+this.PersonId+"'");
-
-            try
-            {
-                PD = new PaymentDetails(this, "", "", "");
-                PD.RemovePaymnetDetail();
-            }
-            catch (Exception)
-            {
-            }
+            dh.runStoredProcedure(QueryBuilder.spUpdateClientWithoutPaymentDetails.sp, client_details);
         }
 
         public void UpdateClientWithPaymentDetails(string accNr, string bank, string branchCode)
@@ -147,39 +148,31 @@ namespace SHSApplication.Business_Layer
             Datahandler dh = Datahandler.getData();
             PD = new PaymentDetails(this, accNr, bank, branchCode);
             Dictionary<string, string[]> client_details = new Dictionary<string, string[]>();
-            Dictionary<string, string[]> pay_details = new Dictionary<string, string[]>();
-            this.PersonAddress.AddressId = "ADDR" + this.PersonId;
-            this.PersonContact.ContactId = "CONT" + this.PersonId;
 
-            client_details.Add(DataAccesHelper.clientId, new string[] { DataAccesHelper.typeString, this.PersonId });
-            client_details.Add(DataAccesHelper.clientName, new string[] { DataAccesHelper.typeString, this.Name });
-            client_details.Add(DataAccesHelper.clientSurname, new string[] { DataAccesHelper.typeString, this.Surname });
-            client_details.Add(DataAccesHelper.clientPaymentMethod, new string[] { DataAccesHelper.typeString, this.PaymentMethod });
-            client_details.Add(DataAccesHelper.clientStatus, new string[] { DataAccesHelper.typeString, this.Status });
-            client_details.Add(DataAccesHelper.clientAddrId, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressId });
-            client_details.Add(DataAccesHelper.clientContactId, new string[] { DataAccesHelper.typeString, this.PersonContact.ContactId });
+            client_details.Add(QueryBuilder.spUpdateClientWithPaymentDetails.sp_identifier, new string[] { DataAccesHelper.typeString, this.ClientIdentifier });
+            client_details.Add(QueryBuilder.spUpdateClientWithPaymentDetails.sp_id, new string[] { DataAccesHelper.typeString, this.PersonId });
+            client_details.Add(QueryBuilder.spUpdateClientWithPaymentDetails.sp_name, new string[] { DataAccesHelper.typeString, this.Name });
+            client_details.Add(QueryBuilder.spUpdateClientWithPaymentDetails.sp_surname, new string[] { DataAccesHelper.typeString, this.Surname });
+            client_details.Add(QueryBuilder.spUpdateClientWithPaymentDetails.sp_payMethod, new string[] { DataAccesHelper.typeString, this.PaymentMethod });
+            client_details.Add(QueryBuilder.spUpdateClientWithPaymentDetails.sp_status, new string[] { DataAccesHelper.typeString, this.Status });
+            client_details.Add(QueryBuilder.spUpdateClientWithPaymentDetails.sp_addrLine1, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressLine1 });
+            client_details.Add(QueryBuilder.spUpdateClientWithPaymentDetails.sp_addrLine2, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressLine2 });
+            client_details.Add(QueryBuilder.spUpdateClientWithPaymentDetails.sp_city, new string[] { DataAccesHelper.typeString, this.PersonAddress.City });
+            client_details.Add(QueryBuilder.spUpdateClientWithPaymentDetails.sp_postCode, new string[] { DataAccesHelper.typeString, this.PersonAddress.PostalCode });
+            client_details.Add(QueryBuilder.spUpdateClientWithPaymentDetails.sp_cell, new string[] { DataAccesHelper.typeString, this.PersonContact.Cell });
+            client_details.Add(QueryBuilder.spUpdateClientWithPaymentDetails.sp_email, new string[] { DataAccesHelper.typeString, this.PersonContact.Email });
+            client_details.Add(QueryBuilder.spUpdateClientWithPaymentDetails.sp_accNr, new string[] { DataAccesHelper.typeString, this.PD.AccNr });
+            client_details.Add(QueryBuilder.spUpdateClientWithPaymentDetails.sp_bank, new string[] { DataAccesHelper.typeString, this.PD.Bank });
+            client_details.Add(QueryBuilder.spUpdateClientWithPaymentDetails.sp_branch, new string[] { DataAccesHelper.typeString, this.PD.BranchCode });
 
-            this.PersonAddress.UpdateAddress();
-            this.PersonContact.UpdateContact();
-            dh.runQuery(DataAccesHelper.targetClient, DataAccesHelper.requestUpdate, client_details, DataAccesHelper.clientId + " = '" + this.PersonId + "'");
-            DataTable dt = dh.readDataFromDB(DataAccesHelper.QueryTestForPaymentDet + this.PersonId);
-            if (dt.Rows.Count>0)
-            {    
-                PD.UpdatePaymentDetail();
-            }
-            else
-            {
-                PD.InsertPaymentDetail();
-            }
-            
+            dh.runStoredProcedure(QueryBuilder.spUpdateClientWithPaymentDetails.sp, client_details);
+
         }
 
         public void RemoveClient()
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> client_details = new Dictionary<string, string[]>();
-            this.PersonAddress.AddressId = "ADDR" + this.PersonId;
-            this.PersonContact.ContactId = "CONT" + this.PersonId;
 
             client_details.Add(DataAccesHelper.clientId, new string[] { DataAccesHelper.typeString, this.PersonId });
             client_details.Add(DataAccesHelper.clientName, new string[] { DataAccesHelper.typeString, this.Name });
@@ -201,6 +194,7 @@ namespace SHSApplication.Business_Layer
             foreach (DataRow item in table.Rows)
             {
                 Client c = new Client();
+                c.ClientIdentifier = item[DataAccesHelper.clientIdentifier].ToString();
                 c.PersonId = item[DataAccesHelper.clientId].ToString();
                 c.Name = item[DataAccesHelper.clientName].ToString();
                 c.Surname = item[DataAccesHelper.clientSurname].ToString();

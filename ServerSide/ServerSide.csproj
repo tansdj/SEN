@@ -67,6 +67,7 @@
     <Compile Include="FileHandler.cs" />
     <Compile Include="HelperLibrabries\DataAccesHelper.cs" />
     <Compile Include="HelperLibrabries\ErrorHandler.cs" />
+    <Compile Include="HelperLibrabries\QueryBuilder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

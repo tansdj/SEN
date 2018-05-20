@@ -11,25 +11,45 @@ namespace SHSApplication.Business_Layer
 {
     public class Product
     {
-        private string productCode;
+        private string productSerialNr;
         private string name;
         private string description;
         private double basePrice;
         private string status;
+        private string manufacturer;
+        private string model;
+
         
 
-        public Product(string productCode, string name, string description, double basePrice, string status)
+
+
+        public Product(string productSerialNr, string name, string description, double basePrice, string status, string manufacturer, string model)
         {
-            this.ProductCode = productCode;
+            this.ProductSerialNr = productSerialNr;
             this.Name = name;
             this.Description = description;
             this.BasePrice = basePrice;
             this.Status = status;
+            this.Manufacturer = manufacturer;
+            this.Model = model;
         }
 
         public Product()
         {
 
+        }
+
+        public string Model
+        {
+            get { return model; }
+            set { model = value; }
+        }
+
+
+        public string Manufacturer
+        {
+            get { return manufacturer; }
+            set { manufacturer = value; }
         }
         public string Status
         {
@@ -59,10 +79,10 @@ namespace SHSApplication.Business_Layer
         }
 
 
-        public string ProductCode
+        public string ProductSerialNr
         {
-            get { return productCode; }
-            set { productCode = value; }
+            get { return productSerialNr; }
+            set { productSerialNr = value; }
         }
 
         public override bool Equals(object obj)
@@ -77,12 +97,12 @@ namespace SHSApplication.Business_Layer
             {
                 return false;
             }
-            return (this.ProductCode==p.ProductCode)&&(this.Name==p.Name)&&(this.Description==p.Description)&&(this.BasePrice==p.BasePrice)&&(this.Status==p.Status);
+            return (this.ProductSerialNr==p.ProductSerialNr)&&(this.Name==p.Name)&&(this.Description==p.Description)&&(this.BasePrice==p.BasePrice)&&(this.Status==p.Status)&&(this.Manufacturer==p.Manufacturer)&&(this.Model==p.Model);
         }
 
         public override int GetHashCode()
         {
-            return this.ProductCode.GetHashCode()^this.Name.GetHashCode()^this.Description.GetHashCode()^this.BasePrice.GetHashCode()^this.Status.GetHashCode();
+            return this.ProductSerialNr.GetHashCode()^this.Name.GetHashCode()^this.Description.GetHashCode()^this.BasePrice.GetHashCode()^this.Status.GetHashCode()^this.Manufacturer.GetHashCode()^this.Model.GetHashCode();
         }
 
         public override string ToString()
@@ -94,9 +114,9 @@ namespace SHSApplication.Business_Layer
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> prod_details = new Dictionary<string, string[]>();
-            this.ProductCode = "PROD" + this.Name.Substring(0, 6).Replace(' ', '#').ToUpper();
+            this.ProductSerialNr = "PROD" + this.Name.Substring(0, 6).Replace(' ', '#').ToUpper();
 
-            prod_details.Add(DataAccesHelper.prodCode, new string[] { DataAccesHelper.typeString, this.ProductCode });
+            prod_details.Add(DataAccesHelper.prodSerialNo, new string[] { DataAccesHelper.typeString, this.ProductSerialNr });
             prod_details.Add(DataAccesHelper.prodName, new string[] { DataAccesHelper.typeString, this.Name });
             prod_details.Add(DataAccesHelper.prodDesc, new string[] { DataAccesHelper.typeString, this.Description });
             prod_details.Add(DataAccesHelper.prodPrice, new string[] { DataAccesHelper.typeDouble, this.BasePrice.ToString() });
@@ -109,15 +129,15 @@ namespace SHSApplication.Business_Layer
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> prod_details = new Dictionary<string, string[]>();
-            this.ProductCode = "PROD" + this.Name.Substring(0, 6).Replace(' ', '#').ToUpper();
+            this.ProductSerialNr = "PROD" + this.Name.Substring(0, 6).Replace(' ', '#').ToUpper();
 
-            prod_details.Add(DataAccesHelper.prodCode, new string[] { DataAccesHelper.typeString, this.ProductCode });
+            prod_details.Add(DataAccesHelper.prodSerialNo, new string[] { DataAccesHelper.typeString, this.ProductSerialNr });
             prod_details.Add(DataAccesHelper.prodName, new string[] { DataAccesHelper.typeString, this.Name });
             prod_details.Add(DataAccesHelper.prodDesc, new string[] { DataAccesHelper.typeString, this.Description });
             prod_details.Add(DataAccesHelper.prodPrice, new string[] { DataAccesHelper.typeDouble, this.BasePrice.ToString() });
             prod_details.Add(DataAccesHelper.prodStatus, new string[] { DataAccesHelper.typeString, this.Status });
 
-            dh.runQuery(DataAccesHelper.targetProduct, DataAccesHelper.requestUpdate, prod_details,DataAccesHelper.prodCode+" = '"+this.ProductCode+"'");
+            dh.runQuery(DataAccesHelper.targetProduct, DataAccesHelper.requestUpdate, prod_details,DataAccesHelper.prodSerialNo+" = '"+this.ProductSerialNr+"'");
         }
 
         public List<Product> GetAllProducts()
@@ -129,7 +149,7 @@ namespace SHSApplication.Business_Layer
             foreach (DataRow item in table.Rows)
             {
                 Product p = new Product();
-                p.ProductCode = item[DataAccesHelper.prodCode].ToString();
+                p.ProductSerialNr = item[DataAccesHelper.prodSerialNo].ToString();
                 p.Name = item[DataAccesHelper.prodName].ToString();
                 p.Description = item[DataAccesHelper.prodDesc].ToString();
                 p.BasePrice = Convert.ToDouble(item[DataAccesHelper.prodPrice].ToString());

@@ -25,6 +25,7 @@ namespace Serverside.HelperLibraries
         public const string contactEmail = "Email";
 
         public const string targetClient = "tblClient";
+        public const string clientIdentifier = "ClientIdentifier";
         public const string clientId = "IdNr";
         public const string clientName = "ClientName";
         public const string clientSurname = "ClientSurname";
@@ -32,25 +33,35 @@ namespace Serverside.HelperLibraries
         public const string clientContactId = "ContactId";
         public const string clientPaymentMethod = "PaymentMethod";
         public const string clientStatus = "ClientStatus";
-   
+
+        public const string targetContract = "tblContract";
+        public const string contractId = "ContractIdentifier";
+        public const string contractClient = "ClientId";
+        public const string contractServiceLevel = "ServiceLevel";
+        public const string contractIssueDate = "DateOfIssue";
+        public const string contractTermDur = "TermDuration";
+
+
         public const string targetBilling = "tblBilling";
-        public const string billingClientid = "ClientIdNr";
+        public const string billingClientid = "ClientId";
         public const string billingDate = "BillDate";
         public const string billAmountDue = "AmountDue";
         public const string billAmountPaid = "AmountPaid";
 
         public const string targetPaymentDetails = "tblPaymentDetails";
-        public const string paymentDetClientId = "ClientIdNr";
+        public const string paymentDetClientId = "ClientId";
         public const string paymentDetAccNr = "AccNr";
         public const string paymentDetBank = "Bank";
         public const string paymentDetBranch = "BranchCode";
 
         public const string targetProduct = "tblProducts";
-        public const string prodCode = "ProductCode";
+        public const string prodSerialNo = "ProductSerialNr";
         public const string prodName = "ProdName";
         public const string prodDesc = "ProdDescription";
         public const string prodPrice = "BasePrice";
         public const string prodStatus = "ProdStatus";
+        public const string prodManufacturer = "Manufacturer";
+        public const string prodModel = "Model";
 
         public const string targetVendor = "tblVendors";
         public const string vendCode = "VendorCode";
@@ -59,12 +70,12 @@ namespace Serverside.HelperLibraries
         public const string vendContactId = "ContactId";
 
         public const string targetProductFunction = "tblProductFunctions";
-        public const string pfProductCode = "ProductCode";
+        public const string pfProductSerial = "ProductSerial";
         public const string pfFunction = "ProdFunction";
 
         public const string targetComponents = "tblSystemComponents";
         public const string compCode = "ComponentCode";
-        public const string compProdCode = "ProductCode";
+        public const string compProdSerial = "ProductSerial";
         public const string compDesc = "CompDesc";
 
         public const string targetConfiguration = "tblConfiguration";
@@ -88,21 +99,40 @@ namespace Serverside.HelperLibraries
         public const string tecDetConfCode = "ConfigCode";
         public const string tecDetDocPath = "DocPath";
 
-        public const string targetTechEvents = "tblTechnicalLog";
+        public const string targetRequestedEvents = "tblRequestedEvents";
         public const string eventId = "EventId";
-        public const string eventClientId = "ClientIdNr";
-        public const string eventTechId = "TechIdNr";
-        public const string eventDate = "EventDate";
+        public const string eventClientId = "ClientId";
+        public const string eventReqDate = "RequestDate";
+        public const string eventCompDate = "DateCompleted";
         public const string eventRemarks = "Remarks";
         public const string eventStatus = "Event_Status";
         public const string skillReq = "SkillRequired";
 
-        public const string targetClientProducts = "tblClientProducts";
-        public const string cpClientId = "ClientIdNr";
-        public const string cpProductId = "ProductCode";
+        public const string targetCallOperators = "tblCallOperators";
+        public const string operatorId = "OperatorId";
+        public const string operatorName = "OperatorName";
+        public const string operatorSurname = "OperatorSurname";
+        public const string operatorContactId = "ContactId";
+        public const string operatorAddressId = "AddressId";
+        public const string operatorStatus = "OperatorStatus";
 
-        public const string targetClientConf = "tblClientCompConfiguration";
-        public const string ccClientId = "ClientId";
+        public const string targetCallLog = "tblCallLog";
+        public const string callOperatorId = "OperatorId";
+        public const string callClientId = "ClientId";
+        public const string callStartTime = "StartTime";
+        public const string callEndTime = "EndTime";
+        public const string callRemarks = "Remarks";
+
+        public const string targetTechEvents = "tblTechnicalLog";
+        public const string tlEventId = "EventId";
+        public const string tlEventTechId = "TechIdNr";
+
+        public const string targetContractProducts = "tblContractProducts";
+        public const string cpContractId = "ContractId";
+        public const string cpProductSerial = "ProductSerial";
+
+        public const string targetContractConf = "tblContractCompConfiguration";
+        public const string ccContractId = "ContractId";
         public const string ccConfId = "ConfigCode";
 
         public const string targetCompVendors = "tblComponentVendors";
@@ -116,12 +146,10 @@ namespace Serverside.HelperLibraries
         public const string uSurname = "UserSurname";
         public const string uEmail = "UserEmail";
 
-        public const string QueryGetClients= @"SELECT * FROM tblClient C
-                                              INNER JOIN tblAddress A ON C.AddressId = A.pAddressId
-                                              INNER JOIN tblContact CT ON C.ContactId = CT.pContactId";
+        public const string QueryGetClients= "SELECT * FROM tblClient C INNER JOIN tblAddress A ON C.AddressId = A.pAddressId INNER JOIN tblContact CT ON C.ContactId = CT.pContactId";
         public const string QueryGetBilling = "SELECT * FROM tblBilling WHERE ClientIdNr = ";
         public const string QueryGetClientConfiguration = "SELECT * FROM tblClientCompConfiguration WHERE ClientId = ";
-        public const string QueryGetClientProducts = "SELECT * FROM tblClientProducts WHERE ClientIdNr = ";
+        public const string QueryGetContractProducts = "SELECT * FROM tblContractProducts WHERE ContractId = ";
         public const string QueryGetComponentVendors = "SELECT * FROM tblComponentVendors WHERE ComponentCode = ";
         public const string QueryGetConfigurations = "SELECT * FROM tblConfiguration WHERE ComponentCode = ";
         public const string QueryGetPaymentDetails = "SELECT * FROM tblPaymentDetails";
@@ -130,7 +158,7 @@ namespace Serverside.HelperLibraries
         public const string QueryGetProductFunction = "SELECT * FROM tblProductFunctions WHERE ProductCode = ";
         public const string QueryGetSystemComponents = "SELECT * FROM tblSystemComponents WHERE ProductCode = ";
         public const string QueryGetTechnicalDetails = "SELECT * FROM tblTechnicalDetails WHERE ConfigCode = ";
-        public const string QueryGetTechnicalLog = "SELECT * FROM tblTechnicalLog";
+        public const string QueryGetRequestedEvents = "SELECT * FROM tblRequestedEvents";
         public const string QueryGetTechnicians = @"SELECT * FROM tblTechnicians T
                                                     INNER JOIN tblAddress A ON T.AddressId = A.pAddressId
                                                     INNER JOIN tblContact C ON T.ContactId = C.pContactId";

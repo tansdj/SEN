@@ -141,6 +141,55 @@ namespace ServerSide
             }
         }
 
+        public bool runStoredProcedure(string procName,Dictionary<string,string[]>values)
+        {
+            //try
+            //{
+                connection = new SqlConnection(connectionStringPrime);
+                if (connection.State != ConnectionState.Open)
+                {
+                    connection.Open();
+                }
+                command = new SqlCommand(procName, connection);
+                command.CommandType = CommandType.StoredProcedure;
+                foreach (var item in values)
+                {
+                    if (item.Value[0] == "STRING")
+                    {
+                        command.Parameters.Add(new SqlParameter(item.Key, item.Value[1]));
+                    }
+                    else if (item.Value[0] == "DOUBLE")
+                    {
+                        command.Parameters.Add(new SqlParameter(item.Key, Convert.ToDouble(item.Value[1])));
+                    }
+                    else if (item.Value[0] == "INT")
+                    {
+                        command.Parameters.Add(new SqlParameter(item.Key, Convert.ToInt32(item.Value[1])));
+                    }
+                    else if (item.Value[0] == "DATETIME")
+                    {
+                        command.Parameters.Add(new SqlParameter(item.Key, Convert.ToDateTime(item.Value[1])));
+                    }
+                    else if (item.Value[0] == "BOOL")
+                    {
+                        command.Parameters.Add(new SqlParameter(item.Key, Convert.ToBoolean(item.Value[1])));
+                    }     
+                }
+                command.ExecuteNonQuery();
+                return true;
+            //}
+            //catch (Exception ex)
+            //{
+            //    ErrorHandler e = new ErrorHandler(ex);
+            //    e.PrintError();
+            //    return false;
+            //}
+            //finally
+            //{
+            //    connection.Close();
+            //}
+        }
+
         public DataTable readDataFromDB(string query)
         {
             DataTable dataTable = new DataTable();
@@ -164,6 +213,31 @@ namespace ServerSide
             finally
             { connection.Close(); }
             return dataTable;
+            //DataTable table = new DataTable();
+
+            //try
+            //{
+            //    DbProviderFactory factory = DbProviderFactories.GetFactory(DbProvider);
+            //    DbConnection conn = factory.CreateConnection();
+            //    conn.ConnectionString = connectionStringPrime;
+            //    using (conn)
+            //    {
+            //        string queryString = query;
+
+            //        DbCommand dbcommand = factory.CreateCommand();
+            //        dbcommand.CommandText = queryString;
+            //        dbcommand.Connection = conn;
+            //        conn.Open();
+            //        DbDataAdapter adapter = factory.CreateDataAdapter();
+            //        adapter.SelectCommand = dbcommand;
+
+            //        adapter.Fill(table);
+
+
+            //    }
+            //}
+            //catch { }
+            //return table;
         }
 
         

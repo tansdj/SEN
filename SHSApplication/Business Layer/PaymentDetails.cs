@@ -133,7 +133,7 @@ namespace SHSApplication.Business_Layer
                 pd.Bank = item[DataAccesHelper.paymentDetBank].ToString();
                 pd.BranchCode = item[DataAccesHelper.paymentDetBranch].ToString();
                 pd.PaymentDet_Client = new Client();
-                pd.PaymentDet_Client.PersonId = item[DataAccesHelper.paymentDetClientId].ToString();
+                pd.PaymentDet_Client.ClientIdentifier = item[DataAccesHelper.paymentDetClientId].ToString();
                 details.Add(pd);
             }
             return details;

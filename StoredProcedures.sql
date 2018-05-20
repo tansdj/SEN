@@ -1,21 +1,31 @@
 GO
 CREATE PROCEDURE addClientWithoutPaymentDet
-(@id VARCHAR(13),@name VARCHAR(13),@surname VARCHAR(13),@addrLine1 VARCHAR(30),@addrLine2 VARCHAR(30),@city VARCHAR(20),@cell VARCHAR(10),@email VARCHAR(50),@payMethod VARCHAR(30),@status VARCHAR(20))
+(@id nCHAR(13),@name VARCHAR(13),@surname VARCHAR(13),@addrLine1 VARCHAR(30),@addrLine2 VARCHAR(30),@city VARCHAR(20),@postCode VARCHAR(10),@cell VARCHAR(10),@email VARCHAR(50),@payMethod VARCHAR(30),@status VARCHAR(20))
 AS
 	BEGIN
-	 DECLARE @addrId VARCHAR(17),@contactId VARCHAR(17);
-	 SET @addrId = 'ADDR'+@id;
-	 SET @contactId = 'CONT' + @id;
+	 DECLARE @identifier nCHAR(9),@addrId nCHAR(13),@contactId nCHAR(13);
+	 DECLARE @num INT,@char nCHAR(1);
+	 SET @num = FLOOR(RAND()*(5-1+1)+1);
+	 SET @char =  CASE 
+				WHEN @num = 1 THEN 'A'
+				WHEN @num = 2 THEN 'B'
+				WHEN @num = 3 THEN 'C'
+				WHEN @num = 4 THEN 'D'
+				WHEN @num = 5 THEN 'E'
+			END
+	 SET @identifier = @char + REPLICATE('0',8 - ((SELECT COUNT(IdNr) FROM tblClient)+1));
+	 SET @addrId = 'ADDR'+@identifier;
+	 SET @contactId = 'CONT' + @identifier;
 		BEGIN TRY
 			BEGIN TRANSACTION
-				INSERT INTO tblAddress(AddressId,AddressLine1,AddressLine2,City)
-				VALUES (@addrId,@addrLine1,@addrLine2);
+				INSERT INTO tblAddress(pAddressId,AddressLine1,AddressLine2,City,PostalCode)
+				VALUES (@addrId,@addrLine1,@addrLine2,@city,@postCode);
 
-				INSERT INTO tblContact(ContactId,Cell,Email)
+				INSERT INTO tblContact(pContactId,Cell,Email)
 				VALUES (@contactId,@cell,@email);
 
-				INSERT INTO tblClient(IdNr,ClientName,ClientSurname,AddressId,ContactId,PaymentMethod,ClientStatus)
-				VALUES (@id,@name,@surname,@addrId,@contactId,@payMethod,@status);
+				INSERT INTO tblClient(ClientIdentifier,IdNr,ClientName,ClientSurname,AddressId,ContactId,PaymentMethod,ClientStatus)
+				VALUES (@identifier,@id,@name,@surname,@addrId,@contactId,@payMethod,@status);
 			COMMIT TRANSACTION
 		END TRY
 		BEGIN CATCH
@@ -25,25 +35,35 @@ AS
 
 GO
 CREATE PROCEDURE addClientWithPaymentDet
-(@id VARCHAR(13),@name VARCHAR(13),@surname VARCHAR(13),@addrLine1 VARCHAR(30),@addrLine2 VARCHAR(30),@city VARCHAR(20),@cell VARCHAR(10),@email VARCHAR(50),@payMethod VARCHAR(30),@status VARCHAR(20),@accNr VARCHAR(20),@bank VARCHAR(15),@branchCode VARCHAR(10))
+(@id nCHAR(13),@name VARCHAR(13),@surname VARCHAR(13),@addrLine1 VARCHAR(30),@addrLine2 VARCHAR(30),@city VARCHAR(20),@postCode VARCHAR(10),@cell VARCHAR(10),@email VARCHAR(50),@payMethod VARCHAR(30),@status VARCHAR(20),@accNr VARCHAR(20),@bank VARCHAR(15),@branchCode VARCHAR(10))
 AS
 	BEGIN
-	 DECLARE @addrId VARCHAR(17),@contactId VARCHAR(17);
-	 SET @addrId = 'ADDR'+@id;
-	 SET @contactId = 'CONT' + @id;
+	 DECLARE @identifier nCHAR(9),@addrId nCHAR(13),@contactId nCHAR(13);
+	 DECLARE @num INT,@char nCHAR(1);
+	 SET @num = FLOOR(RAND()*(5-1+1)+1);
+	 SET @char =  CASE 
+				WHEN @num = 1 THEN 'A'
+				WHEN @num = 2 THEN 'B'
+				WHEN @num = 3 THEN 'C'
+				WHEN @num = 4 THEN 'D'
+				WHEN @num = 5 THEN 'E'
+			END
+	 SET @identifier = @char + REPLICATE('0',8 - ((SELECT COUNT(IdNr) FROM tblClient)+1));
+	 SET @addrId = 'ADDR'+@identifier;
+	 SET @contactId = 'CONT' + @identifier;
 		BEGIN TRY
 			BEGIN TRANSACTION
-				INSERT INTO tblAddress(AddressId,AddressLine1,AddressLine2,City)
-				VALUES (@addrId,@addrLine1,@addrLine2);
+				INSERT INTO tblAddress(pAddressId,AddressLine1,AddressLine2,City,PostalCode)
+				VALUES (@addrId,@addrLine1,@addrLine2,@city,@postCode);
 
-				INSERT INTO tblContact(ContactId,Cell,Email)
+				INSERT INTO tblContact(pContactId,Cell,Email)
 				VALUES (@contactId,@cell,@email);
 
-				INSERT INTO tblClient(IdNr,ClientName,ClientSurname,AddressId,ContactId,PaymentMethod,ClientStatus)
-				VALUES (@id,@name,@surname,@addrId,@contactId,@payMethod,@status);
+				INSERT INTO tblClient(ClientIdentifier,IdNr,ClientName,ClientSurname,AddressId,ContactId,PaymentMethod,ClientStatus)
+				VALUES (@identifier,@id,@name,@surname,@addrId,@contactId,@payMethod,@status);
 
-				INSERT INTO tblPaymentDetails(ClientIdNr,AccNr,Bank,BranchCode)
-				VALUES (@id,@accNr,@bank,@branchCode);
+				INSERT INTO tblPaymentDetails(ClientId,AccNr,Bank,BranchCode)
+				VALUES (@identifier,@accNr,@bank,@branchCode);
 			COMMIT TRANSACTION
 		END TRY
 		BEGIN CATCH
@@ -53,21 +73,26 @@ AS
 
 GO
 CREATE PROCEDURE updateClientWithoutPaymentDetails
-(@id VARCHAR(13),@name VARCHAR(13),@surname VARCHAR(13),@addrLine1 VARCHAR(30),@addrLine2 VARCHAR(30),@city VARCHAR(20),@cell VARCHAR(10),@email VARCHAR(50),@payMethod VARCHAR(30),@status VARCHAR(20))
+(@identifier nCHAR(9),@id nCHAR(13),@name VARCHAR(13),@surname VARCHAR(13),@addrLine1 VARCHAR(30),@addrLine2 VARCHAR(30),@city VARCHAR(20),@postCode VARCHAR(10),@cell VARCHAR(10),@email VARCHAR(50),@payMethod VARCHAR(30),@status VARCHAR(20))
 AS
 	BEGIN
-	 DECLARE @addrId VARCHAR(17),@contactId VARCHAR(17);
-	 SET @addrId = (SELECT tblAddress.AddressId FROM tblAddress INNER JOIN tblClient ON tblClient.AddressId = tblAddress.AddressId WHERE tblClient.IdNr=@id);
-	 SET @contactId = (SELECT tblContact.ContactId FROM tblContact INNER JOIN tblClient ON tblClient.ContactId = tblContact.ContactId WHERE tblClient.IdNr = @id);
+	 DECLARE @addrId nCHAR(13),@contactId nCHAR(13);
+	 SET @addrId = (SELECT tblAddress.pAddressId FROM tblAddress INNER JOIN tblClient ON tblClient.AddressId = tblAddress.pAddressId WHERE tblClient.ClientIdentifier=@identifier);
+	 SET @contactId = (SELECT tblContact.pContactId FROM tblContact INNER JOIN tblClient ON tblClient.ContactId = tblContact.pContactId WHERE tblClient.ClientIdentifier = @identifier);
 		BEGIN TRY
 			BEGIN TRANSACTION
-				UPDATE tblAddress SET AddressLine1 = @addrLine1,AddressLine2=@addrLine2,City=@city
-				WHERE AddressId = @addrId;
+				UPDATE tblAddress SET AddressLine1 = @addrLine1,AddressLine2=@addrLine2,City=@city, PostalCode = @postCode
+				WHERE pAddressId = @addrId;
 
-				UPDATE tblContact SET Cell=@cell,Email=@email WHERE ContactId = @contactId;
+				UPDATE tblContact SET Cell=@cell,Email=@email WHERE pContactId = @contactId;
 
 				UPDATE tblClient SET ClientName=@name,ClientSurname=@surname, PaymentMethod = @payMethod,ClientStatus=@status
-				WHERE IdNr = @id;
+				WHERE ClientIdentifier = @identifier;
+
+				IF (SELECT COUNT(ClientId) FROM tblPaymentDetails WHERE ClientId = @identifier)>0
+				BEGIN
+					DELETE FROM tblPaymentDetails WHERE ClientId = @identifier
+				END
 			COMMIT TRANSACTION
 		END TRY
 		BEGIN CATCH
@@ -77,24 +102,28 @@ AS
 
 GO
 CREATE PROCEDURE updateClientWithPaymentDetails
-(@id VARCHAR(13),@name VARCHAR(13),@surname VARCHAR(13),@addrLine1 VARCHAR(30),@addrLine2 VARCHAR(30),@city VARCHAR(20),@cell VARCHAR(10),@email VARCHAR(50),@payMethod VARCHAR(30),@status VARCHAR(20),@accNr VARCHAR(20),@bank VARCHAR(15),@branchCode VARCHAR(10))
+(@identifier nCHAR(9),@id nCHAR(13),@name VARCHAR(13),@surname VARCHAR(13),@addrLine1 VARCHAR(30),@addrLine2 VARCHAR(30),@city VARCHAR(20),@postCode VARCHAR(10),@cell VARCHAR(10),@email VARCHAR(50),@payMethod VARCHAR(30),@status VARCHAR(20),@accNr VARCHAR(20),@bank VARCHAR(15),@branchCode VARCHAR(10))
 AS
 	BEGIN
 	 DECLARE @addrId VARCHAR(17),@contactId VARCHAR(17);
-	  SET @addrId = (SELECT tblAddress.AddressId FROM tblAddress INNER JOIN tblClient ON tblClient.AddressId = tblAddress.AddressId WHERE tblClient.IdNr=@id);
-	 SET @contactId = (SELECT tblContact.ContactId FROM tblContact INNER JOIN tblClient ON tblClient.ContactId = tblContact.ContactId WHERE tblClient.IdNr = @id);
+	 SET @addrId = (SELECT tblAddress.pAddressId FROM tblAddress INNER JOIN tblClient ON tblClient.AddressId = tblAddress.pAddressId WHERE tblClient.IdNr=@id);
+	 SET @contactId = (SELECT tblContact.pContactId FROM tblContact INNER JOIN tblClient ON tblClient.ContactId = tblContact.pContactId WHERE tblClient.IdNr = @id);
 		BEGIN TRY
 			BEGIN TRANSACTION
-				UPDATE tblAddress SET AddressLine1 = @addrLine1,AddressLine2=@addrLine2,City=@city
-				WHERE AddressId = @addrId;
+				UPDATE tblAddress SET AddressLine1 = @addrLine1,AddressLine2=@addrLine2,City=@city,PostalCode = @postCode
+				WHERE pAddressId = @addrId;
 
-				UPDATE tblContact SET Cell=@cell,Email=@email WHERE ContactId = @contactId;
+				UPDATE tblContact SET Cell=@cell,Email=@email WHERE pContactId = @contactId;
 
 				UPDATE tblClient SET ClientName=@name,ClientSurname=@surname, PaymentMethod = @payMethod,ClientStatus=@status
 				WHERE IdNr = @id;
 
-				UPDATE tblPaymentDetails SET AccNr=@accNr,Bank=@bank,BranchCode=@branchCode
-				WHERE ClientIdNr = @id;
+				IF (SELECT ClientId FROM tblPaymentDetails WHERE ClientId = @identifier) IS NULL
+				 INSERT INTO tblPaymentDetails(ClientId,AccNr,Bank,BranchCode)
+				 VALUES (@identifier,@accNr,@bank,@branchCode);
+				ELSE
+				 UPDATE tblPaymentDetails SET AccNr=@accNr,Bank=@bank,BranchCode=@branchCode
+				 WHERE ClientId = @identifier;
 			COMMIT TRANSACTION
 		END TRY
 		BEGIN CATCH
@@ -192,7 +221,7 @@ AS
 
 GO 
 CREATE PROCEDURE addTech
-(@id VARCHAR(13),@name VARCHAR(13),@surname VARCHAR(13),@addrLine1 VARCHAR(30),@addrLine2 VARCHAR(30),@city VARCHAR(20),@cell VARCHAR(10),@email VARCHAR(50),@status VARCHAR(10))
+(@id VARCHAR(13),@name VARCHAR(13),@surname VARCHAR(13),@addrLine1 VARCHAR(30),@addrLine2 VARCHAR(30),@city VARCHAR(20),@postCode VARCHAR(10),@cell VARCHAR(10),@email VARCHAR(50),@status VARCHAR(10))
 AS
 	BEGIN
 	 DECLARE @addrId VARCHAR(17),@contactId VARCHAR(17);
@@ -200,10 +229,10 @@ AS
 	 SET @contactId = 'CONT' + @id;
 		BEGIN TRY
 			BEGIN TRANSACTION
-				INSERT INTO tblAddress(AddressId,AddressLine1,AddressLine2,City)
-				VALUES (@addrId,@addrLine1,@addrLine2);
+				INSERT INTO tblAddress(pAddressId,AddressLine1,AddressLine2,City,PostalCode)
+				VALUES (@addrId,@addrLine1,@addrLine2,@city,@postCode);
 
-				INSERT INTO tblContact(ContactId,Cell,Email)
+				INSERT INTO tblContact(pContactId,Cell,Email)
 				VALUES (@contactId,@cell,@email);
 
 				INSERT INTO tblTechnicians(TechId,TechName,TechSurname,AddressId,ContactId,TechStatus)
@@ -217,18 +246,18 @@ AS
 
 GO
 CREATE PROCEDURE updateTech
-(@id VARCHAR(13),@name VARCHAR(13),@surname VARCHAR(13),@addrLine1 VARCHAR(30),@addrLine2 VARCHAR(30),@city VARCHAR(20),@cell VARCHAR(10),@email VARCHAR(50),@status VARCHAR(10))
+(@id VARCHAR(13),@name VARCHAR(13),@surname VARCHAR(13),@addrLine1 VARCHAR(30),@addrLine2 VARCHAR(30),@city VARCHAR(20),@postCode VARCHAR(10),@cell VARCHAR(10),@email VARCHAR(50),@status VARCHAR(10))
 AS
 	BEGIN
 	 DECLARE @addrId VARCHAR(17),@contactId VARCHAR(17);
-	 SET @addrId = (SELECT tblAddress.AddressId FROM tblAddress INNER JOIN tblTechnicians ON tblTechnicians.AddressId = tblAddress.AddressId WHERE tblTechnicians.TechId=@id);
-	 SET @contactId = (SELECT tblContact.ContactId FROM tblContact INNER JOIN tblTechnicians ON tblTechnicians.ContactId = tblContact.ContactId WHERE tblTechnicians.TechId = @id);
+	 SET @addrId = (SELECT tblAddress.pAddressId FROM tblAddress INNER JOIN tblTechnicians ON tblTechnicians.AddressId = tblAddress.pAddressId WHERE tblTechnicians.TechId=@id);
+	 SET @contactId = (SELECT tblContact.pContactId FROM tblContact INNER JOIN tblTechnicians ON tblTechnicians.ContactId = tblContact.pContactId WHERE tblTechnicians.TechId = @id);
 		BEGIN TRY
 			BEGIN TRANSACTION
-				UPDATE tblAddress SET AddressLine1 = @addrLine1,AddressLine2=@addrLine2,City=@city
-				WHERE AddressId = @addrId;
+				UPDATE tblAddress SET AddressLine1 = @addrLine1,AddressLine2=@addrLine2,City=@city, PostalCode = @postCode
+				WHERE pAddressId = @addrId;
 
-				UPDATE tblContact SET Cell=@cell,Email=@email WHERE ContactId = @contactId;
+				UPDATE tblContact SET Cell=@cell,Email=@email WHERE pContactId = @contactId;
 
 				UPDATE tblTechnicians SET TechName=@name,TechSurname=@surname,TechStatus=@status
 				WHERE TechId = @id;

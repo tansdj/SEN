@@ -76,9 +76,6 @@ namespace SHSApplication.Business_Layer
             tech_details.Add(DataAccesHelper.techStatus, new string[] { DataAccesHelper.typeString, this.Status });
             tech_details.Add(DataAccesHelper.techSkill, new string[] { DataAccesHelper.typeString, this.SkillLevel });
 
-            this.PersonAddress.InsertAddress();
-            this.PersonContact.InsertContact();
-            dh.runQuery(DataAccesHelper.targetTechnicians, DataAccesHelper.requestInsert, tech_details);
         }
 
 
@@ -99,9 +96,6 @@ namespace SHSApplication.Business_Layer
             tech_details.Add(DataAccesHelper.techStatus, new string[] { DataAccesHelper.typeString, this.Status });
             tech_details.Add(DataAccesHelper.techSkill, new string[] { DataAccesHelper.typeString, this.SkillLevel });
 
-            this.PersonAddress.UpdateAddress();
-            this.PersonContact.UpdateContact();
-            dh.runQuery(DataAccesHelper.targetTechnicians, DataAccesHelper.requestUpdate, tech_details,DataAccesHelper.techId +" = '"+this.PersonId+"'");
         }
 
         public void RemoveTech()
@@ -121,7 +115,6 @@ namespace SHSApplication.Business_Layer
             tech_details.Add(DataAccesHelper.techStatus, new string[] { DataAccesHelper.typeString, this.Status });
             tech_details.Add(DataAccesHelper.techSkill, new string[] { DataAccesHelper.typeString, this.SkillLevel });
 
-            dh.runQuery(DataAccesHelper.targetTechnicians, DataAccesHelper.requestDelete, tech_details, DataAccesHelper.techId + " = '" + this.PersonId+"'");
         }
 
         public List<Technicians> GetAllTechnicians()

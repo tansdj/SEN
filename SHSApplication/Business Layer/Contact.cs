@@ -65,40 +65,40 @@ namespace SHSApplication.Business_Layer
             return base.ToString();
         }
 
-        public void InsertContact()
-        {
-            Datahandler dh = Datahandler.getData();
-            Dictionary<string, string[]> cont_details = new Dictionary<string, string[]>();
+        //public void InsertContact()
+        //{
+        //    Datahandler dh = Datahandler.getData();
+        //    Dictionary<string, string[]> cont_details = new Dictionary<string, string[]>();
 
-            cont_details.Add(DataAccesHelper.contactId, new string[] { DataAccesHelper.typeString, this.ContactId });
-            cont_details.Add(DataAccesHelper.contactCell, new string[] { DataAccesHelper.typeString, this.Cell });
-            cont_details.Add(DataAccesHelper.contactEmail, new string[] { DataAccesHelper.typeString, this.Email });
+        //    cont_details.Add(DataAccesHelper.contactId, new string[] { DataAccesHelper.typeString, this.ContactId });
+        //    cont_details.Add(DataAccesHelper.contactCell, new string[] { DataAccesHelper.typeString, this.Cell });
+        //    cont_details.Add(DataAccesHelper.contactEmail, new string[] { DataAccesHelper.typeString, this.Email });
 
-            dh.runQuery(DataAccesHelper.targetContact, DataAccesHelper.requestInsert, cont_details);
-        }
+        //    dh.runQuery(DataAccesHelper.targetContact, DataAccesHelper.requestInsert, cont_details);
+        //}
 
-        public void UpdateContact()
-        {
-            Datahandler dh = Datahandler.getData();
-            Dictionary<string, string[]> cont_details = new Dictionary<string, string[]>();
+        //public void UpdateContact()
+        //{
+        //    Datahandler dh = Datahandler.getData();
+        //    Dictionary<string, string[]> cont_details = new Dictionary<string, string[]>();
 
-            cont_details.Add(DataAccesHelper.contactId, new string[] { DataAccesHelper.typeString, this.ContactId });
-            cont_details.Add(DataAccesHelper.contactCell, new string[] { DataAccesHelper.typeString, this.Cell });
-            cont_details.Add(DataAccesHelper.contactEmail, new string[] { DataAccesHelper.typeString, this.Email });
+        //    cont_details.Add(DataAccesHelper.contactId, new string[] { DataAccesHelper.typeString, this.ContactId });
+        //    cont_details.Add(DataAccesHelper.contactCell, new string[] { DataAccesHelper.typeString, this.Cell });
+        //    cont_details.Add(DataAccesHelper.contactEmail, new string[] { DataAccesHelper.typeString, this.Email });
 
-            dh.runQuery(DataAccesHelper.targetContact, DataAccesHelper.requestUpdate, cont_details, DataAccesHelper.contactId + " = '" + this.ContactId + "'");
-        }
+        //    dh.runQuery(DataAccesHelper.targetContact, DataAccesHelper.requestUpdate, cont_details, DataAccesHelper.contactId + " = '" + this.ContactId + "'");
+        //}
 
-        public void RemoveContact()
-        {
-            Datahandler dh = Datahandler.getData();
-            Dictionary<string, string[]> cont_details = new Dictionary<string, string[]>();
+        //public void RemoveContact()
+        //{
+        //    Datahandler dh = Datahandler.getData();
+        //    Dictionary<string, string[]> cont_details = new Dictionary<string, string[]>();
 
-            cont_details.Add(DataAccesHelper.contactId, new string[] { DataAccesHelper.typeString, this.ContactId });
-            cont_details.Add(DataAccesHelper.contactCell, new string[] { DataAccesHelper.typeString, this.Cell });
-            cont_details.Add(DataAccesHelper.contactEmail, new string[] { DataAccesHelper.typeString, this.Email });
+        //    cont_details.Add(DataAccesHelper.contactId, new string[] { DataAccesHelper.typeString, this.ContactId });
+        //    cont_details.Add(DataAccesHelper.contactCell, new string[] { DataAccesHelper.typeString, this.Cell });
+        //    cont_details.Add(DataAccesHelper.contactEmail, new string[] { DataAccesHelper.typeString, this.Email });
 
-            dh.runQuery(DataAccesHelper.targetContact, DataAccesHelper.requestDelete, cont_details, DataAccesHelper.contactId + " = '" + this.ContactId + "'");
-        }
+        //    dh.runQuery(DataAccesHelper.targetContact, DataAccesHelper.requestDelete, cont_details, DataAccesHelper.contactId + " = '" + this.ContactId + "'");
+        //}
     }
 }
