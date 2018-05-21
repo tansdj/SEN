@@ -128,11 +128,11 @@ CREATE TABLE tblClient
 	 AddCost SMALLMONEY NOT NULL DEFAULT 0
 	 )
 
-	CREATE TABLE tblClientCompConfiguration
+	CREATE TABLE tblContractCompConfiguration
 	(ClientConfigCount INT IDENTITY,
-	 ClientId nCHAR(9) FOREIGN KEY REFERENCES tblClient(ClientIdentifier),
+	 ContractId nCHAR(12) FOREIGN KEY REFERENCES tblContract(ContractIdentifier),
 	 ConfigCode nCHAR(10) FOREIGN KEY REFERENCES tblConfiguration(ConfigurationCode),
-	 PRIMARY KEY(ClientId,ConfigCode)
+	 PRIMARY KEY(ContractId,ConfigCode)
 	 )
 
 	CREATE TABLE tblTechnicians

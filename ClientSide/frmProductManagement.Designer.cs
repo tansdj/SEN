@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmProductManagement));
             this.pnlMenu = new System.Windows.Forms.Panel();
+            this.btnCall = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
             this.btnUserManagement = new System.Windows.Forms.Button();
             this.btnTecManagement = new System.Windows.Forms.Button();
@@ -41,6 +42,8 @@
             this.lblDash = new System.Windows.Forms.Label();
             this.picLogoSmall = new System.Windows.Forms.PictureBox();
             this.picLogo = new System.Windows.Forms.PictureBox();
+            this.btnNewProduct = new System.Windows.Forms.Button();
+            this.btnEditProduct = new System.Windows.Forms.Button();
             this.pnlMenu.SuspendLayout();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogoSmall)).BeginInit();
@@ -52,6 +55,7 @@
             this.pnlMenu.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.pnlMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.pnlMenu.Controls.Add(this.btnCall);
             this.pnlMenu.Controls.Add(this.btnHome);
             this.pnlMenu.Controls.Add(this.btnUserManagement);
             this.pnlMenu.Controls.Add(this.btnTecManagement);
@@ -61,6 +65,21 @@
             this.pnlMenu.Name = "pnlMenu";
             this.pnlMenu.Size = new System.Drawing.Size(243, 537);
             this.pnlMenu.TabIndex = 0;
+            // 
+            // btnCall
+            // 
+            this.btnCall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCall.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnCall.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCall.BackgroundImage")));
+            this.btnCall.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnCall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCall.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnCall.Location = new System.Drawing.Point(186, 485);
+            this.btnCall.Name = "btnCall";
+            this.btnCall.Size = new System.Drawing.Size(54, 49);
+            this.btnCall.TabIndex = 6;
+            this.btnCall.UseVisualStyleBackColor = false;
+            this.btnCall.Click += new System.EventHandler(this.btnCall_Click);
             // 
             // btnHome
             // 
@@ -113,7 +132,7 @@
             this.btnTecManagement.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnTecManagement.Size = new System.Drawing.Size(243, 90);
             this.btnTecManagement.TabIndex = 3;
-            this.btnTecManagement.Text = "        Technician Management";
+            this.btnTecManagement.Text = "        Employee   Management";
             this.btnTecManagement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnTecManagement.UseVisualStyleBackColor = true;
             this.btnTecManagement.Click += new System.EventHandler(this.btnTecManagement_Click);
@@ -237,12 +256,44 @@
             this.picLogo.TabIndex = 2;
             this.picLogo.TabStop = false;
             // 
+            // btnNewProduct
+            // 
+            this.btnNewProduct.AutoSize = true;
+            this.btnNewProduct.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnNewProduct.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnNewProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNewProduct.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNewProduct.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnNewProduct.Location = new System.Drawing.Point(270, 108);
+            this.btnNewProduct.Name = "btnNewProduct";
+            this.btnNewProduct.Size = new System.Drawing.Size(202, 148);
+            this.btnNewProduct.TabIndex = 4;
+            this.btnNewProduct.Text = "New Product";
+            this.btnNewProduct.UseVisualStyleBackColor = false;
+            // 
+            // btnEditProduct
+            // 
+            this.btnEditProduct.AutoSize = true;
+            this.btnEditProduct.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnEditProduct.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnEditProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditProduct.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditProduct.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnEditProduct.Location = new System.Drawing.Point(491, 108);
+            this.btnEditProduct.Name = "btnEditProduct";
+            this.btnEditProduct.Size = new System.Drawing.Size(202, 148);
+            this.btnEditProduct.TabIndex = 5;
+            this.btnEditProduct.Text = "Edit Product";
+            this.btnEditProduct.UseVisualStyleBackColor = false;
+            // 
             // frmProductManagement
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(885, 537);
+            this.Controls.Add(this.btnEditProduct);
+            this.Controls.Add(this.btnNewProduct);
             this.Controls.Add(this.pnlTop);
             this.Controls.Add(this.pnlMenu);
             this.Controls.Add(this.picLogo);
@@ -257,6 +308,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picLogoSmall)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -274,6 +326,9 @@
         private System.Windows.Forms.Button btnLoginReg;
         private System.Windows.Forms.Label lblDash;
         private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Button btnCall;
+        private System.Windows.Forms.Button btnNewProduct;
+        private System.Windows.Forms.Button btnEditProduct;
     }
 }
 

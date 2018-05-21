@@ -37,7 +37,7 @@ namespace ClientSide
 
         private void btnTecManagement_Click(object sender, EventArgs e)
         {
-            frmTechManagement tm = new frmTechManagement();
+            frmEmpManagement tm = new frmEmpManagement();
             tm.Show(); 
         }
 
@@ -45,6 +45,12 @@ namespace ClientSide
         {
             frmUserManagement um = new frmUserManagement();
             um.Show();
+        }
+
+        private void btnCall_Click(object sender, EventArgs e)
+        {
+            CallSimulator cs = new CallSimulator();
+            cs.Show();
         }
     }
 }

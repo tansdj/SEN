@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CallSimulator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CallSimulator.Designer.cs">
+      <DependentUpon>CallSimulator.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmUpdateClient.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,11 +70,11 @@
     <Compile Include="frmUserManagement.Designer.cs">
       <DependentUpon>frmUserManagement.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmTechManagement.cs">
+    <Compile Include="frmEmpManagement.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmTechManagement.Designer.cs">
-      <DependentUpon>frmTechManagement.cs</DependentUpon>
+    <Compile Include="frmEmpManagement.Designer.cs">
+      <DependentUpon>frmEmpManagement.cs</DependentUpon>
     </Compile>
     <Compile Include="frmProductManagement.cs">
       <SubType>Form</SubType>
@@ -90,6 +96,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CallSimulator.resx">
+      <DependentUpon>CallSimulator.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmUpdateClient.resx">
       <DependentUpon>frmUpdateClient.cs</DependentUpon>
     </EmbeddedResource>
@@ -99,8 +108,8 @@
     <EmbeddedResource Include="frmUserManagement.resx">
       <DependentUpon>frmUserManagement.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmTechManagement.resx">
-      <DependentUpon>frmTechManagement.cs</DependentUpon>
+    <EmbeddedResource Include="frmEmpManagement.resx">
+      <DependentUpon>frmEmpManagement.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmProductManagement.resx">
       <DependentUpon>frmProductManagement.cs</DependentUpon>

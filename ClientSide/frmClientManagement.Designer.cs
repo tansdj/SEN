@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmClientManagement));
             this.pnlMenu = new System.Windows.Forms.Panel();
+            this.btnCall = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
             this.btnUserManagement = new System.Windows.Forms.Button();
             this.btnTecManagement = new System.Windows.Forms.Button();
@@ -44,6 +45,9 @@
             this.btnNewClient = new System.Windows.Forms.Button();
             this.btnEditClient = new System.Windows.Forms.Button();
             this.btnCancelClient = new System.Windows.Forms.Button();
+            this.btnNewContract = new System.Windows.Forms.Button();
+            this.btnEditContract = new System.Windows.Forms.Button();
+            this.btnViewContract = new System.Windows.Forms.Button();
             this.pnlMenu.SuspendLayout();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogoSmall)).BeginInit();
@@ -55,6 +59,7 @@
             this.pnlMenu.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.pnlMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.pnlMenu.Controls.Add(this.btnCall);
             this.pnlMenu.Controls.Add(this.btnHome);
             this.pnlMenu.Controls.Add(this.btnUserManagement);
             this.pnlMenu.Controls.Add(this.btnTecManagement);
@@ -64,6 +69,21 @@
             this.pnlMenu.Name = "pnlMenu";
             this.pnlMenu.Size = new System.Drawing.Size(243, 537);
             this.pnlMenu.TabIndex = 0;
+            // 
+            // btnCall
+            // 
+            this.btnCall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCall.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnCall.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCall.BackgroundImage")));
+            this.btnCall.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnCall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCall.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnCall.Location = new System.Drawing.Point(186, 485);
+            this.btnCall.Name = "btnCall";
+            this.btnCall.Size = new System.Drawing.Size(54, 49);
+            this.btnCall.TabIndex = 6;
+            this.btnCall.UseVisualStyleBackColor = false;
+            this.btnCall.Click += new System.EventHandler(this.btnCall_Click);
             // 
             // btnHome
             // 
@@ -116,7 +136,7 @@
             this.btnTecManagement.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnTecManagement.Size = new System.Drawing.Size(243, 90);
             this.btnTecManagement.TabIndex = 3;
-            this.btnTecManagement.Text = "        Technician Management";
+            this.btnTecManagement.Text = "        Employee   Management";
             this.btnTecManagement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnTecManagement.UseVisualStyleBackColor = true;
             this.btnTecManagement.Click += new System.EventHandler(this.btnTecManagement_Click);
@@ -242,8 +262,6 @@
             // 
             // btnNewClient
             // 
-            this.btnNewClient.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
             this.btnNewClient.AutoSize = true;
             this.btnNewClient.BackColor = System.Drawing.Color.YellowGreen;
             this.btnNewClient.FlatAppearance.BorderColor = System.Drawing.Color.Black;
@@ -260,8 +278,6 @@
             // 
             // btnEditClient
             // 
-            this.btnEditClient.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
             this.btnEditClient.AutoSize = true;
             this.btnEditClient.BackColor = System.Drawing.Color.YellowGreen;
             this.btnEditClient.FlatAppearance.BorderColor = System.Drawing.Color.Black;
@@ -278,8 +294,6 @@
             // 
             // btnCancelClient
             // 
-            this.btnCancelClient.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancelClient.AutoSize = true;
             this.btnCancelClient.BackColor = System.Drawing.Color.YellowGreen;
             this.btnCancelClient.FlatAppearance.BorderColor = System.Drawing.Color.Black;
@@ -293,12 +307,60 @@
             this.btnCancelClient.Text = "Cancel client";
             this.btnCancelClient.UseVisualStyleBackColor = false;
             // 
+            // btnNewContract
+            // 
+            this.btnNewContract.AutoSize = true;
+            this.btnNewContract.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnNewContract.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnNewContract.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNewContract.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNewContract.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnNewContract.Location = new System.Drawing.Point(259, 282);
+            this.btnNewContract.Name = "btnNewContract";
+            this.btnNewContract.Size = new System.Drawing.Size(202, 148);
+            this.btnNewContract.TabIndex = 6;
+            this.btnNewContract.Text = "Create new Contract";
+            this.btnNewContract.UseVisualStyleBackColor = false;
+            // 
+            // btnEditContract
+            // 
+            this.btnEditContract.AutoSize = true;
+            this.btnEditContract.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnEditContract.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnEditContract.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditContract.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditContract.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnEditContract.Location = new System.Drawing.Point(479, 282);
+            this.btnEditContract.Name = "btnEditContract";
+            this.btnEditContract.Size = new System.Drawing.Size(183, 148);
+            this.btnEditContract.TabIndex = 7;
+            this.btnEditContract.Text = "Modify Contract";
+            this.btnEditContract.UseVisualStyleBackColor = false;
+            // 
+            // btnViewContract
+            // 
+            this.btnViewContract.AutoSize = true;
+            this.btnViewContract.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnViewContract.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnViewContract.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnViewContract.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnViewContract.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnViewContract.Location = new System.Drawing.Point(681, 282);
+            this.btnViewContract.Name = "btnViewContract";
+            this.btnViewContract.Size = new System.Drawing.Size(183, 148);
+            this.btnViewContract.TabIndex = 8;
+            this.btnViewContract.Text = "Inspect Contract";
+            this.btnViewContract.UseVisualStyleBackColor = false;
+            // 
             // frmClientManagement
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(885, 537);
+            this.Controls.Add(this.btnViewContract);
+            this.Controls.Add(this.btnEditContract);
+            this.Controls.Add(this.btnNewContract);
             this.Controls.Add(this.btnCancelClient);
             this.Controls.Add(this.btnEditClient);
             this.Controls.Add(this.btnNewClient);
@@ -337,6 +399,10 @@
         private System.Windows.Forms.Button btnNewClient;
         private System.Windows.Forms.Button btnEditClient;
         private System.Windows.Forms.Button btnCancelClient;
+        private System.Windows.Forms.Button btnCall;
+        private System.Windows.Forms.Button btnNewContract;
+        private System.Windows.Forms.Button btnEditContract;
+        private System.Windows.Forms.Button btnViewContract;
     }
 }
 

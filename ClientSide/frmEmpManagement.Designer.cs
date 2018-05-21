@@ -1,6 +1,6 @@
 ﻿namespace ClientSide
 {
-    partial class frmTechManagement
+    partial class frmEmpManagement
     {
         /// <summary>
         /// Required designer variable.
@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTechManagement));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEmpManagement));
             this.pnlMenu = new System.Windows.Forms.Panel();
+            this.btnCall = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
             this.btnUserManagement = new System.Windows.Forms.Button();
             this.btnTecManagement = new System.Windows.Forms.Button();
@@ -41,6 +42,9 @@
             this.lblDash = new System.Windows.Forms.Label();
             this.picLogoSmall = new System.Windows.Forms.PictureBox();
             this.picLogo = new System.Windows.Forms.PictureBox();
+            this.btnNewEmp = new System.Windows.Forms.Button();
+            this.btnEditEmployee = new System.Windows.Forms.Button();
+            this.btnEmployeeRpt = new System.Windows.Forms.Button();
             this.pnlMenu.SuspendLayout();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogoSmall)).BeginInit();
@@ -52,6 +56,7 @@
             this.pnlMenu.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.pnlMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.pnlMenu.Controls.Add(this.btnCall);
             this.pnlMenu.Controls.Add(this.btnHome);
             this.pnlMenu.Controls.Add(this.btnUserManagement);
             this.pnlMenu.Controls.Add(this.btnTecManagement);
@@ -61,6 +66,21 @@
             this.pnlMenu.Name = "pnlMenu";
             this.pnlMenu.Size = new System.Drawing.Size(243, 537);
             this.pnlMenu.TabIndex = 0;
+            // 
+            // btnCall
+            // 
+            this.btnCall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCall.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnCall.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCall.BackgroundImage")));
+            this.btnCall.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnCall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCall.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnCall.Location = new System.Drawing.Point(189, 485);
+            this.btnCall.Name = "btnCall";
+            this.btnCall.Size = new System.Drawing.Size(54, 49);
+            this.btnCall.TabIndex = 6;
+            this.btnCall.UseVisualStyleBackColor = false;
+            this.btnCall.Click += new System.EventHandler(this.btnCall_Click);
             // 
             // btnHome
             // 
@@ -113,7 +133,7 @@
             this.btnTecManagement.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnTecManagement.Size = new System.Drawing.Size(243, 90);
             this.btnTecManagement.TabIndex = 3;
-            this.btnTecManagement.Text = "        Technician Management";
+            this.btnTecManagement.Text = "        Employee   Management";
             this.btnTecManagement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnTecManagement.UseVisualStyleBackColor = true;
             // 
@@ -210,9 +230,9 @@
             this.lblDash.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lblDash.Location = new System.Drawing.Point(92, 37);
             this.lblDash.Name = "lblDash";
-            this.lblDash.Size = new System.Drawing.Size(572, 44);
+            this.lblDash.Size = new System.Drawing.Size(539, 44);
             this.lblDash.TabIndex = 4;
-            this.lblDash.Text = "Technician Management";
+            this.lblDash.Text = "Employee Management";
             // 
             // picLogoSmall
             // 
@@ -236,17 +256,71 @@
             this.picLogo.TabIndex = 2;
             this.picLogo.TabStop = false;
             // 
-            // frmTechManagement
+            // btnNewEmp
+            // 
+            this.btnNewEmp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnNewEmp.AutoSize = true;
+            this.btnNewEmp.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnNewEmp.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnNewEmp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNewEmp.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNewEmp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnNewEmp.Location = new System.Drawing.Point(266, 116);
+            this.btnNewEmp.Name = "btnNewEmp";
+            this.btnNewEmp.Size = new System.Drawing.Size(202, 148);
+            this.btnNewEmp.TabIndex = 4;
+            this.btnNewEmp.Text = "Add new Employee";
+            this.btnNewEmp.UseVisualStyleBackColor = false;
+            // 
+            // btnEditEmployee
+            // 
+            this.btnEditEmployee.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnEditEmployee.AutoSize = true;
+            this.btnEditEmployee.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnEditEmployee.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnEditEmployee.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditEmployee.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditEmployee.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnEditEmployee.Location = new System.Drawing.Point(491, 116);
+            this.btnEditEmployee.Name = "btnEditEmployee";
+            this.btnEditEmployee.Size = new System.Drawing.Size(171, 148);
+            this.btnEditEmployee.TabIndex = 5;
+            this.btnEditEmployee.Text = "Edit Employee";
+            this.btnEditEmployee.UseVisualStyleBackColor = false;
+            // 
+            // btnEmployeeRpt
+            // 
+            this.btnEmployeeRpt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnEmployeeRpt.AutoSize = true;
+            this.btnEmployeeRpt.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnEmployeeRpt.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnEmployeeRpt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEmployeeRpt.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEmployeeRpt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnEmployeeRpt.Location = new System.Drawing.Point(683, 116);
+            this.btnEmployeeRpt.Name = "btnEmployeeRpt";
+            this.btnEmployeeRpt.Size = new System.Drawing.Size(181, 148);
+            this.btnEmployeeRpt.TabIndex = 6;
+            this.btnEmployeeRpt.Text = "Employee Report";
+            this.btnEmployeeRpt.UseVisualStyleBackColor = false;
+            // 
+            // frmEmpManagement
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(885, 537);
+            this.Controls.Add(this.btnEmployeeRpt);
+            this.Controls.Add(this.btnEditEmployee);
+            this.Controls.Add(this.btnNewEmp);
             this.Controls.Add(this.pnlTop);
             this.Controls.Add(this.pnlMenu);
             this.Controls.Add(this.picLogo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "frmTechManagement";
+            this.Name = "frmEmpManagement";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmMain";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -256,6 +330,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picLogoSmall)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -273,6 +348,10 @@
         private System.Windows.Forms.Button btnLoginReg;
         private System.Windows.Forms.Label lblDash;
         private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Button btnCall;
+        private System.Windows.Forms.Button btnNewEmp;
+        private System.Windows.Forms.Button btnEditEmployee;
+        private System.Windows.Forms.Button btnEmployeeRpt;
     }
 }
 

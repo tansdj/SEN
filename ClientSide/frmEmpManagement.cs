@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ClientSide
 {
-    public partial class frmTechManagement : Form
+    public partial class frmEmpManagement : Form
     {
-        public frmTechManagement()
+        public frmEmpManagement()
         {
             InitializeComponent();
             this.Size = Screen.PrimaryScreen.WorkingArea.Size;
@@ -47,6 +47,12 @@ namespace ClientSide
             frmUserManagement um = new frmUserManagement();
             um.Show();
             this.Close();
+        }
+
+        private void btnCall_Click(object sender, EventArgs e)
+        {
+            CallSimulator cs = new CallSimulator();
+            cs.Show();
         }
     }
 }
