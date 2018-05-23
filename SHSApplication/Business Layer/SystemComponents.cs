@@ -71,7 +71,7 @@ namespace SHSApplication.Business_Layer
             return base.ToString();
         }
 
-        public void InsertComponent()
+        public bool InsertComponent()
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> sysComp_details = new Dictionary<string, string[]>();
@@ -81,10 +81,10 @@ namespace SHSApplication.Business_Layer
             sysComp_details.Add(DataAccesHelper.compProdSerial, new string[] { DataAccesHelper.typeString, this.SysComps_Product.ProductSerialNr });
             sysComp_details.Add(DataAccesHelper.compDesc, new string[] { DataAccesHelper.typeString, this.Description });
 
-            dh.runQuery(DataAccesHelper.targetComponents, DataAccesHelper.requestInsert, sysComp_details);
+            return dh.runQuery(DataAccesHelper.targetComponents, DataAccesHelper.requestInsert, sysComp_details);
         }
 
-        public void UpdateComponent()
+        public bool UpdateComponent()
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> sysComp_details = new Dictionary<string, string[]>();
@@ -94,10 +94,10 @@ namespace SHSApplication.Business_Layer
             sysComp_details.Add(DataAccesHelper.compProdSerial, new string[] { DataAccesHelper.typeString, this.SysComps_Product.ProductSerialNr });
             sysComp_details.Add(DataAccesHelper.compDesc, new string[] { DataAccesHelper.typeString, this.Description });
 
-            dh.runQuery(DataAccesHelper.targetComponents, DataAccesHelper.requestUpdate, sysComp_details, DataAccesHelper.compCode + " = '" + this.CompCode + "'");
+            return dh.runQuery(DataAccesHelper.targetComponents, DataAccesHelper.requestUpdate, sysComp_details, DataAccesHelper.compCode + " = '" + this.CompCode + "'");
         }
 
-        public void RemoveComponent()
+        public bool RemoveComponent()
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> sysComp_details = new Dictionary<string, string[]>();
@@ -107,7 +107,7 @@ namespace SHSApplication.Business_Layer
             sysComp_details.Add(DataAccesHelper.compProdSerial, new string[] { DataAccesHelper.typeString, this.SysComps_Product.ProductSerialNr });
             sysComp_details.Add(DataAccesHelper.compDesc, new string[] { DataAccesHelper.typeString, this.Description });
 
-            dh.runQuery(DataAccesHelper.targetComponents, DataAccesHelper.requestDelete, sysComp_details,DataAccesHelper.compCode+" = '"+this.CompCode+"'");
+            return dh.runQuery(DataAccesHelper.targetComponents, DataAccesHelper.requestDelete, sysComp_details,DataAccesHelper.compCode+" = '"+this.CompCode+"'");
         }
 
         public List<SystemComponents> GetSystemComponents()

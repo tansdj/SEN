@@ -61,7 +61,7 @@ namespace SHSApplication.Business_Layer
             return base.ToString();
         }
 
-        public void InsertFunction()
+        public bool InsertFunction()
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> prodFunc_details = new Dictionary<string, string[]>();
@@ -69,10 +69,10 @@ namespace SHSApplication.Business_Layer
             prodFunc_details.Add(DataAccesHelper.pfProductSerial, new string[] { DataAccesHelper.typeString, this.ProductFunc_Product.ProductSerialNr });
             prodFunc_details.Add(DataAccesHelper.pfFunction, new string[] { DataAccesHelper.typeString, this.ProdFunction });
 
-            dh.runQuery(DataAccesHelper.targetProductFunction, DataAccesHelper.requestInsert, prodFunc_details);
+            return dh.runQuery(DataAccesHelper.targetProductFunction, DataAccesHelper.requestInsert, prodFunc_details);
         }
 
-        public void UpdateFunction()
+        public bool UpdateFunction()
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> prodFunc_details = new Dictionary<string, string[]>();
@@ -80,11 +80,11 @@ namespace SHSApplication.Business_Layer
             prodFunc_details.Add(DataAccesHelper.pfProductSerial, new string[] { DataAccesHelper.typeString, this.ProductFunc_Product.ProductSerialNr });
             prodFunc_details.Add(DataAccesHelper.pfFunction, new string[] { DataAccesHelper.typeString, this.ProdFunction });
 
-            dh.runQuery(DataAccesHelper.targetProductFunction, DataAccesHelper.requestUpdate, prodFunc_details,DataAccesHelper.pfProductSerial+" = '"+this.ProductFunc_Product.ProductSerialNr+"'");
+            return dh.runQuery(DataAccesHelper.targetProductFunction, DataAccesHelper.requestUpdate, prodFunc_details,DataAccesHelper.pfProductSerial+" = '"+this.ProductFunc_Product.ProductSerialNr+"'");
         }
 
 
-        public void RemoveFunction()
+        public bool RemoveFunction()
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> prodFunc_details = new Dictionary<string, string[]>();
@@ -92,7 +92,7 @@ namespace SHSApplication.Business_Layer
             prodFunc_details.Add(DataAccesHelper.pfProductSerial, new string[] { DataAccesHelper.typeString, this.ProductFunc_Product.ProductSerialNr });
             prodFunc_details.Add(DataAccesHelper.pfFunction, new string[] { DataAccesHelper.typeString, this.ProdFunction });
 
-            dh.runQuery(DataAccesHelper.targetProductFunction, DataAccesHelper.requestDelete, prodFunc_details, DataAccesHelper.pfProductSerial + " = '" + this.ProductFunc_Product.ProductSerialNr + "'");
+            return dh.runQuery(DataAccesHelper.targetProductFunction, DataAccesHelper.requestDelete, prodFunc_details, DataAccesHelper.pfProductSerial + " = '" + this.ProductFunc_Product.ProductSerialNr + "'");
         }
 
         public List<ProductFunction> GetAllProductFunctions()

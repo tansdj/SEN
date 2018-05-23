@@ -19,9 +19,6 @@ namespace SHSApplication.Business_Layer
         private string skillRequired;
         private DateTime completedDate;
 
-        
-
-
         public RequestedEvents(int eventId, Client techLog_client, DateTime requestedDate, DateTime completedDate, string status, string remarks, string skillRequired)
         {
             this.EventId = eventId;
@@ -107,7 +104,7 @@ namespace SHSApplication.Business_Layer
             return base.ToString();
         }
 
-        public void NewEvent()
+        public bool NewEvent()
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> event_details = new Dictionary<string, string[]>();
@@ -120,10 +117,10 @@ namespace SHSApplication.Business_Layer
             event_details.Add(DataAccesHelper.eventStatus, new string[] { DataAccesHelper.typeString, this.Status });
             event_details.Add(DataAccesHelper.skillReq, new string[] { DataAccesHelper.typeString, this.SkillRequired });
 
-            dh.runQuery(DataAccesHelper.targetTechEvents, DataAccesHelper.requestInsert, event_details);
+            return dh.runQuery(DataAccesHelper.targetTechEvents, DataAccesHelper.requestInsert, event_details);
         }
 
-        public void UpdateEvent()
+        public bool UpdateEvent()
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> event_details = new Dictionary<string, string[]>();
@@ -136,7 +133,7 @@ namespace SHSApplication.Business_Layer
             event_details.Add(DataAccesHelper.eventStatus, new string[] { DataAccesHelper.typeString, this.Status });
             event_details.Add(DataAccesHelper.skillReq, new string[] { DataAccesHelper.typeString, this.SkillRequired });
 
-            dh.runQuery(DataAccesHelper.targetTechEvents, DataAccesHelper.requestUpdate, event_details,DataAccesHelper.eventId+" = "+this.EventId);
+            return dh.runQuery(DataAccesHelper.targetTechEvents, DataAccesHelper.requestUpdate, event_details,DataAccesHelper.eventId+" = "+this.EventId);
         }
 
         public List<RequestedEvents> GetRequestedEvents()

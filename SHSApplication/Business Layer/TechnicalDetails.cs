@@ -71,7 +71,7 @@ namespace SHSApplication.Business_Layer
             return base.ToString();
         }
 
-        public void InsertDetail()
+        public bool InsertDetail()
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> tecDet_details = new Dictionary<string, string[]>();
@@ -80,10 +80,10 @@ namespace SHSApplication.Business_Layer
             tecDet_details.Add(DataAccesHelper.tecDetConfCode, new string[] { DataAccesHelper.typeString, this.TechDet_Config.ConfigId });
             tecDet_details.Add(DataAccesHelper.tecDetDocPath, new string[] { DataAccesHelper.typeString, this.DocPath });
 
-            dh.runQuery(DataAccesHelper.targetTechDetail, DataAccesHelper.requestInsert, tecDet_details);
+            return dh.runQuery(DataAccesHelper.targetTechDetail, DataAccesHelper.requestInsert, tecDet_details);
         }
 
-        public void RemoveDetail()
+        public bool RemoveDetail()
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> tecDet_details = new Dictionary<string, string[]>();
@@ -92,7 +92,7 @@ namespace SHSApplication.Business_Layer
             tecDet_details.Add(DataAccesHelper.tecDetConfCode, new string[] { DataAccesHelper.typeString, this.TechDet_Config.ConfigId });
             tecDet_details.Add(DataAccesHelper.tecDetDocPath, new string[] { DataAccesHelper.typeString, this.DocPath });
 
-            dh.runQuery(DataAccesHelper.targetTechDetail, DataAccesHelper.requestDelete, tecDet_details,DataAccesHelper.tecDetId+" = "+this.DetailId);
+            return dh.runQuery(DataAccesHelper.targetTechDetail, DataAccesHelper.requestDelete, tecDet_details,DataAccesHelper.tecDetId+" = "+this.DetailId);
         }
 
         public List<TechnicalDetails> GetComponentTechDet()

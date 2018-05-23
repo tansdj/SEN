@@ -78,7 +78,7 @@ namespace SHSApplication.Business_Layer
             return base.ToString();
         }
 
-        public void InsertBilling()
+        public bool InsertBilling()
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> billing_details = new Dictionary<string, string[]>();
@@ -88,10 +88,10 @@ namespace SHSApplication.Business_Layer
             billing_details.Add(DataAccesHelper.billAmountDue, new string[] { DataAccesHelper.typeDouble, this.AmountDue.ToString() });
             billing_details.Add(DataAccesHelper.billAmountPaid, new string[] { DataAccesHelper.typeDouble, this.AmountPaid.ToString() });
             
-            dh.runQuery(DataAccesHelper.targetBilling, DataAccesHelper.requestInsert, billing_details);
+            return dh.runQuery(DataAccesHelper.targetBilling, DataAccesHelper.requestInsert, billing_details);
         }
 
-        public void UpdateBilling()
+        public bool UpdateBilling()
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> billing_details = new Dictionary<string, string[]>();
@@ -101,10 +101,10 @@ namespace SHSApplication.Business_Layer
             billing_details.Add(DataAccesHelper.billAmountDue, new string[] { DataAccesHelper.typeDouble, this.AmountDue.ToString() });
             billing_details.Add(DataAccesHelper.billAmountPaid, new string[] { DataAccesHelper.typeDouble, this.AmountPaid.ToString() });
 
-            dh.runQuery(DataAccesHelper.targetBilling, DataAccesHelper.requestUpdate, billing_details,DataAccesHelper.billingClientid+" = '"+this.Billing_Client.PersonId+"'");
+            return dh.runQuery(DataAccesHelper.targetBilling, DataAccesHelper.requestUpdate, billing_details,DataAccesHelper.billingClientid+" = '"+this.Billing_Client.PersonId+"'");
         }
 
-        public void RemoveBilling()
+        public bool RemoveBilling()
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> billing_details = new Dictionary<string, string[]>();
@@ -114,7 +114,7 @@ namespace SHSApplication.Business_Layer
             billing_details.Add(DataAccesHelper.billAmountDue, new string[] { DataAccesHelper.typeDouble, this.AmountDue.ToString() });
             billing_details.Add(DataAccesHelper.billAmountPaid, new string[] { DataAccesHelper.typeDouble, this.AmountPaid.ToString() });
 
-            dh.runQuery(DataAccesHelper.targetBilling, DataAccesHelper.requestDelete, billing_details, DataAccesHelper.billingClientid + " = '" + this.Billing_Client.PersonId + "'");
+            return dh.runQuery(DataAccesHelper.targetBilling, DataAccesHelper.requestDelete, billing_details, DataAccesHelper.billingClientid + " = '" + this.Billing_Client.PersonId + "'");
         }
 
         public List<Billing> GetClientBilling()

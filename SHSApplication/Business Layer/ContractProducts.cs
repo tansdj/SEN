@@ -62,7 +62,7 @@ namespace SHSApplication.Business_Layer
             return base.ToString();
         }
 
-        public void InsertContractProduct()
+        public bool InsertContractProduct()
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> clientProd_details = new Dictionary<string, string[]>();
@@ -70,10 +70,10 @@ namespace SHSApplication.Business_Layer
             clientProd_details.Add(DataAccesHelper.cpContractId, new string[] { DataAccesHelper.typeString, this.ContractProducts_Contract.ContractIdentifier});
             clientProd_details.Add(DataAccesHelper.cpProductSerial, new string[] { DataAccesHelper.typeString, this.ContractProducts_Product.ProductSerialNr });
 
-            dh.runQuery(DataAccesHelper.targetContractProducts, DataAccesHelper.requestInsert, clientProd_details);
+            return dh.runQuery(DataAccesHelper.targetContractProducts, DataAccesHelper.requestInsert, clientProd_details);
         }
 
-        public void RemoveContractProduct()
+        public bool RemoveContractProduct()
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> clientProd_details = new Dictionary<string, string[]>();
@@ -81,7 +81,7 @@ namespace SHSApplication.Business_Layer
             clientProd_details.Add(DataAccesHelper.cpContractId, new string[] { DataAccesHelper.typeString, this.ContractProducts_Contract.ContractIdentifier });
             clientProd_details.Add(DataAccesHelper.cpProductSerial, new string[] { DataAccesHelper.typeString, this.ContractProducts_Product.ProductSerialNr });
 
-            dh.runQuery(DataAccesHelper.targetContractProducts, DataAccesHelper.requestDelete, clientProd_details,DataAccesHelper.cpContractId+" = '"+this.ContractProducts_Contract.ContractIdentifier+"' AND "+DataAccesHelper.cpProductSerial+" = '"+this.ContractProducts_Product.ProductSerialNr+"'");
+            return dh.runQuery(DataAccesHelper.targetContractProducts, DataAccesHelper.requestDelete, clientProd_details,DataAccesHelper.cpContractId+" = '"+this.ContractProducts_Contract.ContractIdentifier+"' AND "+DataAccesHelper.cpProductSerial+" = '"+this.ContractProducts_Product.ProductSerialNr+"'");
         }
 
         public List<ContractProducts> GetContractProducts()

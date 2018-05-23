@@ -78,7 +78,7 @@ namespace SHSApplication.Business_Layer
             return this.Name + " " + this.Surname + " (" + this.PersonId + ")";
         }
 
-        public void NewClientWithPaymentDet(string accNr,string bank,string branchCode)
+        public bool NewClientWithPaymentDet(string accNr,string bank,string branchCode)
         {
             Datahandler dh = Datahandler.getData();
             PD = new PaymentDetails(this, accNr, bank, branchCode);
@@ -99,10 +99,10 @@ namespace SHSApplication.Business_Layer
             client_details.Add(QueryBuilder.spAddClientWithPaymentDet.sp_bank, new string[] { DataAccesHelper.typeString, this.PD.Bank });
             client_details.Add(QueryBuilder.spAddClientWithPaymentDet.sp_branch, new string[] { DataAccesHelper.typeString, this.PD.BranchCode });
 
-            dh.runStoredProcedure(QueryBuilder.spAddClientWithPaymentDet.sp, client_details);
+            return dh.runStoredProcedure(QueryBuilder.spAddClientWithPaymentDet.sp, client_details);
         }
 
-        public void NewClient()
+        public bool NewClient()
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> client_details = new Dictionary<string, string[]>();
@@ -119,10 +119,10 @@ namespace SHSApplication.Business_Layer
             client_details.Add(QueryBuilder.spAddClientWithoutPaymentDetails.sp_cell, new string[] { DataAccesHelper.typeString, this.PersonContact.Cell });
             client_details.Add(QueryBuilder.spAddClientWithoutPaymentDetails.sp_email, new string[] { DataAccesHelper.typeString, this.PersonContact.Email });
 
-            dh.runStoredProcedure(QueryBuilder.spAddClientWithoutPaymentDetails.sp, client_details);
+            return dh.runStoredProcedure(QueryBuilder.spAddClientWithoutPaymentDetails.sp, client_details);
         }
 
-        public void UpdateClient()
+        public bool UpdateClient()
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> client_details = new Dictionary<string, string[]>();
@@ -140,10 +140,10 @@ namespace SHSApplication.Business_Layer
             client_details.Add(QueryBuilder.spUpdateClientWithoutPaymentDetails.sp_cell, new string[] { DataAccesHelper.typeString, this.PersonContact.Cell });
             client_details.Add(QueryBuilder.spUpdateClientWithoutPaymentDetails.sp_email, new string[] { DataAccesHelper.typeString, this.PersonContact.Email });
 
-            dh.runStoredProcedure(QueryBuilder.spUpdateClientWithoutPaymentDetails.sp, client_details);
+            return dh.runStoredProcedure(QueryBuilder.spUpdateClientWithoutPaymentDetails.sp, client_details);
         }
 
-        public void UpdateClientWithPaymentDetails(string accNr, string bank, string branchCode)
+        public bool UpdateClientWithPaymentDetails(string accNr, string bank, string branchCode)
         {
             Datahandler dh = Datahandler.getData();
             PD = new PaymentDetails(this, accNr, bank, branchCode);
@@ -165,11 +165,11 @@ namespace SHSApplication.Business_Layer
             client_details.Add(QueryBuilder.spUpdateClientWithPaymentDetails.sp_bank, new string[] { DataAccesHelper.typeString, this.PD.Bank });
             client_details.Add(QueryBuilder.spUpdateClientWithPaymentDetails.sp_branch, new string[] { DataAccesHelper.typeString, this.PD.BranchCode });
 
-            dh.runStoredProcedure(QueryBuilder.spUpdateClientWithPaymentDetails.sp, client_details);
+            return dh.runStoredProcedure(QueryBuilder.spUpdateClientWithPaymentDetails.sp, client_details);
 
         }
 
-        public void RemoveClient()
+        public bool RemoveClient()
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> client_details = new Dictionary<string, string[]>();
@@ -182,7 +182,7 @@ namespace SHSApplication.Business_Layer
             client_details.Add(DataAccesHelper.clientAddrId, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressId });
             client_details.Add(DataAccesHelper.clientContactId, new string[] { DataAccesHelper.typeString, this.PersonContact.ContactId });
 
-            dh.runQuery(DataAccesHelper.targetClient, DataAccesHelper.requestDelete, client_details, DataAccesHelper.clientId + " = '" + this.PersonId + "'");
+            return dh.runQuery(DataAccesHelper.targetClient, DataAccesHelper.requestDelete, client_details, DataAccesHelper.clientId + " = '" + this.PersonId + "'");
         }
 
         public List<Client> GetAllClients()

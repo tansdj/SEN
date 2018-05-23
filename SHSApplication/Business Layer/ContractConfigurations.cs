@@ -62,7 +62,7 @@ namespace SHSApplication.Business_Layer
             return base.ToString();
         }
 
-        public void InsertContractConfiguration()
+        public bool InsertContractConfiguration()
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> contractConf_details = new Dictionary<string, string[]>();
@@ -70,10 +70,10 @@ namespace SHSApplication.Business_Layer
             contractConf_details.Add(DataAccesHelper.ccContractId, new string[] { DataAccesHelper.typeString, this.ContractConfigurations_Contract.ContractIdentifier });
             contractConf_details.Add(DataAccesHelper.ccConfId, new string[] { DataAccesHelper.typeString, this.ContractConfigurations_Configuration.ConfigId });
 
-            dh.runQuery(DataAccesHelper.targetContractConf, DataAccesHelper.requestInsert, contractConf_details);
+            return dh.runQuery(DataAccesHelper.targetContractConf, DataAccesHelper.requestInsert, contractConf_details);
         }
 
-        public void RemoveContractConfiguration()
+        public bool RemoveContractConfiguration()
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> clientConf_details = new Dictionary<string, string[]>();
@@ -81,7 +81,7 @@ namespace SHSApplication.Business_Layer
             clientConf_details.Add(DataAccesHelper.ccContractId, new string[] { DataAccesHelper.typeString, this.ContractConfigurations_Contract.ContractIdentifier });
             clientConf_details.Add(DataAccesHelper.ccConfId, new string[] { DataAccesHelper.typeString, this.ContractConfigurations_Configuration.ConfigId });
 
-            dh.runQuery(DataAccesHelper.targetContractConf, DataAccesHelper.requestDelete, clientConf_details,DataAccesHelper.ccContractId + " = '"+this.ContractConfigurations_Contract.ContractIdentifier + "' AND "+DataAccesHelper.ccConfId+" = '"+this.ContractConfigurations_Configuration.ConfigId+"'");
+            return dh.runQuery(DataAccesHelper.targetContractConf, DataAccesHelper.requestDelete, clientConf_details,DataAccesHelper.ccContractId + " = '"+this.ContractConfigurations_Contract.ContractIdentifier + "' AND "+DataAccesHelper.ccConfId+" = '"+this.ContractConfigurations_Configuration.ConfigId+"'");
         }
 
         public List<ContractConfigurations> GetContractConfigurations()

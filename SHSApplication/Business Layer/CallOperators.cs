@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Serverside.HelperLibraries;
+using ServerSide;
+using ServerSide.HelperLibrabries;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -50,5 +53,42 @@ namespace SHSApplication.Business_Layer
             return base.ToString();
         }
 
+        public bool InsertCallOperator()
+        {
+            Datahandler dh = Datahandler.getData();
+            Dictionary<string, string[]> operator_details = new Dictionary<string, string[]>();
+
+            operator_details.Add(QueryBuilder.spAddCallOperator.sp_id, new string[] { DataAccesHelper.typeString, this.PersonId });
+            operator_details.Add(QueryBuilder.spAddCallOperator.sp_name, new string[] { DataAccesHelper.typeString, this.Name });
+            operator_details.Add(QueryBuilder.spAddCallOperator.sp_surname, new string[] { DataAccesHelper.typeString, this.Surname });
+            operator_details.Add(QueryBuilder.spAddCallOperator.sp_status, new string[] { DataAccesHelper.typeString, this.OperatorStatus });
+            operator_details.Add(QueryBuilder.spAddCallOperator.sp_addrLine1, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressLine1 });
+            operator_details.Add(QueryBuilder.spAddCallOperator.sp_addrLine2, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressLine2 });
+            operator_details.Add(QueryBuilder.spAddCallOperator.sp_city, new string[] { DataAccesHelper.typeString, this.PersonAddress.City });
+            operator_details.Add(QueryBuilder.spAddCallOperator.sp_postCode, new string[] { DataAccesHelper.typeString, this.PersonAddress.PostalCode });
+            operator_details.Add(QueryBuilder.spAddCallOperator.sp_cell, new string[] { DataAccesHelper.typeString, this.PersonContact.Cell });
+            operator_details.Add(QueryBuilder.spAddCallOperator.sp_email, new string[] { DataAccesHelper.typeString, this.PersonContact.Email });
+
+            return dh.runStoredProcedure(QueryBuilder.spAddCallOperator.sp, operator_details);
+        }
+
+        public bool UpdateCallOperator()
+        {
+            Datahandler dh = Datahandler.getData();
+            Dictionary<string, string[]> operator_details = new Dictionary<string, string[]>();
+
+            operator_details.Add(QueryBuilder.spAddCallOperator.sp_id, new string[] { DataAccesHelper.typeString, this.PersonId });
+            operator_details.Add(QueryBuilder.spAddCallOperator.sp_name, new string[] { DataAccesHelper.typeString, this.Name });
+            operator_details.Add(QueryBuilder.spAddCallOperator.sp_surname, new string[] { DataAccesHelper.typeString, this.Surname });
+            operator_details.Add(QueryBuilder.spAddCallOperator.sp_status, new string[] { DataAccesHelper.typeString, this.OperatorStatus });
+            operator_details.Add(QueryBuilder.spAddCallOperator.sp_addrLine1, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressLine1 });
+            operator_details.Add(QueryBuilder.spAddCallOperator.sp_addrLine2, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressLine2 });
+            operator_details.Add(QueryBuilder.spAddCallOperator.sp_city, new string[] { DataAccesHelper.typeString, this.PersonAddress.City });
+            operator_details.Add(QueryBuilder.spAddCallOperator.sp_postCode, new string[] { DataAccesHelper.typeString, this.PersonAddress.PostalCode });
+            operator_details.Add(QueryBuilder.spAddCallOperator.sp_cell, new string[] { DataAccesHelper.typeString, this.PersonContact.Cell });
+            operator_details.Add(QueryBuilder.spAddCallOperator.sp_email, new string[] { DataAccesHelper.typeString, this.PersonContact.Email });
+
+            return dh.runStoredProcedure(QueryBuilder.spAddCallOperator.sp, operator_details);
+        }
     }
 }

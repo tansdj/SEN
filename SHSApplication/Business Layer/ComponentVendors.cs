@@ -61,7 +61,7 @@ namespace SHSApplication.Business_Layer
             return base.ToString();
         }
 
-        public void InsertComponentVendor()
+        public bool InsertComponentVendor()
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> compVend_details = new Dictionary<string, string[]>();
@@ -69,10 +69,10 @@ namespace SHSApplication.Business_Layer
             compVend_details.Add(DataAccesHelper.cvCompCode, new string[] { DataAccesHelper.typeString, this.CvComponents.CompCode});
             compVend_details.Add(DataAccesHelper.cvVendorCode, new string[] { DataAccesHelper.typeString, this.CvVendor.VendorCode });
 
-            dh.runQuery(DataAccesHelper.targetCompVendors, DataAccesHelper.requestInsert, compVend_details);
+            return dh.runQuery(DataAccesHelper.targetCompVendors, DataAccesHelper.requestInsert, compVend_details);
         }
 
-        public void RemoveComponentVendor()
+        public bool RemoveComponentVendor()
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> compVend_details = new Dictionary<string, string[]>();
@@ -80,7 +80,7 @@ namespace SHSApplication.Business_Layer
             compVend_details.Add(DataAccesHelper.cvCompCode, new string[] { DataAccesHelper.typeString, this.CvComponents.CompCode });
             compVend_details.Add(DataAccesHelper.cvVendorCode, new string[] { DataAccesHelper.typeString, this.CvVendor.VendorCode });
 
-            dh.runQuery(DataAccesHelper.targetCompVendors, DataAccesHelper.requestDelete, compVend_details,DataAccesHelper.cvCompCode+" = '"+this.CvComponents.CompCode+"' AND "+DataAccesHelper.cvVendorCode+" = '"+this.CvVendor.VendorCode+"'");
+            return dh.runQuery(DataAccesHelper.targetCompVendors, DataAccesHelper.requestDelete, compVend_details,DataAccesHelper.cvCompCode+" = '"+this.CvComponents.CompCode+"' AND "+DataAccesHelper.cvVendorCode+" = '"+this.CvVendor.VendorCode+"'");
         }
 
         public List<ComponentVendors> GetComponentVendors()

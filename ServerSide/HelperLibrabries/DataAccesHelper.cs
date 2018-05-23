@@ -166,6 +166,7 @@ namespace Serverside.HelperLibraries
         public const string QueryGetVendors = @"SELECT * FROM tblVendors V
                                                 INNER JOIN tblAddress A ON V.AddressId = A.pAddressId
                                                 INNER JOIN tblContact C ON V.ContactId = C.pContactId";
+        public const string QueryCountContracts = "SELECT COUNT(ContractIdentifier) AS 'NrContracts' FROM tblContract";
 
         public const string typeString = "STRING";
         public const string typeDouble = "DOUBLE";

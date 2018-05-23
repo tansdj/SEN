@@ -132,38 +132,6 @@ AS
 	END;
 
 GO
-CREATE PROCEDURE addProduct
-(@name VARCHAR(20),@desc VARCHAR(200),@basePrice SMALLMONEY,@status VARCHAR(15))
-AS
-	BEGIN
-		DECLARE @productCode VARCHAR(10);
-		SET @productCode = 'PROD'+ UPPER(LEFT(@name,3)) + (SELECT COUNT(ProductCount) FROM tblProducts);
-		INSERT INTO tblProducts(ProductCode,ProdName,ProdDescription,BasePrice,ProdStatus)
-		VALUES(@productCode,@name,@desc,@basePrice,@status); 
-	END;
-
-GO
-CREATE PROCEDURE updateProduct
-(@prodCode VARCHAR(10),@desc VARCHAR(200),@basePrice SMALLMONEY,@status VARCHAR(15))
-AS
-	BEGIN
-		UPDATE tblProducts SET ProdDescription = @desc,BasePrice =@basePrice,ProdStatus = @status
-		WHERE ProductCode = @prodCode;
-	END;
-
-GO
-CREATE PROCEDURE addComponent
-(@prodCode VARCHAR(10),@desc VARCHAR(200))
-AS
-	BEGIN
-		DECLARE @compCode VARCHAR(10);
-		SET @compCode = 'COMP'+ SUBSTRING(@prodCode,4,3) + (SELECT COUNT(CompCount) FROM tblSystemComponents);
-
-		INSERT INTO tblSystemComponents(ComponentCode,ProductCode,CompDesc)
-		VALUES (@compCode,@prodCode,@desc);
-	END;
-
-GO
 CREATE PROCEDURE removeComp
 (@compCode VARCHAR(10))
 AS
@@ -172,7 +140,7 @@ AS
 		SET @config = (SELECT ConfigurationCode FROM tblConfiguration WHERE ComponentCode = @compCode);
 		BEGIN TRY
 			BEGIN TRANSACTION
-				DELETE FROM tblClientCompConfiguration WHERE ConfigCode = @config;
+				DELETE FROM tblContractCompConfiguration WHERE ConfigCode = @config;
 				DELETE FROM tblConfiguration WHERE ConfigurationCode = @config;
 				DELETE FROM tblSystemComponents WHERE ComponentCode = @compCode;
 			COMMIT TRANSACTION
@@ -180,27 +148,6 @@ AS
 		BEGIN CATCH
 			ROLLBACK TRANSACTION
 		END CATCH
-	END;
-
-GO
-CREATE PROCEDURE addConfiguration
-(@name VARCHAR(20),@desc VARCHAR(200),@compCode VARCHAR(10),@cost SMALLMONEY)
-AS
-	BEGIN
-		DECLARE @confCode VARCHAR(10);
-		SET @confCode = 'CONF'+UPPER(LEFT(@name,3))+ (SELECT COUNT(ConfigCount) FROM tblConfiguration);
-
-		INSERT INTO tblConfiguration(ConfigurationCode,ConfigName,ConfigDesc,ComponentCode,AddCost)
-		VALUES (@confCode,@name,@desc,@compCode,@cost);
-	END
-
-GO
-CREATE PROCEDURE updateConf
-(@confCode VARCHAR(10),@desc VARCHAR(200),@cost SMALLMONEY)
-AS
-	BEGIN
-		UPDATE tblConfiguration SET ConfigDesc=@desc,AddCost = @cost
-		WHERE ConfigurationCode=@confCode;
 	END;
 
 GO
@@ -268,37 +215,52 @@ AS
 		END CATCH
 	END;
 
-GO
-CREATE PROCEDURE addTechDetail
-(@confCode VARCHAR(10),@docPath VARCHAR(200))
+GO 
+CREATE PROCEDURE addCallOperator
+(@id VARCHAR(13),@name VARCHAR(13),@surname VARCHAR(13),@addrLine1 VARCHAR(30),@addrLine2 VARCHAR(30),@city VARCHAR(20),@postCode VARCHAR(10),@cell VARCHAR(10),@email VARCHAR(50),@status VARCHAR(10))
 AS
 	BEGIN
-		INSERT INTO tblTechnicalDetails(ConfigCode,DocPath)
-		VALUES (@confCode,@docPath);
+	 DECLARE @addrId VARCHAR(17),@contactId VARCHAR(17);
+	 SET @addrId = 'ADDR'+@id;
+	 SET @contactId = 'CONT' + @id;
+		BEGIN TRY
+			BEGIN TRANSACTION
+				INSERT INTO tblAddress(pAddressId,AddressLine1,AddressLine2,City,PostalCode)
+				VALUES (@addrId,@addrLine1,@addrLine2,@city,@postCode);
+
+				INSERT INTO tblContact(pContactId,Cell,Email)
+				VALUES (@contactId,@cell,@email);
+
+				INSERT INTO tblCallOperators(OperatorId,OperatorName,OperatorSurname,ContactId,AddressId,OperatorStatus)
+				VALUES (@id,@name,@surname,@addrId,@contactId,@status);
+			COMMIT TRANSACTION
+		END TRY
+		BEGIN CATCH
+			ROLLBACK TRANSACTION
+		END CATCH
 	END;
 
 GO
-CREATE PROCEDURE removeTechDetail
-(@detailId INT)
+CREATE PROCEDURE updateCallOperator
+(@id VARCHAR(13),@name VARCHAR(13),@surname VARCHAR(13),@addrLine1 VARCHAR(30),@addrLine2 VARCHAR(30),@city VARCHAR(20),@postCode VARCHAR(10),@cell VARCHAR(10),@email VARCHAR(50),@status VARCHAR(10))
 AS
 	BEGIN
-		DELETE FROM tblTechnicalDetails WHERE DetailId = @detailId;
+	 DECLARE @addrId VARCHAR(17),@contactId VARCHAR(17);
+	 SET @addrId = (SELECT tblAddress.pAddressId FROM tblAddress INNER JOIN tblCallOperators ON tblCallOperators.AddressId = tblAddress.pAddressId WHERE tblCallOperators.OperatorId=@id);
+	 SET @contactId = (SELECT tblContact.pContactId FROM tblContact INNER JOIN tblCallOperators ON tblCallOperators.ContactId = tblContact.pContactId WHERE tblCallOperators.OperatorId = @id);
+		BEGIN TRY
+			BEGIN TRANSACTION
+				UPDATE tblAddress SET AddressLine1 = @addrLine1,AddressLine2=@addrLine2,City=@city, PostalCode = @postCode
+				WHERE pAddressId = @addrId;
+
+				UPDATE tblContact SET Cell=@cell,Email=@email WHERE pContactId = @contactId;
+
+				UPDATE tblCallOperators SET OperatorName=@name,OperatorSurname=@surname,OperatorStatus=@status
+				WHERE OperatorId = @id;
+			COMMIT TRANSACTION
+		END TRY
+		BEGIN CATCH
+			ROLLBACK TRANSACTION
+		END CATCH
 	END;
 
-GO
-CREATE PROCEDURE logTechEvent
-(@clientId VARCHAR(13),@techId VARCHAR(13),@date DATETIME,@remarks VARCHAR(200))
-AS
-	BEGIN
-		INSERT INTO tblTechnicalLog(ClientIdNr,TechIdNr,EventDate,Remarks)
-		VALUES (@clientId,@techId,@date,@remarks);
-	END;
-
-GO
-CREATE PROCEDURE addClientProduct
-(@clientId VARCHAR(13),@prodCode VARCHAR(10))
-AS
-	BEGIN
-		INSERT INTO tblClientProducts(ClientIdNr,ProductCode)
-		VALUES (@clientId,@prodCode);
-	END;

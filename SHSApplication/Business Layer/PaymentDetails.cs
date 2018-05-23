@@ -81,7 +81,7 @@ namespace SHSApplication.Business_Layer
             return base.ToString();
         }
 
-        public void InsertPaymentDetail()
+        public bool InsertPaymentDetail()
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> pay_details = new Dictionary<string, string[]>();
@@ -91,10 +91,10 @@ namespace SHSApplication.Business_Layer
             pay_details.Add(DataAccesHelper.paymentDetBank, new string[] { DataAccesHelper.typeString, this.Bank });
             pay_details.Add(DataAccesHelper.paymentDetBranch, new string[] { DataAccesHelper.typeString, this.BranchCode });
 
-            dh.runQuery(DataAccesHelper.targetPaymentDetails, DataAccesHelper.requestInsert, pay_details);
+            return dh.runQuery(DataAccesHelper.targetPaymentDetails, DataAccesHelper.requestInsert, pay_details);
         }
 
-        public void UpdatePaymentDetail()
+        public bool UpdatePaymentDetail()
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> pay_details = new Dictionary<string, string[]>();
@@ -104,7 +104,7 @@ namespace SHSApplication.Business_Layer
             pay_details.Add(DataAccesHelper.paymentDetBank, new string[] { DataAccesHelper.typeString, this.Bank });
             pay_details.Add(DataAccesHelper.paymentDetBranch, new string[] { DataAccesHelper.typeString, this.BranchCode });
 
-            dh.runQuery(DataAccesHelper.targetPaymentDetails, DataAccesHelper.requestUpdate, pay_details, DataAccesHelper.paymentDetClientId + " = '" + this.PaymentDet_Client.PersonId + "'");
+            return dh.runQuery(DataAccesHelper.targetPaymentDetails, DataAccesHelper.requestUpdate, pay_details, DataAccesHelper.paymentDetClientId + " = '" + this.PaymentDet_Client.PersonId + "'");
         }
 
         public void RemovePaymnetDetail()

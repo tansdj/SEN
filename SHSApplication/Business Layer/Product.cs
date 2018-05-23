@@ -19,10 +19,6 @@ namespace SHSApplication.Business_Layer
         private string manufacturer;
         private string model;
 
-        
-
-
-
         public Product(string productSerialNr, string name, string description, double basePrice, string status, string manufacturer, string model)
         {
             this.ProductSerialNr = productSerialNr;
@@ -110,11 +106,10 @@ namespace SHSApplication.Business_Layer
             return base.ToString();
         }
 
-        public void InsertProduct()
+        public bool InsertProduct()
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> prod_details = new Dictionary<string, string[]>();
-            this.ProductSerialNr = "PROD" + this.Name.Substring(0, 6).Replace(' ', '#').ToUpper();
 
             prod_details.Add(DataAccesHelper.prodSerialNo, new string[] { DataAccesHelper.typeString, this.ProductSerialNr });
             prod_details.Add(DataAccesHelper.prodName, new string[] { DataAccesHelper.typeString, this.Name });
@@ -122,14 +117,13 @@ namespace SHSApplication.Business_Layer
             prod_details.Add(DataAccesHelper.prodPrice, new string[] { DataAccesHelper.typeDouble, this.BasePrice.ToString() });
             prod_details.Add(DataAccesHelper.prodStatus, new string[] { DataAccesHelper.typeString, this.Status });
 
-            dh.runQuery(DataAccesHelper.targetProduct, DataAccesHelper.requestInsert, prod_details);
+            return dh.runQuery(DataAccesHelper.targetProduct, DataAccesHelper.requestInsert, prod_details);
         }
 
-        public void UpdateProduct()
+        public bool UpdateProduct()
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> prod_details = new Dictionary<string, string[]>();
-            this.ProductSerialNr = "PROD" + this.Name.Substring(0, 6).Replace(' ', '#').ToUpper();
 
             prod_details.Add(DataAccesHelper.prodSerialNo, new string[] { DataAccesHelper.typeString, this.ProductSerialNr });
             prod_details.Add(DataAccesHelper.prodName, new string[] { DataAccesHelper.typeString, this.Name });
@@ -137,7 +131,7 @@ namespace SHSApplication.Business_Layer
             prod_details.Add(DataAccesHelper.prodPrice, new string[] { DataAccesHelper.typeDouble, this.BasePrice.ToString() });
             prod_details.Add(DataAccesHelper.prodStatus, new string[] { DataAccesHelper.typeString, this.Status });
 
-            dh.runQuery(DataAccesHelper.targetProduct, DataAccesHelper.requestUpdate, prod_details,DataAccesHelper.prodSerialNo+" = '"+this.ProductSerialNr+"'");
+            return dh.runQuery(DataAccesHelper.targetProduct, DataAccesHelper.requestUpdate, prod_details,DataAccesHelper.prodSerialNo+" = '"+this.ProductSerialNr+"'");
         }
 
         public List<Product> GetAllProducts()

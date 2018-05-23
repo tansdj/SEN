@@ -79,5 +79,77 @@ namespace ServerSide.HelperLibrabries
             public const string sp_bank = "@bank";
             public const string sp_branch = "@branchCode";
         }
+
+        public struct spAddTech
+        {
+            public const string sp = "addTech";
+            public const string sp_id = "@id";
+            public const string sp_name = "@name";
+            public const string sp_surname = "@surname";
+            public const string sp_addrLine1 = "@addrLine1";
+            public const string sp_addrLine2 = "@addrLine2";
+            public const string sp_city = "@city";
+            public const string sp_postCode = "@postCode";
+            public const string sp_cell = "@cell";
+            public const string sp_email = "@email";
+            public const string sp_status = "@status";
+        }
+
+        public struct spUpdateTech
+        {
+            public const string sp = "updateTech";
+            public const string sp_id = "@id";
+            public const string sp_name = "@name";
+            public const string sp_surname = "@surname";
+            public const string sp_addrLine1 = "@addrLine1";
+            public const string sp_addrLine2 = "@addrLine2";
+            public const string sp_city = "@city";
+            public const string sp_postCode = "@postCode";
+            public const string sp_cell = "@cell";
+            public const string sp_email = "@email";
+            public const string sp_status = "@status";
+        }
+
+        public struct spAddCallOperator
+        {
+            public const string sp = "addCallOperator";
+            public const string sp_id = "@id";
+            public const string sp_name = "@name";
+            public const string sp_surname = "@surname";
+            public const string sp_addrLine1 = "@addrLine1";
+            public const string sp_addrLine2 = "@addrLine2";
+            public const string sp_city = "@city";
+            public const string sp_postCode = "@postCode";
+            public const string sp_cell = "@cell";
+            public const string sp_email = "@email";
+            public const string sp_status = "@status";
+        }
+
+        public struct spUpdateCallOperator
+        {
+            public const string sp = "updateCallOperator";
+            public const string sp_id = "@id";
+            public const string sp_name = "@name";
+            public const string sp_surname = "@surname";
+            public const string sp_addrLine1 = "@addrLine1";
+            public const string sp_addrLine2 = "@addrLine2";
+            public const string sp_city = "@city";
+            public const string sp_postCode = "@postCode";
+            public const string sp_cell = "@cell";
+            public const string sp_email = "@email";
+            public const string sp_status = "@status";
+        }
+
+        public struct spRemoveConf
+        {
+            public const string sp = "removeConf";
+            public const string sp_confCode = "@confCode";
+        }
+
+        public struct spRemoveComponent
+        {
+            public const string sp = "removeComp";
+            public const string sp_compCode = "@compCode";
+        }
     }
 }

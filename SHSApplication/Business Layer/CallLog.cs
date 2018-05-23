@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Serverside.HelperLibraries;
+using ServerSide;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -85,6 +87,20 @@ namespace SHSApplication.Business_Layer
         public override string ToString()
         {
             return base.ToString();
+        }
+
+        public bool InsertCall()
+        {
+            Datahandler dh = Datahandler.getData();
+            Dictionary<string, string[]> call_details = new Dictionary<string, string[]>();
+
+            call_details.Add(DataAccesHelper.callOperatorId, new string[] { DataAccesHelper.typeString, this.LogOperator.PersonId });
+            call_details.Add(DataAccesHelper.callClientId, new string[] { DataAccesHelper.typeString, this.LogClient.ClientIdentifier });
+            call_details.Add(DataAccesHelper.callStartTime, new string[] { DataAccesHelper.typeDateTime, this.StartTime.ToString() });
+            call_details.Add(DataAccesHelper.callEndTime, new string[] { DataAccesHelper.typeDateTime, this.EndTime.ToString() });
+            call_details.Add(DataAccesHelper.callRemarks, new string[] { DataAccesHelper.typeString, this.Remarks });
+
+            return dh.runQuery(DataAccesHelper.targetCallLog, DataAccesHelper.requestInsert, call_details);
         }
 
     }

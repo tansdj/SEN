@@ -90,7 +90,7 @@ namespace SHSApplication.Business_Layer
             return base.ToString();
         }
 
-        public void InsertUser()
+        public bool InsertUser()
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> user_details = new Dictionary<string, string[]>();
@@ -101,10 +101,10 @@ namespace SHSApplication.Business_Layer
             user_details.Add(DataAccesHelper.uSurname, new string[] { DataAccesHelper.typeString, this.Surname });
             user_details.Add(DataAccesHelper.uEmail, new string[] { DataAccesHelper.typeString, this.Email });
 
-            dh.runQuery(DataAccesHelper.targetUsers, DataAccesHelper.requestInsert, user_details);
+            return dh.runQuery(DataAccesHelper.targetUsers, DataAccesHelper.requestInsert, user_details);
         }
 
-        public void UpdateUser()
+        public bool UpdateUser()
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> user_details = new Dictionary<string, string[]>();
@@ -115,10 +115,10 @@ namespace SHSApplication.Business_Layer
             user_details.Add(DataAccesHelper.uSurname, new string[] { DataAccesHelper.typeString, this.Surname });
             user_details.Add(DataAccesHelper.uEmail, new string[] { DataAccesHelper.typeString, this.Email });
 
-            dh.runQuery(DataAccesHelper.targetUsers, DataAccesHelper.requestUpdate, user_details,DataAccesHelper.uEmail+" = '"+this.Email+"'");
+            return dh.runQuery(DataAccesHelper.targetUsers, DataAccesHelper.requestUpdate, user_details,DataAccesHelper.uEmail+" = '"+this.Email+"'");
         }
 
-        public void RemoveUser()
+        public bool RemoveUser()
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> user_details = new Dictionary<string, string[]>();
@@ -129,7 +129,7 @@ namespace SHSApplication.Business_Layer
             user_details.Add(DataAccesHelper.uSurname, new string[] { DataAccesHelper.typeString, this.Surname });
             user_details.Add(DataAccesHelper.uEmail, new string[] { DataAccesHelper.typeString, this.Email });
 
-            dh.runQuery(DataAccesHelper.targetUsers, DataAccesHelper.requestDelete, user_details, DataAccesHelper.uEmail + " = '" + this.Email + "'");
+            return dh.runQuery(DataAccesHelper.targetUsers, DataAccesHelper.requestDelete, user_details, DataAccesHelper.uEmail + " = '" + this.Email + "'");
         }
 
         public List<User> GetAllUsers()
