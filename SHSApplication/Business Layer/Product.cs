@@ -134,11 +134,19 @@ namespace SHSApplication.Business_Layer
             return dh.runQuery(DataAccesHelper.targetProduct, DataAccesHelper.requestUpdate, prod_details,DataAccesHelper.prodSerialNo+" = '"+this.ProductSerialNr+"'");
         }
 
-        public List<Product> GetAllProducts()
+        public List<Product> GetAllProducts(string serialCode="")
         {
             Datahandler dh = Datahandler.getData();
             List<Product> products = new List<Product>();
-            DataTable table = dh.readDataFromDB(DataAccesHelper.QueryGetProducts);
+            DataTable table = new DataTable();
+            if (serialCode!="")
+            {
+                table = dh.readDataFromDB(DataAccesHelper.QueryGetProducts+ " WHERE "+DataAccesHelper.prodSerialNo+" = '"+this.ProductSerialNr+"'");
+            }
+            else
+            {
+                table = dh.readDataFromDB(DataAccesHelper.QueryGetProducts);
+            }
 
             foreach (DataRow item in table.Rows)
             {

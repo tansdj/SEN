@@ -56,7 +56,7 @@
     <Compile Include="Business Layer\Configurations.cs" />
     <Compile Include="Business Layer\Contact.cs" />
     <Compile Include="Business Layer\Contract.cs" />
-    <Compile Include="Business Layer\CustomExceptions.cs" />
+    <Compile Include="Helper Libraries\CustomExceptions.cs" />
     <Compile Include="Business Layer\TechnicalLog.cs" />
     <Compile Include="Business Layer\User.cs" />
     <Compile Include="Business Layer\PaymentDetails.cs" />
@@ -75,6 +75,8 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helper Libraries\MessageBoxShower.cs" />
+    <Compile Include="Helper Libraries\Validation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">

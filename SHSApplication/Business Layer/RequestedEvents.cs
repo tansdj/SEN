@@ -117,7 +117,7 @@ namespace SHSApplication.Business_Layer
             event_details.Add(DataAccesHelper.eventStatus, new string[] { DataAccesHelper.typeString, this.Status });
             event_details.Add(DataAccesHelper.skillReq, new string[] { DataAccesHelper.typeString, this.SkillRequired });
 
-            return dh.runQuery(DataAccesHelper.targetTechEvents, DataAccesHelper.requestInsert, event_details);
+            return dh.runQuery(DataAccesHelper.targetRequestedEvents, DataAccesHelper.requestInsert, event_details);
         }
 
         public bool UpdateEvent()
@@ -133,7 +133,7 @@ namespace SHSApplication.Business_Layer
             event_details.Add(DataAccesHelper.eventStatus, new string[] { DataAccesHelper.typeString, this.Status });
             event_details.Add(DataAccesHelper.skillReq, new string[] { DataAccesHelper.typeString, this.SkillRequired });
 
-            return dh.runQuery(DataAccesHelper.targetTechEvents, DataAccesHelper.requestUpdate, event_details,DataAccesHelper.eventId+" = "+this.EventId);
+            return dh.runQuery(DataAccesHelper.targetRequestedEvents, DataAccesHelper.requestUpdate, event_details,DataAccesHelper.eventId+" = "+this.EventId);
         }
 
         public List<RequestedEvents> GetRequestedEvents()

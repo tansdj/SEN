@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace SHSApplication.Business_Layer
 {
-    class CustomExceptions:Exception
+    public class CustomExceptions:Exception
     {
         public CustomExceptions(string message, string topic):base(message)
             {

@@ -18,19 +18,27 @@ namespace SHSApplication.Business_Layer
         private string description;
         private SystemComponents configuration_component;
         private double addCost;
+        private string status;
 
-        public Configurations(string configId, string name, string description, SystemComponents configuration_component, double addCost)
+        public Configurations(string configId, string name, string description, SystemComponents configuration_component, double addCost,string status)
         {
             this.Name = name;
             this.Description = description;
             this.Configuration_Component = configuration_component;
             this.AddCost = addCost;
             this.ConfigId = configId;
+            this.Status = status;
         }
 
         public Configurations()
         {
 
+        }
+
+        public string Status
+        {
+            get { return status; }
+            set { status = value; }
         }
         public double AddCost
         {
@@ -78,12 +86,12 @@ namespace SHSApplication.Business_Layer
             {
                 return false;
             }
-            return (this.ConfigId==c.ConfigId)&&(this.Name==c.Name)&&(this.Description==c.Description)&&(this.Configuration_Component==c.Configuration_Component)&&(this.AddCost==c.AddCost);
+            return (this.ConfigId==c.ConfigId)&&(this.Name==c.Name)&&(this.Description==c.Description)&&(this.Configuration_Component==c.Configuration_Component)&&(this.AddCost==c.AddCost)&&(this.Status==c.Status);
         }
 
         public override int GetHashCode()
         {
-            return this.ConfigId.GetHashCode()^this.Name.GetHashCode()^this.Description.GetHashCode()^this.Configuration_Component.GetHashCode()^this.AddCost.GetHashCode();
+            return this.ConfigId.GetHashCode()^this.Name.GetHashCode()^this.Description.GetHashCode()^this.Configuration_Component.GetHashCode()^this.AddCost.GetHashCode()^this.Status.GetHashCode();
         }
 
         public override string ToString()
@@ -95,13 +103,13 @@ namespace SHSApplication.Business_Layer
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> conf_details = new Dictionary<string, string[]>();
-            //this.ConfigId = "CONFIG"+ this.Name.Substring(0,4).Replace(' ','#').ToUpper();
 
             conf_details.Add(DataAccesHelper.confCode, new string[] { DataAccesHelper.typeString, this.ConfigId});
             conf_details.Add(DataAccesHelper.confName, new string[] { DataAccesHelper.typeString, this.Name });
             conf_details.Add(DataAccesHelper.confDesc, new string[] { DataAccesHelper.typeString, this.Description });
             conf_details.Add(DataAccesHelper.confCompCode, new string[] { DataAccesHelper.typeString, this.Configuration_Component.CompCode });
             conf_details.Add(DataAccesHelper.confAddCost, new string[] { DataAccesHelper.typeDouble, this.AddCost.ToString() });
+            conf_details.Add(DataAccesHelper.confStatus, new string[] { DataAccesHelper.typeString, this.Status.ToString() });
 
             return dh.runQuery(DataAccesHelper.targetConfiguration, DataAccesHelper.requestInsert, conf_details);
         }
@@ -110,26 +118,15 @@ namespace SHSApplication.Business_Layer
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> conf_details = new Dictionary<string, string[]>();
-            //this.ConfigId = "CONFIG" + this.Name.Substring(0, 4).Replace(' ', '#').ToUpper();
 
             conf_details.Add(DataAccesHelper.confCode, new string[] { DataAccesHelper.typeString, this.ConfigId });
             conf_details.Add(DataAccesHelper.confName, new string[] { DataAccesHelper.typeString, this.Name });
             conf_details.Add(DataAccesHelper.confDesc, new string[] { DataAccesHelper.typeString, this.Description });
             conf_details.Add(DataAccesHelper.confCompCode, new string[] { DataAccesHelper.typeString, this.Configuration_Component.CompCode });
             conf_details.Add(DataAccesHelper.confAddCost, new string[] { DataAccesHelper.typeDouble, this.AddCost.ToString() });
+            conf_details.Add(DataAccesHelper.confStatus, new string[] { DataAccesHelper.typeString, this.Status.ToString() });
 
             return dh.runQuery(DataAccesHelper.targetConfiguration, DataAccesHelper.requestUpdate, conf_details,DataAccesHelper.confCode+" = '"+this.ConfigId+"'");
-        }
-
-        public bool RemoveConfig()
-        {
-            Datahandler dh = Datahandler.getData();
-            Dictionary<string, string[]> conf_details = new Dictionary<string, string[]>();
-            //this.ConfigId = "CONFIG" + this.Name.Substring(0, 4).Replace(' ', '#').ToUpper();
-
-            conf_details.Add(QueryBuilder.spRemoveConf.sp_confCode, new string[] { DataAccesHelper.typeString, this.ConfigId });
-
-            return dh.runStoredProcedure(QueryBuilder.spRemoveConf.sp, conf_details);
         }
 
         public List<Configurations> GetAllConfigurations()
@@ -147,6 +144,7 @@ namespace SHSApplication.Business_Layer
                 c.AddCost = Convert.ToDouble(item[DataAccesHelper.confAddCost].ToString());
                 c.Configuration_Component = new SystemComponents();
                 c.Configuration_Component.CompCode = item[DataAccesHelper.confCompCode].ToString();
+                c.Status = item[DataAccesHelper.confStatus].ToString();
                 confs.Add(c);
             }
 

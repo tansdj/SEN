@@ -2,6 +2,7 @@
 using ServerSide;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -101,6 +102,34 @@ namespace SHSApplication.Business_Layer
             call_details.Add(DataAccesHelper.callRemarks, new string[] { DataAccesHelper.typeString, this.Remarks });
 
             return dh.runQuery(DataAccesHelper.targetCallLog, DataAccesHelper.requestInsert, call_details);
+        }
+
+        public List<CallLog> GetCalls(string clientId = "")
+        {
+            Datahandler dh = Datahandler.getData();
+            List<CallLog> calls = new List<CallLog>();
+            DataTable table = new DataTable();
+            if (clientId!="")
+            {
+                table = dh.readDataFromDB(DataAccesHelper.QueryGetAllCalls + " WHERE '"+DataAccesHelper.callClientId+" = "+clientId+"'");
+            }
+            else
+            {
+                table = dh.readDataFromDB(DataAccesHelper.QueryGetAllCalls);
+            }
+
+            foreach (DataRow item in table.Rows)
+            {
+                CallLog c = new CallLog();
+                c.LogOperator = new CallOperators(item[DataAccesHelper.callOperatorId].ToString(),"","",null,null,"");
+                c.LogClient = new Client("","","",null,null,"","",item[DataAccesHelper.callClientId].ToString());
+                c.StartTime = Convert.ToDateTime(item[DataAccesHelper.callStartTime].ToString());
+                c.EndTime = Convert.ToDateTime(item[DataAccesHelper.callEndTime].ToString());
+                c.Remarks = item[DataAccesHelper.callRemarks].ToString();
+                calls.Add(c);
+            }
+
+            return calls;
         }
 
     }

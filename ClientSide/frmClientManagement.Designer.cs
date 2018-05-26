@@ -48,6 +48,7 @@
             this.btnNewContract = new System.Windows.Forms.Button();
             this.btnEditContract = new System.Windows.Forms.Button();
             this.btnViewContract = new System.Windows.Forms.Button();
+            this.btnPayments = new System.Windows.Forms.Button();
             this.pnlMenu.SuspendLayout();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogoSmall)).BeginInit();
@@ -352,12 +353,28 @@
             this.btnViewContract.Text = "Inspect Contract";
             this.btnViewContract.UseVisualStyleBackColor = false;
             // 
+            // btnPayments
+            // 
+            this.btnPayments.AutoSize = true;
+            this.btnPayments.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnPayments.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnPayments.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPayments.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPayments.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnPayments.Location = new System.Drawing.Point(347, 453);
+            this.btnPayments.Name = "btnPayments";
+            this.btnPayments.Size = new System.Drawing.Size(432, 60);
+            this.btnPayments.TabIndex = 9;
+            this.btnPayments.Text = "Record Payments";
+            this.btnPayments.UseVisualStyleBackColor = false;
+            // 
             // frmClientManagement
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(885, 537);
+            this.Controls.Add(this.btnPayments);
             this.Controls.Add(this.btnViewContract);
             this.Controls.Add(this.btnEditContract);
             this.Controls.Add(this.btnNewContract);
@@ -403,6 +420,7 @@
         private System.Windows.Forms.Button btnNewContract;
         private System.Windows.Forms.Button btnEditContract;
         private System.Windows.Forms.Button btnViewContract;
+        private System.Windows.Forms.Button btnPayments;
     }
 }
 

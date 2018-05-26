@@ -3,6 +3,7 @@ using ServerSide;
 using ServerSide.HelperLibrabries;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -89,6 +90,35 @@ namespace SHSApplication.Business_Layer
             operator_details.Add(QueryBuilder.spAddCallOperator.sp_email, new string[] { DataAccesHelper.typeString, this.PersonContact.Email });
 
             return dh.runStoredProcedure(QueryBuilder.spAddCallOperator.sp, operator_details);
+        }
+
+        public List<CallOperators> GetCallOperators(string operatorId="")
+        {
+            Datahandler dh = Datahandler.getData();
+            List<CallOperators> callOperators = new List<CallOperators>();
+            DataTable table = new DataTable();
+            if (operatorId!="")
+            {
+                table = dh.readDataFromDB(DataAccesHelper.QueryGetCallOperators+" WHERE "+DataAccesHelper.operatorId+" = '"+operatorId+"'");
+            }
+            else
+            {
+                table = dh.readDataFromDB(DataAccesHelper.QueryGetCallOperators);
+            }
+
+            foreach (DataRow item in table.Rows)
+            {
+                CallOperators c = new CallOperators();
+                c.PersonId = item[DataAccesHelper.operatorId].ToString();
+                c.Name = item[DataAccesHelper.operatorName].ToString();
+                c.Surname = item[DataAccesHelper.operatorSurname].ToString();
+                c.PersonAddress = new Address(item[DataAccesHelper.addressId].ToString(),item[DataAccesHelper.addrLine1].ToString(),item[DataAccesHelper.addrLine2].ToString(),item[DataAccesHelper.addrCity].ToString(),item[DataAccesHelper.addrPostalCode].ToString());
+                c.PersonContact = new Contact(item[DataAccesHelper.contactId].ToString(), item[DataAccesHelper.contactCell].ToString(), item[DataAccesHelper.contactEmail].ToString());
+                c.OperatorStatus = item[DataAccesHelper.operatorStatus].ToString();
+                callOperators.Add(c);
+            }
+
+            return callOperators;
         }
     }
 }

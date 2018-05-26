@@ -151,5 +151,31 @@ namespace ServerSide.HelperLibrabries
             public const string sp = "removeComp";
             public const string sp_compCode = "@compCode";
         }
+
+        public struct spAddVendor
+        {
+            public const string sp = "insertVendor";
+            public const string sp_code = "@code";
+            public const string sp_name = "@name";
+            public const string sp_addrLine1 = "@addrLine1";
+            public const string sp_addrLine2 = "@addrLine2";
+            public const string sp_city = "@city";
+            public const string sp_postCode = "@postCode";
+            public const string sp_cell = "@cell";
+            public const string sp_email = "@email";
+        }
+
+        public struct spUpdateVendor
+        {
+            public const string sp = "updateVendor";
+            public const string sp_code = "@code";
+            public const string sp_name = "@name";
+            public const string sp_addrLine1 = "@addrLine1";
+            public const string sp_addrLine2 = "@addrLine2";
+            public const string sp_city = "@city";
+            public const string sp_postCode = "@postCode";
+            public const string sp_cell = "@cell";
+            public const string sp_email = "@email";
+        }
     }
 }

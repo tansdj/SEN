@@ -1,10 +1,12 @@
-﻿using System;
+﻿using SHSApplication.Business_Layer;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,6 +17,12 @@ namespace ClientSide
         public frmMain()
         {
             InitializeComponent();
+            if (DateTime.UtcNow.Day==1)
+            {
+                Billing b = new Billing();
+                Thread t = new Thread(b.SendBills);
+                t.Start();
+            }
             this.Size = Screen.PrimaryScreen.WorkingArea.Size;
         }
 

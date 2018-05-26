@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SHSApplication.Business_Layer;
+using SHSApplication.Helper_Libraries;
 
 namespace ClientSide
 {
@@ -64,14 +65,17 @@ namespace ClientSide
 
         private void btnAddClient_Click(object sender, EventArgs e)
         {
-            Client client = new Client(txtId.Text, txtName.Text, txtSurname.Text, new Address("", txtLine1.Text, txtLine2.Text, txtCity.Text, txtPostalCode.Text), new Contact("", txtCell.Text, txtEmail.Text), cmbPayment.SelectedItem.ToString(), "Active");
-            if (cmbPayment.SelectedItem.ToString() == "Debit Order")
+            if (ValidateClientInfo())
             {
-                client.NewClientWithPaymentDet(txtAccNr.Text, txtBank.Text, txtBranch.Text);
-            }
-            else
-            {
-                client.NewClient();
+                Client client = new Client(txtId.Text, txtName.Text, txtSurname.Text, new Address("", txtLine1.Text, txtLine2.Text, txtCity.Text, txtPostalCode.Text), new Contact("", txtCell.Text, txtEmail.Text), cmbPayment.SelectedItem.ToString(), "Active");
+                if (cmbPayment.SelectedItem.ToString() == "Debit Order")
+                {
+                    client.NewClientWithPaymentDet(txtAccNr.Text, txtBank.Text, txtBranch.Text);
+                }
+                else
+                {
+                    client.NewClient();
+                }
             }
             this.Close();
         }
@@ -92,6 +96,28 @@ namespace ClientSide
         {
             CallSimulator cs = new CallSimulator();
             cs.Show();
+        }
+
+        private bool ValidateClientInfo()
+        {
+            bool valid = false;
+            valid = Validation.ValidateTextbox(13, 13, "INT", ref txtId);
+            valid = Validation.ValidateTextbox(1, 50, "STRING", ref txtName);
+            valid = Validation.ValidateTextbox(1, 50, "STRING", ref txtSurname);
+            valid = Validation.ValidateCombo(ref cmbPayment);
+            valid = Validation.ValidateTextbox(1, 30, "STRING", ref txtLine1);
+            valid = Validation.ValidateTextbox(1, 30, "STRING", ref txtLine2);
+            valid = Validation.ValidateTextbox(1, 20, "STRING", ref txtCity);
+            valid = Validation.ValidateTextbox(1, 10, "INT", ref txtPostalCode);
+            valid = Validation.ValidateTextbox(1, 50, "STRING", ref txtEmail);
+            valid = Validation.ValidateTextbox(10, 10, "INT", ref txtCell);
+            if (cmbPayment.SelectedItem.ToString() == "Debit Order")
+            {
+                valid = Validation.ValidateTextbox(5, 20, "INT", ref txtAccNr);
+                valid = Validation.ValidateTextbox(1, 15, "STRING", ref txtBank);
+                valid = Validation.ValidateTextbox(1, 10, "STRING", ref txtBranch);
+            }
+            return valid;
         }
     }
 }

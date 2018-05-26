@@ -164,5 +164,33 @@ namespace SHSApplication.Business_Layer
             return dh.runQuery(DataAccesHelper.targetContract, DataAccesHelper.requestUpdate, contract_details,DataAccesHelper.contractId+" = '"+this.ContractIdentifier+"'");
         }
 
+        public List<Contract> GetAllContracts(string clientId="")
+        {
+            Datahandler dh = Datahandler.getData();
+            List<Contract> contracts = new List<Contract>();
+            DataTable table = new DataTable();
+            if (clientId!="")
+            {
+                table = dh.readDataFromDB(DataAccesHelper.QueryGetAllCalls+ " WHERE "+DataAccesHelper.contractClient+" = '"+clientId+"'");
+            }
+            else
+            {
+                table = dh.readDataFromDB(DataAccesHelper.QueryGetAllCalls);
+            }
+
+            foreach (DataRow item in table.Rows)
+            {
+                Contract c = new Contract();
+                c.ContractIdentifier = item[DataAccesHelper.contractId].ToString();
+                c.ContractClient = new Client("", "", "", null, null, "", "", item[DataAccesHelper.contractClient].ToString());
+                c.ServiceLevel = item[DataAccesHelper.contractServiceLevel].ToString();
+                c.DateOfIssue = Convert.ToDateTime(item[DataAccesHelper.contractIssueDate].ToString());
+                c.TermDuration = Convert.ToInt32(item[DataAccesHelper.contractTermDur].ToString());
+                contracts.Add(c);
+            }
+
+            return contracts;
+        }
+
     }
 }

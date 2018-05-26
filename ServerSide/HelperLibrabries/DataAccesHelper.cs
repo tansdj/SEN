@@ -77,6 +77,7 @@ namespace Serverside.HelperLibraries
         public const string compCode = "ComponentCode";
         public const string compProdSerial = "ProductSerial";
         public const string compDesc = "CompDesc";
+        public const string compStatus = "CompStatus";
 
         public const string targetConfiguration = "tblConfiguration";
         public const string confCode = "ConfigurationCode";
@@ -84,6 +85,7 @@ namespace Serverside.HelperLibraries
         public const string confDesc = "ConfigDesc";
         public const string confCompCode = "ComponentCode";
         public const string confAddCost = "AddCost";
+        public const string confStatus = "ConfStatus";
 
         public const string targetTechnicians = "tblTechnicians";
         public const string techId = "TechId";
@@ -109,7 +111,7 @@ namespace Serverside.HelperLibraries
         public const string skillReq = "SkillRequired";
 
         public const string targetCallOperators = "tblCallOperators";
-        public const string operatorId = "OperatorId";
+        public const string operatorId = "pOperatorId";
         public const string operatorName = "OperatorName";
         public const string operatorSurname = "OperatorSurname";
         public const string operatorContactId = "ContactId";
@@ -167,7 +169,11 @@ namespace Serverside.HelperLibraries
                                                 INNER JOIN tblAddress A ON V.AddressId = A.pAddressId
                                                 INNER JOIN tblContact C ON V.ContactId = C.pContactId";
         public const string QueryCountContracts = "SELECT COUNT(ContractIdentifier) AS 'NrContracts' FROM tblContract";
-
+        public const string QueryGetAllCalls = "SELECT * FROM tblCallLog";
+        public const string QueryGetCallOperators = @"SELECT * FROM tblCallOperators c
+                                                    INNER JOIN tblAddress a ON a.pAddressId = c.AddressId
+                                                    INNER JOIN tblContact ct ON ct.pContactId = c.ContactId";
+        public const string QueryGetTechEvents = "SELECT * FROM tblTechnicalLog";
         public const string typeString = "STRING";
         public const string typeDouble = "DOUBLE";
         public const string typeInt = "INT";

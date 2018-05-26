@@ -132,11 +132,19 @@ namespace SHSApplication.Business_Layer
             return dh.runQuery(DataAccesHelper.targetUsers, DataAccesHelper.requestDelete, user_details, DataAccesHelper.uEmail + " = '" + this.Email + "'");
         }
 
-        public List<User> GetAllUsers()
+        public List<User> GetAllUsers(string userEmail="")
         {
             Datahandler dh = Datahandler.getData();
             List<User> users = new List<User>();
-            DataTable table = dh.readDataFromDB(DataAccesHelper.QueryGetUsers);
+            DataTable table = new DataTable();
+            if (userEmail != "")
+            {
+                table = dh.readDataFromDB(DataAccesHelper.QueryGetUsers+" WHERE "+DataAccesHelper.uEmail+" = '"+this.Email+"'");
+            }
+            else
+            {
+                table = dh.readDataFromDB(DataAccesHelper.QueryGetUsers);
+            }
 
             foreach (DataRow item in table.Rows)
             {

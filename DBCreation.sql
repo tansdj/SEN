@@ -27,7 +27,7 @@ DROP TABLE tblAddress;
 DROP TABLE tblProducts;
 
 CREATE TABLE tblAddress
-(pAddressId nCHAR(13) PRIMARY KEY,
+(pAddressId VARCHAR(17) PRIMARY KEY,
  AddressLine1 VARCHAR(30) NOT NULL,
  AddressLine2 VARCHAR(30) NOT NULL,
  City VARCHAR(20) NOT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE tblAddress
 )
 
 CREATE TABLE tblContact
-(pContactId nCHAR(13) PRIMARY KEY,
+(pContactId VARCHAR(17) PRIMARY KEY,
  Cell VARCHAR(10) NOT NULL,
  Email VARCHAR(50) NOT NULL
  )
@@ -46,8 +46,8 @@ CREATE TABLE tblClient
  IdNr nCHAR(13) NOT NULL,
  ClientName VARCHAR(50) NOT NULL,
  ClientSurname VARCHAR(50) NOT NULL,
- AddressId nCHAR(13) FOREIGN KEY REFERENCES tblAddress(pAddressId),
- ContactId nCHAR(13) FOREIGN KEY REFERENCES tblContact(pContactId),
+ AddressId VARCHAR(17) FOREIGN KEY REFERENCES tblAddress(pAddressId),
+ ContactId VARCHAR(17) FOREIGN KEY REFERENCES tblContact(pContactId),
  PaymentMethod VARCHAR(30) NOT NULL,
  ClientStatus VARCHAR(20) NOT NULL
  )
@@ -90,8 +90,8 @@ CREATE TABLE tblClient
    CREATE TABLE tblVendors
    (VendorCode nCHAR(10) PRIMARY KEY,
     VendorName VARCHAR(30) NOT NULL,
-	AddressId nCHAR(13) FOREIGN KEY REFERENCES tblAddress(pAddressId),
-	ContactId nCHAR(13) FOREIGN KEY REFERENCES tblContact(pContactId)
+	AddressId VARCHAR(17) FOREIGN KEY REFERENCES tblAddress(pAddressId),
+	ContactId VARCHAR(17) FOREIGN KEY REFERENCES tblContact(pContactId)
 	)
 
 	CREATE TABLE tblProductFunctions
@@ -110,7 +110,8 @@ CREATE TABLE tblClient
 	(CompCount INT IDENTITY,
 	 ComponentCode nCHAR(10) PRIMARY KEY,
 	 ProductSerial VARCHAR(100) FOREIGN KEY REFERENCES tblProducts(ProductSerialNr),
-	 CompDesc VARCHAR(200) NOT NULL
+	 CompDesc VARCHAR(200) NOT NULL,
+	 CompStatus VARCHAR(10) NOT NULL
 	 )
 	 CREATE TABLE tblComponentVendors
 	(CompVendorCount INT IDENTITY,
@@ -125,7 +126,8 @@ CREATE TABLE tblClient
 	 ConfigName VARCHAR(20) NOT NULL,
 	 ConfigDesc VARCHAR(200) NOT NULL,
 	 ComponentCode nCHAR(10) FOREIGN KEY REFERENCES tblSystemComponents(ComponentCode),
-	 AddCost SMALLMONEY NOT NULL DEFAULT 0
+	 AddCost SMALLMONEY NOT NULL DEFAULT 0,
+	 ConfStatus VARCHAR(10) NOT NULL
 	 )
 
 	CREATE TABLE tblContractCompConfiguration
@@ -140,25 +142,25 @@ CREATE TABLE tblClient
 	 TechId nCHAR(13) PRIMARY KEY,
 	 TechName VARCHAR(20) NOT NULL,
 	 TechSurname VARCHAR(20) NOT NULL,
-	 ContactId nCHAR(13) FOREIGN KEY REFERENCES tblContact(pContactId),
-	 AddressId nCHAR(13) FOREIGN KEY REFERENCES tblAddress(pAddressId),
+	 ContactId VARCHAR(17) FOREIGN KEY REFERENCES tblContact(pContactId),
+	 AddressId VARCHAR(17) FOREIGN KEY REFERENCES tblAddress(pAddressId),
 	 TechStatus VARCHAR(10) NOT NULL,
 	 SkillLevel VARCHAR(20) NOT NULL
 	 )
 
 	CREATE TABLE tblCallOperators
 	(OperatorCount INT IDENTITY,
-	 OperatorId nCHAR(13) PRIMARY KEY,
+	 pOperatorId nCHAR(13) PRIMARY KEY,
 	 OperatorName VARCHAR(20) NOT NULL,
 	 OperatorSurname VARCHAR(20) NOT NULL,
-	 ContactId nCHAR(13) FOREIGN KEY REFERENCES tblContact(pContactId),
-	 AddressId nCHAR(13) FOREIGN KEY REFERENCES tblAddress(pAddressId),
+	 ContactId VARCHAR(17) FOREIGN KEY REFERENCES tblContact(pContactId),
+	 AddressId VARCHAR(17) FOREIGN KEY REFERENCES tblAddress(pAddressId),
 	 OperatorStatus VARCHAR(10) NOT NULL,
 	)
 
 	CREATE TABLE tblCallLog
 	(CallId INT IDENTITY PRIMARY KEY,
-	 OperatorId nCHAR(13) FOREIGN KEY REFERENCES tblCallOperators(OperatorId),
+	 OperatorId nCHAR(13) FOREIGN KEY REFERENCES tblCallOperators(pOperatorId),
 	 ClientId nCHAR(9) FOREIGN KEY REFERENCES tblClient(ClientIdentifier),
 	 StartTime DATETIME,
 	 EndTime DATETIME,

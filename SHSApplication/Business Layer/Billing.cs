@@ -137,5 +137,10 @@ namespace SHSApplication.Business_Layer
         }
 
         public void payBill(double amount) { }
+
+        public void SendBills()
+        {
+
+        }
     }
 }

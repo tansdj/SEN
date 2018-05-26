@@ -14,17 +14,24 @@ namespace SHSApplication.Business_Layer
         private string compCode;
         private Product sysComps_product;
         private string description;
+        private string status;
 
-        public SystemComponents(string compCode, Product sysComps_product, string description)
+        public SystemComponents(string compCode, Product sysComps_product, string description,string status)
         {
             this.CompCode = compCode;
             this.SysComps_Product = sysComps_product;
             this.Description = description;
+            this.Status = status;
         }
 
         public SystemComponents()
         {
 
+        }
+        public string Status
+        {
+            get { return status; }
+            set { status = value; }
         }
 
         public string Description
@@ -43,7 +50,7 @@ namespace SHSApplication.Business_Layer
         public string CompCode
         {
             get { return compCode; }
-            set { compCode = value; }
+            set { compCode = (value==null)? "COMP" + this.Description.Substring(0, 6).Replace(' ', '#').ToUpper():value; }
         }
 
         public override bool Equals(object obj)
@@ -58,12 +65,12 @@ namespace SHSApplication.Business_Layer
             {
                 return false;
             }
-            return (this.CompCode==sc.CompCode)&&(this.Description==sc.Description)&&(this.SysComps_Product==sc.SysComps_Product);
+            return (this.CompCode==sc.CompCode)&&(this.Description==sc.Description)&&(this.SysComps_Product==sc.SysComps_Product)&&(this.Status==sc.Status);
         }
 
         public override int GetHashCode()
         {
-            return this.CompCode.GetHashCode()^this.Description.GetHashCode()^this.SysComps_Product.GetHashCode();
+            return this.CompCode.GetHashCode()^this.Description.GetHashCode()^this.SysComps_Product.GetHashCode()^this.Status.GetHashCode();
         }
 
         public override string ToString()
@@ -75,11 +82,11 @@ namespace SHSApplication.Business_Layer
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> sysComp_details = new Dictionary<string, string[]>();
-            this.CompCode = "COMP" + this.Description.Substring(0, 6).Replace(' ', '#').ToUpper();
 
             sysComp_details.Add(DataAccesHelper.compCode, new string[] { DataAccesHelper.typeString, this.CompCode });
             sysComp_details.Add(DataAccesHelper.compProdSerial, new string[] { DataAccesHelper.typeString, this.SysComps_Product.ProductSerialNr });
             sysComp_details.Add(DataAccesHelper.compDesc, new string[] { DataAccesHelper.typeString, this.Description });
+            sysComp_details.Add(DataAccesHelper.compStatus, new string[] { DataAccesHelper.typeString, this.Status });
 
             return dh.runQuery(DataAccesHelper.targetComponents, DataAccesHelper.requestInsert, sysComp_details);
         }
@@ -88,26 +95,13 @@ namespace SHSApplication.Business_Layer
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> sysComp_details = new Dictionary<string, string[]>();
-            this.CompCode = "COMP" + this.Description.Substring(0, 6).Replace(' ', '#').ToUpper();
 
             sysComp_details.Add(DataAccesHelper.compCode, new string[] { DataAccesHelper.typeString, this.CompCode });
             sysComp_details.Add(DataAccesHelper.compProdSerial, new string[] { DataAccesHelper.typeString, this.SysComps_Product.ProductSerialNr });
             sysComp_details.Add(DataAccesHelper.compDesc, new string[] { DataAccesHelper.typeString, this.Description });
+            sysComp_details.Add(DataAccesHelper.compStatus, new string[] { DataAccesHelper.typeString, this.Status });
 
             return dh.runQuery(DataAccesHelper.targetComponents, DataAccesHelper.requestUpdate, sysComp_details, DataAccesHelper.compCode + " = '" + this.CompCode + "'");
-        }
-
-        public bool RemoveComponent()
-        {
-            Datahandler dh = Datahandler.getData();
-            Dictionary<string, string[]> sysComp_details = new Dictionary<string, string[]>();
-            this.CompCode = "COMP" + this.Description.Substring(0, 6).Replace(' ', '#').ToUpper();
-
-            sysComp_details.Add(DataAccesHelper.compCode, new string[] { DataAccesHelper.typeString, this.CompCode });
-            sysComp_details.Add(DataAccesHelper.compProdSerial, new string[] { DataAccesHelper.typeString, this.SysComps_Product.ProductSerialNr });
-            sysComp_details.Add(DataAccesHelper.compDesc, new string[] { DataAccesHelper.typeString, this.Description });
-
-            return dh.runQuery(DataAccesHelper.targetComponents, DataAccesHelper.requestDelete, sysComp_details,DataAccesHelper.compCode+" = '"+this.CompCode+"'");
         }
 
         public List<SystemComponents> GetSystemComponents()
@@ -123,6 +117,7 @@ namespace SHSApplication.Business_Layer
                 sc.Description = item[DataAccesHelper.compDesc].ToString();
                 sc.SysComps_Product = new Product();
                 sc.SysComps_Product.ProductSerialNr = item[DataAccesHelper.compProdSerial].ToString();
+                sc.Status = item[DataAccesHelper.compStatus].ToString();
                 sysComps.Add(sc);
             }
 

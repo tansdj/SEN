@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ServerSide;
 using Serverside.HelperLibraries;
 using System.Data;
+using ServerSide.HelperLibrabries;
 
 namespace SHSApplication.Business_Layer
 {
@@ -61,67 +62,60 @@ namespace SHSApplication.Business_Layer
             return base.ToString();
         }
 
-        public void AddTech()
+        public bool AddTech()
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> tech_details = new Dictionary<string, string[]>();
-            this.PersonAddress.AddressId = "ADDR" + this.PersonId;
-            this.PersonContact.ContactId = "CONT" + this.PersonId;
 
-            tech_details.Add(DataAccesHelper.techId, new string[] { DataAccesHelper.typeString, this.PersonId });
-            tech_details.Add(DataAccesHelper.techName, new string[] { DataAccesHelper.typeString, this.Name });
-            tech_details.Add(DataAccesHelper.techSurname, new string[] { DataAccesHelper.typeString, this.Surname });
-            tech_details.Add(DataAccesHelper.techAddressId, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressId });
-            tech_details.Add(DataAccesHelper.techContactId, new string[] { DataAccesHelper.typeString, this.PersonContact.ContactId });
-            tech_details.Add(DataAccesHelper.techStatus, new string[] { DataAccesHelper.typeString, this.Status });
-            tech_details.Add(DataAccesHelper.techSkill, new string[] { DataAccesHelper.typeString, this.SkillLevel });
+            tech_details.Add(QueryBuilder.spAddTech.sp_id, new string[] { DataAccesHelper.typeString, this.PersonId });
+            tech_details.Add(QueryBuilder.spAddTech.sp_name, new string[] { DataAccesHelper.typeString, this.Name });
+            tech_details.Add(QueryBuilder.spAddTech.sp_surname, new string[] { DataAccesHelper.typeString, this.Surname });
+            tech_details.Add(QueryBuilder.spAddTech.sp_status, new string[] { DataAccesHelper.typeString, this.Status });
+            tech_details.Add(QueryBuilder.spAddTech.sp_addrLine1, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressLine1 });
+            tech_details.Add(QueryBuilder.spAddTech.sp_addrLine2, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressLine2 });
+            tech_details.Add(QueryBuilder.spAddTech.sp_city, new string[] { DataAccesHelper.typeString, this.PersonAddress.City });
+            tech_details.Add(QueryBuilder.spAddTech.sp_postCode, new string[] { DataAccesHelper.typeString, this.PersonAddress.PostalCode });
+            tech_details.Add(QueryBuilder.spAddTech.sp_cell, new string[] { DataAccesHelper.typeString, this.PersonContact.Cell });
+            tech_details.Add(QueryBuilder.spAddTech.sp_email, new string[] { DataAccesHelper.typeString, this.PersonContact.Email });
+
+            return dh.runStoredProcedure(QueryBuilder.spAddTech.sp, tech_details);
 
         }
 
 
-        public void UpdateTech()
+        public bool UpdateTech()
         {
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> tech_details = new Dictionary<string, string[]>();
-            Dictionary<string, string[]> addr_details = new Dictionary<string, string[]>();
-            Dictionary<string, string[]> cont_details = new Dictionary<string, string[]>();
-            this.PersonAddress.AddressId = "ADDR" + this.PersonId;
-            this.PersonContact.ContactId = "CONT" + this.PersonId;
 
-            tech_details.Add(DataAccesHelper.techId, new string[] { DataAccesHelper.typeString, this.PersonId });
-            tech_details.Add(DataAccesHelper.techName, new string[] { DataAccesHelper.typeString, this.Name });
-            tech_details.Add(DataAccesHelper.techSurname, new string[] { DataAccesHelper.typeString, this.Surname });
-            tech_details.Add(DataAccesHelper.techAddressId, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressId });
-            tech_details.Add(DataAccesHelper.techContactId, new string[] { DataAccesHelper.typeString, this.PersonContact.ContactId });
-            tech_details.Add(DataAccesHelper.techStatus, new string[] { DataAccesHelper.typeString, this.Status });
-            tech_details.Add(DataAccesHelper.techSkill, new string[] { DataAccesHelper.typeString, this.SkillLevel });
+            tech_details.Add(QueryBuilder.spUpdateTech.sp_id, new string[] { DataAccesHelper.typeString, this.PersonId });
+            tech_details.Add(QueryBuilder.spUpdateTech.sp_name, new string[] { DataAccesHelper.typeString, this.Name });
+            tech_details.Add(QueryBuilder.spUpdateTech.sp_surname, new string[] { DataAccesHelper.typeString, this.Surname });
+            tech_details.Add(QueryBuilder.spUpdateTech.sp_status, new string[] { DataAccesHelper.typeString, this.Status });
+            tech_details.Add(QueryBuilder.spUpdateTech.sp_addrLine1, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressLine1 });
+            tech_details.Add(QueryBuilder.spUpdateTech.sp_addrLine2, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressLine2 });
+            tech_details.Add(QueryBuilder.spUpdateTech.sp_city, new string[] { DataAccesHelper.typeString, this.PersonAddress.City });
+            tech_details.Add(QueryBuilder.spUpdateTech.sp_postCode, new string[] { DataAccesHelper.typeString, this.PersonAddress.PostalCode });
+            tech_details.Add(QueryBuilder.spUpdateTech.sp_cell, new string[] { DataAccesHelper.typeString, this.PersonContact.Cell });
+            tech_details.Add(QueryBuilder.spUpdateTech.sp_email, new string[] { DataAccesHelper.typeString, this.PersonContact.Email });
 
-        }
-
-        public void RemoveTech()
-        {
-            Datahandler dh = Datahandler.getData();
-            Dictionary<string, string[]> tech_details = new Dictionary<string, string[]>();
-            Dictionary<string, string[]> addr_details = new Dictionary<string, string[]>();
-            Dictionary<string, string[]> cont_details = new Dictionary<string, string[]>();
-            this.PersonAddress.AddressId = "ADDR" + this.PersonId;
-            this.PersonContact.ContactId = "CONT" + this.PersonId;
-
-            tech_details.Add(DataAccesHelper.techId, new string[] { DataAccesHelper.typeString, this.PersonId });
-            tech_details.Add(DataAccesHelper.techName, new string[] { DataAccesHelper.typeString, this.Name });
-            tech_details.Add(DataAccesHelper.techSurname, new string[] { DataAccesHelper.typeString, this.Surname });
-            tech_details.Add(DataAccesHelper.techAddressId, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressId });
-            tech_details.Add(DataAccesHelper.techContactId, new string[] { DataAccesHelper.typeString, this.PersonContact.ContactId });
-            tech_details.Add(DataAccesHelper.techStatus, new string[] { DataAccesHelper.typeString, this.Status });
-            tech_details.Add(DataAccesHelper.techSkill, new string[] { DataAccesHelper.typeString, this.SkillLevel });
+            return dh.runStoredProcedure(QueryBuilder.spUpdateTech.sp, tech_details);
 
         }
 
-        public List<Technicians> GetAllTechnicians()
+        public List<Technicians> GetAllTechnicians(string techId="")
         {
             Datahandler dh = Datahandler.getData();
             List<Technicians> techs = new List<Technicians>();
-            DataTable table = dh.readDataFromDB(DataAccesHelper.QueryGetTechnicians);
+            DataTable table = new DataTable();
+            if (techId!="")
+            {
+                table = dh.readDataFromDB(DataAccesHelper.QueryGetTechnicians+" WHERE "+DataAccesHelper.techId+" = '"+this.PersonId+"'");
+            }
+            else
+            {
+                table = dh.readDataFromDB(DataAccesHelper.QueryGetTechnicians);
+            }
 
             foreach (DataRow item in table.Rows)
             {

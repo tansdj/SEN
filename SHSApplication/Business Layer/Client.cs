@@ -185,11 +185,19 @@ namespace SHSApplication.Business_Layer
             return dh.runQuery(DataAccesHelper.targetClient, DataAccesHelper.requestDelete, client_details, DataAccesHelper.clientId + " = '" + this.PersonId + "'");
         }
 
-        public List<Client> GetAllClients()
+        public List<Client> GetAllClients(string clientId="")
         {
             Datahandler dh = Datahandler.getData();
             List<Client> clients = new List<Client>();
-            DataTable table = dh.readDataFromDB(DataAccesHelper.QueryGetClients);
+            DataTable table = new DataTable();
+            if (clientId!="")
+            {
+                table = dh.readDataFromDB(DataAccesHelper.QueryGetClients+" WHERE "+DataAccesHelper.clientIdentifier+" = '"+clientId+"'");
+            }
+            else
+            {
+                table = dh.readDataFromDB(DataAccesHelper.QueryGetClients);
+            }
 
             foreach (DataRow item in table.Rows)
             {

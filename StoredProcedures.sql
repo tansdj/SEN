@@ -105,7 +105,7 @@ CREATE PROCEDURE updateClientWithPaymentDetails
 (@identifier nCHAR(9),@id nCHAR(13),@name VARCHAR(13),@surname VARCHAR(13),@addrLine1 VARCHAR(30),@addrLine2 VARCHAR(30),@city VARCHAR(20),@postCode VARCHAR(10),@cell VARCHAR(10),@email VARCHAR(50),@payMethod VARCHAR(30),@status VARCHAR(20),@accNr VARCHAR(20),@bank VARCHAR(15),@branchCode VARCHAR(10))
 AS
 	BEGIN
-	 DECLARE @addrId VARCHAR(17),@contactId VARCHAR(17);
+	DECLARE @addrId nCHAR(13),@contactId nCHAR(13);
 	 SET @addrId = (SELECT tblAddress.pAddressId FROM tblAddress INNER JOIN tblClient ON tblClient.AddressId = tblAddress.pAddressId WHERE tblClient.IdNr=@id);
 	 SET @contactId = (SELECT tblContact.pContactId FROM tblContact INNER JOIN tblClient ON tblClient.ContactId = tblContact.pContactId WHERE tblClient.IdNr = @id);
 		BEGIN TRY
@@ -231,7 +231,7 @@ AS
 				INSERT INTO tblContact(pContactId,Cell,Email)
 				VALUES (@contactId,@cell,@email);
 
-				INSERT INTO tblCallOperators(OperatorId,OperatorName,OperatorSurname,ContactId,AddressId,OperatorStatus)
+				INSERT INTO tblCallOperators(pOperatorId,OperatorName,OperatorSurname,AddressId,ContactId,OperatorStatus)
 				VALUES (@id,@name,@surname,@addrId,@contactId,@status);
 			COMMIT TRANSACTION
 		END TRY
@@ -256,7 +256,7 @@ AS
 				UPDATE tblContact SET Cell=@cell,Email=@email WHERE pContactId = @contactId;
 
 				UPDATE tblCallOperators SET OperatorName=@name,OperatorSurname=@surname,OperatorStatus=@status
-				WHERE OperatorId = @id;
+				WHERE pOperatorId = @id;
 			COMMIT TRANSACTION
 		END TRY
 		BEGIN CATCH
@@ -264,3 +264,49 @@ AS
 		END CATCH
 	END;
 
+GO 
+CREATE PROCEDURE insertVendor
+(@code VARCHAR(10),@name VARCHAR(13),@addrLine1 VARCHAR(30),@addrLine2 VARCHAR(30),@city VARCHAR(20),@postCode VARCHAR(10),@cell VARCHAR(10),@email VARCHAR(50),@status VARCHAR(10))
+AS
+	BEGIN
+	 DECLARE @addrId VARCHAR(14),@contactId VARCHAR(14);
+	 SET @addrId = 'ADDR'+@code;
+	 SET @contactId = 'CONT' + @code;
+		BEGIN TRY
+			BEGIN TRANSACTION
+				INSERT INTO tblAddress(pAddressId,AddressLine1,AddressLine2,City,PostalCode)
+				VALUES (@addrId,@addrLine1,@addrLine2,@city,@postCode);
+
+				INSERT INTO tblContact(pContactId,Cell,Email)
+				VALUES (@contactId,@cell,@email);
+
+				INSERT INTO tblVendors(VendorCode,VendorName,AddressId,ContactId)
+				VALUES (@code,@name,@addrId,@contactId);
+			COMMIT TRANSACTION
+		END TRY
+		BEGIN CATCH
+			ROLLBACK TRANSACTION
+		END CATCH
+	END;
+
+GO 
+CREATE PROCEDURE updateVendor
+(@code VARCHAR(10),@name VARCHAR(13),@addrLine1 VARCHAR(30),@addrLine2 VARCHAR(30),@city VARCHAR(20),@postCode VARCHAR(10),@cell VARCHAR(10),@email VARCHAR(50),@status VARCHAR(10))
+AS
+	BEGIN
+	 DECLARE @addrId VARCHAR(14),@contactId VARCHAR(14);
+	 SET @addrId = 'ADDR'+@code;
+	 SET @contactId = 'CONT' + @code;
+		BEGIN TRY
+			BEGIN TRANSACTION
+				UPDATE tblAddress SET AddressLine1 = @addrLine1,AddressLine2 = @addrLine2,City=@city,PostalCode=@postCode
+				WHERE pAddressId = @addrId;
+
+				UPDATE tblContact SET Cell=@cell,Email=@email
+				WHERE pContactId = @contactId;
+			COMMIT TRANSACTION
+		END TRY
+		BEGIN CATCH
+			ROLLBACK TRANSACTION
+		END CATCH
+	END;
