@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUpdateClient));
             this.pnlMenu = new System.Windows.Forms.Panel();
+            this.btnCall = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
             this.btnUserManagement = new System.Windows.Forms.Button();
             this.btnTecManagement = new System.Windows.Forms.Button();
@@ -75,7 +76,6 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnAddClient = new System.Windows.Forms.Button();
             this.cmbClients = new System.Windows.Forms.ComboBox();
-            this.btnCall = new System.Windows.Forms.Button();
             this.pnlMenu.SuspendLayout();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogoSmall)).BeginInit();
@@ -101,6 +101,21 @@
             this.pnlMenu.Name = "pnlMenu";
             this.pnlMenu.Size = new System.Drawing.Size(243, 537);
             this.pnlMenu.TabIndex = 0;
+            // 
+            // btnCall
+            // 
+            this.btnCall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCall.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnCall.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCall.BackgroundImage")));
+            this.btnCall.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnCall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCall.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnCall.Location = new System.Drawing.Point(186, 488);
+            this.btnCall.Name = "btnCall";
+            this.btnCall.Size = new System.Drawing.Size(54, 49);
+            this.btnCall.TabIndex = 6;
+            this.btnCall.UseVisualStyleBackColor = false;
+            this.btnCall.Click += new System.EventHandler(this.btnCall_Click);
             // 
             // btnHome
             // 
@@ -690,21 +705,6 @@
             this.cmbClients.TabIndex = 9;
             this.cmbClients.Text = "Select Client";
             this.cmbClients.SelectedIndexChanged += new System.EventHandler(this.cmbClients_SelectedIndexChanged);
-            // 
-            // btnCall
-            // 
-            this.btnCall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCall.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnCall.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCall.BackgroundImage")));
-            this.btnCall.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnCall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCall.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnCall.Location = new System.Drawing.Point(186, 488);
-            this.btnCall.Name = "btnCall";
-            this.btnCall.Size = new System.Drawing.Size(54, 49);
-            this.btnCall.TabIndex = 6;
-            this.btnCall.UseVisualStyleBackColor = false;
-            this.btnCall.Click += new System.EventHandler(this.btnCall_Click);
             // 
             // frmUpdateClient
             // 

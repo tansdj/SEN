@@ -11,23 +11,19 @@ namespace SHSApplication.Business_Layer
 {
     public class Product
     {
-        private string productSerialNr;
+        private string productCode;
         private string name;
         private string description;
         private double basePrice;
         private string status;
-        private string manufacturer;
-        private string model;
 
-        public Product(string productSerialNr, string name, string description, double basePrice, string status, string manufacturer, string model)
+        public Product(string productCode, string name, string description, double basePrice, string status)
         {
-            this.ProductSerialNr = productSerialNr;
+            this.ProductCode = productCode;
             this.Name = name;
             this.Description = description;
             this.BasePrice = basePrice;
             this.Status = status;
-            this.Manufacturer = manufacturer;
-            this.Model = model;
         }
 
         public Product()
@@ -35,18 +31,7 @@ namespace SHSApplication.Business_Layer
 
         }
 
-        public string Model
-        {
-            get { return model; }
-            set { model = value; }
-        }
-
-
-        public string Manufacturer
-        {
-            get { return manufacturer; }
-            set { manufacturer = value; }
-        }
+        
         public string Status
         {
             get { return status; }
@@ -75,10 +60,10 @@ namespace SHSApplication.Business_Layer
         }
 
 
-        public string ProductSerialNr
+        public string ProductCode
         {
-            get { return productSerialNr; }
-            set { productSerialNr = value; }
+            get { return productCode; }
+            set { productCode = (value == null) ? "PROD" + this.Name.Substring(0, 6).Replace(' ', '#').ToUpper() : value; }
         }
 
         public override bool Equals(object obj)
@@ -93,12 +78,12 @@ namespace SHSApplication.Business_Layer
             {
                 return false;
             }
-            return (this.ProductSerialNr==p.ProductSerialNr)&&(this.Name==p.Name)&&(this.Description==p.Description)&&(this.BasePrice==p.BasePrice)&&(this.Status==p.Status)&&(this.Manufacturer==p.Manufacturer)&&(this.Model==p.Model);
+            return (this.ProductCode==p.ProductCode)&&(this.Name==p.Name)&&(this.Description==p.Description)&&(this.BasePrice==p.BasePrice)&&(this.Status==p.Status);
         }
 
         public override int GetHashCode()
         {
-            return this.ProductSerialNr.GetHashCode()^this.Name.GetHashCode()^this.Description.GetHashCode()^this.BasePrice.GetHashCode()^this.Status.GetHashCode()^this.Manufacturer.GetHashCode()^this.Model.GetHashCode();
+            return this.ProductCode.GetHashCode()^this.Name.GetHashCode()^this.Description.GetHashCode()^this.BasePrice.GetHashCode()^this.Status.GetHashCode();
         }
 
         public override string ToString()
@@ -111,7 +96,7 @@ namespace SHSApplication.Business_Layer
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> prod_details = new Dictionary<string, string[]>();
 
-            prod_details.Add(DataAccesHelper.prodSerialNo, new string[] { DataAccesHelper.typeString, this.ProductSerialNr });
+            prod_details.Add(DataAccesHelper.prodCode, new string[] { DataAccesHelper.typeString, this.ProductCode });
             prod_details.Add(DataAccesHelper.prodName, new string[] { DataAccesHelper.typeString, this.Name });
             prod_details.Add(DataAccesHelper.prodDesc, new string[] { DataAccesHelper.typeString, this.Description });
             prod_details.Add(DataAccesHelper.prodPrice, new string[] { DataAccesHelper.typeDouble, this.BasePrice.ToString() });
@@ -125,13 +110,13 @@ namespace SHSApplication.Business_Layer
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> prod_details = new Dictionary<string, string[]>();
 
-            prod_details.Add(DataAccesHelper.prodSerialNo, new string[] { DataAccesHelper.typeString, this.ProductSerialNr });
+            prod_details.Add(DataAccesHelper.prodCode, new string[] { DataAccesHelper.typeString, this.ProductCode });
             prod_details.Add(DataAccesHelper.prodName, new string[] { DataAccesHelper.typeString, this.Name });
             prod_details.Add(DataAccesHelper.prodDesc, new string[] { DataAccesHelper.typeString, this.Description });
             prod_details.Add(DataAccesHelper.prodPrice, new string[] { DataAccesHelper.typeDouble, this.BasePrice.ToString() });
             prod_details.Add(DataAccesHelper.prodStatus, new string[] { DataAccesHelper.typeString, this.Status });
 
-            return dh.runQuery(DataAccesHelper.targetProduct, DataAccesHelper.requestUpdate, prod_details,DataAccesHelper.prodSerialNo+" = '"+this.ProductSerialNr+"'");
+            return dh.runQuery(DataAccesHelper.targetProduct, DataAccesHelper.requestUpdate, prod_details,DataAccesHelper.prodCode+" = '"+this.ProductCode+"'");
         }
 
         public List<Product> GetAllProducts(string serialCode="")
@@ -141,7 +126,7 @@ namespace SHSApplication.Business_Layer
             DataTable table = new DataTable();
             if (serialCode!="")
             {
-                table = dh.readDataFromDB(DataAccesHelper.QueryGetProducts+ " WHERE "+DataAccesHelper.prodSerialNo+" = '"+this.ProductSerialNr+"'");
+                table = dh.readDataFromDB(DataAccesHelper.QueryGetProducts+ " WHERE "+DataAccesHelper.prodCode+" = '"+this.ProductCode+"'");
             }
             else
             {
@@ -151,7 +136,7 @@ namespace SHSApplication.Business_Layer
             foreach (DataRow item in table.Rows)
             {
                 Product p = new Product();
-                p.ProductSerialNr = item[DataAccesHelper.prodSerialNo].ToString();
+                p.ProductCode = item[DataAccesHelper.prodCode].ToString();
                 p.Name = item[DataAccesHelper.prodName].ToString();
                 p.Description = item[DataAccesHelper.prodDesc].ToString();
                 p.BasePrice = Convert.ToDouble(item[DataAccesHelper.prodPrice].ToString());

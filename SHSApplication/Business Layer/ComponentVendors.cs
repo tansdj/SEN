@@ -66,7 +66,7 @@ namespace SHSApplication.Business_Layer
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> compVend_details = new Dictionary<string, string[]>();
 
-            compVend_details.Add(DataAccesHelper.cvCompCode, new string[] { DataAccesHelper.typeString, this.CvComponents.CompCode});
+            compVend_details.Add(DataAccesHelper.cvCompCode, new string[] { DataAccesHelper.typeString, this.CvComponents.CompSerial});
             compVend_details.Add(DataAccesHelper.cvVendorCode, new string[] { DataAccesHelper.typeString, this.CvVendor.VendorCode });
 
             return dh.runQuery(DataAccesHelper.targetCompVendors, DataAccesHelper.requestInsert, compVend_details);
@@ -77,23 +77,23 @@ namespace SHSApplication.Business_Layer
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> compVend_details = new Dictionary<string, string[]>();
 
-            compVend_details.Add(DataAccesHelper.cvCompCode, new string[] { DataAccesHelper.typeString, this.CvComponents.CompCode });
+            compVend_details.Add(DataAccesHelper.cvCompCode, new string[] { DataAccesHelper.typeString, this.CvComponents.CompSerial });
             compVend_details.Add(DataAccesHelper.cvVendorCode, new string[] { DataAccesHelper.typeString, this.CvVendor.VendorCode });
 
-            return dh.runQuery(DataAccesHelper.targetCompVendors, DataAccesHelper.requestDelete, compVend_details,DataAccesHelper.cvCompCode+" = '"+this.CvComponents.CompCode+"' AND "+DataAccesHelper.cvVendorCode+" = '"+this.CvVendor.VendorCode+"'");
+            return dh.runQuery(DataAccesHelper.targetCompVendors, DataAccesHelper.requestDelete, compVend_details,DataAccesHelper.cvCompCode+" = '"+this.CvComponents.CompSerial+"' AND "+DataAccesHelper.cvVendorCode+" = '"+this.CvVendor.VendorCode+"'");
         }
 
         public List<ComponentVendors> GetComponentVendors()
         {
             Datahandler dh = Datahandler.getData();
             List<ComponentVendors> compVends = new List<ComponentVendors>();
-            DataTable table = dh.readDataFromDB(DataAccesHelper.QueryGetComponentVendors + this.CvComponents.CompCode);
+            DataTable table = dh.readDataFromDB(DataAccesHelper.QueryGetComponentVendors + this.CvComponents.CompSerial);
 
             foreach (DataRow item in table.Rows)
             {
                 ComponentVendors cv = new ComponentVendors();
                 cv.CvComponents = new SystemComponents();
-                cv.CvComponents.CompCode = item[DataAccesHelper.cvCompCode].ToString();
+                cv.CvComponents.CompSerial = item[DataAccesHelper.cvCompCode].ToString();
                 cv.CvVendor = new Vendor();
                 cv.CvVendor.VendorCode = item[DataAccesHelper.cvVendorCode].ToString();
                 compVends.Add(cv);

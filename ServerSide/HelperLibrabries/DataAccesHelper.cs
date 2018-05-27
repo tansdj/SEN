@@ -55,13 +55,12 @@ namespace Serverside.HelperLibraries
         public const string paymentDetBranch = "BranchCode";
 
         public const string targetProduct = "tblProducts";
-        public const string prodSerialNo = "ProductSerialNr";
+        public const string prodCode = "pProductCode";
         public const string prodName = "ProdName";
         public const string prodDesc = "ProdDescription";
         public const string prodPrice = "BasePrice";
         public const string prodStatus = "ProdStatus";
-        public const string prodManufacturer = "Manufacturer";
-        public const string prodModel = "Model";
+        
 
         public const string targetVendor = "tblVendors";
         public const string vendCode = "VendorCode";
@@ -70,14 +69,16 @@ namespace Serverside.HelperLibraries
         public const string vendContactId = "ContactId";
 
         public const string targetProductFunction = "tblProductFunctions";
-        public const string pfProductSerial = "ProductSerial";
+        public const string pfProductCode = "ProductCode";
         public const string pfFunction = "ProdFunction";
 
         public const string targetComponents = "tblSystemComponents";
-        public const string compCode = "ComponentCode";
-        public const string compProdSerial = "ProductSerial";
+        public const string compSerial = "ComponentSerial";
+        public const string compProdCode = "ProductCode";
         public const string compDesc = "CompDesc";
         public const string compStatus = "CompStatus";
+        public const string compManufacturer = "Manufacturer";
+        public const string compModel = "Model";
 
         public const string targetConfiguration = "tblConfiguration";
         public const string confCode = "ConfigurationCode";
@@ -131,7 +132,7 @@ namespace Serverside.HelperLibraries
 
         public const string targetContractProducts = "tblContractProducts";
         public const string cpContractId = "ContractId";
-        public const string cpProductSerial = "ProductSerial";
+        public const string cpProductCode = "ProductCode";
 
         public const string targetContractConf = "tblContractCompConfiguration";
         public const string ccContractId = "ContractId";

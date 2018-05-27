@@ -1,5 +1,6 @@
 ﻿using Serverside.HelperLibraries;
 using ServerSide;
+using SHSApplication.Business_Layer;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SHSApplication.Business_Layer
 {
-    public class User
+    public class User:ILogin<User>
     {
         private string username;
         private string password;
@@ -160,5 +161,14 @@ namespace SHSApplication.Business_Layer
             return users;
         }
 
+        public bool TestLogin(User userObject)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RecoverPassword(User userObject)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

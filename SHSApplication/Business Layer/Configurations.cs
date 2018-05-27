@@ -107,7 +107,7 @@ namespace SHSApplication.Business_Layer
             conf_details.Add(DataAccesHelper.confCode, new string[] { DataAccesHelper.typeString, this.ConfigId});
             conf_details.Add(DataAccesHelper.confName, new string[] { DataAccesHelper.typeString, this.Name });
             conf_details.Add(DataAccesHelper.confDesc, new string[] { DataAccesHelper.typeString, this.Description });
-            conf_details.Add(DataAccesHelper.confCompCode, new string[] { DataAccesHelper.typeString, this.Configuration_Component.CompCode });
+            conf_details.Add(DataAccesHelper.confCompCode, new string[] { DataAccesHelper.typeString, this.Configuration_Component.CompSerial });
             conf_details.Add(DataAccesHelper.confAddCost, new string[] { DataAccesHelper.typeDouble, this.AddCost.ToString() });
             conf_details.Add(DataAccesHelper.confStatus, new string[] { DataAccesHelper.typeString, this.Status.ToString() });
 
@@ -122,7 +122,7 @@ namespace SHSApplication.Business_Layer
             conf_details.Add(DataAccesHelper.confCode, new string[] { DataAccesHelper.typeString, this.ConfigId });
             conf_details.Add(DataAccesHelper.confName, new string[] { DataAccesHelper.typeString, this.Name });
             conf_details.Add(DataAccesHelper.confDesc, new string[] { DataAccesHelper.typeString, this.Description });
-            conf_details.Add(DataAccesHelper.confCompCode, new string[] { DataAccesHelper.typeString, this.Configuration_Component.CompCode });
+            conf_details.Add(DataAccesHelper.confCompCode, new string[] { DataAccesHelper.typeString, this.Configuration_Component.CompSerial });
             conf_details.Add(DataAccesHelper.confAddCost, new string[] { DataAccesHelper.typeDouble, this.AddCost.ToString() });
             conf_details.Add(DataAccesHelper.confStatus, new string[] { DataAccesHelper.typeString, this.Status.ToString() });
 
@@ -133,7 +133,7 @@ namespace SHSApplication.Business_Layer
         {
             Datahandler dh = Datahandler.getData();
             List<Configurations> confs = new List<Configurations>();
-            DataTable table = dh.readDataFromDB(DataAccesHelper.QueryGetConfigurations+ this.Configuration_Component.CompCode);
+            DataTable table = dh.readDataFromDB(DataAccesHelper.QueryGetConfigurations+ this.Configuration_Component.CompSerial);
 
             foreach (DataRow item in table.Rows)
             {
@@ -143,7 +143,7 @@ namespace SHSApplication.Business_Layer
                 c.Description = item[DataAccesHelper.confDesc].ToString();
                 c.AddCost = Convert.ToDouble(item[DataAccesHelper.confAddCost].ToString());
                 c.Configuration_Component = new SystemComponents();
-                c.Configuration_Component.CompCode = item[DataAccesHelper.confCompCode].ToString();
+                c.Configuration_Component.CompSerial = item[DataAccesHelper.confCompCode].ToString();
                 c.Status = item[DataAccesHelper.confStatus].ToString();
                 confs.Add(c);
             }

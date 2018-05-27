@@ -52,6 +52,36 @@
     <Compile Include="CallSimulator.Designer.cs">
       <DependentUpon>CallSimulator.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmCancelClient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCancelClient.Designer.cs">
+      <DependentUpon>frmCancelClient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmInspectContract.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInspectContract.Designer.cs">
+      <DependentUpon>frmInspectContract.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewproduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewproduct.Designer.cs">
+      <DependentUpon>frmNewproduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRecPayment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRecPayment.Designer.cs">
+      <DependentUpon>frmRecPayment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewContract.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewContract.Designer.cs">
+      <DependentUpon>frmNewContract.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmUpdateClient.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +128,21 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CallSimulator.resx">
       <DependentUpon>CallSimulator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCancelClient.resx">
+      <DependentUpon>frmCancelClient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInspectContract.resx">
+      <DependentUpon>frmInspectContract.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewproduct.resx">
+      <DependentUpon>frmNewproduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRecPayment.resx">
+      <DependentUpon>frmRecPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewContract.resx">
+      <DependentUpon>frmNewContract.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmUpdateClient.resx">
       <DependentUpon>frmUpdateClient.cs</DependentUpon>

@@ -68,7 +68,7 @@ namespace SHSApplication.Business_Layer
             Dictionary<string, string[]> clientProd_details = new Dictionary<string, string[]>();
 
             clientProd_details.Add(DataAccesHelper.cpContractId, new string[] { DataAccesHelper.typeString, this.ContractProducts_Contract.ContractIdentifier});
-            clientProd_details.Add(DataAccesHelper.cpProductSerial, new string[] { DataAccesHelper.typeString, this.ContractProducts_Product.ProductSerialNr });
+            clientProd_details.Add(DataAccesHelper.cpProductCode, new string[] { DataAccesHelper.typeString, this.ContractProducts_Product.ProductCode });
 
             return dh.runQuery(DataAccesHelper.targetContractProducts, DataAccesHelper.requestInsert, clientProd_details);
         }
@@ -79,9 +79,9 @@ namespace SHSApplication.Business_Layer
             Dictionary<string, string[]> clientProd_details = new Dictionary<string, string[]>();
 
             clientProd_details.Add(DataAccesHelper.cpContractId, new string[] { DataAccesHelper.typeString, this.ContractProducts_Contract.ContractIdentifier });
-            clientProd_details.Add(DataAccesHelper.cpProductSerial, new string[] { DataAccesHelper.typeString, this.ContractProducts_Product.ProductSerialNr });
+            clientProd_details.Add(DataAccesHelper.cpProductCode, new string[] { DataAccesHelper.typeString, this.ContractProducts_Product.ProductCode });
 
-            return dh.runQuery(DataAccesHelper.targetContractProducts, DataAccesHelper.requestDelete, clientProd_details,DataAccesHelper.cpContractId+" = '"+this.ContractProducts_Contract.ContractIdentifier+"' AND "+DataAccesHelper.cpProductSerial+" = '"+this.ContractProducts_Product.ProductSerialNr+"'");
+            return dh.runQuery(DataAccesHelper.targetContractProducts, DataAccesHelper.requestDelete, clientProd_details,DataAccesHelper.cpContractId+" = '"+this.ContractProducts_Contract.ContractIdentifier+"' AND "+DataAccesHelper.cpProductCode+" = '"+this.ContractProducts_Product.ProductCode+"'");
         }
 
         public List<ContractProducts> GetContractProducts()
@@ -96,7 +96,7 @@ namespace SHSApplication.Business_Layer
                 cp.ContractProducts_Contract = new Contract();
                 cp.ContractProducts_Contract.ContractIdentifier = item[DataAccesHelper.cpContractId].ToString();
                 cp.ContractProducts_Product = new Product();
-                cp.ContractProducts_Product.ProductSerialNr = item[DataAccesHelper.cpProductSerial].ToString();
+                cp.ContractProducts_Product.ProductCode = item[DataAccesHelper.cpProductCode].ToString();
                 clientProds.Add(cp);
             }
 

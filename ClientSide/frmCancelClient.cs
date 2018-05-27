@@ -1,26 +1,35 @@
-﻿using System;
+﻿using SHSApplication.Business_Layer;
+using SHSApplication.Helper_Libraries;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ClientSide
 {
-    public partial class frmClientManagement : Form
+    public partial class frmCancelClient : Form
     {
-        public frmClientManagement()
+        BindingSource bind1 = new BindingSource();
+        public frmCancelClient()
         {
             InitializeComponent();
             this.Size = Screen.PrimaryScreen.WorkingArea.Size;
+
+            bind1.DataSource = new Client().GetAllClients();
+            cmbClients.DataSource = bind1;
         }
 
         private void btnClientManagement_Click(object sender, EventArgs e)
         {
-
+            frmClientManagement cm = new frmClientManagement();
+            cm.Show();
+            this.Close();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -49,50 +58,24 @@ namespace ClientSide
             this.Close();
         }
 
-        private void btnHome_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void btnNewClient_Click(object sender, EventArgs e)
-        {
-            frmNewClient nc = new frmNewClient();
-            nc.Show();
-            this.Close();
-        }
-
-        private void btnEditClient_Click(object sender, EventArgs e)
-        {
-            frmUpdateClient uc = new frmUpdateClient();
-            uc.Show();
-            this.Close();
-        }
-
         private void btnCall_Click(object sender, EventArgs e)
         {
             CallSimulator cs = new CallSimulator();
             cs.Show();
+            this.Close();
         }
 
-        private void btnNewContract_Click(object sender, EventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
-            frmNewContract c = new frmNewContract();
-            c.Show();
             this.Close();
         }
 
         private void btnCancelClient_Click(object sender, EventArgs e)
         {
-            frmCancelClient cc = new frmCancelClient();
-            cc.Show();
-            this.Close();
-        }
+            Client current = (Client)bind1.Current;
 
-        private void btnViewContract_Click(object sender, EventArgs e)
-        {
-            frmInspectContract ic = new frmInspectContract();
-            ic.Show();
-            this.Close();
+            current.Status = "Inactive";
+            if(current.UpdateClient())MessageBoxShower.ShowInfo("Client Deactivated","Cancel Contract");
         }
     }
 }
