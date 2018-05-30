@@ -12,13 +12,31 @@ using System.Windows.Forms;
 
 namespace ClientSide
 {
-    public partial class frmInspectContract : Form,IAccessibility
+    public partial class frmUpdateEmployee : Form
     {
-        public frmInspectContract()
+        BindingSource empBind = new BindingSource();
+        List<Technicians> techs = new Technicians().GetAllTechnicians();
+        List<CallOperators> cOps = new CallOperators().GetCallOperators();
+        List<object> employees = new List<object>();
+        public frmUpdateEmployee()
         {
             InitializeComponent();
             this.Size = Screen.PrimaryScreen.WorkingArea.Size;
-            VerifyAccessibility();
+            lblSkill.Visible = false;
+            cmbSkill.Visible = false;
+            foreach (Technicians item in techs)
+            {
+                employees.Add(item);
+            }
+            foreach (CallOperators item in cOps)
+            {
+                employees.Add(item);
+            }
+
+            empBind.DataSource = employees;
+            cmbEmps.DataSource = empBind;
+            cmbEmps.DisplayMember = "Name" +" "+"Surname";
+            txtId.DataBindings.Add("Text", empBind, "PersonId");
         }
         #region menuItems
         private void btnClientManagement_Click(object sender, EventArgs e)
@@ -59,34 +77,24 @@ namespace ClientSide
             CallSimulator cs = new CallSimulator();
             cs.Show();
         }
-
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
         }
         #endregion
-        public void VerifyAccessibility()
+        private void cmbType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (frmMain.loggedIn != null)
+            if (cmbType.SelectedItem.ToString() == "Technician")
             {
-                btnLoginLogout.Text = "Logout";
-                if (frmMain.loggedIn.Access == "Admin")
-                {
-                    btnTecManagement.Enabled = true;
-                    btnTecManagement.Visible = true;
-                    btnUserManagement.Enabled = true;
-                    btnUserManagement.Visible = true;
-                }
-                else
-                {
-                    btnTecManagement.Enabled = false;
-                    btnTecManagement.Visible = false;
-                    btnUserManagement.Enabled = false;
-                    btnUserManagement.Visible = false;
-                }
-            }   
+                lblSkill.Visible = true;
+                cmbSkill.Visible = true;
+            }
+            else
+            {
+                lblSkill.Visible = false;
+                cmbSkill.Visible = false;
+            }
         }
-
         private void btnLoginLogout_Click(object sender, EventArgs e)
         {
             if (frmMain.loggedIn != null)

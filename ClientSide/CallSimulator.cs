@@ -1,4 +1,5 @@
 ﻿using SHSApplication.Business_Layer;
+using SHSApplication.Helper_Libraries;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,16 +15,15 @@ namespace ClientSide
 {
     public partial class CallSimulator : Form
     {
-        List<PaymentDetails> details = new PaymentDetails().GetAllPaymentDetails();
         BindingSource bind1 = new BindingSource();
         Client current = new Client();
-        DateTime start = new DateTime();
-        DateTime end = new DateTime();
+        DateTime start;
+        DateTime end;
         int hours = 0, minutes = 0, seconds = 0;
         public CallSimulator()
         {
             InitializeComponent();
-            bind1.DataSource = new Client().GetAllClients();
+            bind1.DataSource = current.GetAllClients();
             cmbClients.DataSource = bind1;
             cmbClientsHandler.DataSource = bind1;
         }
@@ -43,11 +43,21 @@ namespace ClientSide
         {
             btnClose.Visible = true;
             current = (Client)bind1.Current;
-            end = DateTime.UtcNow;
-            //Test if call was taken
-            callTime.Stop();
-            CallOperators co = new CallOperators();
-            CallLog call = new CallLog(co, current, start, end, rtxtRemarks.Text);
+            if (start != null)
+            {
+                end = DateTime.UtcNow;
+                callTime.Stop();
+                CallOperators co = frmMain.loggedIn.GetMatchingCallOperator();
+                CallLog call = new CallLog(co, current, start, end, rtxtRemarks.Text);
+                if (call.InsertCall())
+                {
+                    MessageBoxShower.ShowInfo("This called has been logged. Thank you.", "Call Log");
+                }
+                else
+                {
+                    CustomExceptions error = new CustomExceptions("This call could not be logged. Please try again", "Logging Error!");
+                }
+            }
         }
 
         private void btnClose_Click(object sender, EventArgs e)

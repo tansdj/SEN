@@ -17,7 +17,7 @@ namespace ClientSide
             InitializeComponent();
             this.Size = Screen.PrimaryScreen.WorkingArea.Size;
         }
-
+        #region menuItems
         private void btnClientManagement_Click(object sender, EventArgs e)
         {
             frmClientManagement cm = new frmClientManagement();
@@ -54,5 +54,43 @@ namespace ClientSide
             CallSimulator cs = new CallSimulator();
             cs.Show();
         }
+
+        private void btnNewEmp_Click(object sender, EventArgs e)
+        {
+            frmNewEmployee emp = new frmNewEmployee();
+            emp.Show();
+            this.Close();
+        }
+
+        private void btnEditEmployee_Click(object sender, EventArgs e)
+        {
+            frmUpdateEmployee uEmp = new frmUpdateEmployee();
+            uEmp.Show();
+            this.Close();
+        }
+
+        private void btnEmployeeRpt_Click(object sender, EventArgs e)
+        {
+            frmEmpReport rEmp = new frmEmpReport();
+            rEmp.Show();
+            this.Close();
+        }
+        #endregion
+        private void btnLoginLogout_Click(object sender, EventArgs e)
+        {
+            if (frmMain.loggedIn != null)
+            {
+                frmMain.lh.LogOut();
+                this.Close();
+            }
+            else
+            {
+                frmLogin l = new frmLogin();
+                l.Show();
+                this.Close();
+            }
+        }
+
+        
     }
 }

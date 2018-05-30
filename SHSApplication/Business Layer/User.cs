@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,19 +18,27 @@ namespace SHSApplication.Business_Layer
         private string name;
         private string surname;
         private string email;
+        private string access;
 
-        public User(string username, string password, string name, string surname, string email)
+        public User(string username, string password, string name, string surname, string email, string access)
         {
             this.Username = username;
             this.Password = password;
             this.Name = name;
             this.Surname = surname;
             this.Email = email;
+            this.Access = access;
         }
 
         public User()
         {
 
+        }
+
+        public string Access
+        {
+            get { return access; }
+            set { access = value; }
         }
 
         public string Email
@@ -78,12 +87,12 @@ namespace SHSApplication.Business_Layer
             {
                 return false;
             }
-            return (this.Username==u.Username)&&(this.Password==u.Password)&&(this.Name==u.Name)&&(this.Surname==u.Surname)&&(this.Email==u.Email);
+            return (this.Username==u.Username)&&(this.Password==u.Password)&&(this.Name==u.Name)&&(this.Surname==u.Surname)&&(this.Email==u.Email)&&(this.Access==u.Access);
         }
 
         public override int GetHashCode()
         {
-            return this.Username.GetHashCode()^this.Password.GetHashCode()^this.Name.GetHashCode()^this.Surname.GetHashCode()^this.Email.GetHashCode();
+            return this.Username.GetHashCode()^this.Password.GetHashCode()^this.Name.GetHashCode()^this.Surname.GetHashCode()^this.Email.GetHashCode()^this.Access.GetHashCode();
         }
 
         public override string ToString()
@@ -101,6 +110,7 @@ namespace SHSApplication.Business_Layer
             user_details.Add(DataAccesHelper.uName, new string[] { DataAccesHelper.typeString, this.Name });
             user_details.Add(DataAccesHelper.uSurname, new string[] { DataAccesHelper.typeString, this.Surname });
             user_details.Add(DataAccesHelper.uEmail, new string[] { DataAccesHelper.typeString, this.Email });
+            user_details.Add(DataAccesHelper.uAccess, new string[] { DataAccesHelper.typeString, this.Access });
 
             return dh.runQuery(DataAccesHelper.targetUsers, DataAccesHelper.requestInsert, user_details);
         }
@@ -115,6 +125,7 @@ namespace SHSApplication.Business_Layer
             user_details.Add(DataAccesHelper.uName, new string[] { DataAccesHelper.typeString, this.Name });
             user_details.Add(DataAccesHelper.uSurname, new string[] { DataAccesHelper.typeString, this.Surname });
             user_details.Add(DataAccesHelper.uEmail, new string[] { DataAccesHelper.typeString, this.Email });
+            user_details.Add(DataAccesHelper.uAccess, new string[] { DataAccesHelper.typeString, this.Access });
 
             return dh.runQuery(DataAccesHelper.targetUsers, DataAccesHelper.requestUpdate, user_details,DataAccesHelper.uEmail+" = '"+this.Email+"'");
         }
@@ -129,6 +140,7 @@ namespace SHSApplication.Business_Layer
             user_details.Add(DataAccesHelper.uName, new string[] { DataAccesHelper.typeString, this.Name });
             user_details.Add(DataAccesHelper.uSurname, new string[] { DataAccesHelper.typeString, this.Surname });
             user_details.Add(DataAccesHelper.uEmail, new string[] { DataAccesHelper.typeString, this.Email });
+            user_details.Add(DataAccesHelper.uAccess, new string[] { DataAccesHelper.typeString, this.Access });
 
             return dh.runQuery(DataAccesHelper.targetUsers, DataAccesHelper.requestDelete, user_details, DataAccesHelper.uEmail + " = '" + this.Email + "'");
         }
@@ -155,20 +167,75 @@ namespace SHSApplication.Business_Layer
                 u.Name = item[DataAccesHelper.uName].ToString();
                 u.Surname = item[DataAccesHelper.uSurname].ToString();
                 u.Email = item[DataAccesHelper.uEmail].ToString();
+                u.Access = item[DataAccesHelper.uAccess].ToString();
                 users.Add(u);
             }
 
             return users;
         }
 
-        public bool TestLogin(User userObject)
+        public CallOperators GetMatchingCallOperator()
         {
-            throw new NotImplementedException();
+            CallOperators callOp = new CallOperators();
+            List<CallOperators> callOps = callOp.GetCallOperators();
+
+            var results = from ops in callOps where ops.PersonContact.Email == this.Email select ops;
+            if (results!=null)
+            {
+                foreach (CallOperators item in results)
+                {
+                    callOp = item;
+                }
+            }
+
+            return callOp;
         }
 
-        public void RecoverPassword(User userObject)
+        public bool TestLogin(ref User userObject)
         {
-            throw new NotImplementedException();
+            User user =new User(userObject.Username,userObject.Password,"","","","");
+            List<User> users = userObject.GetAllUsers();
+            var item = (from u in users where u.Username == user.Username && u.Password == user.Password select u);
+            if (item!=null)
+            {
+                foreach (var u in item)
+                {
+                    userObject = u;  
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
+
+        public bool RecoverPassword(User userObject)
+        {
+            try
+            {
+                MailMessage mail = new MailMessage();
+                SmtpClient smtp = new SmtpClient("smtp.gmail.com");
+
+                mail.From = new MailAddress("additionaladdress.tanya@gmail.com");
+                mail.To.Add(userObject.Email);
+                mail.Subject = "Password Recovery";
+                mail.Body = string.Format(@"Dear {0},
+                                           Your Password for the Sorceress Lodge application is: {1}", userObject.Username, userObject.Password);
+                smtp.Port = 587;
+                smtp.Credentials = new System.Net.NetworkCredential("additionaladdress.tanya", "AdditionalAddress1!");
+                smtp.EnableSsl = true;
+
+                smtp.Send(mail);
+                return true;
+            }
+            catch (Exception)
+            {
+                CustomExceptions error = new CustomExceptions("The password email could not be sent to user: " + userObject.Username, "Email Error!");
+                return false;
+            }
+        }
+
+        
     }
 }

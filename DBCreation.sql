@@ -78,13 +78,11 @@ CREATE TABLE tblClient
 
    CREATE TABLE tblProducts
    (ProductCount INT IDENTITY,
-    ProductSerialNr VARCHAR(100) PRIMARY KEY,
+    pProductCode nCHAR(10) PRIMARY KEY,
 	ProdName VARCHAR(20) NOT NULL,
 	ProdDescription VARCHAR(200) NOT NULL,
 	BasePrice SMALLMONEY NOT NULL DEFAULT 0,
-	ProdStatus VARCHAR(15) NOT NULL,
-	Manufacturer VARCHAR(30) NOT NULL,
-	Model VARCHAR(20) NOT NULL
+	ProdStatus VARCHAR(15) NOT NULL
 	)
 
    CREATE TABLE tblVendors
@@ -96,26 +94,29 @@ CREATE TABLE tblClient
 
 	CREATE TABLE tblProductFunctions
 	(FunctionCount INT IDENTITY,
-	 ProductSerial VARCHAR(100) FOREIGN KEY REFERENCES tblProducts(ProductSerialNr),
+	 ProductCode nCHAR(10) FOREIGN KEY REFERENCES tblProducts(pProductCode),
 	 ProdFunction VARCHAR(200) NOT NULL)
 
 	CREATE TABLE tblContractProducts
 	(ContractProdCount INT IDENTITY,
 	 ContractId nCHAR(12) FOREIGN KEY REFERENCES tblContract(ContractIdentifier),
-	 ProductSerial VARCHAR(100) FOREIGN KEY REFERENCES tblProducts(ProductSerialNr),
-	 PRIMARY KEY(ContractId,ProductSerial)
+	 ProductCode nCHAR(10) FOREIGN KEY REFERENCES tblProducts(pProductCode),
+	 PRIMARY KEY(ContractId,ProductCode)
 	)
 
 	CREATE TABLE tblSystemComponents
 	(CompCount INT IDENTITY,
-	 ComponentCode nCHAR(10) PRIMARY KEY,
-	 ProductSerial VARCHAR(100) FOREIGN KEY REFERENCES tblProducts(ProductSerialNr),
+	 pComponentCode VARCHAR(12) UNIQUE NOT NULL,
+	 ProductCode nCHAR(10) FOREIGN KEY REFERENCES tblProducts(pProductCode),
 	 CompDesc VARCHAR(200) NOT NULL,
-	 CompStatus VARCHAR(10) NOT NULL
+	 CompStatus VARCHAR(10) NOT NULL,
+	 Manufacturer VARCHAR(30) NOT NULL,
+	 Model VARCHAR(20) NOT NULL,
+	 PRIMARY KEY(Manufacturer,Model)
 	 )
 	 CREATE TABLE tblComponentVendors
 	(CompVendorCount INT IDENTITY,
-	 ComponentCode nCHAR(10) FOREIGN KEY REFERENCES tblSystemComponents(ComponentCode),
+	 ComponentCode VARCHAR(12) FOREIGN KEY REFERENCES tblSystemComponents(pComponentCode),
 	 VendorCode nCHAR(10) FOREIGN KEY REFERENCES tblVendors(VendorCode)
 	 PRIMARY KEY(ComponentCode,VendorCode)
 	)
@@ -125,7 +126,7 @@ CREATE TABLE tblClient
 	 ConfigurationCode nCHAR(10) PRIMARY KEY,
 	 ConfigName VARCHAR(20) NOT NULL,
 	 ConfigDesc VARCHAR(200) NOT NULL,
-	 ComponentCode nCHAR(10) FOREIGN KEY REFERENCES tblSystemComponents(ComponentCode),
+	 ComponentCode VARCHAR(12) FOREIGN KEY REFERENCES tblSystemComponents(pComponentCode),
 	 AddCost SMALLMONEY NOT NULL DEFAULT 0,
 	 ConfStatus VARCHAR(10) NOT NULL
 	 )
@@ -134,6 +135,7 @@ CREATE TABLE tblClient
 	(ClientConfigCount INT IDENTITY,
 	 ContractId nCHAR(12) FOREIGN KEY REFERENCES tblContract(ContractIdentifier),
 	 ConfigCode nCHAR(10) FOREIGN KEY REFERENCES tblConfiguration(ConfigurationCode),
+	 ComponentSerial VARCHAR(50) UNIQUE NOT NULL,
 	 PRIMARY KEY(ContractId,ConfigCode)
 	 )
 
@@ -190,10 +192,17 @@ CREATE TABLE tblClient
 	 ) 
 
 	 CREATE TABLE tblUsers
-	 (UserCount INT IDENTITY,
+	 (UserCount INT IDENTITY PRIMARY KEY,
 	  Username VARCHAR(50) NOT NULL,
 	  UserPassword VARCHAR(50) NOT NULL,
 	  UserFirstName VARCHAR(30) NOT NULL,
 	  UserSurname VARCHAR(50) NOT NULL,
-	  UserEmail VARCHAR(100) PRIMARY KEY
+	  UserEmail VARCHAR(100) UNIQUE NOT NULL,
+	  UserAccess VARCHAR(10) NOT NULL
+	 )
+
+	 CREATE TABLE tblServiceLevel
+	 (ServiceLevelId INT IDENTITY PRIMARY KEY,
+	  ServiceLevel VARCHAR(20) UNIQUE NOT NULL,
+	  MonthlyCost SMALLMONEY NOT NULL
 	 )

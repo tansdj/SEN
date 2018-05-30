@@ -121,7 +121,7 @@ namespace SHSApplication.Business_Layer
         {
             Datahandler dh = Datahandler.getData();
             List<Billing> bill = new List<Billing>();
-            DataTable table = dh.readDataFromDB(DataAccesHelper.QueryGetBilling+this.Billing_Client.PersonId);
+            DataTable table = dh.readDataFromDB(DataAccesHelper.QueryGetBilling+this.Billing_Client.ClientIdentifier+"'");
 
             foreach (DataRow item in table.Rows)
             {

@@ -38,7 +38,7 @@
             this.btnClientManagement = new System.Windows.Forms.Button();
             this.pnlTop = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.Button();
-            this.btnLoginReg = new System.Windows.Forms.Button();
+            this.btnLoginLogout = new System.Windows.Forms.Button();
             this.lblDash = new System.Windows.Forms.Label();
             this.picLogoSmall = new System.Windows.Forms.PictureBox();
             this.picLogo = new System.Windows.Forms.PictureBox();
@@ -46,6 +46,9 @@
             this.lblFormCommand = new System.Windows.Forms.Label();
             this.btnCancelClient = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.txtOutstanding = new System.Windows.Forms.TextBox();
+            this.lblOutstanding = new System.Windows.Forms.Label();
+            this.chcDiffPaid = new System.Windows.Forms.CheckBox();
             this.pnlMenu.SuspendLayout();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogoSmall)).BeginInit();
@@ -182,7 +185,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.pnlTop.Controls.Add(this.btnClose);
-            this.pnlTop.Controls.Add(this.btnLoginReg);
+            this.pnlTop.Controls.Add(this.btnLoginLogout);
             this.pnlTop.Controls.Add(this.lblDash);
             this.pnlTop.Controls.Add(this.picLogoSmall);
             this.pnlTop.Location = new System.Drawing.Point(0, 0);
@@ -206,23 +209,24 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // btnLoginReg
+            // btnLoginLogout
             // 
-            this.btnLoginReg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLoginReg.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnLoginReg.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnLoginReg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLoginReg.Font = new System.Drawing.Font("Copperplate Gothic Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLoginReg.ForeColor = System.Drawing.Color.OrangeRed;
-            this.btnLoginReg.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLoginReg.Location = new System.Drawing.Point(651, 42);
-            this.btnLoginReg.Name = "btnLoginReg";
-            this.btnLoginReg.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnLoginReg.Size = new System.Drawing.Size(234, 50);
-            this.btnLoginReg.TabIndex = 5;
-            this.btnLoginReg.Text = "Login/Register";
-            this.btnLoginReg.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnLoginReg.UseVisualStyleBackColor = true;
+            this.btnLoginLogout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLoginLogout.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnLoginLogout.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnLoginLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLoginLogout.Font = new System.Drawing.Font("Copperplate Gothic Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLoginLogout.ForeColor = System.Drawing.Color.OrangeRed;
+            this.btnLoginLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLoginLogout.Location = new System.Drawing.Point(763, 42);
+            this.btnLoginLogout.Name = "btnLoginLogout";
+            this.btnLoginLogout.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnLoginLogout.Size = new System.Drawing.Size(122, 50);
+            this.btnLoginLogout.TabIndex = 5;
+            this.btnLoginLogout.Text = "Logout";
+            this.btnLoginLogout.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnLoginLogout.UseVisualStyleBackColor = true;
+            this.btnLoginLogout.Click += new System.EventHandler(this.btnLoginLogout_Click);
             // 
             // lblDash
             // 
@@ -268,6 +272,7 @@
             this.cmbClients.Size = new System.Drawing.Size(451, 29);
             this.cmbClients.TabIndex = 10;
             this.cmbClients.Text = "Select Client";
+            this.cmbClients.SelectedIndexChanged += new System.EventHandler(this.cmbClients_SelectedIndexChanged);
             // 
             // lblFormCommand
             // 
@@ -314,12 +319,50 @@
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // txtOutstanding
+            // 
+            this.txtOutstanding.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtOutstanding.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtOutstanding.Font = new System.Drawing.Font("Franklin Gothic Book", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtOutstanding.ForeColor = System.Drawing.Color.Snow;
+            this.txtOutstanding.Location = new System.Drawing.Point(409, 199);
+            this.txtOutstanding.Name = "txtOutstanding";
+            this.txtOutstanding.Size = new System.Drawing.Size(225, 26);
+            this.txtOutstanding.TabIndex = 22;
+            // 
+            // lblOutstanding
+            // 
+            this.lblOutstanding.AutoSize = true;
+            this.lblOutstanding.Font = new System.Drawing.Font("Segoe MDL2 Assets", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblOutstanding.ForeColor = System.Drawing.Color.White;
+            this.lblOutstanding.Location = new System.Drawing.Point(280, 202);
+            this.lblOutstanding.Name = "lblOutstanding";
+            this.lblOutstanding.Size = new System.Drawing.Size(123, 16);
+            this.lblOutstanding.TabIndex = 21;
+            this.lblOutstanding.Text = "Outstanding Amount:";
+            // 
+            // chcDiffPaid
+            // 
+            this.chcDiffPaid.AutoSize = true;
+            this.chcDiffPaid.ForeColor = System.Drawing.Color.White;
+            this.chcDiffPaid.Location = new System.Drawing.Point(409, 246);
+            this.chcDiffPaid.Name = "chcDiffPaid";
+            this.chcDiffPaid.Size = new System.Drawing.Size(99, 17);
+            this.chcDiffPaid.TabIndex = 23;
+            this.chcDiffPaid.Text = "Difference Paid";
+            this.chcDiffPaid.UseVisualStyleBackColor = true;
+            this.chcDiffPaid.Visible = false;
+            // 
             // frmCancelClient
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(885, 537);
+            this.Controls.Add(this.chcDiffPaid);
+            this.Controls.Add(this.txtOutstanding);
+            this.Controls.Add(this.lblOutstanding);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnCancelClient);
             this.Controls.Add(this.lblFormCommand);
@@ -353,7 +396,7 @@
         private System.Windows.Forms.Button btnTecManagement;
         private System.Windows.Forms.Button btnProdManagement;
         private System.Windows.Forms.Button btnClientManagement;
-        private System.Windows.Forms.Button btnLoginReg;
+        private System.Windows.Forms.Button btnLoginLogout;
         private System.Windows.Forms.Label lblDash;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnCall;
@@ -361,6 +404,9 @@
         private System.Windows.Forms.Label lblFormCommand;
         private System.Windows.Forms.Button btnCancelClient;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.TextBox txtOutstanding;
+        private System.Windows.Forms.Label lblOutstanding;
+        private System.Windows.Forms.CheckBox chcDiffPaid;
     }
 }
 

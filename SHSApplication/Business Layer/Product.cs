@@ -119,12 +119,12 @@ namespace SHSApplication.Business_Layer
             return dh.runQuery(DataAccesHelper.targetProduct, DataAccesHelper.requestUpdate, prod_details,DataAccesHelper.prodCode+" = '"+this.ProductCode+"'");
         }
 
-        public List<Product> GetAllProducts(string serialCode="")
+        public List<Product> GetAllProducts(string prodCode="")
         {
             Datahandler dh = Datahandler.getData();
             List<Product> products = new List<Product>();
             DataTable table = new DataTable();
-            if (serialCode!="")
+            if (prodCode != "")
             {
                 table = dh.readDataFromDB(DataAccesHelper.QueryGetProducts+ " WHERE "+DataAccesHelper.prodCode+" = '"+this.ProductCode+"'");
             }

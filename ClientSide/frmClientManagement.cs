@@ -10,14 +10,15 @@ using System.Windows.Forms;
 
 namespace ClientSide
 {
-    public partial class frmClientManagement : Form
+    public partial class frmClientManagement : Form,IAccessibility
     {
         public frmClientManagement()
         {
             InitializeComponent();
+            VerifyAccessibility();
             this.Size = Screen.PrimaryScreen.WorkingArea.Size;
         }
-
+        #region menuItems
         private void btnClientManagement_Click(object sender, EventArgs e)
         {
 
@@ -93,6 +94,50 @@ namespace ClientSide
             frmInspectContract ic = new frmInspectContract();
             ic.Show();
             this.Close();
+        }
+
+        private void btnPayments_Click(object sender, EventArgs e)
+        {
+            frmRecPayment rp = new frmRecPayment();
+            rp.Show();
+            this.Close();
+        }
+        #endregion
+        public void VerifyAccessibility()
+        {
+            if (frmMain.loggedIn != null)
+            {
+                btnLoginLogout.Text = "Logout";
+                if (frmMain.loggedIn.Access == "Admin")
+                {
+                    btnTecManagement.Enabled = true;
+                    btnTecManagement.Visible = true;
+                    btnUserManagement.Enabled = true;
+                    btnUserManagement.Visible = true;
+                }
+                else
+                {
+                    btnTecManagement.Enabled = false;
+                    btnTecManagement.Visible = false;
+                    btnUserManagement.Enabled = false;
+                    btnUserManagement.Visible = false;
+                }
+            }
+        }
+
+        private void btnLoginLogout_Click(object sender, EventArgs e)
+        {
+            if (frmMain.loggedIn != null)
+            {
+                frmMain.lh.LogOut();
+                this.Close();
+            }
+            else
+            {
+                frmLogin l = new frmLogin();
+                l.Show();
+                this.Close();
+            }
         }
     }
 }

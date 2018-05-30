@@ -12,17 +12,18 @@ using System.Windows.Forms;
 
 namespace ClientSide
 {
-    public partial class frmNewProduct : Form
+    public partial class frmNewProduct : Form,IAccessibility
     {
         public frmNewProduct()
         {
             InitializeComponent();
             this.Size = Screen.PrimaryScreen.WorkingArea.Size;
+            VerifyAccessibility();
 
             gbCompInfo.Hide();
             gbConfInfo.Hide();
         }
-
+        #region menuItems
         private void btnClientManagement_Click(object sender, EventArgs e)
         {
             frmClientManagement cm = new frmClientManagement();
@@ -60,14 +61,9 @@ namespace ClientSide
         {
             CallSimulator cs = new CallSimulator();
             cs.Show();
-            this.Close();
         }
-
-        private void btnCancelProduct_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
+        #endregion
+        #region panelNavigation
         private void btnNextComp_Click(object sender, EventArgs e)
         {
             gbCompInfo.Show();
@@ -88,6 +84,48 @@ namespace ClientSide
         {
             gbCompInfo.Hide();
             gbConfInfo.Show();
+        }
+        private void btnCancelProduct_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        #endregion
+
+        public void VerifyAccessibility()
+        {
+            if (frmMain.loggedIn != null)
+            {
+                btnLoginLogout.Text = "Logout";
+                if (frmMain.loggedIn.Access == "Admin")
+                {
+                    btnTecManagement.Enabled = true;
+                    btnTecManagement.Visible = true;
+                    btnUserManagement.Enabled = true;
+                    btnUserManagement.Visible = true;
+                }
+                else
+                {
+                    btnTecManagement.Enabled = false;
+                    btnTecManagement.Visible = false;
+                    btnUserManagement.Enabled = false;
+                    btnUserManagement.Visible = false;
+                }
+            }
+        }
+
+        private void btnLoginLogout_Click(object sender, EventArgs e)
+        {
+            if (frmMain.loggedIn != null)
+            {
+                frmMain.lh.LogOut();
+                this.Close();
+            }
+            else
+            {
+                frmLogin l = new frmLogin();
+                l.Show();
+                this.Close();
+            }
         }
     }
 }

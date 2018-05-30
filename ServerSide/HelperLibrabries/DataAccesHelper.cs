@@ -73,7 +73,7 @@ namespace Serverside.HelperLibraries
         public const string pfFunction = "ProdFunction";
 
         public const string targetComponents = "tblSystemComponents";
-        public const string compSerial = "ComponentSerial";
+        public const string compCode = "pComponentCode";
         public const string compProdCode = "ProductCode";
         public const string compDesc = "CompDesc";
         public const string compStatus = "CompStatus";
@@ -137,6 +137,7 @@ namespace Serverside.HelperLibraries
         public const string targetContractConf = "tblContractCompConfiguration";
         public const string ccContractId = "ContractId";
         public const string ccConfId = "ConfigCode";
+        public const string ccCompSerial = "ComponentSerial";
 
         public const string targetCompVendors = "tblComponentVendors";
         public const string cvCompCode = "ComponentCode";
@@ -148,19 +149,25 @@ namespace Serverside.HelperLibraries
         public const string uName = "UserFirstName";
         public const string uSurname = "UserSurname";
         public const string uEmail = "UserEmail";
+        public const string uAccess = "UserAccess";
+
+        public const string targetServiceLevel = "tblServiceLevel";
+        public const string serviceLevelId = "ServiceLevelId";
+        public const string serviceLevelDesc = "ServiceLevel";
+        public const string serviceLevelMonthlyCost = "MonthlyCost";
 
         public const string QueryGetClients= "SELECT * FROM tblClient C INNER JOIN tblAddress A ON C.AddressId = A.pAddressId INNER JOIN tblContact CT ON C.ContactId = CT.pContactId";
-        public const string QueryGetBilling = "SELECT * FROM tblBilling WHERE ClientIdNr = ";
-        public const string QueryGetClientConfiguration = "SELECT * FROM tblClientCompConfiguration WHERE ClientId = ";
-        public const string QueryGetContractProducts = "SELECT * FROM tblContractProducts WHERE ContractId = ";
-        public const string QueryGetComponentVendors = "SELECT * FROM tblComponentVendors WHERE ComponentCode = ";
-        public const string QueryGetConfigurations = "SELECT * FROM tblConfiguration WHERE ComponentCode = ";
+        public const string QueryGetBilling = "SELECT * FROM tblBilling WHERE ClientId = '";
+        public const string QueryGetContractConfiguration = "SELECT * FROM tblContractCompConfiguration cc INNER JOIN tblConfiguration c ON cc.ConfigCode = c.ConfigurationCode WHERE ContractId = '";
+        public const string QueryGetContractProducts = "SELECT * FROM tblContractProducts WHERE ContractId = '";
+        public const string QueryGetComponentVendors = "SELECT * FROM tblComponentVendors WHERE ComponentCode = '";
+        public const string QueryGetConfigurations = "SELECT * FROM tblConfiguration WHERE ComponentCode = '";
         public const string QueryGetPaymentDetails = "SELECT * FROM tblPaymentDetails";
-        public const string QueryTestForPaymentDet = "SELECT * FROM tblPaymentDetails WHERE ClientIdNr = ";
+        public const string QueryTestForPaymentDet = "SELECT * FROM tblPaymentDetails WHERE ClientIdNr = '";
         public const string QueryGetProducts = "SELECT * FROM tblProducts";
-        public const string QueryGetProductFunction = "SELECT * FROM tblProductFunctions WHERE ProductCode = ";
-        public const string QueryGetSystemComponents = "SELECT * FROM tblSystemComponents WHERE ProductCode = ";
-        public const string QueryGetTechnicalDetails = "SELECT * FROM tblTechnicalDetails WHERE ConfigCode = ";
+        public const string QueryGetProductFunction = "SELECT * FROM tblProductFunctions WHERE ProductCode = '";
+        public const string QueryGetSystemComponents = "SELECT * FROM tblSystemComponents WHERE ProductCode = '";
+        public const string QueryGetTechnicalDetails = "SELECT * FROM tblTechnicalDetails WHERE ConfigCode = '";
         public const string QueryGetRequestedEvents = "SELECT * FROM tblRequestedEvents";
         public const string QueryGetTechnicians = @"SELECT * FROM tblTechnicians T
                                                     INNER JOIN tblAddress A ON T.AddressId = A.pAddressId
@@ -175,6 +182,9 @@ namespace Serverside.HelperLibraries
                                                     INNER JOIN tblAddress a ON a.pAddressId = c.AddressId
                                                     INNER JOIN tblContact ct ON ct.pContactId = c.ContactId";
         public const string QueryGetTechEvents = "SELECT * FROM tblTechnicalLog";
+        public const string QueryGetServiceLevels = "SELECT * FROM tblServiceLevel";
+        public const string QueryGetContracts = "SELECT * FROM tblContract";
+        public const string QueryCountComponents = "SELECT COUNT(pComponentCode) AS 'NrComponents' FROM tblSystemComponents";
         public const string typeString = "STRING";
         public const string typeDouble = "DOUBLE";
         public const string typeInt = "INT";

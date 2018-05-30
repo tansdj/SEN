@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmNewClient));
             this.pnlMenu = new System.Windows.Forms.Panel();
+            this.btnCall = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
             this.btnUserManagement = new System.Windows.Forms.Button();
             this.btnTecManagement = new System.Windows.Forms.Button();
@@ -37,7 +38,7 @@
             this.btnClientManagement = new System.Windows.Forms.Button();
             this.pnlTop = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.Button();
-            this.btnLoginReg = new System.Windows.Forms.Button();
+            this.btnLoginLogout = new System.Windows.Forms.Button();
             this.lblDash = new System.Windows.Forms.Label();
             this.picLogoSmall = new System.Windows.Forms.PictureBox();
             this.picLogo = new System.Windows.Forms.PictureBox();
@@ -51,6 +52,15 @@
             this.txtBank = new System.Windows.Forms.TextBox();
             this.txtAccNr = new System.Windows.Forms.TextBox();
             this.cmbPayment = new System.Windows.Forms.ComboBox();
+            this.gbAddress = new System.Windows.Forms.GroupBox();
+            this.lblPostCode = new System.Windows.Forms.Label();
+            this.txtPostalCode = new System.Windows.Forms.TextBox();
+            this.lblLine2 = new System.Windows.Forms.Label();
+            this.lblCity = new System.Windows.Forms.Label();
+            this.txtCity = new System.Windows.Forms.TextBox();
+            this.txtLine2 = new System.Windows.Forms.TextBox();
+            this.txtLine1 = new System.Windows.Forms.TextBox();
+            this.lblLine1 = new System.Windows.Forms.Label();
             this.gbContact = new System.Windows.Forms.GroupBox();
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.txtCell = new System.Windows.Forms.TextBox();
@@ -63,26 +73,16 @@
             this.lblName = new System.Windows.Forms.Label();
             this.txtId = new System.Windows.Forms.TextBox();
             this.lblId = new System.Windows.Forms.Label();
-            this.gbAddress = new System.Windows.Forms.GroupBox();
-            this.lblPostCode = new System.Windows.Forms.Label();
-            this.txtPostalCode = new System.Windows.Forms.TextBox();
-            this.lblLine2 = new System.Windows.Forms.Label();
-            this.lblCity = new System.Windows.Forms.Label();
-            this.txtCity = new System.Windows.Forms.TextBox();
-            this.txtLine2 = new System.Windows.Forms.TextBox();
-            this.txtLine1 = new System.Windows.Forms.TextBox();
-            this.lblLine1 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnAddClient = new System.Windows.Forms.Button();
-            this.btnCall = new System.Windows.Forms.Button();
             this.pnlMenu.SuspendLayout();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogoSmall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
             this.gbPersonalInfo.SuspendLayout();
             this.gbDebitOrder.SuspendLayout();
-            this.gbContact.SuspendLayout();
             this.gbAddress.SuspendLayout();
+            this.gbContact.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlMenu
@@ -100,6 +100,21 @@
             this.pnlMenu.Name = "pnlMenu";
             this.pnlMenu.Size = new System.Drawing.Size(243, 537);
             this.pnlMenu.TabIndex = 0;
+            // 
+            // btnCall
+            // 
+            this.btnCall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCall.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnCall.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCall.BackgroundImage")));
+            this.btnCall.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnCall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCall.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnCall.Location = new System.Drawing.Point(186, 488);
+            this.btnCall.Name = "btnCall";
+            this.btnCall.Size = new System.Drawing.Size(54, 49);
+            this.btnCall.TabIndex = 6;
+            this.btnCall.UseVisualStyleBackColor = false;
+            this.btnCall.Click += new System.EventHandler(this.btnCall_Click);
             // 
             // btnHome
             // 
@@ -201,7 +216,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.pnlTop.Controls.Add(this.btnClose);
-            this.pnlTop.Controls.Add(this.btnLoginReg);
+            this.pnlTop.Controls.Add(this.btnLoginLogout);
             this.pnlTop.Controls.Add(this.lblDash);
             this.pnlTop.Controls.Add(this.picLogoSmall);
             this.pnlTop.Location = new System.Drawing.Point(0, 0);
@@ -225,23 +240,24 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // btnLoginReg
+            // btnLoginLogout
             // 
-            this.btnLoginReg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLoginReg.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnLoginReg.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnLoginReg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLoginReg.Font = new System.Drawing.Font("Copperplate Gothic Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLoginReg.ForeColor = System.Drawing.Color.OrangeRed;
-            this.btnLoginReg.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLoginReg.Location = new System.Drawing.Point(650, 42);
-            this.btnLoginReg.Name = "btnLoginReg";
-            this.btnLoginReg.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnLoginReg.Size = new System.Drawing.Size(235, 50);
-            this.btnLoginReg.TabIndex = 5;
-            this.btnLoginReg.Text = "Login/Register";
-            this.btnLoginReg.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnLoginReg.UseVisualStyleBackColor = true;
+            this.btnLoginLogout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLoginLogout.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnLoginLogout.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnLoginLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLoginLogout.Font = new System.Drawing.Font("Copperplate Gothic Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLoginLogout.ForeColor = System.Drawing.Color.OrangeRed;
+            this.btnLoginLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLoginLogout.Location = new System.Drawing.Point(763, 42);
+            this.btnLoginLogout.Name = "btnLoginLogout";
+            this.btnLoginLogout.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnLoginLogout.Size = new System.Drawing.Size(122, 50);
+            this.btnLoginLogout.TabIndex = 5;
+            this.btnLoginLogout.Text = "Logout";
+            this.btnLoginLogout.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnLoginLogout.UseVisualStyleBackColor = true;
+            this.btnLoginLogout.Click += new System.EventHandler(this.btnLoginLogout_Click);
             // 
             // lblDash
             // 
@@ -296,6 +312,7 @@
             this.gbPersonalInfo.BackColor = System.Drawing.Color.Transparent;
             this.gbPersonalInfo.Controls.Add(this.gbDebitOrder);
             this.gbPersonalInfo.Controls.Add(this.cmbPayment);
+            this.gbPersonalInfo.Controls.Add(this.gbAddress);
             this.gbPersonalInfo.Controls.Add(this.gbContact);
             this.gbPersonalInfo.Controls.Add(this.txtSurname);
             this.gbPersonalInfo.Controls.Add(this.txtName);
@@ -405,6 +422,115 @@
             this.cmbPayment.TabIndex = 7;
             this.cmbPayment.Text = "None Selected";
             this.cmbPayment.SelectedIndexChanged += new System.EventHandler(this.cmbPayment_SelectedIndexChanged);
+            // 
+            // gbAddress
+            // 
+            this.gbAddress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbAddress.BackColor = System.Drawing.Color.Transparent;
+            this.gbAddress.Controls.Add(this.lblPostCode);
+            this.gbAddress.Controls.Add(this.txtPostalCode);
+            this.gbAddress.Controls.Add(this.lblLine2);
+            this.gbAddress.Controls.Add(this.lblCity);
+            this.gbAddress.Controls.Add(this.txtCity);
+            this.gbAddress.Controls.Add(this.txtLine2);
+            this.gbAddress.Controls.Add(this.txtLine1);
+            this.gbAddress.Controls.Add(this.lblLine1);
+            this.gbAddress.ForeColor = System.Drawing.Color.Snow;
+            this.gbAddress.Location = new System.Drawing.Point(294, 11);
+            this.gbAddress.Name = "gbAddress";
+            this.gbAddress.Size = new System.Drawing.Size(312, 155);
+            this.gbAddress.TabIndex = 5;
+            this.gbAddress.TabStop = false;
+            this.gbAddress.Text = "Address";
+            // 
+            // lblPostCode
+            // 
+            this.lblPostCode.AutoSize = true;
+            this.lblPostCode.Font = new System.Drawing.Font("Segoe MDL2 Assets", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPostCode.Location = new System.Drawing.Point(15, 123);
+            this.lblPostCode.Name = "lblPostCode";
+            this.lblPostCode.Size = new System.Drawing.Size(78, 16);
+            this.lblPostCode.TabIndex = 8;
+            this.lblPostCode.Text = "Postal Code:";
+            // 
+            // txtPostalCode
+            // 
+            this.txtPostalCode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPostalCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtPostalCode.Font = new System.Drawing.Font("Franklin Gothic Book", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPostalCode.ForeColor = System.Drawing.Color.Snow;
+            this.txtPostalCode.Location = new System.Drawing.Point(99, 120);
+            this.txtPostalCode.Name = "txtPostalCode";
+            this.txtPostalCode.Size = new System.Drawing.Size(202, 26);
+            this.txtPostalCode.TabIndex = 7;
+            // 
+            // lblLine2
+            // 
+            this.lblLine2.AutoSize = true;
+            this.lblLine2.Font = new System.Drawing.Font("Segoe MDL2 Assets", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLine2.Location = new System.Drawing.Point(47, 57);
+            this.lblLine2.Name = "lblLine2";
+            this.lblLine2.Size = new System.Drawing.Size(46, 16);
+            this.lblLine2.TabIndex = 6;
+            this.lblLine2.Text = "Line 2:";
+            // 
+            // lblCity
+            // 
+            this.lblCity.AutoSize = true;
+            this.lblCity.Font = new System.Drawing.Font("Segoe MDL2 Assets", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCity.Location = new System.Drawing.Point(63, 89);
+            this.lblCity.Name = "lblCity";
+            this.lblCity.Size = new System.Drawing.Size(30, 16);
+            this.lblCity.TabIndex = 5;
+            this.lblCity.Text = "City:";
+            // 
+            // txtCity
+            // 
+            this.txtCity.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtCity.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtCity.Font = new System.Drawing.Font("Franklin Gothic Book", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCity.ForeColor = System.Drawing.Color.Snow;
+            this.txtCity.Location = new System.Drawing.Point(99, 86);
+            this.txtCity.Name = "txtCity";
+            this.txtCity.Size = new System.Drawing.Size(202, 26);
+            this.txtCity.TabIndex = 4;
+            // 
+            // txtLine2
+            // 
+            this.txtLine2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtLine2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtLine2.Font = new System.Drawing.Font("Franklin Gothic Book", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLine2.ForeColor = System.Drawing.Color.Snow;
+            this.txtLine2.Location = new System.Drawing.Point(99, 50);
+            this.txtLine2.Name = "txtLine2";
+            this.txtLine2.Size = new System.Drawing.Size(202, 26);
+            this.txtLine2.TabIndex = 3;
+            // 
+            // txtLine1
+            // 
+            this.txtLine1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtLine1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtLine1.Font = new System.Drawing.Font("Franklin Gothic Book", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLine1.ForeColor = System.Drawing.Color.Snow;
+            this.txtLine1.Location = new System.Drawing.Point(99, 16);
+            this.txtLine1.Name = "txtLine1";
+            this.txtLine1.Size = new System.Drawing.Size(202, 26);
+            this.txtLine1.TabIndex = 2;
+            // 
+            // lblLine1
+            // 
+            this.lblLine1.AutoSize = true;
+            this.lblLine1.Font = new System.Drawing.Font("Segoe MDL2 Assets", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLine1.Location = new System.Drawing.Point(47, 19);
+            this.lblLine1.Name = "lblLine1";
+            this.lblLine1.Size = new System.Drawing.Size(46, 16);
+            this.lblLine1.TabIndex = 1;
+            this.lblLine1.Text = "Line 1:";
             // 
             // gbContact
             // 
@@ -535,115 +661,6 @@
             this.lblId.TabIndex = 0;
             this.lblId.Text = "ID Nr:";
             // 
-            // gbAddress
-            // 
-            this.gbAddress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbAddress.BackColor = System.Drawing.Color.Transparent;
-            this.gbAddress.Controls.Add(this.lblPostCode);
-            this.gbAddress.Controls.Add(this.txtPostalCode);
-            this.gbAddress.Controls.Add(this.lblLine2);
-            this.gbAddress.Controls.Add(this.lblCity);
-            this.gbAddress.Controls.Add(this.txtCity);
-            this.gbAddress.Controls.Add(this.txtLine2);
-            this.gbAddress.Controls.Add(this.txtLine1);
-            this.gbAddress.Controls.Add(this.lblLine1);
-            this.gbAddress.ForeColor = System.Drawing.Color.Snow;
-            this.gbAddress.Location = new System.Drawing.Point(548, 151);
-            this.gbAddress.Name = "gbAddress";
-            this.gbAddress.Size = new System.Drawing.Size(312, 155);
-            this.gbAddress.TabIndex = 5;
-            this.gbAddress.TabStop = false;
-            this.gbAddress.Text = "Address";
-            // 
-            // lblPostCode
-            // 
-            this.lblPostCode.AutoSize = true;
-            this.lblPostCode.Font = new System.Drawing.Font("Segoe MDL2 Assets", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPostCode.Location = new System.Drawing.Point(15, 123);
-            this.lblPostCode.Name = "lblPostCode";
-            this.lblPostCode.Size = new System.Drawing.Size(78, 16);
-            this.lblPostCode.TabIndex = 8;
-            this.lblPostCode.Text = "Postal Code:";
-            // 
-            // txtPostalCode
-            // 
-            this.txtPostalCode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPostalCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtPostalCode.Font = new System.Drawing.Font("Franklin Gothic Book", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPostalCode.ForeColor = System.Drawing.Color.Snow;
-            this.txtPostalCode.Location = new System.Drawing.Point(99, 120);
-            this.txtPostalCode.Name = "txtPostalCode";
-            this.txtPostalCode.Size = new System.Drawing.Size(202, 26);
-            this.txtPostalCode.TabIndex = 7;
-            // 
-            // lblLine2
-            // 
-            this.lblLine2.AutoSize = true;
-            this.lblLine2.Font = new System.Drawing.Font("Segoe MDL2 Assets", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLine2.Location = new System.Drawing.Point(47, 57);
-            this.lblLine2.Name = "lblLine2";
-            this.lblLine2.Size = new System.Drawing.Size(46, 16);
-            this.lblLine2.TabIndex = 6;
-            this.lblLine2.Text = "Line 2:";
-            // 
-            // lblCity
-            // 
-            this.lblCity.AutoSize = true;
-            this.lblCity.Font = new System.Drawing.Font("Segoe MDL2 Assets", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCity.Location = new System.Drawing.Point(63, 89);
-            this.lblCity.Name = "lblCity";
-            this.lblCity.Size = new System.Drawing.Size(30, 16);
-            this.lblCity.TabIndex = 5;
-            this.lblCity.Text = "City:";
-            // 
-            // txtCity
-            // 
-            this.txtCity.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCity.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtCity.Font = new System.Drawing.Font("Franklin Gothic Book", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCity.ForeColor = System.Drawing.Color.Snow;
-            this.txtCity.Location = new System.Drawing.Point(99, 86);
-            this.txtCity.Name = "txtCity";
-            this.txtCity.Size = new System.Drawing.Size(202, 26);
-            this.txtCity.TabIndex = 4;
-            // 
-            // txtLine2
-            // 
-            this.txtLine2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtLine2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtLine2.Font = new System.Drawing.Font("Franklin Gothic Book", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLine2.ForeColor = System.Drawing.Color.Snow;
-            this.txtLine2.Location = new System.Drawing.Point(99, 50);
-            this.txtLine2.Name = "txtLine2";
-            this.txtLine2.Size = new System.Drawing.Size(202, 26);
-            this.txtLine2.TabIndex = 3;
-            // 
-            // txtLine1
-            // 
-            this.txtLine1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtLine1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtLine1.Font = new System.Drawing.Font("Franklin Gothic Book", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLine1.ForeColor = System.Drawing.Color.Snow;
-            this.txtLine1.Location = new System.Drawing.Point(99, 16);
-            this.txtLine1.Name = "txtLine1";
-            this.txtLine1.Size = new System.Drawing.Size(202, 26);
-            this.txtLine1.TabIndex = 2;
-            // 
-            // lblLine1
-            // 
-            this.lblLine1.AutoSize = true;
-            this.lblLine1.Font = new System.Drawing.Font("Segoe MDL2 Assets", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLine1.Location = new System.Drawing.Point(47, 19);
-            this.lblLine1.Name = "lblLine1";
-            this.lblLine1.Size = new System.Drawing.Size(46, 16);
-            this.lblLine1.TabIndex = 1;
-            this.lblLine1.Text = "Line 1:";
-            // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -676,21 +693,6 @@
             this.btnAddClient.UseVisualStyleBackColor = false;
             this.btnAddClient.Click += new System.EventHandler(this.btnAddClient_Click);
             // 
-            // btnCall
-            // 
-            this.btnCall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCall.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnCall.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCall.BackgroundImage")));
-            this.btnCall.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnCall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCall.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnCall.Location = new System.Drawing.Point(186, 488);
-            this.btnCall.Name = "btnCall";
-            this.btnCall.Size = new System.Drawing.Size(54, 49);
-            this.btnCall.TabIndex = 6;
-            this.btnCall.UseVisualStyleBackColor = false;
-            this.btnCall.Click += new System.EventHandler(this.btnCall_Click);
-            // 
             // frmNewClient
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -699,7 +701,6 @@
             this.ClientSize = new System.Drawing.Size(885, 537);
             this.Controls.Add(this.btnAddClient);
             this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.gbAddress);
             this.Controls.Add(this.gbPersonalInfo);
             this.Controls.Add(this.lblFormCommand);
             this.Controls.Add(this.pnlTop);
@@ -719,10 +720,10 @@
             this.gbPersonalInfo.PerformLayout();
             this.gbDebitOrder.ResumeLayout(false);
             this.gbDebitOrder.PerformLayout();
-            this.gbContact.ResumeLayout(false);
-            this.gbContact.PerformLayout();
             this.gbAddress.ResumeLayout(false);
             this.gbAddress.PerformLayout();
+            this.gbContact.ResumeLayout(false);
+            this.gbContact.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -739,7 +740,7 @@
         private System.Windows.Forms.Button btnTecManagement;
         private System.Windows.Forms.Button btnProdManagement;
         private System.Windows.Forms.Button btnClientManagement;
-        private System.Windows.Forms.Button btnLoginReg;
+        private System.Windows.Forms.Button btnLoginLogout;
         private System.Windows.Forms.Label lblDash;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label lblFormCommand;

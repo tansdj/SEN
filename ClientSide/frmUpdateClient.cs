@@ -11,7 +11,7 @@ using SHSApplication.Business_Layer;
 
 namespace ClientSide
 {
-    public partial class frmUpdateClient : Form
+    public partial class frmUpdateClient : Form,IAccessibility
     {
        
         List<PaymentDetails> details = new PaymentDetails().GetAllPaymentDetails();
@@ -20,6 +20,7 @@ namespace ClientSide
         {
             InitializeComponent();
             this.Size = Screen.PrimaryScreen.WorkingArea.Size;
+            VerifyAccessibility();
            
             bind1.DataSource = new Client().GetAllClients();
             cmbClients.DataSource = bind1;
@@ -40,7 +41,7 @@ namespace ClientSide
         {
 
         }
-
+        #region menuItems
         private void btnClose_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -76,7 +77,7 @@ namespace ClientSide
         {
             this.Close();
         }
-
+        #endregion
         private void btnAddClient_Click(object sender, EventArgs e)
         {
             Client client = (Client)bind1.Current;
@@ -122,6 +123,43 @@ namespace ClientSide
         {
             CallSimulator cs = new CallSimulator();
             cs.Show();
+        }
+
+        public void VerifyAccessibility()
+        {
+            if (frmMain.loggedIn != null)
+            {
+                btnLoginLogout.Text = "Logout";
+                if (frmMain.loggedIn.Access == "Admin")
+                {
+                    btnTecManagement.Enabled = true;
+                    btnTecManagement.Visible = true;
+                    btnUserManagement.Enabled = true;
+                    btnUserManagement.Visible = true;
+                }
+                else
+                {
+                    btnTecManagement.Enabled = false;
+                    btnTecManagement.Visible = false;
+                    btnUserManagement.Enabled = false;
+                    btnUserManagement.Visible = false;
+                }
+            } 
+        }
+
+        private void btnLoginLogout_Click(object sender, EventArgs e)
+        {
+            if (frmMain.loggedIn != null)
+            {
+                frmMain.lh.LogOut();
+                this.Close();
+            }
+            else
+            {
+                frmLogin l = new frmLogin();
+                l.Show();
+                this.Close();
+            }
         }
     }
 }

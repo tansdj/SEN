@@ -14,14 +14,14 @@ namespace SHSApplication.Business_Layer
     {
         private string contractIdentifier;
         private Client contractClient;
-        private string serviceLevel;
+        private ServiceLevel sLevel;
         private DateTime dateOfIssue;
         private int termDuration;
 
-        public Contract(string contractIdentifier, Client contractClient, string serviceLevel, DateTime dateOfIssue, int termDuration)
+        public Contract(string contractIdentifier, Client contractClient, ServiceLevel sLevel, DateTime dateOfIssue, int termDuration)
         {
             this.ContractClient = contractClient;
-            this.ServiceLevel = serviceLevel;
+            this.SLevel = sLevel;
             this.DateOfIssue = dateOfIssue;
             this.TermDuration = termDuration;
             this.ContractIdentifier = contractIdentifier;
@@ -46,10 +46,10 @@ namespace SHSApplication.Business_Layer
         }
 
 
-        public string ServiceLevel
+        public ServiceLevel SLevel
         {
-            get { return serviceLevel; }
-            set { serviceLevel = value; }
+            get { return sLevel; }
+            set { sLevel = value; }
         }
 
 
@@ -78,12 +78,12 @@ namespace SHSApplication.Business_Layer
             {
                 return false;
             }
-            return (this.ContractIdentifier==c.ContractIdentifier)&&(this.ContractClient==c.ContractClient)&&(this.ServiceLevel==c.ServiceLevel)&&(this.DateOfIssue==c.DateOfIssue)&&(this.TermDuration==c.TermDuration);
+            return (this.ContractIdentifier==c.ContractIdentifier)&&(this.ContractClient==c.ContractClient)&&(this.SLevel==c.SLevel)&&(this.DateOfIssue==c.DateOfIssue)&&(this.TermDuration==c.TermDuration);
         }
 
         public override int GetHashCode()
         {
-            return this.ContractIdentifier.GetHashCode()^this.ContractClient.GetHashCode()^this.ServiceLevel.GetHashCode()^this.DateOfIssue.GetHashCode()^this.TermDuration.GetHashCode();
+            return this.ContractIdentifier.GetHashCode()^this.ContractClient.GetHashCode()^this.SLevel.GetHashCode()^this.DateOfIssue.GetHashCode()^this.TermDuration.GetHashCode();
         }
 
         public override string ToString()
@@ -107,7 +107,7 @@ namespace SHSApplication.Business_Layer
                 default:
                     break;
             }
-            switch (this.ServiceLevel)
+            switch (this.SLevel.Level)
             {
                 case "LOW":id += "L";break;
                 case "STANDARD":id += "S";break;
@@ -143,7 +143,7 @@ namespace SHSApplication.Business_Layer
 
             contract_details.Add(DataAccesHelper.contractId, new string[] { DataAccesHelper.typeString, this.ContractIdentifier });
             contract_details.Add(DataAccesHelper.contractClient, new string[] { DataAccesHelper.typeString, this.ContractClient.ClientIdentifier });
-            contract_details.Add(DataAccesHelper.contractServiceLevel, new string[] { DataAccesHelper.typeString, this.ServiceLevel });
+            contract_details.Add(DataAccesHelper.contractServiceLevel, new string[] { DataAccesHelper.typeString, this.SLevel.Level });
             contract_details.Add(DataAccesHelper.contractIssueDate, new string[] { DataAccesHelper.typeDateTime, this.DateOfIssue.ToShortDateString() });
             contract_details.Add(DataAccesHelper.contractTermDur, new string[] { DataAccesHelper.typeInt, this.TermDuration.ToString() });
 
@@ -155,9 +155,8 @@ namespace SHSApplication.Business_Layer
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> contract_details = new Dictionary<string, string[]>();
 
-            contract_details.Add(DataAccesHelper.contractId, new string[] { DataAccesHelper.typeString, this.ContractIdentifier });
             contract_details.Add(DataAccesHelper.contractClient, new string[] { DataAccesHelper.typeString, this.ContractClient.ClientIdentifier });
-            contract_details.Add(DataAccesHelper.contractServiceLevel, new string[] { DataAccesHelper.typeString, this.ServiceLevel });
+            contract_details.Add(DataAccesHelper.contractServiceLevel, new string[] { DataAccesHelper.typeString, this.SLevel.Level });
             contract_details.Add(DataAccesHelper.contractIssueDate, new string[] { DataAccesHelper.typeDateTime, this.DateOfIssue.ToShortDateString() });
             contract_details.Add(DataAccesHelper.contractTermDur, new string[] { DataAccesHelper.typeInt, this.TermDuration.ToString() });
 
@@ -171,11 +170,11 @@ namespace SHSApplication.Business_Layer
             DataTable table = new DataTable();
             if (clientId!="")
             {
-                table = dh.readDataFromDB(DataAccesHelper.QueryGetAllCalls+ " WHERE "+DataAccesHelper.contractClient+" = '"+clientId+"'");
+                table = dh.readDataFromDB(DataAccesHelper.QueryGetContracts+ " WHERE "+DataAccesHelper.contractClient+" = '"+clientId+"'");
             }
             else
             {
-                table = dh.readDataFromDB(DataAccesHelper.QueryGetAllCalls);
+                table = dh.readDataFromDB(DataAccesHelper.QueryGetContracts);
             }
 
             foreach (DataRow item in table.Rows)
@@ -183,7 +182,7 @@ namespace SHSApplication.Business_Layer
                 Contract c = new Contract();
                 c.ContractIdentifier = item[DataAccesHelper.contractId].ToString();
                 c.ContractClient = new Client("", "", "", null, null, "", "", item[DataAccesHelper.contractClient].ToString());
-                c.ServiceLevel = item[DataAccesHelper.contractServiceLevel].ToString();
+                c.SLevel = new ServiceLevel(item[DataAccesHelper.contractServiceLevel].ToString());
                 c.DateOfIssue = Convert.ToDateTime(item[DataAccesHelper.contractIssueDate].ToString());
                 c.TermDuration = Convert.ToInt32(item[DataAccesHelper.contractTermDur].ToString());
                 contracts.Add(c);

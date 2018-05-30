@@ -1,6 +1,6 @@
 ﻿namespace ClientSide
 {
-    partial class frmUserManagement
+    partial class frmRemoveUser
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUserManagement));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRemoveUser));
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.btnCall = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
@@ -42,9 +42,10 @@
             this.lblDash = new System.Windows.Forms.Label();
             this.picLogoSmall = new System.Windows.Forms.PictureBox();
             this.picLogo = new System.Windows.Forms.PictureBox();
-            this.btnNewUser = new System.Windows.Forms.Button();
-            this.btnEditUser = new System.Windows.Forms.Button();
+            this.lblFormCommand = new System.Windows.Forms.Label();
+            this.cmbUsers = new System.Windows.Forms.ComboBox();
             this.btnRemoveUser = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.pnlMenu.SuspendLayout();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogoSmall)).BeginInit();
@@ -75,10 +76,10 @@
             this.btnCall.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnCall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCall.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnCall.Location = new System.Drawing.Point(186, 488);
+            this.btnCall.Location = new System.Drawing.Point(186, 485);
             this.btnCall.Name = "btnCall";
             this.btnCall.Size = new System.Drawing.Size(54, 49);
-            this.btnCall.TabIndex = 6;
+            this.btnCall.TabIndex = 5;
             this.btnCall.UseVisualStyleBackColor = false;
             this.btnCall.Click += new System.EventHandler(this.btnCall_Click);
             // 
@@ -91,7 +92,7 @@
             this.btnHome.ForeColor = System.Drawing.Color.OrangeRed;
             this.btnHome.Image = ((System.Drawing.Image)(resources.GetObject("btnHome.Image")));
             this.btnHome.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnHome.Location = new System.Drawing.Point(0, 108);
+            this.btnHome.Location = new System.Drawing.Point(0, 98);
             this.btnHome.Name = "btnHome";
             this.btnHome.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnHome.Size = new System.Drawing.Size(243, 50);
@@ -99,7 +100,6 @@
             this.btnHome.Text = "        Home";
             this.btnHome.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnHome.UseVisualStyleBackColor = true;
-            this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
             // 
             // btnUserManagement
             // 
@@ -117,6 +117,7 @@
             this.btnUserManagement.Text = "       User             Management";
             this.btnUserManagement.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnUserManagement.UseVisualStyleBackColor = true;
+            this.btnUserManagement.Click += new System.EventHandler(this.btnUserManagement_Click);
             // 
             // btnTecManagement
             // 
@@ -199,7 +200,7 @@
             this.btnClose.Location = new System.Drawing.Point(845, 0);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(40, 30);
-            this.btnClose.TabIndex = 7;
+            this.btnClose.TabIndex = 6;
             this.btnClose.Text = "X";
             this.btnClose.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnClose.UseVisualStyleBackColor = true;
@@ -214,10 +215,10 @@
             this.btnLoginLogout.Font = new System.Drawing.Font("Copperplate Gothic Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLoginLogout.ForeColor = System.Drawing.Color.OrangeRed;
             this.btnLoginLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLoginLogout.Location = new System.Drawing.Point(761, 42);
+            this.btnLoginLogout.Location = new System.Drawing.Point(763, 42);
             this.btnLoginLogout.Name = "btnLoginLogout";
             this.btnLoginLogout.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnLoginLogout.Size = new System.Drawing.Size(124, 50);
+            this.btnLoginLogout.Size = new System.Drawing.Size(122, 50);
             this.btnLoginLogout.TabIndex = 5;
             this.btnLoginLogout.Text = "Logout";
             this.btnLoginLogout.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
@@ -231,9 +232,9 @@
             this.lblDash.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lblDash.Location = new System.Drawing.Point(92, 33);
             this.lblDash.Name = "lblDash";
-            this.lblDash.Size = new System.Drawing.Size(462, 48);
+            this.lblDash.Size = new System.Drawing.Size(335, 48);
             this.lblDash.TabIndex = 4;
-            this.lblDash.Text = "User Management";
+            this.lblDash.Text = "Remove User";
             // 
             // picLogoSmall
             // 
@@ -257,74 +258,76 @@
             this.picLogo.TabIndex = 2;
             this.picLogo.TabStop = false;
             // 
-            // btnNewUser
+            // lblFormCommand
             // 
-            this.btnNewUser.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnNewUser.AutoSize = true;
-            this.btnNewUser.BackColor = System.Drawing.Color.YellowGreen;
-            this.btnNewUser.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnNewUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNewUser.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNewUser.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnNewUser.Location = new System.Drawing.Point(262, 116);
-            this.btnNewUser.Name = "btnNewUser";
-            this.btnNewUser.Size = new System.Drawing.Size(202, 148);
-            this.btnNewUser.TabIndex = 5;
-            this.btnNewUser.Text = "Add new User";
-            this.btnNewUser.UseVisualStyleBackColor = false;
-            this.btnNewUser.Click += new System.EventHandler(this.btnNewUser_Click);
+            this.lblFormCommand.AutoSize = true;
+            this.lblFormCommand.BackColor = System.Drawing.Color.Transparent;
+            this.lblFormCommand.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.lblFormCommand.Font = new System.Drawing.Font("Century Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFormCommand.ForeColor = System.Drawing.Color.YellowGreen;
+            this.lblFormCommand.Location = new System.Drawing.Point(255, 132);
+            this.lblFormCommand.Name = "lblFormCommand";
+            this.lblFormCommand.Size = new System.Drawing.Size(136, 25);
+            this.lblFormCommand.TabIndex = 19;
+            this.lblFormCommand.Text = "Select User:";
             // 
-            // btnEditUser
+            // cmbUsers
             // 
-            this.btnEditUser.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnEditUser.AutoSize = true;
-            this.btnEditUser.BackColor = System.Drawing.Color.YellowGreen;
-            this.btnEditUser.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnEditUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEditUser.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditUser.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnEditUser.Location = new System.Drawing.Point(485, 116);
-            this.btnEditUser.Name = "btnEditUser";
-            this.btnEditUser.Size = new System.Drawing.Size(180, 148);
-            this.btnEditUser.TabIndex = 6;
-            this.btnEditUser.Text = "Edit User";
-            this.btnEditUser.UseVisualStyleBackColor = false;
-            this.btnEditUser.Click += new System.EventHandler(this.btnEditUser_Click);
+            this.cmbUsers.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.cmbUsers.Font = new System.Drawing.Font("Franklin Gothic Book", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbUsers.ForeColor = System.Drawing.Color.Snow;
+            this.cmbUsers.FormattingEnabled = true;
+            this.cmbUsers.Location = new System.Drawing.Point(397, 133);
+            this.cmbUsers.Name = "cmbUsers";
+            this.cmbUsers.Size = new System.Drawing.Size(476, 29);
+            this.cmbUsers.TabIndex = 18;
+            this.cmbUsers.Text = "None Selected";
             // 
             // btnRemoveUser
             // 
-            this.btnRemoveUser.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnRemoveUser.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRemoveUser.AutoSize = true;
             this.btnRemoveUser.BackColor = System.Drawing.Color.YellowGreen;
-            this.btnRemoveUser.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnRemoveUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRemoveUser.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRemoveUser.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnRemoveUser.Location = new System.Drawing.Point(684, 116);
+            this.btnRemoveUser.Location = new System.Drawing.Point(710, 472);
             this.btnRemoveUser.Name = "btnRemoveUser";
-            this.btnRemoveUser.Size = new System.Drawing.Size(189, 148);
-            this.btnRemoveUser.TabIndex = 7;
+            this.btnRemoveUser.Size = new System.Drawing.Size(153, 43);
+            this.btnRemoveUser.TabIndex = 21;
             this.btnRemoveUser.Text = "Remove User";
             this.btnRemoveUser.UseVisualStyleBackColor = false;
-            this.btnRemoveUser.Click += new System.EventHandler(this.btnRemoveUser_Click);
             // 
-            // frmUserManagement
+            // btnCancel
+            // 
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCancel.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancel.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnCancel.Location = new System.Drawing.Point(551, 472);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(153, 42);
+            this.btnCancel.TabIndex = 20;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = false;
+            // 
+            // frmRemoveUser
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(885, 537);
             this.Controls.Add(this.btnRemoveUser);
-            this.Controls.Add(this.btnEditUser);
-            this.Controls.Add(this.btnNewUser);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.lblFormCommand);
+            this.Controls.Add(this.cmbUsers);
             this.Controls.Add(this.pnlTop);
             this.Controls.Add(this.pnlMenu);
             this.Controls.Add(this.picLogo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "frmUserManagement";
+            this.Name = "frmRemoveUser";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmMain";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -353,9 +356,10 @@
         private System.Windows.Forms.Label lblDash;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnCall;
-        private System.Windows.Forms.Button btnNewUser;
-        private System.Windows.Forms.Button btnEditUser;
+        private System.Windows.Forms.Label lblFormCommand;
+        private System.Windows.Forms.ComboBox cmbUsers;
         private System.Windows.Forms.Button btnRemoveUser;
+        private System.Windows.Forms.Button btnCancel;
     }
 }
 

@@ -8,7 +8,7 @@ namespace SHSApplication.Business_Layer
 {
     public interface ILogin<T>
     {
-        bool TestLogin(T userObject);
+        bool TestLogin(ref T userObject);
         void RecoverPassword(T userObject);
     }
 }

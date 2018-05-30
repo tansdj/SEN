@@ -12,13 +12,12 @@ using System.Windows.Forms;
 
 namespace ClientSide
 {
-    public partial class frmInspectContract : Form,IAccessibility
+    public partial class frmEmpReport : Form
     {
-        public frmInspectContract()
+        public frmEmpReport()
         {
             InitializeComponent();
             this.Size = Screen.PrimaryScreen.WorkingArea.Size;
-            VerifyAccessibility();
         }
         #region menuItems
         private void btnClientManagement_Click(object sender, EventArgs e)
@@ -65,28 +64,6 @@ namespace ClientSide
             this.Close();
         }
         #endregion
-        public void VerifyAccessibility()
-        {
-            if (frmMain.loggedIn != null)
-            {
-                btnLoginLogout.Text = "Logout";
-                if (frmMain.loggedIn.Access == "Admin")
-                {
-                    btnTecManagement.Enabled = true;
-                    btnTecManagement.Visible = true;
-                    btnUserManagement.Enabled = true;
-                    btnUserManagement.Visible = true;
-                }
-                else
-                {
-                    btnTecManagement.Enabled = false;
-                    btnTecManagement.Visible = false;
-                    btnUserManagement.Enabled = false;
-                    btnUserManagement.Visible = false;
-                }
-            }   
-        }
-
         private void btnLoginLogout_Click(object sender, EventArgs e)
         {
             if (frmMain.loggedIn != null)

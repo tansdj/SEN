@@ -38,7 +38,7 @@
             this.btnClientManagement = new System.Windows.Forms.Button();
             this.pnlTop = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.Button();
-            this.btnLoginReg = new System.Windows.Forms.Button();
+            this.btnLoginLogout = new System.Windows.Forms.Button();
             this.lblDash = new System.Windows.Forms.Label();
             this.picLogoSmall = new System.Windows.Forms.PictureBox();
             this.picLogo = new System.Windows.Forms.PictureBox();
@@ -182,7 +182,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.pnlTop.Controls.Add(this.btnClose);
-            this.pnlTop.Controls.Add(this.btnLoginReg);
+            this.pnlTop.Controls.Add(this.btnLoginLogout);
             this.pnlTop.Controls.Add(this.lblDash);
             this.pnlTop.Controls.Add(this.picLogoSmall);
             this.pnlTop.Location = new System.Drawing.Point(0, 0);
@@ -206,23 +206,24 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // btnLoginReg
+            // btnLoginLogout
             // 
-            this.btnLoginReg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLoginReg.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnLoginReg.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnLoginReg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLoginReg.Font = new System.Drawing.Font("Copperplate Gothic Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLoginReg.ForeColor = System.Drawing.Color.OrangeRed;
-            this.btnLoginReg.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLoginReg.Location = new System.Drawing.Point(651, 42);
-            this.btnLoginReg.Name = "btnLoginReg";
-            this.btnLoginReg.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnLoginReg.Size = new System.Drawing.Size(234, 50);
-            this.btnLoginReg.TabIndex = 5;
-            this.btnLoginReg.Text = "Login/Register";
-            this.btnLoginReg.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnLoginReg.UseVisualStyleBackColor = true;
+            this.btnLoginLogout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLoginLogout.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnLoginLogout.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnLoginLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLoginLogout.Font = new System.Drawing.Font("Copperplate Gothic Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLoginLogout.ForeColor = System.Drawing.Color.OrangeRed;
+            this.btnLoginLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLoginLogout.Location = new System.Drawing.Point(763, 42);
+            this.btnLoginLogout.Name = "btnLoginLogout";
+            this.btnLoginLogout.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnLoginLogout.Size = new System.Drawing.Size(122, 50);
+            this.btnLoginLogout.TabIndex = 5;
+            this.btnLoginLogout.Text = "Logout";
+            this.btnLoginLogout.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnLoginLogout.UseVisualStyleBackColor = true;
+            this.btnLoginLogout.Click += new System.EventHandler(this.btnLoginLogout_Click);
             // 
             // lblDash
             // 
@@ -231,9 +232,9 @@
             this.lblDash.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.lblDash.Location = new System.Drawing.Point(92, 33);
             this.lblDash.Name = "lblDash";
-            this.lblDash.Size = new System.Drawing.Size(293, 48);
+            this.lblDash.Size = new System.Drawing.Size(450, 48);
             this.lblDash.TabIndex = 4;
-            this.lblDash.Text = "Dashboard";
+            this.lblDash.Text = "Inspect Contract";
             // 
             // picLogoSmall
             // 
@@ -352,7 +353,7 @@
         private System.Windows.Forms.Button btnTecManagement;
         private System.Windows.Forms.Button btnProdManagement;
         private System.Windows.Forms.Button btnClientManagement;
-        private System.Windows.Forms.Button btnLoginReg;
+        private System.Windows.Forms.Button btnLoginLogout;
         private System.Windows.Forms.Label lblDash;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnCall;

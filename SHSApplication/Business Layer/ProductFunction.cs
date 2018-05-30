@@ -99,7 +99,7 @@ namespace SHSApplication.Business_Layer
         {
             Datahandler dh = Datahandler.getData();
             List<ProductFunction> prodFunc = new List<ProductFunction>();
-            DataTable table = dh.readDataFromDB(DataAccesHelper.QueryGetProductFunction+this.ProductFunc_Product.ProductCode);
+            DataTable table = dh.readDataFromDB(DataAccesHelper.QueryGetProductFunction+this.ProductFunc_Product.ProductCode+"'");
 
             foreach (DataRow item in table.Rows)
             {

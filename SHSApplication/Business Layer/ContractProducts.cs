@@ -88,15 +88,14 @@ namespace SHSApplication.Business_Layer
         {
             Datahandler dh = Datahandler.getData();
             List<ContractProducts> clientProds = new List<ContractProducts>();
-            DataTable table = dh.readDataFromDB(DataAccesHelper.QueryGetContractProducts + this.ContractProducts_Contract.ContractIdentifier);
+            DataTable table = dh.readDataFromDB(DataAccesHelper.QueryGetContractProducts + this.ContractProducts_Contract.ContractIdentifier+"'");
 
             foreach (DataRow item in table.Rows)
             {
                 ContractProducts cp = new ContractProducts();
                 cp.ContractProducts_Contract = new Contract();
                 cp.ContractProducts_Contract.ContractIdentifier = item[DataAccesHelper.cpContractId].ToString();
-                cp.ContractProducts_Product = new Product();
-                cp.ContractProducts_Product.ProductCode = item[DataAccesHelper.cpProductCode].ToString();
+                cp.ContractProducts_Product = cp.ContractProducts_Product.GetAllProducts(item[DataAccesHelper.cpProductCode].ToString())[0];
                 clientProds.Add(cp);
             }
 

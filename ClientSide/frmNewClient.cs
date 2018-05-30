@@ -12,14 +12,15 @@ using SHSApplication.Helper_Libraries;
 
 namespace ClientSide
 {
-    public partial class frmNewClient : Form
+    public partial class frmNewClient : Form,IAccessibility
     {
         public frmNewClient()
         {
             InitializeComponent();
             this.Size = Screen.PrimaryScreen.WorkingArea.Size;
+            VerifyAccessibility();
         }
-
+        #region menuItems
         private void btnClientManagement_Click(object sender, EventArgs e)
         {
             frmClientManagement cm = new frmClientManagement();
@@ -62,7 +63,7 @@ namespace ClientSide
         {
             this.Close();
         }
-
+        #endregion
         private void btnAddClient_Click(object sender, EventArgs e)
         {
             if (ValidateClientInfo())
@@ -118,6 +119,43 @@ namespace ClientSide
                 valid = Validation.ValidateTextbox(1, 10, "STRING", ref txtBranch);
             }
             return valid;
+        }
+
+        public void VerifyAccessibility()
+        {
+            if (frmMain.loggedIn != null)
+            {
+                btnLoginLogout.Text = "Logout";
+                if (frmMain.loggedIn.Access == "Admin")
+                {
+                    btnTecManagement.Enabled = true;
+                    btnTecManagement.Visible = true;
+                    btnUserManagement.Enabled = true;
+                    btnUserManagement.Visible = true;
+                }
+                else
+                {
+                    btnTecManagement.Enabled = false;
+                    btnTecManagement.Visible = false;
+                    btnUserManagement.Enabled = false;
+                    btnUserManagement.Visible = false;
+                }
+            } 
+        }
+
+        private void btnLoginLogout_Click(object sender, EventArgs e)
+        {
+            if (frmMain.loggedIn != null)
+            {
+                frmMain.lh.LogOut();
+                this.Close();
+            }
+            else
+            {
+                frmLogin l = new frmLogin();
+                l.Show();
+                this.Close();
+            }
         }
     }
 }

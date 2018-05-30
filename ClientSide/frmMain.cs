@@ -12,11 +12,18 @@ using System.Windows.Forms;
 
 namespace ClientSide
 {
-    public partial class frmMain : Form
+    public partial class frmMain : Form,IAccessibility,IUserHandling
     {
+        public static User loggedIn;
+        public static LoginHandler lh = new LoginHandler();
         public frmMain()
         {
             InitializeComponent();
+            VerifyAccessibility();
+           
+            lh.LoggedIn += this.OnLogIn;
+            lh.LoggedOut += this.OnLogOut;
+
             if (DateTime.UtcNow.Day==1)
             {
                 Billing b = new Billing();
@@ -25,6 +32,7 @@ namespace ClientSide
             }
             this.Size = Screen.PrimaryScreen.WorkingArea.Size;
         }
+        #region menuItems
 
         private void btnClientManagement_Click(object sender, EventArgs e)
         {
@@ -59,6 +67,66 @@ namespace ClientSide
         {
             CallSimulator cs = new CallSimulator();
             cs.Show();
+        }
+        #endregion
+
+        public void VerifyAccessibility()
+        {
+            if (loggedIn!=null)
+            {
+                btnLoginLogout.Text = "Logout";
+                if (loggedIn.Access=="Admin")
+                {
+                    btnTecManagement.Enabled = true;
+                    btnTecManagement.Visible = true;
+                    btnUserManagement.Enabled = true;
+                    btnUserManagement.Visible = true;
+                }
+                else
+                {
+                    btnTecManagement.Enabled = false;
+                    btnTecManagement.Visible = false;
+                    btnUserManagement.Enabled = false;
+                    btnUserManagement.Visible = false;
+                }
+            }
+            else
+            {
+                btnTecManagement.Enabled = false;
+                btnTecManagement.Visible = false;
+                btnUserManagement.Enabled = false;
+                btnUserManagement.Visible = false;
+
+                btnClientManagement.Enabled = false;
+                btnClientManagement.Visible = false;
+                btnProdManagement.Enabled = false;
+                btnProdManagement.Visible = false;
+            }
+        }
+
+        private void btnLoginLogout_Click(object sender, EventArgs e)
+        {
+            if (loggedIn != null)
+            {
+                lh.LogOut();
+            }
+            else
+            {
+                frmLogin l = new frmLogin();
+                l.Show();
+            }
+        }
+
+        public void OnLogIn(object source, EventArgs e)
+        {
+            VerifyAccessibility();
+        }
+
+        public void OnLogOut(object source, EventArgs e)
+        {
+            loggedIn = null;
+            frmLogin l = new frmLogin();
+            l.Show();
         }
     }
 }

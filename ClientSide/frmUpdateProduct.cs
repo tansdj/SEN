@@ -12,13 +12,16 @@ using System.Windows.Forms;
 
 namespace ClientSide
 {
-    public partial class frmInspectContract : Form,IAccessibility
+    public partial class frmUpdateProduct : Form,IAccessibility
     {
-        public frmInspectContract()
+        public frmUpdateProduct()
         {
             InitializeComponent();
             this.Size = Screen.PrimaryScreen.WorkingArea.Size;
             VerifyAccessibility();
+
+            gbCompInfo.Hide();
+            gbConfInfo.Hide();
         }
         #region menuItems
         private void btnClientManagement_Click(object sender, EventArgs e)
@@ -31,6 +34,7 @@ namespace ClientSide
         private void btnClose_Click(object sender, EventArgs e)
         {
             Application.Exit();
+            this.Close();
         }
 
         private void btnProdManagement_Click(object sender, EventArgs e)
@@ -59,12 +63,40 @@ namespace ClientSide
             CallSimulator cs = new CallSimulator();
             cs.Show();
         }
+        #endregion
+        #region panelNavigation
+        private void btnCancelProduct_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void btnNextComp_Click(object sender, EventArgs e)
+        {
+            gpProductInformation.Hide();
+            gbCompInfo.Show();
+        }
+
+        private void btnCancelComp_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnNextConf_Click(object sender, EventArgs e)
+        {
+            gbCompInfo.Hide();
+            gbConfInfo.Show();
+        }
+
+        private void btnCancelConf_Click(object sender, EventArgs e)
         {
             this.Close();
         }
         #endregion
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+
+        }
+
         public void VerifyAccessibility()
         {
             if (frmMain.loggedIn != null)

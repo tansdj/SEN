@@ -99,7 +99,7 @@ namespace SHSApplication.Business_Layer
         {
             Datahandler dh = Datahandler.getData();
             List<TechnicalDetails> techDets = new List<TechnicalDetails>();
-            DataTable table = dh.readDataFromDB(DataAccesHelper.QueryGetTechnicalDetails + this.TechDet_Config.ConfigId);
+            DataTable table = dh.readDataFromDB(DataAccesHelper.QueryGetTechnicalDetails + this.TechDet_Config.ConfigId+"'");
 
             foreach (DataRow item in table.Rows)
             {

@@ -58,6 +58,8 @@
     <Compile Include="Business Layer\Contract.cs" />
     <Compile Include="Business Layer\IDataModification.cs" />
     <Compile Include="Business Layer\ILogin.cs" />
+    <Compile Include="Business Layer\LoginHandler.cs" />
+    <Compile Include="Business Layer\ServiceLevel.cs" />
     <Compile Include="Helper Libraries\CustomExceptions.cs" />
     <Compile Include="Business Layer\TechnicalLog.cs" />
     <Compile Include="Business Layer\User.cs" />
@@ -77,6 +79,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helper Libraries\DateDifference.cs" />
     <Compile Include="Helper Libraries\MessageBoxShower.cs" />
     <Compile Include="Helper Libraries\Validation.cs" />
     <Compile Include="Program.cs" />
