@@ -28,13 +28,13 @@ namespace SHSApplication.Business_Layer
         public string SkillLevel
         {
             get { return skillLevel; }
-            set { skillLevel = value; }
+            set { skillLevel = value.Trim(' '); }
         }
 
         public string Status
         {
             get { return status; }
-            set { status = value; }
+            set { status = value.Trim(' '); }
         }
 
         public override bool Equals(object obj)
@@ -54,12 +54,12 @@ namespace SHSApplication.Business_Layer
 
         public override int GetHashCode()
         {
-            return base.GetHashCode()^this.Status.GetHashCode()^this.SkillLevel.GetHashCode();
+            return this.Status.GetHashCode()^this.SkillLevel.GetHashCode();
         }
 
         public override string ToString()
         {
-            return base.ToString();
+            return string.Format("{0} {1}({2})",this.Name,this.Surname,this.PersonId);
         }
 
         public bool AddTech()
@@ -71,6 +71,7 @@ namespace SHSApplication.Business_Layer
             tech_details.Add(QueryBuilder.spAddTech.sp_name, new string[] { DataAccesHelper.typeString, this.Name });
             tech_details.Add(QueryBuilder.spAddTech.sp_surname, new string[] { DataAccesHelper.typeString, this.Surname });
             tech_details.Add(QueryBuilder.spAddTech.sp_status, new string[] { DataAccesHelper.typeString, this.Status });
+            tech_details.Add(QueryBuilder.spAddTech.sp_skill, new string[] { DataAccesHelper.typeString, this.SkillLevel });
             tech_details.Add(QueryBuilder.spAddTech.sp_addrLine1, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressLine1 });
             tech_details.Add(QueryBuilder.spAddTech.sp_addrLine2, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressLine2 });
             tech_details.Add(QueryBuilder.spAddTech.sp_city, new string[] { DataAccesHelper.typeString, this.PersonAddress.City });
@@ -92,6 +93,7 @@ namespace SHSApplication.Business_Layer
             tech_details.Add(QueryBuilder.spUpdateTech.sp_name, new string[] { DataAccesHelper.typeString, this.Name });
             tech_details.Add(QueryBuilder.spUpdateTech.sp_surname, new string[] { DataAccesHelper.typeString, this.Surname });
             tech_details.Add(QueryBuilder.spUpdateTech.sp_status, new string[] { DataAccesHelper.typeString, this.Status });
+            tech_details.Add(QueryBuilder.spUpdateTech.sp_skill, new string[] { DataAccesHelper.typeString, this.SkillLevel });
             tech_details.Add(QueryBuilder.spUpdateTech.sp_addrLine1, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressLine1 });
             tech_details.Add(QueryBuilder.spUpdateTech.sp_addrLine2, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressLine2 });
             tech_details.Add(QueryBuilder.spUpdateTech.sp_city, new string[] { DataAccesHelper.typeString, this.PersonAddress.City });

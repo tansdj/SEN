@@ -32,28 +32,32 @@ namespace SHSApplication.Business_Layer
         {
 
         }
+        public SystemComponents(Product sysComps_product)
+        {
+            this.SysComps_Product = sysComps_product;
+        }
         public string Model
         {
             get { return model; }
-            set { model = value; }
+            set { model = value.Trim(' '); }
         }
 
 
         public string Manufacturer
         {
             get { return manufacturer; }
-            set { manufacturer = value; }
+            set { manufacturer = value.Trim(' '); }
         }
         public string Status
         {
             get { return status; }
-            set { status = value; }
+            set { status = value.Trim(' '); }
         }
 
         public string Description
         {
             get { return description; }
-            set { description = value; }
+            set { description = value.Trim(' '); }
         }
 
         public Product SysComps_Product
@@ -66,7 +70,7 @@ namespace SHSApplication.Business_Layer
         public string CompCode
         {
             get { return compCode; }
-            set { compCode = (value=="")?Manufacturer.Substring(0,4).ToUpper()+Model.Substring(0,4).ToUpper()+CountComponents().ToString():value; }
+            set { compCode = (value=="")?Manufacturer.Substring(0,4).ToUpper()+Model.Substring(0,4).ToUpper()+CountComponents().ToString():value.Trim(' '); }
         }
 
         public override bool Equals(object obj)
@@ -86,12 +90,12 @@ namespace SHSApplication.Business_Layer
 
         public override int GetHashCode()
         {
-            return this.CompCode.GetHashCode()^this.Description.GetHashCode()^this.SysComps_Product.GetHashCode()^this.Status.GetHashCode()^this.Manufacturer.GetHashCode()^this.Model.GetHashCode();
+            return this.CompCode.GetHashCode()^this.Description.GetHashCode()^this.Status.GetHashCode()^this.Manufacturer.GetHashCode()^this.Model.GetHashCode();
         }
 
         public override string ToString()
         {
-            return base.ToString();
+            return string.Format("{0}({1}) - {2}",this.Model,this.Manufacturer,this.CompCode);
         }
 
         public bool InsertComponent()

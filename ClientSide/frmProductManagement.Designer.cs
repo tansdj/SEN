@@ -44,6 +44,9 @@
             this.picLogo = new System.Windows.Forms.PictureBox();
             this.btnNewProduct = new System.Windows.Forms.Button();
             this.btnEditProduct = new System.Windows.Forms.Button();
+            this.btnNewVendor = new System.Windows.Forms.Button();
+            this.btnEditVendor = new System.Windows.Forms.Button();
+            this.btnLinkVendors = new System.Windows.Forms.Button();
             this.pnlMenu.SuspendLayout();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogoSmall)).BeginInit();
@@ -281,7 +284,7 @@
             this.btnEditProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEditProduct.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEditProduct.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnEditProduct.Location = new System.Drawing.Point(491, 108);
+            this.btnEditProduct.Location = new System.Drawing.Point(478, 108);
             this.btnEditProduct.Name = "btnEditProduct";
             this.btnEditProduct.Size = new System.Drawing.Size(202, 148);
             this.btnEditProduct.TabIndex = 5;
@@ -289,12 +292,63 @@
             this.btnEditProduct.UseVisualStyleBackColor = false;
             this.btnEditProduct.Click += new System.EventHandler(this.btnEditProduct_Click);
             // 
+            // btnNewVendor
+            // 
+            this.btnNewVendor.AutoSize = true;
+            this.btnNewVendor.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnNewVendor.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnNewVendor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNewVendor.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNewVendor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnNewVendor.Location = new System.Drawing.Point(270, 273);
+            this.btnNewVendor.Name = "btnNewVendor";
+            this.btnNewVendor.Size = new System.Drawing.Size(202, 148);
+            this.btnNewVendor.TabIndex = 6;
+            this.btnNewVendor.Text = "Add Vendor";
+            this.btnNewVendor.UseVisualStyleBackColor = false;
+            this.btnNewVendor.Click += new System.EventHandler(this.btnNewVendor_Click);
+            // 
+            // btnEditVendor
+            // 
+            this.btnEditVendor.AutoSize = true;
+            this.btnEditVendor.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnEditVendor.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnEditVendor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditVendor.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditVendor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnEditVendor.Location = new System.Drawing.Point(478, 273);
+            this.btnEditVendor.Name = "btnEditVendor";
+            this.btnEditVendor.Size = new System.Drawing.Size(202, 148);
+            this.btnEditVendor.TabIndex = 7;
+            this.btnEditVendor.Text = "Edit Vendor";
+            this.btnEditVendor.UseVisualStyleBackColor = false;
+            this.btnEditVendor.Click += new System.EventHandler(this.btnEditVendor_Click);
+            // 
+            // btnLinkVendors
+            // 
+            this.btnLinkVendors.AutoSize = true;
+            this.btnLinkVendors.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnLinkVendors.Enabled = false;
+            this.btnLinkVendors.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnLinkVendors.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLinkVendors.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLinkVendors.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnLinkVendors.Location = new System.Drawing.Point(683, 108);
+            this.btnLinkVendors.Name = "btnLinkVendors";
+            this.btnLinkVendors.Size = new System.Drawing.Size(190, 148);
+            this.btnLinkVendors.TabIndex = 8;
+            this.btnLinkVendors.Text = "Link Vendors";
+            this.btnLinkVendors.UseVisualStyleBackColor = false;
+            // 
             // frmProductManagement
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(885, 537);
+            this.Controls.Add(this.btnLinkVendors);
+            this.Controls.Add(this.btnEditVendor);
+            this.Controls.Add(this.btnNewVendor);
             this.Controls.Add(this.btnEditProduct);
             this.Controls.Add(this.btnNewProduct);
             this.Controls.Add(this.pnlTop);
@@ -332,6 +386,9 @@
         private System.Windows.Forms.Button btnCall;
         private System.Windows.Forms.Button btnNewProduct;
         private System.Windows.Forms.Button btnEditProduct;
+        private System.Windows.Forms.Button btnNewVendor;
+        private System.Windows.Forms.Button btnEditVendor;
+        private System.Windows.Forms.Button btnLinkVendors;
     }
 }
 

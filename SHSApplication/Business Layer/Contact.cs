@@ -21,6 +21,10 @@ namespace SHSApplication.Business_Layer
             this.Email = email;
         }
 
+        public Contact()
+        {
+
+        }
         public string ContactId
         {
             get { return contactId; }
@@ -30,14 +34,14 @@ namespace SHSApplication.Business_Layer
         public string Email
         {
             get { return email; }
-            set { email = value; }
+            set { email = value.Trim(' '); }
         }
 
 
         public string Cell
         {
             get { return cell; }
-            set { cell = value; }
+            set { cell = value.Trim(' '); }
         }
 
         public override bool Equals(object obj)
@@ -57,12 +61,13 @@ namespace SHSApplication.Business_Layer
 
         public override int GetHashCode()
         {
-            return this.ContactId.GetHashCode()^this.Cell.GetHashCode()^this.Email.GetHashCode();
+            return base.GetHashCode();
+            //return this.ContactId.GetHashCode()^this.Cell.GetHashCode()^this.Email.GetHashCode();
         }
 
         public override string ToString()
         {
-            return base.ToString();
+            return string.Format("{0}\n{1}",this.Cell,this.Email);
         }
     }
 }

@@ -32,21 +32,21 @@ namespace SHSApplication.Business_Layer
         public string BranchCode
         {
             get { return branchCode; }
-            set { branchCode = value; }
+            set { branchCode = value.Trim(' '); }
         }
 
 
         public string Bank
         {
             get { return bank; }
-            set { bank = value; }
+            set { bank = value.Trim(' '); }
         }
 
 
         public string AccNr
         {
             get { return accNr; }
-            set { accNr = value; }
+            set { accNr = value.Trim(' '); }
         }
 
 
@@ -78,7 +78,7 @@ namespace SHSApplication.Business_Layer
 
         public override string ToString()
         {
-            return base.ToString();
+            return string.Format("{0}\n{1}\n{2}",this.AccNr,this.Bank,this.BranchCode);
         }
 
         public bool InsertPaymentDetail()

@@ -95,7 +95,8 @@ namespace SHSApplication.Business_Layer
                 ContractProducts cp = new ContractProducts();
                 cp.ContractProducts_Contract = new Contract();
                 cp.ContractProducts_Contract.ContractIdentifier = item[DataAccesHelper.cpContractId].ToString();
-                cp.ContractProducts_Product = cp.ContractProducts_Product.GetAllProducts(item[DataAccesHelper.cpProductCode].ToString())[0];
+                List<Product> p = new Product().GetAllProducts(item[DataAccesHelper.cpProductCode].ToString());
+                cp.ContractProducts_Product = p[0];
                 clientProds.Add(cp);
             }
 

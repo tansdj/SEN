@@ -24,10 +24,15 @@ namespace SHSApplication.Business_Layer
             this.City = city;
             this.PostalCode = postalCode;
         }
+
+        public Address()
+        {
+
+        }
         public string PostalCode
         {
             get { return postalCode; }
-            set { postalCode = value; }
+            set { postalCode = value.Trim(' '); }
         }
 
         public string AddressId
@@ -39,21 +44,21 @@ namespace SHSApplication.Business_Layer
         public string City
         {
             get { return city; }
-            set { city = value; }
+            set { city = value.Trim(' '); }
         }
 
 
         public string AddressLine2
         {
             get { return addressLine2; }
-            set { addressLine2 = value; }
+            set { addressLine2 = value.Trim(' '); }
         }
 
 
         public string AddressLine1
         {
             get { return addressLine1; }
-            set { addressLine1 = value; }
+            set { addressLine1 = value.Trim(' '); }
         }
 
         public override bool Equals(object obj)
@@ -73,12 +78,13 @@ namespace SHSApplication.Business_Layer
 
         public override int GetHashCode()
         {
-            return this.AddressId.GetHashCode()^this.AddressLine1.GetHashCode()^this.AddressLine2.GetHashCode()^this.City.GetHashCode()^this.PostalCode.GetHashCode();
+            return base.GetHashCode();
+            //return this.AddressId.GetHashCode()^this.AddressLine1.GetHashCode()^this.AddressLine2.GetHashCode()^this.City.GetHashCode()^this.PostalCode.GetHashCode();
         }
 
         public override string ToString()
         {
-            return base.ToString();
+            return string.Format("{0}\n{1}\n{2}\n{3}",this.AddressLine1,this.AddressLine2,this.City,this.PostalCode);
         }
 
         

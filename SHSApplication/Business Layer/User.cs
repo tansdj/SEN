@@ -38,41 +38,41 @@ namespace SHSApplication.Business_Layer
         public string Access
         {
             get { return access; }
-            set { access = value; }
+            set { access = value.Trim(' '); }
         }
 
         public string Email
         {
             get { return email; }
-            set { email = value; }
+            set { email = value.Trim(' '); }
         }
 
 
         public string Surname
         {
             get { return surname; }
-            set { surname = value; }
+            set { surname = value.Trim(' '); }
         }
 
 
         public string Name
         {
             get { return name; }
-            set { name = value; }
+            set { name = value.Trim(' '); }
         }
 
 
         public string Password
         {
             get { return password; }
-            set { password = value; }
+            set { password = value.Trim(' '); }
         }
 
 
         public string Username
         {
             get { return username; }
-            set { username = value; }
+            set { username = value.Trim(' '); }
         }
 
         public override bool Equals(object obj)
@@ -97,7 +97,7 @@ namespace SHSApplication.Business_Layer
 
         public override string ToString()
         {
-            return base.ToString();
+            return string.Format("{0} {1}({2})",this.Name,this.Surname,this.Access);
         }
 
         public bool InsertUser()
@@ -152,7 +152,7 @@ namespace SHSApplication.Business_Layer
             DataTable table = new DataTable();
             if (userEmail != "")
             {
-                table = dh.readDataFromDB(DataAccesHelper.QueryGetUsers+" WHERE "+DataAccesHelper.uEmail+" = '"+this.Email+"'");
+                table = dh.readDataFromDB(DataAccesHelper.QueryGetUsers+" WHERE "+DataAccesHelper.uEmail+" = '"+userEmail+"'");
             }
             else
             {
@@ -178,36 +178,31 @@ namespace SHSApplication.Business_Layer
         {
             CallOperators callOp = new CallOperators();
             List<CallOperators> callOps = callOp.GetCallOperators();
-
-            var results = from ops in callOps where ops.PersonContact.Email == this.Email select ops;
-            if (results!=null)
+            foreach (CallOperators item in callOps)
             {
-                foreach (CallOperators item in results)
+                if (item.PersonContact.Email==this.Email)
                 {
                     callOp = item;
                 }
             }
-
+            callOp = callOp != null ? callOp : new CallOperators("", this.Name, this.Surname, new Address(), new Contact(), "Active");
+            
             return callOp;
         }
 
         public bool TestLogin(ref User userObject)
         {
             User user =new User(userObject.Username,userObject.Password,"","","","");
-            List<User> users = userObject.GetAllUsers();
-            var item = (from u in users where u.Username == user.Username && u.Password == user.Password select u);
-            if (item!=null)
+            List<User> users = user.GetAllUsers();
+            foreach (User item in users)
             {
-                foreach (var u in item)
+                if ((item.Username==userObject.Username)&&(item.Password==userObject.Password))
                 {
-                    userObject = u;  
+                    userObject = item;
+                    if (userObject.Name != "") return true;
                 }
-                return true;
             }
-            else
-            {
-                return false;
-            }
+            return false;           
         }
 
         public bool RecoverPassword(User userObject)
@@ -221,7 +216,7 @@ namespace SHSApplication.Business_Layer
                 mail.To.Add(userObject.Email);
                 mail.Subject = "Password Recovery";
                 mail.Body = string.Format(@"Dear {0},
-                                           Your Password for the Sorceress Lodge application is: {1}", userObject.Username, userObject.Password);
+                                           Your Password for the SHS Management application is: {1}", userObject.Username, userObject.Password);
                 smtp.Port = 587;
                 smtp.Credentials = new System.Net.NetworkCredential("additionaladdress.tanya", "AdditionalAddress1!");
                 smtp.EnableSsl = true;
@@ -235,7 +230,5 @@ namespace SHSApplication.Business_Layer
                 return false;
             }
         }
-
-        
     }
 }

@@ -13,7 +13,7 @@ AS
 				WHEN @num = 4 THEN 'D'
 				WHEN @num = 5 THEN 'E'
 			END
-	 SET @identifier = @char + REPLICATE('0',8 - ((SELECT COUNT(IdNr) FROM tblClient)+1));
+	  SET @identifier = @char + REPLICATE('0',8 - LEN((CONVERT(VARCHAR(10),(SELECT COUNT(IdNr) FROM tblClient)+1))))+CONVERT(VARCHAR(10),(SELECT COUNT(IdNr) FROM tblClient) + 1);
 	 SET @addrId = 'ADDR'+@identifier;
 	 SET @contactId = 'CONT' + @identifier;
 		BEGIN TRY
@@ -48,7 +48,7 @@ AS
 				WHEN @num = 4 THEN 'D'
 				WHEN @num = 5 THEN 'E'
 			END
-	 SET @identifier = @char + REPLICATE('0',8 - ((SELECT COUNT(IdNr) FROM tblClient)+1));
+	SET @identifier = @char + REPLICATE('0',8 - LEN((CONVERT(VARCHAR(10),(SELECT COUNT(IdNr) FROM tblClient)+1))))+CONVERT(VARCHAR(10),(SELECT COUNT(IdNr) FROM tblClient) + 1);
 	 SET @addrId = 'ADDR'+@identifier;
 	 SET @contactId = 'CONT' + @identifier;
 		BEGIN TRY
@@ -266,7 +266,7 @@ AS
 
 GO 
 CREATE PROCEDURE insertVendor
-(@code VARCHAR(10),@name VARCHAR(13),@addrLine1 VARCHAR(30),@addrLine2 VARCHAR(30),@city VARCHAR(20),@postCode VARCHAR(10),@cell VARCHAR(10),@email VARCHAR(50),@status VARCHAR(10))
+(@code VARCHAR(10),@name VARCHAR(50),@addrLine1 VARCHAR(30),@addrLine2 VARCHAR(30),@city VARCHAR(20),@postCode VARCHAR(10),@cell VARCHAR(10),@email VARCHAR(50))
 AS
 	BEGIN
 	 DECLARE @addrId VARCHAR(14),@contactId VARCHAR(14);
@@ -291,7 +291,7 @@ AS
 
 GO 
 CREATE PROCEDURE updateVendor
-(@code VARCHAR(10),@name VARCHAR(13),@addrLine1 VARCHAR(30),@addrLine2 VARCHAR(30),@city VARCHAR(20),@postCode VARCHAR(10),@cell VARCHAR(10),@email VARCHAR(50),@status VARCHAR(10))
+(@code VARCHAR(10),@name VARCHAR(50),@addrLine1 VARCHAR(30),@addrLine2 VARCHAR(30),@city VARCHAR(20),@postCode VARCHAR(10),@cell VARCHAR(10),@email VARCHAR(50))
 AS
 	BEGIN
 	 DECLARE @addrId VARCHAR(14),@contactId VARCHAR(14);

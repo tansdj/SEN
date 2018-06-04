@@ -93,6 +93,7 @@ namespace ServerSide.HelperLibrabries
             public const string sp_cell = "@cell";
             public const string sp_email = "@email";
             public const string sp_status = "@status";
+            public const string sp_skill = "@skill";
         }
 
         public struct spUpdateTech
@@ -108,6 +109,7 @@ namespace ServerSide.HelperLibrabries
             public const string sp_cell = "@cell";
             public const string sp_email = "@email";
             public const string sp_status = "@status";
+            public const string sp_skill = "@skill";
         }
 
         public struct spAddCallOperator

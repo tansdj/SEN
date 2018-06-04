@@ -603,6 +603,7 @@
             // txtId
             // 
             this.txtId.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtId.Enabled = false;
             this.txtId.Font = new System.Drawing.Font("Franklin Gothic Book", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtId.ForeColor = System.Drawing.Color.Snow;
             this.txtId.Location = new System.Drawing.Point(75, 75);
@@ -635,6 +636,7 @@
             this.btnUpdateEmp.TabIndex = 12;
             this.btnUpdateEmp.Text = "Update Employee";
             this.btnUpdateEmp.UseVisualStyleBackColor = false;
+            this.btnUpdateEmp.Click += new System.EventHandler(this.btnUpdateEmp_Click);
             // 
             // btnCancel
             // 
@@ -662,6 +664,7 @@
             this.cmbEmps.Size = new System.Drawing.Size(417, 29);
             this.cmbEmps.TabIndex = 14;
             this.cmbEmps.Text = "None Selected";
+            this.cmbEmps.SelectedIndexChanged += new System.EventHandler(this.cmbEmps_SelectedIndexChanged);
             // 
             // lblFormCommand
             // 

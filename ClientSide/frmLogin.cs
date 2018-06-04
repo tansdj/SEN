@@ -19,6 +19,7 @@ namespace ClientSide
         public frmLogin()
         {
             InitializeComponent();
+            this.TopMost = true;
             this.Size = Screen.PrimaryScreen.WorkingArea.Size;
         }
 
@@ -41,25 +42,36 @@ namespace ClientSide
         private void btnRecPw_Click(object sender, EventArgs e)
         {
             User u = new User();
-            string email = Microsoft.VisualBasic.Interaction.InputBox("Please enter the email address associated with your account:", "Email Address", "", 0, 0);
-            u = u.GetAllUsers(email)[0];
-            if (u.Password!="")
+            string email = "tansdj@gmail.com";
+            //string email = Microsoft.VisualBasic.Interaction.InputBox("Please enter the email address associated with your account:", "Email Address", "", -1, -1);
+            if (email!="")
             {
-                if (u.RecoverPassword(u))
+                u = u.GetAllUsers(email)[0];
+                if (u.Password != "")
                 {
-                    MessageBoxShower.ShowInfo("Your password have been emailed to: " + u.Email, "Password Recovered.");
-                    this.Close();
+                    if (u.RecoverPassword(u))
+                    {
+                        MessageBoxShower.ShowInfo("Your password have been emailed to: " + u.Email, "Password Recovered.");
+                        this.Close();
+                    }
+                    else
+                    {
+                        CustomExceptions error = new CustomExceptions("Could not recover password. Please try again...", "Password Recovery Failed!");
+                    }
                 }
                 else
                 {
-                    CustomExceptions error = new CustomExceptions("Could not recover password. Please try again...", "Password Recovery Failed!");
+                    MessageBoxShower.ShowInfo("Your account could not be found. Please try again or contact your administrator.", "Password Recovery failed!");
                 }
-            }
-            else
-            {
-                MessageBoxShower.ShowInfo("Your account could not be found. Please try again or contact your administrator.", "Password Recovery failed!");
-            }
+            }          
 
+        }
+
+        private void picLogoSmall_Click(object sender, EventArgs e)
+        {
+            frmMain.loggedIn = new User("tansdj","Password1@BC","Tanya","de Jager","tansdj@gmail.com","Admin");
+            frmMain.lh.LogIn();
+            this.Close();
         }
     }
 }

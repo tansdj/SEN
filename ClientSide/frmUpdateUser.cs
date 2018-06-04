@@ -1,4 +1,5 @@
 ﻿using SHSApplication.Business_Layer;
+using SHSApplication.Helper_Libraries;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,10 +15,20 @@ namespace ClientSide
 {
     public partial class frmUpdateUser : Form
     {
+        BindingSource userBind = new BindingSource();
+        string password;
         public frmUpdateUser()
         {
             InitializeComponent();
             this.Size = Screen.PrimaryScreen.WorkingArea.Size;
+
+            userBind.DataSource = new User().GetAllUsers();
+            cmbUsers.DataSource = userBind;
+            txtName.DataBindings.Add("Text", userBind, "Name");
+            txtSurname.DataBindings.Add("Text", userBind, "Surname");
+            txtEmail.DataBindings.Add("Text", userBind, "Email");
+            txtUsername.DataBindings.Add("Text", userBind, "Username");
+            cmbAccess.DataBindings.Add("SelectedItem", userBind, "Access");
         }
         #region menuItems
         private void btnClientManagement_Click(object sender, EventArgs e)
@@ -58,7 +69,13 @@ namespace ClientSide
             CallSimulator cs = new CallSimulator();
             cs.Show();
         }
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         #endregion
+        #region UserAccessManagement
         private void btnLoginLogout_Click(object sender, EventArgs e)
         {
             if (frmMain.loggedIn != null)
@@ -73,5 +90,109 @@ namespace ClientSide
                 this.Close();
             }
         }
+        #endregion
+        private void btnGenPw_Click(object sender, EventArgs e)
+        {
+            char[] chars = new char[] { '@', '#', '$', '%', '&' };
+            Random rand = new Random();
+            if (txtUsername.Text != "")
+            {
+                password = txtUsername.Text.Substring(0, 3).ToUpper() + rand.Next(10, 99).ToString() + chars[rand.Next(0, 4)].ToString() + txtUsername.Text.Substring(txtUsername.Text.Length - 3, 2).ToLower();
+            }
+            txtPassword.Text = password;
+            txtRePw.Text = password;
+            lblAutoPw.Text = "User Password: " + password;
+        }
+
+        
+        private void btnUpdateUser_Click(object sender, EventArgs e)
+        {
+            if (ValidateUser()&&ValidatePassword())
+            {
+                User u = (User)userBind.Current;
+                if (u.UpdateUser())
+                {
+                    MessageBoxShower.ShowInfo("The user was successfully updated.", "Success!");
+                }
+                else
+                {
+                    CustomExceptions error = new CustomExceptions("The user could not be updated.Please try again later.", "Something went wrong..");
+                }
+            }
+            else
+            {
+                CustomExceptions error = new CustomExceptions("Please complete all fields correctly.", "Validation Error!");
+            }
+            
+        }
+
+        #region Validation
+        private bool ValidateUser()
+        {
+            bool valid = true;
+            if (!Validation.ValidateCombo(ref cmbUsers)) valid = false;
+            if (!Validation.ValidateTextbox(1, 50, "STRING", ref txtName)) valid = false;
+            if (!Validation.ValidateTextbox(1, 50, "STRING", ref txtSurname)) valid = false;
+            if (!Validation.ValidateTextbox(1, 50, "STRING", ref txtUsername)) valid = false;
+            if (!Validation.ValidateTextbox(1, 50, "STRING", ref txtEmail))
+            {
+                valid = false;
+            }
+            else
+            {
+                if (txtEmail.Text.IndexOf('@') == -1 || txtEmail.Text.IndexOf('.') == -1)
+                {
+                    valid = false;
+                    CustomExceptions error = new CustomExceptions("Invalid Email", "Email error!");
+                }
+            }
+            if (!Validation.ValidateCombo(ref cmbAccess)) valid = false;
+            return valid;
+        }
+
+        private bool ValidatePassword()
+        {
+            bool valid = true;
+            string password = "";
+            char[] specialChars = new char[] { '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '<', '>', '?', ',', '.', '/', '|', '-', '_' };
+            char[] upperCase = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' };
+            char[] lowerCase = new char[] { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
+            char[] nums = new char[] { '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
+            if ((!Validation.ValidateTextbox(1, 8, "STRING", ref txtPassword)) || (!Validation.ValidateTextbox(1, 8, "STRING", ref txtRePw)))
+            {
+                CustomExceptions error_length = new CustomExceptions("Password should be exactly 8 characters long.", "Password Error!");
+                valid = false;
+            }
+            if (txtPassword.Text != txtRePw.Text)
+            {
+                CustomExceptions error_equals = new CustomExceptions("Password entry boxes does not match.", "Password Error!");
+            }
+            else
+            {
+                password = txtPassword.Text;
+                if (password.IndexOfAny(specialChars) == -1)
+                {
+                    CustomExceptions error_special = new CustomExceptions("Password should contains at least 1 special character.", "Password Error!");
+                    valid = false;
+                }
+                if (password.IndexOfAny(upperCase) == -1)
+                {
+                    CustomExceptions error_upper = new CustomExceptions("Password should contains at least 1 uppercase character.", "Password Error!");
+                    valid = false;
+                }
+                if (password.IndexOfAny(lowerCase) == -1)
+                {
+                    CustomExceptions error_lower = new CustomExceptions("Password should contains at least 1 lowercase character.", "Password Error!");
+                    valid = false;
+                }
+                if (password.IndexOfAny(nums) == -1)
+                {
+                    CustomExceptions error_nums = new CustomExceptions("Password should contains at least 1 digit.", "Password Error!");
+                    valid = false;
+                }
+            }
+            return valid;
+        }
+        #endregion
     }
 }

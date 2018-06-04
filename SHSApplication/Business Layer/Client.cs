@@ -31,7 +31,7 @@ namespace SHSApplication.Business_Layer
         public string ClientIdentifier
         {
             get { return clientIdentifier; }
-            set { clientIdentifier = value; }
+            set { clientIdentifier = value.Trim(' '); }
         }
         public PaymentDetails PD
         {
@@ -43,14 +43,14 @@ namespace SHSApplication.Business_Layer
         public string Status
         {
             get { return status; }
-            set { status = value; }
+            set { status = value.Trim(' '); }
         }
 
 
         public string PaymentMethod
         {
             get { return paymentMethod; }
-            set { paymentMethod = value; }
+            set { paymentMethod = value.Trim(' '); }
         }
 
 
@@ -75,7 +75,7 @@ namespace SHSApplication.Business_Layer
 
         public override string ToString()
         {
-            return this.Name + " " + this.Surname + " (" + this.PersonId + ")";
+            return this.Name + " " + this.Surname + " (" + this.PersonId + ")/"+this.ClientIdentifier;
         }
 
         public bool NewClientWithPaymentDet(string accNr,string bank,string branchCode)
@@ -206,8 +206,11 @@ namespace SHSApplication.Business_Layer
                 c.PersonId = item[DataAccesHelper.clientId].ToString();
                 c.Name = item[DataAccesHelper.clientName].ToString();
                 c.Surname = item[DataAccesHelper.clientSurname].ToString();
-                c.PersonAddress = new Address(item[DataAccesHelper.addressId].ToString(), item[DataAccesHelper.addrLine1].ToString(), item[DataAccesHelper.addrLine2].ToString(), item[DataAccesHelper.addrCity].ToString(),item[DataAccesHelper.addrPostalCode].ToString());
-                c.PersonContact = new Contact(item[DataAccesHelper.contactId].ToString(), item[DataAccesHelper.contactCell].ToString(), item[DataAccesHelper.contactEmail].ToString());
+                c.PersonAddress = new Address(item[DataAccesHelper.addressId].ToString(), 
+                                  item[DataAccesHelper.addrLine1].ToString(), item[DataAccesHelper.addrLine2].ToString(), 
+                                  item[DataAccesHelper.addrCity].ToString(),item[DataAccesHelper.addrPostalCode].ToString());
+                c.PersonContact = new Contact(item[DataAccesHelper.contactId].ToString(), item[DataAccesHelper.contactCell].ToString(), 
+                                  item[DataAccesHelper.contactEmail].ToString());
                 c.Status = item[DataAccesHelper.clientStatus].ToString();
                 c.PaymentMethod = item[DataAccesHelper.clientPaymentMethod].ToString();
                 clients.Add(c);

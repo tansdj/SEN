@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmNewEmployee));
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.btnCall = new System.Windows.Forms.Button();
@@ -71,6 +72,7 @@
             this.lblId = new System.Windows.Forms.Label();
             this.btnAddEmp = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.ttEmp = new System.Windows.Forms.ToolTip(this.components);
             this.pnlMenu.SuspendLayout();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogoSmall)).BeginInit();
@@ -354,6 +356,7 @@
             this.cmbType.Size = new System.Drawing.Size(202, 29);
             this.cmbType.TabIndex = 10;
             this.cmbType.Text = "None Selected";
+            this.ttEmp.SetToolTip(this.cmbType, "Indicate the type of employee");
             this.cmbType.SelectedIndexChanged += new System.EventHandler(this.cmbType_SelectedIndexChanged);
             // 
             // lblType
@@ -650,6 +653,10 @@
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // ttEmp
+            // 
+            this.ttEmp.ToolTipTitle = "Employee type";
+            // 
             // frmNewEmployee
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -727,6 +734,7 @@
         private System.Windows.Forms.Label lblType;
         private System.Windows.Forms.Button btnAddEmp;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.ToolTip ttEmp;
     }
 }
 

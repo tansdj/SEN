@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmNewClient));
             this.pnlMenu = new System.Windows.Forms.Panel();
             this.btnCall = new System.Windows.Forms.Button();
@@ -75,6 +76,7 @@
             this.lblId = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnAddClient = new System.Windows.Forms.Button();
+            this.ttPay = new System.Windows.Forms.ToolTip(this.components);
             this.pnlMenu.SuspendLayout();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogoSmall)).BeginInit();
@@ -421,6 +423,7 @@
             this.cmbPayment.Size = new System.Drawing.Size(202, 29);
             this.cmbPayment.TabIndex = 7;
             this.cmbPayment.Text = "None Selected";
+            this.ttPay.SetToolTip(this.cmbPayment, "Select the method the client will use to make payments");
             this.cmbPayment.SelectedIndexChanged += new System.EventHandler(this.cmbPayment_SelectedIndexChanged);
             // 
             // gbAddress
@@ -693,6 +696,10 @@
             this.btnAddClient.UseVisualStyleBackColor = false;
             this.btnAddClient.Click += new System.EventHandler(this.btnAddClient_Click);
             // 
+            // ttPay
+            // 
+            this.ttPay.ToolTipTitle = "Payment Method";
+            // 
             // frmNewClient
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -777,6 +784,7 @@
         private System.Windows.Forms.TextBox txtBank;
         private System.Windows.Forms.TextBox txtAccNr;
         private System.Windows.Forms.Button btnCall;
+        private System.Windows.Forms.ToolTip ttPay;
     }
 }
 

@@ -35,13 +35,29 @@ namespace ClientSide
             this.Size = Screen.PrimaryScreen.WorkingArea.Size;
             VerifyAccessibility();
 
-            gpProductInformation.Hide();
-            gbCompInfo.Hide();
+            pnlProducts.Hide();
+            pnlComponents.Hide();
 
-            clientBind.DataSource = new Client().GetAllClients();
+            List<Client> clients = new Client().GetAllClients();
+            foreach (Client item in clients)
+            {
+                if (item.Status == "Inactive")
+                {
+                    clients.Remove(item);
+                }
+            }
+            clientBind.DataSource = clients;
             cmbClients.DataSource = clientBind;
 
-            productBind.DataSource = new Product().GetAllProducts();
+            List<Product> products = new Product().GetAllProducts();
+            foreach (Product item in products)
+            {
+                if (item.Status=="Discontinued")
+                {
+                    products.Remove(item);
+                }
+            }
+            productBind.DataSource = products;
             cmbProducts.DataSource = productBind;
             txtProductName.DataBindings.Add("Text", productBind, "Name");
             redProdDesc.DataBindings.Add("Text", productBind, "Description");
@@ -88,11 +104,19 @@ namespace ClientSide
         }
         #endregion
         #region panelNavigation
-        
+        private void btnAnotherProduct_Click(object sender, EventArgs e)
+        {
+            if (CheckAllComponentsConfigured())
+            {
+                pnlComponents.Hide();
+                pnlProducts.Show();
+            }
+            else
+            {
+                CustomExceptions error = new CustomExceptions("Not all components have been configured.", "Configuration failed.");
+            }
 
-        
-
-        
+        }
 
         private void btnCancelComp_Click(object sender, EventArgs e)
         {
@@ -109,7 +133,9 @@ namespace ClientSide
             this.Close();
         }
         #endregion
+        #region UserAccessManagement
 
+        
         public void VerifyAccessibility()
         {
             if (frmMain.loggedIn != null)
@@ -147,12 +173,73 @@ namespace ClientSide
             }
         }
 
+        #endregion
+        #region BindingManagement
+        private void cmbProducts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            product = (Product)productBind.Current;
+        }
+
+        private void lbComponents_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtCompSerial.Clear();
+            comp = (SystemComponents)lbComponents.SelectedItem;
+            List<Configurations> confs = new Configurations(comp).GetAllConfigurations();
+            foreach (Configurations item in confs)
+            {
+                if (item.Status=="Discontinued")
+                {
+                    confs.Remove(item);
+                }
+            }
+            configBind.DataSource = confs;
+            cmbConf.DataSource = configBind;
+            txtConfName.DataBindings.Clear();
+            txtConfName.DataBindings.Add("Text", configBind, "Name");
+            redConfDesc.DataBindings.Clear();
+            redConfDesc.DataBindings.Add("Text", configBind, "Description");
+            txtConfAddCost.DataBindings.Clear();
+            txtConfAddCost.DataBindings.Add("Text", configBind, "AddCost");
+            txtCompSerial.Focus();
+
+            foreach (ContractConfigurations item in configs)
+            {
+                if (item.ContractConfigurations_Configuration.Configuration_Component== (SystemComponents)compBind.Current)
+                {
+                    cmbConf.SelectedItem = item.ContractConfigurations_Configuration;
+                    txtCompSerial.Text = item.CompSerial;
+                    break;
+                }
+            }
+        }
+
+        private void cmbConf_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+        #endregion
         private void btnNext_Click(object sender, EventArgs e)
         {
-            client = (Client)clientBind.Current;
-            contract = new Contract("", client, new ServiceLevel(cmbServiceLevel.SelectedItem.ToString()), dtpIssueDate.Value, term);
-            gbContractInfo.Hide();
-            gpProductInformation.Show();
+            if (ValidateContractInfo())
+            {
+                client = (Client)clientBind.Current;
+                contract = new Contract("", client, new ServiceLevel(cmbServiceLevel.SelectedItem.ToString()), dtpIssueDate.Value, term);
+                if (NoDuplicates(contract))
+                {
+                    pnlContract.Hide();
+                    pnlProducts.Show();
+                }
+                else
+                {
+                    CustomExceptions error = new CustomExceptions("Customer still has an active contract. Please cancel before a new contract is issued.", "Unable to create contract");
+                }
+                
+            }
+            else
+            {
+                CustomExceptions error = new CustomExceptions("Contract cannot be created. Please complete all fields.", "Something went wronng...");
+            }
+            
         }
 
         private void cmbTerm_SelectedIndexChanged(object sender, EventArgs e)
@@ -187,63 +274,34 @@ namespace ClientSide
 
         private void btnNextComp_Click(object sender, EventArgs e)
         {
-            products.Add(new ContractProducts(contract,product));
-            compBind.DataSource = new SystemComponents("", product, "", "", "", "").GetSystemComponents();
-            lbComponents.DataSource = compBind;
-            gpProductInformation.Hide();
-        }
-
-        private void cmbProducts_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            product = (Product)productBind.Current;
-        }
-
-        private void lbComponents_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            configBind.DataSource = new Configurations("", "", "", comp, 0, "").GetAllConfigurations();
-            txtConfName.DataBindings.Add("Text", configBind, "Name");
-            redConfDesc.DataBindings.Add("Text", configBind, "Description");
-            txtConfAddCost.DataBindings.Add("Text", configBind, "AddCost");
-            txtCompSerial.Focus();
-        }
-
-        private void cmbConf_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            bool found = false;
-            config = (Configurations)configBind.Current;
-            if (txtCompSerial.Text.Length > 0)
+            if (ValidateProductInfo())
             {
-                foreach (ContractConfigurations item in configs)
+                ContractProducts cp = new ContractProducts(contract, product);
+                if (!products.Contains(cp))
                 {
-                    if (item.ContractConfigurations_Configuration.Configuration_Component == config.Configuration_Component)
+                    products.Add(cp);
+                    List<SystemComponents> comps = new SystemComponents(product).GetSystemComponents();
+                    foreach (SystemComponents item in comps)
                     {
-                        item.ContractConfigurations_Configuration = config;
-                        found = true;
+                        if (item.Status=="Discontinued")
+                        {
+                            comps.Remove(item);
+                        }
                     }
+                    compBind.DataSource = comps;
+                    lbComponents.DataSource = compBind;
+                    pnlProducts.Hide();
+                    pnlComponents.Show();
                 }
-                if (found == false)
+                else
                 {
-                    configs.Add(new ContractConfigurations(contract, config, txtCompSerial.Text));
-                }    
+                    CustomExceptions error = new CustomExceptions("This product has already been added to the contract.", "Duplicate Product");
+                }
             }
             else
             {
-                CustomExceptions error = new CustomExceptions("Component Serial Code Not filled in.", "Configuration failed.");
-            }          
-        }
-
-        private bool CheckAllComponentsConfigured()
-        {
-            List<SystemComponents> components = (List<SystemComponents>)compBind.DataSource;
-            foreach (ContractConfigurations item in configs)
-            {
-                var results = from comps in components where comps.CompCode == item.ContractConfigurations_Configuration.Configuration_Component.CompCode select comps;
-                if (results==null)
-                {
-                    return false;
-                }
+                CustomExceptions error = new CustomExceptions("Please select a product before you continue.", "No product selected");
             }
-            return true;
         }
 
         private bool SubmitAllProducts()
@@ -267,34 +325,129 @@ namespace ClientSide
             return valid;
         }
 
-        private void btnAnotherProduct_Click(object sender, EventArgs e)
-        {
-            if (CheckAllComponentsConfigured())
-            {
-                gbCompInfo.Hide();
-                gpProductInformation.Show();
-            }
-            else
-            {
-                CustomExceptions error = new CustomExceptions("Not all components have been configured.", "Configuration failed.");
-            }
-            
-        }
-
         private void btnFinish_Click(object sender, EventArgs e)
         {
-            if (contract.InsertContract()&&SubmitAllProducts()&&SubmitAllConfigs())
+            if (contract.InsertContract() && SubmitAllProducts() && SubmitAllConfigs())
             {
                 MessageBoxShower.ShowInfo("The Contract has been recorded successfully.", "Success!");
-                this.Close();
+                
+                Client current = client;
+                double outstandingAmount = 0;
+                List<Contract> contracts = new Contract().GetAllContracts(current.ClientIdentifier);
+                if (contracts.Count > 0)
+                {
+                    foreach (Contract item in contracts)
+                    {
+                        if (item.DateOfIssue.AddMonths(item.TermDuration) > DateTime.UtcNow)
+                        {
+                            ServiceLevel sl = new ServiceLevel().GetServiceLevels(item.SLevel.Level)[0];
+                            List<ContractProducts> cp = new ContractProducts(item, new Product()).GetContractProducts();
+                            List<ContractConfigurations> cc = new ContractConfigurations(item).GetContractConfigurations();
+                            List<Billing> b = new Billing(current, DateTime.UtcNow, 0, 0).GetClientBilling();
+                            int monthsLeft = DateDifference.GetMonthDifference(item.DateOfIssue, item.DateOfIssue.AddMonths(item.TermDuration));
+                            if (monthsLeft > 0)
+                            {
+                                int monthsPaid = DateDifference.GetMonthDifference(item.DateOfIssue, DateTime.UtcNow);
+                                double serviceFeePaid = monthsPaid * sl.MonthlyCost;
+                                double sumProductCost = (from cProd in cp select cProd.ContractProducts_Product.BasePrice).Sum();
+                                double sumAddCosts = (from cConf in cc select cConf.ContractConfigurations_Configuration.AddCost).Sum();
+                                double sumProductCostPaid = (from bProd in b select bProd.AmountPaid).Sum() - serviceFeePaid;
+                                outstandingAmount = (sumProductCost + sumAddCosts) - sumProductCostPaid;
+                            }
+                            Billing bill = new Billing(client, DateTime.UtcNow, outstandingAmount, 0);
+                            bill.InsertBilling();
+                        }
+
+                    }
+                }
             }
-            else
+            this.Close();
+        }
+
+        #region Validation
+        private bool ValidateContractInfo()
+        {
+            bool valid = true;
+            if (!Validation.ValidateCombo(ref cmbClients)) valid = false;
+            if (!Validation.ValidateCombo(ref cmbServiceLevel)) valid = false;
+            if (!Validation.ValidateCombo(ref cmbTerm))
             {
-                CustomExceptions error = new CustomExceptions("The Contract was not recorded succesfully please inspect to ensure validity", "Failure!");
-                frmInspectContract ic = new frmInspectContract();
-                ic.Show();
-                this.Close();
+                if (!Validation.ValidateSpinEdit(ref numDuration)) valid = false;
             }
+            return valid;
+        }
+
+        private bool ValidateProductInfo()
+        {
+            return Validation.ValidateCombo(ref cmbProducts);
+        }
+
+        private bool ValidateConfInfo()
+        {
+            bool valid = true;
+            if (!Validation.ValidateCombo(ref cmbConf))valid = false ;
+            if (!Validation.ValidateTextbox(2, 50, "STRING", ref txtCompSerial)) valid = false;
+            return valid;
+        }
+        private bool CheckAllComponentsConfigured()
+        {
+            List<SystemComponents> components = (List<SystemComponents>)compBind.DataSource;
+            foreach (ContractConfigurations item in configs)
+            {
+                var results = from comps in components where comps.CompCode == item.ContractConfigurations_Configuration.Configuration_Component.CompCode select comps;
+                if (results == null)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private bool NoDuplicates(Contract c)
+        {
+            List<Contract> contracts = new Contract().GetAllContracts();
+            foreach (Contract item in contracts)
+            {
+                if ((c.ContractClient==item.ContractClient))
+                {
+                    if (item.DateOfIssue.AddMonths(item.TermDuration)>c.DateOfIssue)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        #endregion
+
+        private void btnSaveConfiguration_Click(object sender, EventArgs e)
+        {
+            bool found = false;
+            config = (Configurations)configBind.Current;
+            foreach (ContractConfigurations item in configs)
+            {
+                if (item.ContractConfigurations_Configuration.Configuration_Component == config.Configuration_Component)
+                {
+                    item.ContractConfigurations_Configuration = config;
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false)
+            {
+                if (ValidateConfInfo())
+                {
+                    configs.Add(new ContractConfigurations(contract, config, txtCompSerial.Text));
+                    MessageBoxShower.ShowInfo("Configuration saved!", "Success!");
+
+                }
+                else
+                {
+                    CustomExceptions error = new CustomExceptions("Please complete all fields.", "Configuration failed.");
+                }
+
+            }
+            txtCompSerial.Clear();
         }
     }
 }

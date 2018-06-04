@@ -34,7 +34,7 @@ namespace SHSApplication.Business_Layer
         public string Remarks
         {
             get { return remarks; }
-            set { remarks = value; }
+            set { remarks = value.Trim(' '); }
         }
 
 
@@ -111,7 +111,7 @@ namespace SHSApplication.Business_Layer
             DataTable table = new DataTable();
             if (clientId!="")
             {
-                table = dh.readDataFromDB(DataAccesHelper.QueryGetAllCalls + " WHERE '"+DataAccesHelper.callClientId+" = "+clientId+"'");
+                table = dh.readDataFromDB(DataAccesHelper.QueryGetAllCalls + " WHERE "+DataAccesHelper.callClientId+" = '"+clientId+"'");
             }
             else
             {
@@ -121,7 +121,7 @@ namespace SHSApplication.Business_Layer
             foreach (DataRow item in table.Rows)
             {
                 CallLog c = new CallLog();
-                c.LogOperator = new CallOperators(item[DataAccesHelper.callOperatorId].ToString(),"","",null,null,"");
+                c.LogOperator = new CallOperators(item[DataAccesHelper.callOperatorId].ToString(),item[DataAccesHelper.operatorName].ToString(),item[DataAccesHelper.operatorSurname].ToString(),null,null,"");
                 c.LogClient = new Client("","","",null,null,"","",item[DataAccesHelper.callClientId].ToString());
                 c.StartTime = Convert.ToDateTime(item[DataAccesHelper.callStartTime].ToString());
                 c.EndTime = Convert.ToDateTime(item[DataAccesHelper.callEndTime].ToString());

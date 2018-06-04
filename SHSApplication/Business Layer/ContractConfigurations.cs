@@ -26,10 +26,15 @@ namespace SHSApplication.Business_Layer
         {
 
         }
+
+        public ContractConfigurations(Contract contractConfigurations_contract)
+        {
+            this.ContractConfigurations_Contract = contractConfigurations_contract;
+        }
         public string CompSerial
         {
             get { return compSerial; }
-            set { compSerial = value; }
+            set { compSerial = value.Trim(' '); }
         }
         public Configurations ContractConfigurations_Configuration
         {
@@ -103,7 +108,7 @@ namespace SHSApplication.Business_Layer
                 ContractConfigurations cf = new ContractConfigurations();
                 cf.ContractConfigurations_Contract = new Contract();
                 cf.ContractConfigurations_Contract.ContractIdentifier = item[DataAccesHelper.ccContractId].ToString();
-                cf.ContractConfigurations_Configuration = new Configurations(item[DataAccesHelper.ccConfId].ToString(),item[DataAccesHelper.confName].ToString(),item[DataAccesHelper.confDesc].ToString(),new SystemComponents(item[DataAccesHelper.confCompCode].ToString(),null,"","","",""),Convert.ToDouble(item[DataAccesHelper.confAddCost].ToString()),item[DataAccesHelper.compStatus].ToString());
+                cf.ContractConfigurations_Configuration = new Configurations(item[DataAccesHelper.ccConfId].ToString(),item[DataAccesHelper.confName].ToString(),item[DataAccesHelper.confDesc].ToString(),new SystemComponents(item[DataAccesHelper.confCompCode].ToString(),null,"","","",""),Convert.ToDouble(item[DataAccesHelper.confAddCost].ToString()),item[DataAccesHelper.confStatus].ToString());
                 cf.CompSerial = item[DataAccesHelper.ccCompSerial].ToString();
                 contractConf.Add(cf);
             }

@@ -67,6 +67,7 @@ namespace ClientSide
             this.Close();
         }
         #endregion
+        #region UserAccessManagement
         private void cmbType_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmbType.SelectedItem.ToString() == "Technician")
@@ -95,33 +96,116 @@ namespace ClientSide
                 this.Close();
             }
         }
-
+        #endregion
         private void btnAddEmp_Click(object sender, EventArgs e)
         {
-            if (cmbType.SelectedItem.ToString()== "Technician")
+            if (ValidateForm())
             {
-                Technicians t = new Technicians(txtId.Text, txtName.Text, txtSurname.Text,new Address("", txtLine1.Text, txtLine2.Text, txtCity.Text, txtPostalCode.Text), new Contact("", txtCell.Text, txtEmail.Text), cmbStatus.SelectedItem.ToString(), cmbSkill.SelectedItem.ToString());
-                if (t.AddTech())
+                if (cmbType.SelectedItem.ToString() == "Technician")
                 {
-                    MessageBoxShower.ShowInfo("The Technician was added to the system.", "Success!");
+                    Technicians t = new Technicians(txtId.Text, txtName.Text, txtSurname.Text, new Address("", txtLine1.Text, txtLine2.Text, txtCity.Text, txtPostalCode.Text), new Contact("", txtCell.Text, txtEmail.Text), cmbStatus.SelectedItem.ToString(), cmbSkill.SelectedItem.ToString());
+                    if (NoDuplicates(t))
+                    {
+                        if (t.AddTech())
+                        {
+                            MessageBoxShower.ShowInfo("The Technician was added to the system.", "Success!");
+                            this.Close();
+                        }
+                        else
+                        {
+                            CustomExceptions error = new CustomExceptions("The Technician could not be added. Please try again.", "Failure!");
+                        }
+                    }
+                    else
+                    {
+                        CustomExceptions error = new CustomExceptions("A technician with this ID has already been added. Please update.", "Cannot add technician.");
+                    } 
                 }
-                else
+                else if (cmbType.SelectedItem.ToString() == "Call Operator")
                 {
-                    CustomExceptions error = new CustomExceptions("The Technician could not be added. Please try again.", "Failure!");
+                    CallOperators c = new CallOperators(txtId.Text, txtName.Text, txtSurname.Text, new Address("", txtLine1.Text, txtLine2.Text, txtCity.Text, txtPostalCode.Text), new Contact("", txtCell.Text, txtEmail.Text), cmbStatus.SelectedItem.ToString());
+                    if (NoDuplicates(c))
+                    {
+                        if (c.InsertCallOperator())
+                        {
+                            MessageBoxShower.ShowInfo("The Call Operator was added to the system.", "Success!");
+                            this.Close();
+                        }
+                        else
+                        {
+                            CustomExceptions error = new CustomExceptions("The Call Operator could not be added. Please try again.", "Failure!");
+                        }
+                    }
+                    else
+                    {
+                        CustomExceptions error = new CustomExceptions("A Call Operator with this ID has already been added. Please update.", "Cannot add Call Operator.");
+                    }
                 }
             }
-            else if (cmbType.SelectedItem.ToString() == "Call Operator")
+            else
             {
-                CallOperators c = new CallOperators(txtId.Text, txtName.Text, txtSurname.Text, new Address("", txtLine1.Text, txtLine2.Text, txtCity.Text, txtPostalCode.Text), new Contact("", txtCell.Text, txtEmail.Text), cmbStatus.SelectedItem.ToString());
-                if (c.InsertCallOperator())
-                {
-                    MessageBoxShower.ShowInfo("The Call Operator was added to the system.", "Success!");
-                }
-                else
-                {
-                    CustomExceptions error = new CustomExceptions("The Call Operator could not be added. Please try again.", "Failure!");
-                }
+                CustomExceptions error = new CustomExceptions("Please complete all fields.", "Cannot add Employee.");
             }
+ 
         }
+        #region Validation
+        private bool ValidateForm()
+        {
+            bool valid = true;
+            if (Validation.ValidateCombo(ref cmbType))
+            {
+                if (cmbType.SelectedItem.ToString() == "Technician")
+                {
+                    if (!Validation.ValidateCombo(ref cmbSkill)) valid = false;
+                }
+            }
+            else
+            {
+                valid = false;
+            }
+            if (!Validation.ValidateTextbox(13, 13, "LONGINT", ref txtId)) valid = false;
+            if (!Validation.ValidateTextbox(1, 50, "STRING", ref txtName)) valid = false;
+            if (!Validation.ValidateTextbox(1, 50, "STRING", ref txtSurname)) valid = false;
+            if (!Validation.ValidateTextbox(1, 30, "STRING", ref txtLine1)) valid = false;
+            if (!Validation.ValidateTextbox(1, 30, "STRING", ref txtLine2)) valid = false;
+            if (!Validation.ValidateTextbox(1, 20, "STRING", ref txtCity)) valid = false;
+            if (!Validation.ValidateTextbox(1, 10, "INT", ref txtPostalCode)) valid = false;
+            if (!Validation.ValidateTextbox(1, 50, "STRING", ref txtEmail)) valid = false;
+            if (!Validation.ValidateTextbox(10, 10, "INT", ref txtCell)) valid = false;
+            if (!Validation.ValidateCombo(ref cmbStatus)) valid = false;
+            
+
+            return valid;
+        }
+
+        private bool NoDuplicates(object emp)
+        {
+            if (emp is Technicians)
+            {
+                Technicians t = (Technicians)emp;
+                List<Technicians> techs = t.GetAllTechnicians();
+                foreach (Technicians item in techs)
+                {
+                    if (item.PersonId==t.PersonId)
+                    {
+                        return false;
+                    }
+                }
+            }
+            else if (emp is CallOperators)
+            {
+                CallOperators co = (CallOperators)emp;
+                List<CallOperators> callOps = co.GetCallOperators();
+                foreach (CallOperators item in callOps)
+                {
+                    if (item.PersonId==co.PersonId)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        #endregion
     }
 }

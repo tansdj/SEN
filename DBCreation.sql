@@ -53,7 +53,8 @@ CREATE TABLE tblClient
  )
 
  CREATE TABLE tblContract
- (ContractIdentifier nCHAR(12) PRIMARY KEY,
+ (ContractCount INt IDENTITY,
+  ContractIdentifier nCHAR(12) PRIMARY KEY,
   ClientId nCHAR(9) FOREIGN KEY REFERENCES tblClient(ClientIdentifier),
   ServiceLevel VARCHAR(20) NOT NULL,
   DateOfIssue DATETIME NOT NULL,
@@ -79,7 +80,7 @@ CREATE TABLE tblClient
    CREATE TABLE tblProducts
    (ProductCount INT IDENTITY,
     pProductCode nCHAR(10) PRIMARY KEY,
-	ProdName VARCHAR(20) NOT NULL,
+	ProdName VARCHAR(50) NOT NULL,
 	ProdDescription VARCHAR(200) NOT NULL,
 	BasePrice SMALLMONEY NOT NULL DEFAULT 0,
 	ProdStatus VARCHAR(15) NOT NULL
@@ -87,7 +88,7 @@ CREATE TABLE tblClient
 
    CREATE TABLE tblVendors
    (VendorCode nCHAR(10) PRIMARY KEY,
-    VendorName VARCHAR(30) NOT NULL,
+    VendorName VARCHAR(50) NOT NULL,
 	AddressId VARCHAR(17) FOREIGN KEY REFERENCES tblAddress(pAddressId),
 	ContactId VARCHAR(17) FOREIGN KEY REFERENCES tblContact(pContactId)
 	)
@@ -170,7 +171,8 @@ CREATE TABLE tblClient
 	)
 
 	CREATE TABLE tblRequestedEvents
-	(EventId INt IDENTITY PRIMARY KEY,
+	(ScheduleOrder INT,
+	 EventId INT IDENTITY PRIMARY KEY,
 	 ClientId nCHAR(9) FOREIGN KEY REFERENCES tblClient(ClientIdentifier),
 	 RequestDate DATETIME,
 	 DateCompleted DATETIME,
@@ -194,7 +196,7 @@ CREATE TABLE tblClient
 	 CREATE TABLE tblUsers
 	 (UserCount INT IDENTITY PRIMARY KEY,
 	  Username VARCHAR(50) NOT NULL,
-	  UserPassword VARCHAR(50) NOT NULL,
+	  UserPassword nCHAR(8) NOT NULL,
 	  UserFirstName VARCHAR(30) NOT NULL,
 	  UserSurname VARCHAR(50) NOT NULL,
 	  UserEmail VARCHAR(100) UNIQUE NOT NULL,

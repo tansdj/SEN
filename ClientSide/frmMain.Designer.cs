@@ -211,12 +211,12 @@
             this.btnLoginLogout.Font = new System.Drawing.Font("Copperplate Gothic Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLoginLogout.ForeColor = System.Drawing.Color.OrangeRed;
             this.btnLoginLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLoginLogout.Location = new System.Drawing.Point(785, 42);
+            this.btnLoginLogout.Location = new System.Drawing.Point(758, 42);
             this.btnLoginLogout.Name = "btnLoginLogout";
             this.btnLoginLogout.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnLoginLogout.Size = new System.Drawing.Size(100, 50);
+            this.btnLoginLogout.Size = new System.Drawing.Size(127, 50);
             this.btnLoginLogout.TabIndex = 5;
-            this.btnLoginLogout.Text = "Login";
+            this.btnLoginLogout.Text = "Logoff";
             this.btnLoginLogout.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnLoginLogout.UseVisualStyleBackColor = true;
             this.btnLoginLogout.Click += new System.EventHandler(this.btnLoginLogout_Click);
@@ -242,6 +242,7 @@
             this.picLogoSmall.Size = new System.Drawing.Size(83, 81);
             this.picLogoSmall.TabIndex = 3;
             this.picLogoSmall.TabStop = false;
+            this.picLogoSmall.Click += new System.EventHandler(this.picLogoSmall_Click);
             // 
             // picLogo
             // 

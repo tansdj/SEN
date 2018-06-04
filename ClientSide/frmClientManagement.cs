@@ -102,7 +102,15 @@ namespace ClientSide
             rp.Show();
             this.Close();
         }
+
+        private void btnCallHistory_Click(object sender, EventArgs e)
+        {
+            frmCallHistory ch = new frmCallHistory();
+            ch.Show();
+            this.Close();
+        }
         #endregion
+        #region UserAccessManagement
         public void VerifyAccessibility()
         {
             if (frmMain.loggedIn != null)
@@ -139,5 +147,7 @@ namespace ClientSide
                 this.Close();
             }
         }
+        #endregion
+        
     }
 }

@@ -48,7 +48,7 @@
             this.dtpPayDate = new System.Windows.Forms.DateTimePicker();
             this.lblBank = new System.Windows.Forms.Label();
             this.lblAmount = new System.Windows.Forms.Label();
-            this.txtAccNr = new System.Windows.Forms.TextBox();
+            this.txtAmount = new System.Windows.Forms.TextBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnRecPayment = new System.Windows.Forms.Button();
             this.pnlMenu.SuspendLayout();
@@ -296,7 +296,7 @@
             this.gbPayDetails.Controls.Add(this.dtpPayDate);
             this.gbPayDetails.Controls.Add(this.lblBank);
             this.gbPayDetails.Controls.Add(this.lblAmount);
-            this.gbPayDetails.Controls.Add(this.txtAccNr);
+            this.gbPayDetails.Controls.Add(this.txtAmount);
             this.gbPayDetails.ForeColor = System.Drawing.Color.Snow;
             this.gbPayDetails.Location = new System.Drawing.Point(267, 171);
             this.gbPayDetails.Name = "gbPayDetails";
@@ -304,7 +304,6 @@
             this.gbPayDetails.TabIndex = 14;
             this.gbPayDetails.TabStop = false;
             this.gbPayDetails.Text = "Payment Details";
-            this.gbPayDetails.Visible = false;
             // 
             // dtpPayDate
             // 
@@ -335,17 +334,17 @@
             this.lblAmount.TabIndex = 5;
             this.lblAmount.Text = "Amount:";
             // 
-            // txtAccNr
+            // txtAmount
             // 
-            this.txtAccNr.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtAmount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtAccNr.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtAccNr.Font = new System.Drawing.Font("Franklin Gothic Book", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAccNr.ForeColor = System.Drawing.Color.Snow;
-            this.txtAccNr.Location = new System.Drawing.Point(80, 22);
-            this.txtAccNr.Name = "txtAccNr";
-            this.txtAccNr.Size = new System.Drawing.Size(194, 26);
-            this.txtAccNr.TabIndex = 2;
+            this.txtAmount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtAmount.Font = new System.Drawing.Font("Franklin Gothic Book", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtAmount.ForeColor = System.Drawing.Color.Snow;
+            this.txtAmount.Location = new System.Drawing.Point(80, 22);
+            this.txtAmount.Name = "txtAmount";
+            this.txtAmount.Size = new System.Drawing.Size(194, 26);
+            this.txtAmount.TabIndex = 2;
             // 
             // btnCancel
             // 
@@ -377,6 +376,7 @@
             this.btnRecPayment.TabIndex = 16;
             this.btnRecPayment.Text = "Record Payment";
             this.btnRecPayment.UseVisualStyleBackColor = false;
+            this.btnRecPayment.Click += new System.EventHandler(this.btnRecPayment_Click);
             // 
             // frmRecPayment
             // 
@@ -430,7 +430,7 @@
         private System.Windows.Forms.DateTimePicker dtpPayDate;
         private System.Windows.Forms.Label lblBank;
         private System.Windows.Forms.Label lblAmount;
-        private System.Windows.Forms.TextBox txtAccNr;
+        private System.Windows.Forms.TextBox txtAmount;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnRecPayment;
     }

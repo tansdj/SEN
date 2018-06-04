@@ -1,4 +1,5 @@
 ﻿using SHSApplication.Business_Layer;
+using SHSApplication.Helper_Libraries;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,6 +20,9 @@ namespace ClientSide
         public frmMain()
         {
             InitializeComponent();
+            frmLogin log = new frmLogin();
+            log.Show();
+            log.TopMost = true;
             VerifyAccessibility();
            
             lh.LoggedIn += this.OnLogIn;
@@ -69,7 +73,7 @@ namespace ClientSide
             cs.Show();
         }
         #endregion
-
+        #region UserAccessManagement
         public void VerifyAccessibility()
         {
             if (loggedIn!=null)
@@ -89,6 +93,10 @@ namespace ClientSide
                     btnUserManagement.Enabled = false;
                     btnUserManagement.Visible = false;
                 }
+                btnClientManagement.Enabled = true;
+                btnClientManagement.Visible = true;
+                btnProdManagement.Enabled = true;
+                btnProdManagement.Visible = true;
             }
             else
             {
@@ -127,6 +135,17 @@ namespace ClientSide
             loggedIn = null;
             frmLogin l = new frmLogin();
             l.Show();
+        }
+        #endregion
+
+        private void picLogoSmall_Click(object sender, EventArgs e)
+        {
+            List<CallLog> calllog = new List<CallLog>();
+            Client c = new Client("", "Ina", "de Jager", new Address(), new Contact(), "Debit", "Active","Client1");
+            calllog.Add(new CallLog(new CallOperators("", "Tanya", "de Jager", new Address(), new Contact(), ""), new Client("", "Ina", "de Jager", new Address(), new Contact(), "Debit", "Active"), DateTime.UtcNow, DateTime.UtcNow, "Some call detail"));
+            calllog.Add(new CallLog(new CallOperators("", "Tanya", "de Jager", new Address(), new Contact(), ""), new Client("", "Ina", "de Jager", new Address(), new Contact(), "Debit", "Active"), DateTime.UtcNow, DateTime.UtcNow, "Some call detail"));
+            calllog.Add(new CallLog(new CallOperators("", "Tanya", "de Jager", new Address(), new Contact(), ""), new Client("", "Ina", "de Jager", new Address(), new Contact(), "Debit", "Active"), DateTime.UtcNow, DateTime.UtcNow, "Some call detail"));
+            PdfWriter.CreateCallHistoryPdf(c, calllog);
         }
     }
 }

@@ -28,35 +28,50 @@ namespace ClientSide
             cmbClientsHandler.DataSource = bind1;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnDial_Click(object sender, EventArgs e)
         {
             lblDialing.Visible = true;
-            current = (Client)bind1.Current;
-            Thread.Sleep(10000);
-            start = DateTime.UtcNow;
-            callTime.Start();
-            tabCall.SelectedIndex = 1;
-            btnAnswer.Visible = false;
+            if (cmbClients.SelectedIndex != -1)
+            {
+                current = (Client)bind1.Current;
+                Thread.Sleep(10000);
+                start = DateTime.UtcNow;
+                callTime.Start();
+                tabCall.SelectedIndex = 1;
+                btnAnswer.Visible = false;
+            }
+            else
+            {
+                CustomExceptions error = new CustomExceptions("Please select a client to call.", "Unable to call");
+            }
+            
         }
 
         private void btnDecline_Click(object sender, EventArgs e)
         {
             btnClose.Visible = true;
-            current = (Client)bind1.Current;
-            if (start != null)
+            if (ValidateForm())
             {
-                end = DateTime.UtcNow;
-                callTime.Stop();
-                CallOperators co = frmMain.loggedIn.GetMatchingCallOperator();
-                CallLog call = new CallLog(co, current, start, end, rtxtRemarks.Text);
-                if (call.InsertCall())
+                current = (Client)bind1.Current;
+                if (start != null)
                 {
-                    MessageBoxShower.ShowInfo("This called has been logged. Thank you.", "Call Log");
+                    end = DateTime.UtcNow;
+                    callTime.Stop();
+                    CallOperators co = frmMain.loggedIn.GetMatchingCallOperator();
+                    CallLog call = new CallLog(co, current, start, end, rtxtRemarks.Text);
+                    if (call.InsertCall())
+                    {
+                        MessageBoxShower.ShowInfo("This called has been logged. Thank you.", "Call Log");
+                    }
+                    else
+                    {
+                        CustomExceptions error = new CustomExceptions("This call could not be logged. Please try again", "Logging Error!");
+                    }
                 }
-                else
-                {
-                    CustomExceptions error = new CustomExceptions("This call could not be logged. Please try again", "Logging Error!");
-                }
+            }
+            else
+            {
+                CustomExceptions error = new CustomExceptions("Please complete all fields!", "Validation Error!");
             }
         }
 
@@ -90,6 +105,15 @@ namespace ClientSide
             }
             
             lblTimer.Text = String.Format("{0}:{1}:{2}",hours.ToString(),minutes.ToString(),seconds.ToString());
+        }
+
+        private bool ValidateForm()
+        {
+            bool valid = true;
+            if (!Validation.ValidateCombo(ref cmbClientsHandler)) valid = false;
+            if (!Validation.ValidateRichText(ref rtxtRemarks)) valid = false;
+
+            return valid;
         }
     }
 }

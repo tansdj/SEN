@@ -35,10 +35,14 @@ namespace SHSApplication.Business_Layer
 
         }
 
+        public Configurations(SystemComponents configuration_component)
+        {
+            this.Configuration_Component = configuration_component;
+        }
         public string Status
         {
             get { return status; }
-            set { status = value; }
+            set { status = value.Trim(' '); }
         }
         public double AddCost
         {
@@ -57,21 +61,21 @@ namespace SHSApplication.Business_Layer
         public string Description
         {
             get { return description; }
-            set { description = value; }
+            set { description = value.Trim(' '); }
         }
 
 
         public string Name
         {
             get { return name; }
-            set { name = value; }
+            set { name = value.Trim(' '); }
         }
 
 
         public string ConfigId
         {
             get { return configId; }
-            set { configId = (value==null) ? "CONFIG" + this.Name.Substring(0, 4).Replace(' ', '#').ToUpper():value; }
+            set { configId = (value=="") ? "CONFIG" + this.Name.Substring(0, 4).Replace(' ', '#').ToUpper():value; }
         }
 
         public override bool Equals(object obj)
@@ -91,12 +95,12 @@ namespace SHSApplication.Business_Layer
 
         public override int GetHashCode()
         {
-            return this.ConfigId.GetHashCode()^this.Name.GetHashCode()^this.Description.GetHashCode()^this.Configuration_Component.GetHashCode()^this.AddCost.GetHashCode()^this.Status.GetHashCode();
+            return this.ConfigId.GetHashCode()^this.Name.GetHashCode()^this.Description.GetHashCode()^this.AddCost.GetHashCode()^this.Status.GetHashCode();
         }
 
         public override string ToString()
         {
-            return base.ToString();
+            return this.Name+"("+this.ConfigId+")";
         }
 
         public bool InsertConfig()

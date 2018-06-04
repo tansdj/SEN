@@ -36,7 +36,7 @@ namespace SHSApplication.Business_Layer
         public string Level
         {
             get { return level; }
-            set { level = value; }
+            set { level = value.Trim(' '); }
         }
 
 
@@ -69,7 +69,7 @@ namespace SHSApplication.Business_Layer
 
         public override string ToString()
         {
-            return base.ToString();
+            return this.Level;
         }
 
         public bool InsertServiceLevel()

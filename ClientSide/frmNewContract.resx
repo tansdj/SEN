@@ -887,7 +887,7 @@
         52jOz4ZpJb+ZNtNm2kybaTNtps20mTbTZtpMm2kzbaZ96Utf+tL/B47+A2r6jCpMAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="picLogo.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="C.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAZMAAAEpCAYAAABWTc9yAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
         JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAAsSAAALEgHS3X78AAD/hklE
@@ -2658,4 +2658,10 @@
         vPHGG2+88cYbb7zxxhtvw2pjxvz/KwBeJcTUDK8AAAAASUVORK5CYII=
 </value>
   </data>
+  <metadata name="ttDuration.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="ttProduct.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>125, 17</value>
+  </metadata>
 </root>

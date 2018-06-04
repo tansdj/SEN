@@ -63,64 +63,14 @@ namespace ClientSide
         {
             this.Close();
         }
-        #endregion
-        private void btnAddClient_Click(object sender, EventArgs e)
-        {
-            if (ValidateClientInfo())
-            {
-                Client client = new Client(txtId.Text, txtName.Text, txtSurname.Text, new Address("", txtLine1.Text, txtLine2.Text, txtCity.Text, txtPostalCode.Text), new Contact("", txtCell.Text, txtEmail.Text), cmbPayment.SelectedItem.ToString(), "Active");
-                if (cmbPayment.SelectedItem.ToString() == "Debit Order")
-                {
-                    client.NewClientWithPaymentDet(txtAccNr.Text, txtBank.Text, txtBranch.Text);
-                }
-                else
-                {
-                    client.NewClient();
-                }
-            }
-            this.Close();
-        }
-
-        private void cmbPayment_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if(cmbPayment.SelectedItem.ToString()=="Debit Order")
-            {
-                gbDebitOrder.Visible = true;
-            }
-            else
-            {
-                gbDebitOrder.Visible = false;
-            }
-        }
 
         private void btnCall_Click(object sender, EventArgs e)
         {
             CallSimulator cs = new CallSimulator();
             cs.Show();
         }
-
-        private bool ValidateClientInfo()
-        {
-            bool valid = false;
-            valid = Validation.ValidateTextbox(13, 13, "INT", ref txtId);
-            valid = Validation.ValidateTextbox(1, 50, "STRING", ref txtName);
-            valid = Validation.ValidateTextbox(1, 50, "STRING", ref txtSurname);
-            valid = Validation.ValidateCombo(ref cmbPayment);
-            valid = Validation.ValidateTextbox(1, 30, "STRING", ref txtLine1);
-            valid = Validation.ValidateTextbox(1, 30, "STRING", ref txtLine2);
-            valid = Validation.ValidateTextbox(1, 20, "STRING", ref txtCity);
-            valid = Validation.ValidateTextbox(1, 10, "INT", ref txtPostalCode);
-            valid = Validation.ValidateTextbox(1, 50, "STRING", ref txtEmail);
-            valid = Validation.ValidateTextbox(10, 10, "INT", ref txtCell);
-            if (cmbPayment.SelectedItem.ToString() == "Debit Order")
-            {
-                valid = Validation.ValidateTextbox(5, 20, "INT", ref txtAccNr);
-                valid = Validation.ValidateTextbox(1, 15, "STRING", ref txtBank);
-                valid = Validation.ValidateTextbox(1, 10, "STRING", ref txtBranch);
-            }
-            return valid;
-        }
-
+        #endregion
+        #region UserAccessManagement
         public void VerifyAccessibility()
         {
             if (frmMain.loggedIn != null)
@@ -140,7 +90,7 @@ namespace ClientSide
                     btnUserManagement.Enabled = false;
                     btnUserManagement.Visible = false;
                 }
-            } 
+            }
         }
 
         private void btnLoginLogout_Click(object sender, EventArgs e)
@@ -157,5 +107,112 @@ namespace ClientSide
                 this.Close();
             }
         }
+        #endregion
+        private void btnAddClient_Click(object sender, EventArgs e)
+        {
+            if (ValidateForm())
+            {
+                Client client = new Client(txtId.Text, txtName.Text, txtSurname.Text, new Address("", txtLine1.Text, txtLine2.Text, txtCity.Text, txtPostalCode.Text), new Contact("", txtCell.Text, txtEmail.Text), cmbPayment.SelectedItem.ToString(), "Active");
+                if (NoDuplicates(client))
+                {
+                    if (cmbPayment.SelectedItem.ToString() == "Debit Order")
+                    {
+                        if (client.NewClientWithPaymentDet(txtAccNr.Text, txtBank.Text, txtBranch.Text))
+                        {
+                            MessageBoxShower.ShowInfo("The client was added succesfully!", "Success!");
+                            this.Close();
+                        }
+                        else
+                        {
+                            CustomExceptions error = new CustomExceptions("The client could not be added. Please try again.", "Failure!");
+                        }
+                    }
+                    else
+                    {
+                        if (client.NewClient())
+                        {
+                            MessageBoxShower.ShowInfo("The client was added succesfully!", "Success!");
+                            this.Close();
+                        }
+                        else
+                        {
+                            CustomExceptions error = new CustomExceptions("The client could not be added. Please try again.", "Failure!");
+                        }
+                    }
+                }
+                else
+                {
+                    CustomExceptions error = new CustomExceptions("The client already exists.", "Cannot add client");
+                } 
+            }
+            else
+            {
+                CustomExceptions error = new CustomExceptions("Please fill in all fields correctly.", "Faulure!");
+            }  
+        }
+
+        private void cmbPayment_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cmbPayment.SelectedItem.ToString()=="Debit Order")
+            {
+                gbDebitOrder.Visible = true;
+            }
+            else
+            {
+                gbDebitOrder.Visible = false;
+            }
+        }
+
+        #region Validation
+        private bool ValidateForm()
+        {
+            bool valid = true;
+            if (!Validation.ValidateTextbox(13, 13, "LONGINT", ref txtId)) valid = false;
+            if (!Validation.ValidateTextbox(1, 50, "STRING", ref txtName)) valid = false;
+            if (!Validation.ValidateTextbox(1, 50, "STRING", ref txtSurname)) valid = false;
+            if (!Validation.ValidateCombo(ref cmbPayment)) valid = false;
+            if (!Validation.ValidateTextbox(1, 30, "STRING", ref txtLine1)) valid = false;
+            if (!Validation.ValidateTextbox(1, 30, "STRING", ref txtLine2)) valid = false;
+            if (!Validation.ValidateTextbox(1, 20, "STRING", ref txtCity)) valid = false;
+            if (!Validation.ValidateTextbox(1, 10, "INT", ref txtPostalCode)) valid = false;
+            if (!Validation.ValidateTextbox(1, 50, "STRING", ref txtEmail))
+            {
+                valid = false;
+            }
+            else
+            {
+                if (txtEmail.Text.IndexOf('@') == -1 || txtEmail.Text.IndexOf('.') == -1)
+                {
+                    valid = false;
+                    CustomExceptions error = new CustomExceptions("Invalid Email", "Email error!");
+                }
+            }
+            if (!Validation.ValidateTextbox(10, 10, "INT", ref txtCell)) valid = false;
+            if (cmbPayment.SelectedIndex != -1)
+            {
+                if (cmbPayment.SelectedItem.ToString() == "Debit Order")
+                {
+                    if (!Validation.ValidateTextbox(5, 20, "LONGINT", ref txtAccNr)) valid = false;
+                    if (!Validation.ValidateTextbox(1, 15, "STRING", ref txtBank)) valid = false;
+                    if (!Validation.ValidateTextbox(1, 10, "STRING", ref txtBranch)) valid = false;
+                }
+            }
+            
+            return valid;
+        }
+
+        private bool NoDuplicates(Client c)
+        {
+            List<Client> clients = new Client().GetAllClients();
+            foreach (Client item in clients)
+            {
+                if (item.PersonId==c.PersonId)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        #endregion
     }
 }

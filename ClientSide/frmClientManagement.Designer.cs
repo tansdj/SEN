@@ -48,6 +48,7 @@
             this.btnNewContract = new System.Windows.Forms.Button();
             this.btnViewContract = new System.Windows.Forms.Button();
             this.btnPayments = new System.Windows.Forms.Button();
+            this.btnCallHistory = new System.Windows.Forms.Button();
             this.pnlMenu.SuspendLayout();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogoSmall)).BeginInit();
@@ -357,12 +358,29 @@
             this.btnPayments.UseVisualStyleBackColor = false;
             this.btnPayments.Click += new System.EventHandler(this.btnPayments_Click);
             // 
+            // btnCallHistory
+            // 
+            this.btnCallHistory.AutoSize = true;
+            this.btnCallHistory.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnCallHistory.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnCallHistory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCallHistory.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCallHistory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnCallHistory.Location = new System.Drawing.Point(259, 448);
+            this.btnCallHistory.Name = "btnCallHistory";
+            this.btnCallHistory.Size = new System.Drawing.Size(610, 63);
+            this.btnCallHistory.TabIndex = 10;
+            this.btnCallHistory.Text = "Client Call History";
+            this.btnCallHistory.UseVisualStyleBackColor = false;
+            this.btnCallHistory.Click += new System.EventHandler(this.btnCallHistory_Click);
+            // 
             // frmClientManagement
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(885, 537);
+            this.Controls.Add(this.btnCallHistory);
             this.Controls.Add(this.btnPayments);
             this.Controls.Add(this.btnViewContract);
             this.Controls.Add(this.btnNewContract);
@@ -408,6 +426,7 @@
         private System.Windows.Forms.Button btnNewContract;
         private System.Windows.Forms.Button btnViewContract;
         private System.Windows.Forms.Button btnPayments;
+        private System.Windows.Forms.Button btnCallHistory;
     }
 }
 

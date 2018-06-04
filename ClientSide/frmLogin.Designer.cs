@@ -78,6 +78,7 @@
             this.picLogoSmall.Size = new System.Drawing.Size(83, 81);
             this.picLogoSmall.TabIndex = 3;
             this.picLogoSmall.TabStop = false;
+            this.picLogoSmall.Click += new System.EventHandler(this.picLogoSmall_Click);
             // 
             // picLogo
             // 

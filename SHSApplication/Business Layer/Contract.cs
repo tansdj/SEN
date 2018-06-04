@@ -63,7 +63,7 @@ namespace SHSApplication.Business_Layer
         public string ContractIdentifier
         {
             get { return contractIdentifier; }
-            set { contractIdentifier = (value==null)?CalculateContractId():value; }
+            set { contractIdentifier = (value=="")?CalculateContractId():value.Trim(' '); }
         }
 
         public override bool Equals(object obj)

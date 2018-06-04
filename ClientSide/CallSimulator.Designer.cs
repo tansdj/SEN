@@ -36,17 +36,18 @@
             this.picLogoSmall = new System.Windows.Forms.PictureBox();
             this.tabCall = new System.Windows.Forms.TabControl();
             this.callCreator = new System.Windows.Forms.TabPage();
-            this.callHandler = new System.Windows.Forms.TabPage();
-            this.cmbClients = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.lblDialing = new System.Windows.Forms.Label();
-            this.cmbClientsHandler = new System.Windows.Forms.ComboBox();
-            this.btnAnswer = new System.Windows.Forms.Button();
-            this.btnDecline = new System.Windows.Forms.Button();
-            this.lblComments = new System.Windows.Forms.Label();
-            this.rtxtRemarks = new System.Windows.Forms.RichTextBox();
-            this.callTime = new System.Windows.Forms.Timer(this.components);
+            this.btnDial = new System.Windows.Forms.Button();
+            this.cmbClients = new System.Windows.Forms.ComboBox();
+            this.callHandler = new System.Windows.Forms.TabPage();
             this.lblTimer = new System.Windows.Forms.Label();
+            this.rtxtRemarks = new System.Windows.Forms.RichTextBox();
+            this.lblComments = new System.Windows.Forms.Label();
+            this.btnDecline = new System.Windows.Forms.Button();
+            this.btnAnswer = new System.Windows.Forms.Button();
+            this.cmbClientsHandler = new System.Windows.Forms.ComboBox();
+            this.callTime = new System.Windows.Forms.Timer(this.components);
+            this.ttComments = new System.Windows.Forms.ToolTip(this.components);
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogoSmall)).BeginInit();
             this.tabCall.SuspendLayout();
@@ -119,7 +120,7 @@
             // 
             this.callCreator.BackColor = System.Drawing.Color.Black;
             this.callCreator.Controls.Add(this.lblDialing);
-            this.callCreator.Controls.Add(this.button1);
+            this.callCreator.Controls.Add(this.btnDial);
             this.callCreator.Controls.Add(this.cmbClients);
             this.callCreator.Location = new System.Drawing.Point(4, 22);
             this.callCreator.Name = "callCreator";
@@ -127,6 +128,42 @@
             this.callCreator.Size = new System.Drawing.Size(371, 304);
             this.callCreator.TabIndex = 0;
             this.callCreator.Text = "Make Call";
+            // 
+            // lblDialing
+            // 
+            this.lblDialing.AutoSize = true;
+            this.lblDialing.ForeColor = System.Drawing.SystemColors.Control;
+            this.lblDialing.Location = new System.Drawing.Point(93, 207);
+            this.lblDialing.Name = "lblDialing";
+            this.lblDialing.Size = new System.Drawing.Size(48, 13);
+            this.lblDialing.TabIndex = 12;
+            this.lblDialing.Text = "Dialing...";
+            this.lblDialing.Visible = false;
+            // 
+            // btnDial
+            // 
+            this.btnDial.BackColor = System.Drawing.Color.Black;
+            this.btnDial.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnDial.BackgroundImage")));
+            this.btnDial.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnDial.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDial.Location = new System.Drawing.Point(17, 179);
+            this.btnDial.Name = "btnDial";
+            this.btnDial.Size = new System.Drawing.Size(69, 71);
+            this.btnDial.TabIndex = 11;
+            this.btnDial.UseVisualStyleBackColor = false;
+            this.btnDial.Click += new System.EventHandler(this.btnDial_Click);
+            // 
+            // cmbClients
+            // 
+            this.cmbClients.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.cmbClients.Font = new System.Drawing.Font("Franklin Gothic Book", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbClients.ForeColor = System.Drawing.Color.Snow;
+            this.cmbClients.FormattingEnabled = true;
+            this.cmbClients.Location = new System.Drawing.Point(17, 34);
+            this.cmbClients.Name = "cmbClients";
+            this.cmbClients.Size = new System.Drawing.Size(346, 29);
+            this.cmbClients.TabIndex = 10;
+            this.cmbClients.Text = "Select Client";
             // 
             // callHandler
             // 
@@ -145,41 +182,59 @@
             this.callHandler.TabIndex = 1;
             this.callHandler.Text = "Handle Call";
             // 
-            // cmbClients
+            // lblTimer
             // 
-            this.cmbClients.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.cmbClients.Font = new System.Drawing.Font("Franklin Gothic Book", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbClients.ForeColor = System.Drawing.Color.Snow;
-            this.cmbClients.FormattingEnabled = true;
-            this.cmbClients.Location = new System.Drawing.Point(17, 34);
-            this.cmbClients.Name = "cmbClients";
-            this.cmbClients.Size = new System.Drawing.Size(346, 29);
-            this.cmbClients.TabIndex = 10;
-            this.cmbClients.Text = "Select Client";
+            this.lblTimer.AutoSize = true;
+            this.lblTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTimer.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblTimer.Location = new System.Drawing.Point(258, 7);
+            this.lblTimer.Name = "lblTimer";
+            this.lblTimer.Size = new System.Drawing.Size(0, 13);
+            this.lblTimer.TabIndex = 16;
             // 
-            // button1
+            // rtxtRemarks
             // 
-            this.button1.BackColor = System.Drawing.Color.Black;
-            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(17, 179);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(69, 71);
-            this.button1.TabIndex = 11;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.rtxtRemarks.Location = new System.Drawing.Point(18, 139);
+            this.rtxtRemarks.Name = "rtxtRemarks";
+            this.rtxtRemarks.Size = new System.Drawing.Size(345, 159);
+            this.rtxtRemarks.TabIndex = 15;
+            this.rtxtRemarks.Text = "";
+            this.ttComments.SetToolTip(this.rtxtRemarks, "Note all important actions taken during call.");
             // 
-            // lblDialing
+            // lblComments
             // 
-            this.lblDialing.AutoSize = true;
-            this.lblDialing.ForeColor = System.Drawing.SystemColors.Control;
-            this.lblDialing.Location = new System.Drawing.Point(93, 207);
-            this.lblDialing.Name = "lblDialing";
-            this.lblDialing.Size = new System.Drawing.Size(48, 13);
-            this.lblDialing.TabIndex = 12;
-            this.lblDialing.Text = "Dialing...";
-            this.lblDialing.Visible = false;
+            this.lblComments.AutoSize = true;
+            this.lblComments.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblComments.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.lblComments.Location = new System.Drawing.Point(14, 115);
+            this.lblComments.Name = "lblComments";
+            this.lblComments.Size = new System.Drawing.Size(86, 20);
+            this.lblComments.TabIndex = 14;
+            this.lblComments.Text = "Comments";
+            // 
+            // btnDecline
+            // 
+            this.btnDecline.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnDecline.BackgroundImage")));
+            this.btnDecline.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnDecline.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDecline.Location = new System.Drawing.Point(124, 0);
+            this.btnDecline.Name = "btnDecline";
+            this.btnDecline.Size = new System.Drawing.Size(80, 71);
+            this.btnDecline.TabIndex = 13;
+            this.btnDecline.UseVisualStyleBackColor = true;
+            this.btnDecline.Click += new System.EventHandler(this.btnDecline_Click);
+            // 
+            // btnAnswer
+            // 
+            this.btnAnswer.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAnswer.BackgroundImage")));
+            this.btnAnswer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnAnswer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAnswer.Location = new System.Drawing.Point(43, 3);
+            this.btnAnswer.Name = "btnAnswer";
+            this.btnAnswer.Size = new System.Drawing.Size(75, 74);
+            this.btnAnswer.TabIndex = 12;
+            this.btnAnswer.UseVisualStyleBackColor = true;
+            this.btnAnswer.Click += new System.EventHandler(this.btnAnswer_Click);
             // 
             // cmbClientsHandler
             // 
@@ -194,63 +249,14 @@
             this.cmbClientsHandler.Text = "Select Client";
             this.cmbClientsHandler.Visible = false;
             // 
-            // btnAnswer
-            // 
-            this.btnAnswer.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAnswer.BackgroundImage")));
-            this.btnAnswer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnAnswer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAnswer.Location = new System.Drawing.Point(43, 3);
-            this.btnAnswer.Name = "btnAnswer";
-            this.btnAnswer.Size = new System.Drawing.Size(75, 74);
-            this.btnAnswer.TabIndex = 12;
-            this.btnAnswer.UseVisualStyleBackColor = true;
-            this.btnAnswer.Click += new System.EventHandler(this.btnAnswer_Click);
-            // 
-            // btnDecline
-            // 
-            this.btnDecline.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnDecline.BackgroundImage")));
-            this.btnDecline.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnDecline.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDecline.Location = new System.Drawing.Point(124, 0);
-            this.btnDecline.Name = "btnDecline";
-            this.btnDecline.Size = new System.Drawing.Size(80, 71);
-            this.btnDecline.TabIndex = 13;
-            this.btnDecline.UseVisualStyleBackColor = true;
-            this.btnDecline.Click += new System.EventHandler(this.btnDecline_Click);
-            // 
-            // lblComments
-            // 
-            this.lblComments.AutoSize = true;
-            this.lblComments.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblComments.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblComments.Location = new System.Drawing.Point(14, 115);
-            this.lblComments.Name = "lblComments";
-            this.lblComments.Size = new System.Drawing.Size(86, 20);
-            this.lblComments.TabIndex = 14;
-            this.lblComments.Text = "Comments";
-            // 
-            // rtxtRemarks
-            // 
-            this.rtxtRemarks.Location = new System.Drawing.Point(18, 139);
-            this.rtxtRemarks.Name = "rtxtRemarks";
-            this.rtxtRemarks.Size = new System.Drawing.Size(345, 159);
-            this.rtxtRemarks.TabIndex = 15;
-            this.rtxtRemarks.Text = "";
-            // 
             // callTime
             // 
             this.callTime.Interval = 1000;
             this.callTime.Tick += new System.EventHandler(this.callTime_Tick);
             // 
-            // lblTimer
+            // ttComments
             // 
-            this.lblTimer.AutoSize = true;
-            this.lblTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTimer.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.lblTimer.Location = new System.Drawing.Point(258, 7);
-            this.lblTimer.Name = "lblTimer";
-            this.lblTimer.Size = new System.Drawing.Size(0, 13);
-            this.lblTimer.TabIndex = 16;
+            this.ttComments.ToolTipTitle = "Comments";
             // 
             // CallSimulator
             // 
@@ -289,7 +295,7 @@
         private System.Windows.Forms.TabPage callCreator;
         private System.Windows.Forms.TabPage callHandler;
         private System.Windows.Forms.Label lblDialing;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnDial;
         private System.Windows.Forms.ComboBox cmbClients;
         private System.Windows.Forms.RichTextBox rtxtRemarks;
         private System.Windows.Forms.Label lblComments;
@@ -298,5 +304,6 @@
         private System.Windows.Forms.ComboBox cmbClientsHandler;
         private System.Windows.Forms.Label lblTimer;
         private System.Windows.Forms.Timer callTime;
+        private System.Windows.Forms.ToolTip ttComments;
     }
 }

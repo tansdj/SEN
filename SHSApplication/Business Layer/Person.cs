@@ -45,21 +45,21 @@ namespace SHSApplication.Business_Layer
         public string Surname
         {
             get { return surname; }
-            set { surname = value; }
+            set { surname = value.Trim(' '); }
         }
 
 
         public string Name
         {
             get { return name; }
-            set { name = value; }
+            set { name = value.Trim(' '); }
         }
 
 
         public string PersonId
         {
             get { return personId; }
-            set { personId = value; }
+            set { personId = value.Trim(' '); }
         }
 
         public override bool Equals(object obj)

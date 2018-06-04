@@ -53,6 +53,18 @@
     <Compile Include="CallSimulator.Designer.cs">
       <DependentUpon>CallSimulator.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmUpdateEvent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUpdateEvent.Designer.cs">
+      <DependentUpon>frmUpdateEvent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTechSchedule.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTechSchedule.Designer.cs">
+      <DependentUpon>frmTechSchedule.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmCancelClient.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,6 +88,30 @@
     </Compile>
     <Compile Include="frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCallHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCallHistory.Designer.cs">
+      <DependentUpon>frmCallHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmUpdateVendor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUpdateVendor.Designer.cs">
+      <DependentUpon>frmUpdateVendor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewVendor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewVendor.Designer.cs">
+      <DependentUpon>frmNewVendor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewEvent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewEvent.Designer.cs">
+      <DependentUpon>frmNewEvent.cs</DependentUpon>
     </Compile>
     <Compile Include="frmRemoveUser.cs">
       <SubType>Form</SubType>
@@ -180,6 +216,12 @@
     <EmbeddedResource Include="CallSimulator.resx">
       <DependentUpon>CallSimulator.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmUpdateEvent.resx">
+      <DependentUpon>frmUpdateEvent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTechSchedule.resx">
+      <DependentUpon>frmTechSchedule.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmCancelClient.resx">
       <DependentUpon>frmCancelClient.cs</DependentUpon>
     </EmbeddedResource>
@@ -191,6 +233,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCallHistory.resx">
+      <DependentUpon>frmCallHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUpdateVendor.resx">
+      <DependentUpon>frmUpdateVendor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewVendor.resx">
+      <DependentUpon>frmNewVendor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewEvent.resx">
+      <DependentUpon>frmNewEvent.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmRemoveUser.resx">
       <DependentUpon>frmRemoveUser.cs</DependentUpon>

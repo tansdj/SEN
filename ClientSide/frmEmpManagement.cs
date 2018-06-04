@@ -68,11 +68,24 @@ namespace ClientSide
             uEmp.Show();
             this.Close();
         }
-
-        private void btnEmployeeRpt_Click(object sender, EventArgs e)
+        private void btnUpdateEvent_Click(object sender, EventArgs e)
         {
-            frmEmpReport rEmp = new frmEmpReport();
-            rEmp.Show();
+            frmUpdateEvent ue = new frmUpdateEvent();
+            ue.Show();
+            this.Close();
+        }
+
+        private void btnNewEvent_Click(object sender, EventArgs e)
+        {
+            frmNewEvent ne = new frmNewEvent();
+            ne.Show();
+            this.Close();
+        }
+
+        private void btnScheduling_Click(object sender, EventArgs e)
+        {
+            frmTechSchedule ts = new frmTechSchedule();
+            ts.Show();
             this.Close();
         }
         #endregion
@@ -91,6 +104,6 @@ namespace ClientSide
             }
         }
 
-        
+       
     }
 }

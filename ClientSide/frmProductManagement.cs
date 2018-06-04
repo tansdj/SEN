@@ -74,7 +74,22 @@ namespace ClientSide
             up.Show();
             this.Close();
         }
+
+        private void btnNewVendor_Click(object sender, EventArgs e)
+        {
+            frmNewVendor nv = new frmNewVendor();
+            nv.Show();
+            this.Close();
+        }
+
+        private void btnEditVendor_Click(object sender, EventArgs e)
+        {
+            frmUpdateVendor uv = new frmUpdateVendor();
+            uv.Show();
+            this.Close();
+        }
         #endregion
+        #region UserAccessManagement
         public void VerifyAccessibility()
         {
             if (frmMain.loggedIn != null)
@@ -111,5 +126,7 @@ namespace ClientSide
                 this.Close();
             }
         }
+        #endregion
+
     }
 }

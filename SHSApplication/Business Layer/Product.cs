@@ -19,11 +19,11 @@ namespace SHSApplication.Business_Layer
 
         public Product(string productCode, string name, string description, double basePrice, string status)
         {
-            this.ProductCode = productCode;
             this.Name = name;
             this.Description = description;
             this.BasePrice = basePrice;
             this.Status = status;
+            this.ProductCode = productCode;
         }
 
         public Product()
@@ -35,7 +35,7 @@ namespace SHSApplication.Business_Layer
         public string Status
         {
             get { return status; }
-            set { status = value; }
+            set { status = value.Trim(' '); }
         }
 
 
@@ -49,21 +49,21 @@ namespace SHSApplication.Business_Layer
         public string Description
         {
             get { return description; }
-            set { description = value; }
+            set { description = value.Trim(' '); }
         }
 
 
         public string Name
         {
             get { return name; }
-            set { name = value; }
+            set { name = value.Trim(' '); }
         }
 
 
         public string ProductCode
         {
             get { return productCode; }
-            set { productCode = (value == null) ? "PROD" + this.Name.Substring(0, 6).Replace(' ', '#').ToUpper() : value; }
+            set { productCode = (value == "") ? "PROD" + this.Name.Substring(0, 6).Replace(' ', '#').ToUpper() : value.Trim(' '); }
         }
 
         public override bool Equals(object obj)
@@ -88,7 +88,7 @@ namespace SHSApplication.Business_Layer
 
         public override string ToString()
         {
-            return base.ToString();
+            return string.Format("{0}({1})",this.Name,this.ProductCode);
         }
 
         public bool InsertProduct()
@@ -126,7 +126,7 @@ namespace SHSApplication.Business_Layer
             DataTable table = new DataTable();
             if (prodCode != "")
             {
-                table = dh.readDataFromDB(DataAccesHelper.QueryGetProducts+ " WHERE "+DataAccesHelper.prodCode+" = '"+this.ProductCode+"'");
+                table = dh.readDataFromDB(DataAccesHelper.QueryGetProducts+ " WHERE "+DataAccesHelper.prodCode+" = '"+prodCode+"'");
             }
             else
             {

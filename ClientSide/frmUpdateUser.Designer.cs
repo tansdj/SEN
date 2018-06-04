@@ -47,7 +47,7 @@
             this.btnGenPw = new System.Windows.Forms.Button();
             this.lblPassword = new System.Windows.Forms.Label();
             this.lblReEnter = new System.Windows.Forms.Label();
-            this.txtCity = new System.Windows.Forms.TextBox();
+            this.txtRePw = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.lblUsername = new System.Windows.Forms.Label();
@@ -63,6 +63,7 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.lblFormCommand = new System.Windows.Forms.Label();
             this.cmbUsers = new System.Windows.Forms.ComboBox();
+            this.lblAutoPw = new System.Windows.Forms.Label();
             this.pnlMenu.SuspendLayout();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogoSmall)).BeginInit();
@@ -282,6 +283,7 @@
             this.gbUserInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gbUserInfo.BackColor = System.Drawing.Color.Transparent;
+            this.gbUserInfo.Controls.Add(this.lblAutoPw);
             this.gbUserInfo.Controls.Add(this.gbLogin);
             this.gbUserInfo.Controls.Add(this.cmbAccess);
             this.gbUserInfo.Controls.Add(this.txtSurname);
@@ -308,7 +310,7 @@
             this.gbLogin.Controls.Add(this.btnGenPw);
             this.gbLogin.Controls.Add(this.lblPassword);
             this.gbLogin.Controls.Add(this.lblReEnter);
-            this.gbLogin.Controls.Add(this.txtCity);
+            this.gbLogin.Controls.Add(this.txtRePw);
             this.gbLogin.Controls.Add(this.txtPassword);
             this.gbLogin.Controls.Add(this.txtUsername);
             this.gbLogin.Controls.Add(this.lblUsername);
@@ -333,6 +335,7 @@
             this.btnGenPw.TabIndex = 16;
             this.btnGenPw.Text = "Generate Strong Password";
             this.btnGenPw.UseVisualStyleBackColor = false;
+            this.btnGenPw.Click += new System.EventHandler(this.btnGenPw_Click);
             // 
             // lblPassword
             // 
@@ -354,18 +357,18 @@
             this.lblReEnter.TabIndex = 5;
             this.lblReEnter.Text = "Re - enter\r\nPassword:";
             // 
-            // txtCity
+            // txtRePw
             // 
-            this.txtCity.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtRePw.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtCity.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.txtCity.Font = new System.Drawing.Font("Franklin Gothic Book", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCity.ForeColor = System.Drawing.Color.Snow;
-            this.txtCity.Location = new System.Drawing.Point(99, 86);
-            this.txtCity.Name = "txtCity";
-            this.txtCity.Size = new System.Drawing.Size(202, 26);
-            this.txtCity.TabIndex = 4;
-            this.txtCity.UseSystemPasswordChar = true;
+            this.txtRePw.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtRePw.Font = new System.Drawing.Font("Franklin Gothic Book", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRePw.ForeColor = System.Drawing.Color.Snow;
+            this.txtRePw.Location = new System.Drawing.Point(99, 86);
+            this.txtRePw.Name = "txtRePw";
+            this.txtRePw.Size = new System.Drawing.Size(202, 26);
+            this.txtRePw.TabIndex = 4;
+            this.txtRePw.UseSystemPasswordChar = true;
             // 
             // txtPassword
             // 
@@ -501,6 +504,7 @@
             this.btnUpdateUser.TabIndex = 12;
             this.btnUpdateUser.Text = "Update User";
             this.btnUpdateUser.UseVisualStyleBackColor = false;
+            this.btnUpdateUser.Click += new System.EventHandler(this.btnUpdateUser_Click);
             // 
             // btnCancel
             // 
@@ -515,6 +519,7 @@
             this.btnCancel.TabIndex = 11;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // lblFormCommand
             // 
@@ -540,6 +545,16 @@
             this.cmbUsers.Size = new System.Drawing.Size(476, 29);
             this.cmbUsers.TabIndex = 16;
             this.cmbUsers.Text = "None Selected";
+            // 
+            // lblAutoPw
+            // 
+            this.lblAutoPw.AutoSize = true;
+            this.lblAutoPw.Font = new System.Drawing.Font("Segoe MDL2 Assets", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAutoPw.Location = new System.Drawing.Point(303, 199);
+            this.lblAutoPw.Name = "lblAutoPw";
+            this.lblAutoPw.Size = new System.Drawing.Size(127, 16);
+            this.lblAutoPw.TabIndex = 18;
+            this.lblAutoPw.Text = "Password Generation";
             // 
             // frmUpdateUser
             // 
@@ -594,7 +609,7 @@
         private System.Windows.Forms.Button btnGenPw;
         private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.Label lblReEnter;
-        private System.Windows.Forms.TextBox txtCity;
+        private System.Windows.Forms.TextBox txtRePw;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.Label lblUsername;
@@ -610,6 +625,7 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label lblFormCommand;
         private System.Windows.Forms.ComboBox cmbUsers;
+        private System.Windows.Forms.Label lblAutoPw;
     }
 }
 

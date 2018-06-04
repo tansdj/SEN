@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SHSApplication.Business_Layer;
+using SHSApplication.Helper_Libraries;
 
 namespace ClientSide
 {
@@ -36,17 +37,15 @@ namespace ClientSide
             txtEmail.DataBindings.Add("Text", bind1, "PersonContact.Email");
 
         }
-
-        private void btnClientManagement_Click(object sender, EventArgs e)
-        {
-
-        }
         #region menuItems
         private void btnClose_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
+        private void btnClientManagement_Click(object sender, EventArgs e)
+        {
 
+        }
         private void btnProdManagement_Click(object sender, EventArgs e)
         {
             frmProductManagement pm = new frmProductManagement();
@@ -77,19 +76,44 @@ namespace ClientSide
         {
             this.Close();
         }
+        private void btnCall_Click(object sender, EventArgs e)
+        {
+            CallSimulator cs = new CallSimulator();
+            cs.Show();
+        }
         #endregion
         private void btnAddClient_Click(object sender, EventArgs e)
         {
-            Client client = (Client)bind1.Current;
-            if (cmbPayment.SelectedItem.ToString() == "Debit Order")
+            if (ValidateForm())
             {
-                client.UpdateClientWithPaymentDetails(txtAccNr.Text, txtBank.Text, txtBranch.Text);
+                Client client = (Client)bind1.Current;
+                if (cmbPayment.SelectedItem.ToString() == "Debit Order")
+                {
+                    if (client.UpdateClientWithPaymentDetails(txtAccNr.Text, txtBank.Text, txtBranch.Text))
+                    {
+                        MessageBoxShower.ShowInfo("The Client was updated successfully!", "Success!");
+                    }
+                    else
+                    {
+                        CustomExceptions error = new CustomExceptions("The client could not be updated, Please try again later.", "Something went wrong..");
+                    }
+                }
+                else
+                {
+                    if (client.UpdateClient())
+                    {
+                        MessageBoxShower.ShowInfo("The Client was updated successfully!", "Success!");
+                    }
+                    else
+                    {
+                        CustomExceptions error = new CustomExceptions("The client could not be updated, Please try again later.", "Something went wrong..");
+                    }
+                }
             }
             else
             {
-                client.UpdateClient();
+                CustomExceptions error = new CustomExceptions("Please complete all fields correctly.", "Failure!");
             }
-            this.Close();
         }
 
         private void cmbPayment_SelectedIndexChanged(object sender, EventArgs e)
@@ -106,25 +130,24 @@ namespace ClientSide
 
         private void cmbClients_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Client current = (Client)cmbClients.SelectedItem;
-            var results = from pd in details where pd.PaymentDet_Client.ClientIdentifier == current.ClientIdentifier select new { PAccNr = pd.AccNr, PBank = pd.Bank, PBranch = pd.BranchCode };
-            if (results!=null)
+            if (Validation.ValidateCombo(ref cmbClients))
             {
-                foreach (var item in results)
+                Client current = (Client)cmbClients.SelectedItem;
+                var results = from pd in details where pd.PaymentDet_Client.ClientIdentifier == current.ClientIdentifier select new { PAccNr = pd.AccNr, PBank = pd.Bank, PBranch = pd.BranchCode };
+                if (results != null)
                 {
-                    txtAccNr.Text = item.PAccNr;
-                    txtBank.Text = item.PBank;
-                    txtBranch.Text = item.PBranch;
+                    foreach (var item in results)
+                    {
+                        txtAccNr.Text = item.PAccNr;
+                        txtBank.Text = item.PBank;
+                        txtBranch.Text = item.PBranch;
+                    }
                 }
             }
         }
 
-        private void btnCall_Click(object sender, EventArgs e)
-        {
-            CallSimulator cs = new CallSimulator();
-            cs.Show();
-        }
-
+        
+        #region UserAccessManagement
         public void VerifyAccessibility()
         {
             if (frmMain.loggedIn != null)
@@ -160,6 +183,45 @@ namespace ClientSide
                 l.Show();
                 this.Close();
             }
+        }
+        #endregion
+        private bool ValidateForm()
+        {
+            bool valid = true;
+            if (!Validation.ValidateCombo(ref cmbClients)) valid = false;
+            if (!Validation.ValidateTextbox(13, 13, "LONG", ref txtId)) valid = false;
+            if (!Validation.ValidateTextbox(1, 50, "STRING", ref txtName)) valid = false;
+            if (!Validation.ValidateTextbox(1, 50, "STRING", ref txtSurname)) valid = false;
+            if (!Validation.ValidateCombo(ref cmbPayment)) valid = false;
+            if (!Validation.ValidateTextbox(1, 30, "STRING", ref txtLine1)) valid = false;
+            if (!Validation.ValidateTextbox(1, 30, "STRING", ref txtLine2)) valid = false;
+            if (!Validation.ValidateTextbox(1, 20, "STRING", ref txtCity)) valid = false;
+            if (!Validation.ValidateTextbox(1, 10, "INT", ref txtPostalCode)) valid = false;
+            if (!Validation.ValidateTextbox(1, 50, "STRING", ref txtEmail))
+            {
+                valid = false;
+            }
+            else
+            {
+                if (txtEmail.Text.IndexOf('@') == -1 || txtEmail.Text.IndexOf('.') == -1)
+                {
+                    valid = false;
+                    CustomExceptions error = new CustomExceptions("Invalid Email", "Email error!");
+                    txtEmail.BackColor = System.Drawing.Color.Tomato;
+                }
+            }
+            if (!Validation.ValidateTextbox(10, 10, "INT", ref txtCell)) valid = false;
+            if (cmbPayment.SelectedIndex != -1)
+            {
+                if (cmbPayment.SelectedItem.ToString() == "Debit Order")
+                {
+                    if (!Validation.ValidateTextbox(5, 20, "LONGINT", ref txtAccNr)) valid = false;
+                    if (!Validation.ValidateTextbox(1, 15, "STRING", ref txtBank)) valid = false;
+                    if (!Validation.ValidateTextbox(1, 10, "STRING", ref txtBranch)) valid = false;
+                }
+            }
+
+            return valid;
         }
     }
 }

@@ -83,7 +83,7 @@ namespace SHSApplication.Business_Layer
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> billing_details = new Dictionary<string, string[]>();
 
-            billing_details.Add(DataAccesHelper.billingClientid, new string[] { DataAccesHelper.typeString, this.Billing_Client.PersonId });
+            billing_details.Add(DataAccesHelper.billingClientid, new string[] { DataAccesHelper.typeString, this.Billing_Client.ClientIdentifier });
             billing_details.Add(DataAccesHelper.billingDate, new string[] { DataAccesHelper.typeDateTime, this.Date.ToShortDateString() });
             billing_details.Add(DataAccesHelper.billAmountDue, new string[] { DataAccesHelper.typeDouble, this.AmountDue.ToString() });
             billing_details.Add(DataAccesHelper.billAmountPaid, new string[] { DataAccesHelper.typeDouble, this.AmountPaid.ToString() });
@@ -96,12 +96,12 @@ namespace SHSApplication.Business_Layer
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> billing_details = new Dictionary<string, string[]>();
 
-            billing_details.Add(DataAccesHelper.billingClientid, new string[] { DataAccesHelper.typeString, this.Billing_Client.PersonId });
+            billing_details.Add(DataAccesHelper.billingClientid, new string[] { DataAccesHelper.typeString, this.Billing_Client.ClientIdentifier });
             billing_details.Add(DataAccesHelper.billingDate, new string[] { DataAccesHelper.typeDateTime, this.Date.ToShortDateString() });
             billing_details.Add(DataAccesHelper.billAmountDue, new string[] { DataAccesHelper.typeDouble, this.AmountDue.ToString() });
             billing_details.Add(DataAccesHelper.billAmountPaid, new string[] { DataAccesHelper.typeDouble, this.AmountPaid.ToString() });
 
-            return dh.runQuery(DataAccesHelper.targetBilling, DataAccesHelper.requestUpdate, billing_details,DataAccesHelper.billingClientid+" = '"+this.Billing_Client.PersonId+"'");
+            return dh.runQuery(DataAccesHelper.targetBilling, DataAccesHelper.requestUpdate, billing_details,DataAccesHelper.billingClientid+" = '"+this.Billing_Client.ClientIdentifier+"'");
         }
 
         public bool RemoveBilling()
@@ -109,12 +109,12 @@ namespace SHSApplication.Business_Layer
             Datahandler dh = Datahandler.getData();
             Dictionary<string, string[]> billing_details = new Dictionary<string, string[]>();
 
-            billing_details.Add(DataAccesHelper.billingClientid, new string[] { DataAccesHelper.typeString, this.Billing_Client.PersonId });
+            billing_details.Add(DataAccesHelper.billingClientid, new string[] { DataAccesHelper.typeString, this.Billing_Client.ClientIdentifier });
             billing_details.Add(DataAccesHelper.billingDate, new string[] { DataAccesHelper.typeDateTime, this.Date.ToShortDateString() });
             billing_details.Add(DataAccesHelper.billAmountDue, new string[] { DataAccesHelper.typeDouble, this.AmountDue.ToString() });
             billing_details.Add(DataAccesHelper.billAmountPaid, new string[] { DataAccesHelper.typeDouble, this.AmountPaid.ToString() });
 
-            return dh.runQuery(DataAccesHelper.targetBilling, DataAccesHelper.requestDelete, billing_details, DataAccesHelper.billingClientid + " = '" + this.Billing_Client.PersonId + "'");
+            return dh.runQuery(DataAccesHelper.targetBilling, DataAccesHelper.requestDelete, billing_details, DataAccesHelper.billingClientid + " = '" + this.Billing_Client.ClientIdentifier + "'");
         }
 
         public List<Billing> GetClientBilling()
@@ -127,7 +127,7 @@ namespace SHSApplication.Business_Layer
             {
                 Billing b = new Billing();
                 b.Billing_Client = new Client();
-                b.Billing_Client.PersonId = item[DataAccesHelper.billingClientid].ToString();
+                b.Billing_Client.ClientIdentifier = item[DataAccesHelper.billingClientid].ToString();
                 b.AmountDue = Convert.ToDouble(item[DataAccesHelper.billAmountDue].ToString());
                 b.AmountPaid = Convert.ToDouble(item[DataAccesHelper.billAmountPaid].ToString());
                 b.Date = Convert.ToDateTime(item[DataAccesHelper.billingDate].ToString());

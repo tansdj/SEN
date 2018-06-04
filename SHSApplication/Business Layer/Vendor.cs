@@ -47,19 +47,19 @@ namespace SHSApplication.Business_Layer
         public string Name
         {
             get { return name; }
-            set { name = value; }
+            set { name = value.Trim(' '); }
         }
 
 
         public string VendorCode
         {
             get { return vendorCode; }
-            set { vendorCode = (value==null)? "VENDOR" + this.Name.Substring(0, 4).Replace(' ', '#').ToUpper():value; }
+            set { vendorCode = (value=="")? "VENDOR" + this.Name.Substring(0, 4).Replace(' ', '#').ToUpper():value.Trim(' '); }
         }
 
         public override string ToString()
         {
-            return base.ToString();
+            return this.Name;
         }
 
         public override bool Equals(object obj)

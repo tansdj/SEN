@@ -110,6 +110,7 @@ namespace Serverside.HelperLibraries
         public const string eventRemarks = "Remarks";
         public const string eventStatus = "Event_Status";
         public const string skillReq = "SkillRequired";
+        public const string eventScheduleOrder = "ScheduleOrder";
 
         public const string targetCallOperators = "tblCallOperators";
         public const string operatorId = "pOperatorId";
@@ -168,7 +169,7 @@ namespace Serverside.HelperLibraries
         public const string QueryGetProductFunction = "SELECT * FROM tblProductFunctions WHERE ProductCode = '";
         public const string QueryGetSystemComponents = "SELECT * FROM tblSystemComponents WHERE ProductCode = '";
         public const string QueryGetTechnicalDetails = "SELECT * FROM tblTechnicalDetails WHERE ConfigCode = '";
-        public const string QueryGetRequestedEvents = "SELECT * FROM tblRequestedEvents";
+        public const string QueryGetRequestedEvents = "SELECT * FROM tblRequestedEvents RE INNER JOIN tblClient C ON C.ClientIdentifier=RE.ClientId";
         public const string QueryGetTechnicians = @"SELECT * FROM tblTechnicians T
                                                     INNER JOIN tblAddress A ON T.AddressId = A.pAddressId
                                                     INNER JOIN tblContact C ON T.ContactId = C.pContactId";
@@ -177,7 +178,7 @@ namespace Serverside.HelperLibraries
                                                 INNER JOIN tblAddress A ON V.AddressId = A.pAddressId
                                                 INNER JOIN tblContact C ON V.ContactId = C.pContactId";
         public const string QueryCountContracts = "SELECT COUNT(ContractIdentifier) AS 'NrContracts' FROM tblContract";
-        public const string QueryGetAllCalls = "SELECT * FROM tblCallLog";
+        public const string QueryGetAllCalls = "SELECT * FROM tblCallLog CL INNER JOIN tblCallOperators CO ON CL.OperatorId=CO.pOperatorId";
         public const string QueryGetCallOperators = @"SELECT * FROM tblCallOperators c
                                                     INNER JOIN tblAddress a ON a.pAddressId = c.AddressId
                                                     INNER JOIN tblContact ct ON ct.pContactId = c.ContactId";

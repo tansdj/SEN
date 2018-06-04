@@ -44,7 +44,9 @@
             this.picLogo = new System.Windows.Forms.PictureBox();
             this.btnNewEmp = new System.Windows.Forms.Button();
             this.btnEditEmployee = new System.Windows.Forms.Button();
-            this.btnEmployeeRpt = new System.Windows.Forms.Button();
+            this.btnScheduling = new System.Windows.Forms.Button();
+            this.btnNewEvent = new System.Windows.Forms.Button();
+            this.btnUpdateEvent = new System.Windows.Forms.Button();
             this.pnlMenu.SuspendLayout();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogoSmall)).BeginInit();
@@ -259,8 +261,6 @@
             // 
             // btnNewEmp
             // 
-            this.btnNewEmp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
             this.btnNewEmp.AutoSize = true;
             this.btnNewEmp.BackColor = System.Drawing.Color.YellowGreen;
             this.btnNewEmp.FlatAppearance.BorderColor = System.Drawing.Color.Black;
@@ -277,39 +277,67 @@
             // 
             // btnEditEmployee
             // 
-            this.btnEditEmployee.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
             this.btnEditEmployee.AutoSize = true;
             this.btnEditEmployee.BackColor = System.Drawing.Color.YellowGreen;
             this.btnEditEmployee.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnEditEmployee.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEditEmployee.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEditEmployee.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnEditEmployee.Location = new System.Drawing.Point(491, 116);
+            this.btnEditEmployee.Location = new System.Drawing.Point(474, 116);
             this.btnEditEmployee.Name = "btnEditEmployee";
-            this.btnEditEmployee.Size = new System.Drawing.Size(171, 148);
+            this.btnEditEmployee.Size = new System.Drawing.Size(175, 148);
             this.btnEditEmployee.TabIndex = 5;
             this.btnEditEmployee.Text = "Edit Employee";
             this.btnEditEmployee.UseVisualStyleBackColor = false;
             this.btnEditEmployee.Click += new System.EventHandler(this.btnEditEmployee_Click);
             // 
-            // btnEmployeeRpt
+            // btnScheduling
             // 
-            this.btnEmployeeRpt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnEmployeeRpt.AutoSize = true;
-            this.btnEmployeeRpt.BackColor = System.Drawing.Color.YellowGreen;
-            this.btnEmployeeRpt.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnEmployeeRpt.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEmployeeRpt.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEmployeeRpt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnEmployeeRpt.Location = new System.Drawing.Point(683, 116);
-            this.btnEmployeeRpt.Name = "btnEmployeeRpt";
-            this.btnEmployeeRpt.Size = new System.Drawing.Size(181, 148);
-            this.btnEmployeeRpt.TabIndex = 6;
-            this.btnEmployeeRpt.Text = "Employee Report";
-            this.btnEmployeeRpt.UseVisualStyleBackColor = false;
-            this.btnEmployeeRpt.Click += new System.EventHandler(this.btnEmployeeRpt_Click);
+            this.btnScheduling.AutoSize = true;
+            this.btnScheduling.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnScheduling.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnScheduling.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnScheduling.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnScheduling.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnScheduling.Location = new System.Drawing.Point(655, 116);
+            this.btnScheduling.Name = "btnScheduling";
+            this.btnScheduling.Size = new System.Drawing.Size(201, 148);
+            this.btnScheduling.TabIndex = 7;
+            this.btnScheduling.Text = "Technical Schedules";
+            this.btnScheduling.UseVisualStyleBackColor = false;
+            this.btnScheduling.Click += new System.EventHandler(this.btnScheduling_Click);
+            // 
+            // btnNewEvent
+            // 
+            this.btnNewEvent.AutoSize = true;
+            this.btnNewEvent.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnNewEvent.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnNewEvent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNewEvent.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNewEvent.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnNewEvent.Location = new System.Drawing.Point(474, 282);
+            this.btnNewEvent.Name = "btnNewEvent";
+            this.btnNewEvent.Size = new System.Drawing.Size(175, 148);
+            this.btnNewEvent.TabIndex = 8;
+            this.btnNewEvent.Text = "New Technical Event";
+            this.btnNewEvent.UseVisualStyleBackColor = false;
+            this.btnNewEvent.Click += new System.EventHandler(this.btnNewEvent_Click);
+            // 
+            // btnUpdateEvent
+            // 
+            this.btnUpdateEvent.AutoSize = true;
+            this.btnUpdateEvent.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnUpdateEvent.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnUpdateEvent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpdateEvent.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdateEvent.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnUpdateEvent.Location = new System.Drawing.Point(266, 282);
+            this.btnUpdateEvent.Name = "btnUpdateEvent";
+            this.btnUpdateEvent.Size = new System.Drawing.Size(202, 148);
+            this.btnUpdateEvent.TabIndex = 6;
+            this.btnUpdateEvent.Text = "Update Event";
+            this.btnUpdateEvent.UseVisualStyleBackColor = false;
+            this.btnUpdateEvent.Click += new System.EventHandler(this.btnUpdateEvent_Click);
             // 
             // frmEmpManagement
             // 
@@ -317,7 +345,9 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(885, 537);
-            this.Controls.Add(this.btnEmployeeRpt);
+            this.Controls.Add(this.btnNewEvent);
+            this.Controls.Add(this.btnScheduling);
+            this.Controls.Add(this.btnUpdateEvent);
             this.Controls.Add(this.btnEditEmployee);
             this.Controls.Add(this.btnNewEmp);
             this.Controls.Add(this.pnlTop);
@@ -355,7 +385,9 @@
         private System.Windows.Forms.Button btnCall;
         private System.Windows.Forms.Button btnNewEmp;
         private System.Windows.Forms.Button btnEditEmployee;
-        private System.Windows.Forms.Button btnEmployeeRpt;
+        private System.Windows.Forms.Button btnScheduling;
+        private System.Windows.Forms.Button btnNewEvent;
+        private System.Windows.Forms.Button btnUpdateEvent;
     }
 }
 

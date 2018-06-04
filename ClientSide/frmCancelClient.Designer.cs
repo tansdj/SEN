@@ -49,6 +49,7 @@
             this.txtOutstanding = new System.Windows.Forms.TextBox();
             this.lblOutstanding = new System.Windows.Forms.Label();
             this.chcDiffPaid = new System.Windows.Forms.CheckBox();
+            this.btnCalculateOutstanding = new System.Windows.Forms.Button();
             this.pnlMenu.SuspendLayout();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogoSmall)).BeginInit();
@@ -326,27 +327,29 @@
             this.txtOutstanding.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.txtOutstanding.Font = new System.Drawing.Font("Franklin Gothic Book", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtOutstanding.ForeColor = System.Drawing.Color.Snow;
-            this.txtOutstanding.Location = new System.Drawing.Point(409, 199);
+            this.txtOutstanding.Location = new System.Drawing.Point(409, 231);
             this.txtOutstanding.Name = "txtOutstanding";
             this.txtOutstanding.Size = new System.Drawing.Size(225, 26);
             this.txtOutstanding.TabIndex = 22;
+            this.txtOutstanding.Visible = false;
             // 
             // lblOutstanding
             // 
             this.lblOutstanding.AutoSize = true;
             this.lblOutstanding.Font = new System.Drawing.Font("Segoe MDL2 Assets", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblOutstanding.ForeColor = System.Drawing.Color.White;
-            this.lblOutstanding.Location = new System.Drawing.Point(280, 202);
+            this.lblOutstanding.Location = new System.Drawing.Point(280, 234);
             this.lblOutstanding.Name = "lblOutstanding";
             this.lblOutstanding.Size = new System.Drawing.Size(123, 16);
             this.lblOutstanding.TabIndex = 21;
             this.lblOutstanding.Text = "Outstanding Amount:";
+            this.lblOutstanding.Visible = false;
             // 
             // chcDiffPaid
             // 
             this.chcDiffPaid.AutoSize = true;
             this.chcDiffPaid.ForeColor = System.Drawing.Color.White;
-            this.chcDiffPaid.Location = new System.Drawing.Point(409, 246);
+            this.chcDiffPaid.Location = new System.Drawing.Point(409, 278);
             this.chcDiffPaid.Name = "chcDiffPaid";
             this.chcDiffPaid.Size = new System.Drawing.Size(99, 17);
             this.chcDiffPaid.TabIndex = 23;
@@ -354,12 +357,28 @@
             this.chcDiffPaid.UseVisualStyleBackColor = true;
             this.chcDiffPaid.Visible = false;
             // 
+            // btnCalculateOutstanding
+            // 
+            this.btnCalculateOutstanding.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCalculateOutstanding.BackColor = System.Drawing.Color.Gainsboro;
+            this.btnCalculateOutstanding.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCalculateOutstanding.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCalculateOutstanding.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnCalculateOutstanding.Location = new System.Drawing.Point(409, 183);
+            this.btnCalculateOutstanding.Name = "btnCalculateOutstanding";
+            this.btnCalculateOutstanding.Size = new System.Drawing.Size(216, 32);
+            this.btnCalculateOutstanding.TabIndex = 24;
+            this.btnCalculateOutstanding.Text = "Calculate Outstanding";
+            this.btnCalculateOutstanding.UseVisualStyleBackColor = false;
+            this.btnCalculateOutstanding.Click += new System.EventHandler(this.btnCalculateOutstanding_Click);
+            // 
             // frmCancelClient
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(885, 537);
+            this.Controls.Add(this.btnCalculateOutstanding);
             this.Controls.Add(this.chcDiffPaid);
             this.Controls.Add(this.txtOutstanding);
             this.Controls.Add(this.lblOutstanding);
@@ -407,6 +426,7 @@
         private System.Windows.Forms.TextBox txtOutstanding;
         private System.Windows.Forms.Label lblOutstanding;
         private System.Windows.Forms.CheckBox chcDiffPaid;
+        private System.Windows.Forms.Button btnCalculateOutstanding;
     }
 }
 

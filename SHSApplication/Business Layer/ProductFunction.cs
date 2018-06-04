@@ -23,7 +23,7 @@ namespace SHSApplication.Business_Layer
         public string ProdFunction
         {
             get { return prodFunction; }
-            set { prodFunction = value; }
+            set { prodFunction = value.Trim(' '); }
         }
 
         public ProductFunction()
@@ -58,7 +58,7 @@ namespace SHSApplication.Business_Layer
 
         public override string ToString()
         {
-            return base.ToString();
+            return this.ProdFunction;
         }
 
         public bool InsertFunction()

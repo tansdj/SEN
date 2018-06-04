@@ -288,6 +288,7 @@
             this.btnPrintContract.TabIndex = 16;
             this.btnPrintContract.Text = "Print Contract";
             this.btnPrintContract.UseVisualStyleBackColor = false;
+            this.btnPrintContract.Click += new System.EventHandler(this.btnPrintContract_Click);
             // 
             // lblFormCommand
             // 

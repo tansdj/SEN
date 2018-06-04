@@ -43,44 +43,47 @@
             this.picLogoSmall = new System.Windows.Forms.PictureBox();
             this.picLogo = new System.Windows.Forms.PictureBox();
             this.gpProductInformation = new System.Windows.Forms.GroupBox();
+            this.cmbProdStatus = new System.Windows.Forms.ComboBox();
+            this.lblProdStatus = new System.Windows.Forms.Label();
             this.cmbProducts = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.redProdDesc = new System.Windows.Forms.RichTextBox();
             this.txtProductName = new System.Windows.Forms.TextBox();
-            this.btnCancelProduct = new System.Windows.Forms.Button();
             this.btnNextComp = new System.Windows.Forms.Button();
             this.lblBasePrice = new System.Windows.Forms.Label();
             this.lblProdDesc = new System.Windows.Forms.Label();
             this.lblProductName = new System.Windows.Forms.Label();
             this.txtProductPrice = new System.Windows.Forms.TextBox();
+            this.btnCancelProduct = new System.Windows.Forms.Button();
             this.lblConfName = new System.Windows.Forms.Label();
             this.lblConfdesc = new System.Windows.Forms.Label();
             this.lblConfCost = new System.Windows.Forms.Label();
             this.btnUpdate = new System.Windows.Forms.Button();
-            this.btnAddConf = new System.Windows.Forms.Button();
             this.txtConfName = new System.Windows.Forms.TextBox();
             this.redConfDesc = new System.Windows.Forms.RichTextBox();
             this.txtAddCost = new System.Windows.Forms.TextBox();
             this.lbComponentsConf = new System.Windows.Forms.ListBox();
-            this.btnCancelConf = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.gbConfInfo = new System.Windows.Forms.GroupBox();
+            this.lblCompConfigs = new System.Windows.Forms.Label();
+            this.lbConfs = new System.Windows.Forms.ListBox();
             this.cmbConfStatus = new System.Windows.Forms.ComboBox();
             this.lblConfStatus = new System.Windows.Forms.Label();
             this.lblModel = new System.Windows.Forms.Label();
             this.lblDesc = new System.Windows.Forms.Label();
             this.lblManufacturer = new System.Windows.Forms.Label();
             this.btnNextConf = new System.Windows.Forms.Button();
-            this.btnAddComp = new System.Windows.Forms.Button();
             this.txtCompName = new System.Windows.Forms.TextBox();
             this.redCompDesc = new System.Windows.Forms.RichTextBox();
             this.txtCompManufacturer = new System.Windows.Forms.TextBox();
             this.lbComponents = new System.Windows.Forms.ListBox();
-            this.btnCancelComp = new System.Windows.Forms.Button();
             this.lblProdComps = new System.Windows.Forms.Label();
             this.gbCompInfo = new System.Windows.Forms.GroupBox();
             this.cmbCompStatus = new System.Windows.Forms.ComboBox();
             this.lblCompStatus = new System.Windows.Forms.Label();
+            this.pnlConf = new System.Windows.Forms.Panel();
+            this.pnlComp = new System.Windows.Forms.Panel();
+            this.pnlProduct = new System.Windows.Forms.Panel();
             this.pnlMenu.SuspendLayout();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picLogoSmall)).BeginInit();
@@ -88,6 +91,9 @@
             this.gpProductInformation.SuspendLayout();
             this.gbConfInfo.SuspendLayout();
             this.gbCompInfo.SuspendLayout();
+            this.pnlConf.SuspendLayout();
+            this.pnlComp.SuspendLayout();
+            this.pnlProduct.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlMenu
@@ -300,12 +306,13 @@
             // 
             this.gpProductInformation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gpProductInformation.BackColor = System.Drawing.Color.Transparent;
+            this.gpProductInformation.BackColor = System.Drawing.Color.Black;
+            this.gpProductInformation.Controls.Add(this.cmbProdStatus);
+            this.gpProductInformation.Controls.Add(this.lblProdStatus);
             this.gpProductInformation.Controls.Add(this.cmbProducts);
             this.gpProductInformation.Controls.Add(this.label1);
             this.gpProductInformation.Controls.Add(this.redProdDesc);
             this.gpProductInformation.Controls.Add(this.txtProductName);
-            this.gpProductInformation.Controls.Add(this.btnCancelProduct);
             this.gpProductInformation.Controls.Add(this.btnNextComp);
             this.gpProductInformation.Controls.Add(this.lblBasePrice);
             this.gpProductInformation.Controls.Add(this.lblProdDesc);
@@ -313,12 +320,36 @@
             this.gpProductInformation.Controls.Add(this.txtProductPrice);
             this.gpProductInformation.Cursor = System.Windows.Forms.Cursors.Default;
             this.gpProductInformation.ForeColor = System.Drawing.Color.Snow;
-            this.gpProductInformation.Location = new System.Drawing.Point(263, 115);
+            this.gpProductInformation.Location = new System.Drawing.Point(4, 9);
             this.gpProductInformation.Name = "gpProductInformation";
-            this.gpProductInformation.Size = new System.Drawing.Size(610, 321);
+            this.gpProductInformation.Size = new System.Drawing.Size(597, 373);
             this.gpProductInformation.TabIndex = 18;
             this.gpProductInformation.TabStop = false;
             this.gpProductInformation.Text = "Product Information";
+            // 
+            // cmbProdStatus
+            // 
+            this.cmbProdStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.cmbProdStatus.Font = new System.Drawing.Font("Franklin Gothic Book", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbProdStatus.ForeColor = System.Drawing.Color.Snow;
+            this.cmbProdStatus.FormattingEnabled = true;
+            this.cmbProdStatus.Items.AddRange(new object[] {
+            "Active",
+            "Discontinued"});
+            this.cmbProdStatus.Location = new System.Drawing.Point(144, 249);
+            this.cmbProdStatus.Name = "cmbProdStatus";
+            this.cmbProdStatus.Size = new System.Drawing.Size(215, 29);
+            this.cmbProdStatus.TabIndex = 27;
+            this.cmbProdStatus.Text = "Select Status";
+            // 
+            // lblProdStatus
+            // 
+            this.lblProdStatus.Font = new System.Drawing.Font("Segoe MDL2 Assets", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProdStatus.Location = new System.Drawing.Point(75, 252);
+            this.lblProdStatus.Name = "lblProdStatus";
+            this.lblProdStatus.Size = new System.Drawing.Size(45, 19);
+            this.lblProdStatus.TabIndex = 26;
+            this.lblProdStatus.Text = "Status:";
             // 
             // cmbProducts
             // 
@@ -356,27 +387,13 @@
             // txtProductName
             // 
             this.txtProductName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtProductName.Enabled = false;
             this.txtProductName.Font = new System.Drawing.Font("Franklin Gothic Book", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtProductName.ForeColor = System.Drawing.Color.Snow;
             this.txtProductName.Location = new System.Drawing.Point(144, 69);
             this.txtProductName.Name = "txtProductName";
             this.txtProductName.Size = new System.Drawing.Size(202, 26);
             this.txtProductName.TabIndex = 16;
-            // 
-            // btnCancelProduct
-            // 
-            this.btnCancelProduct.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCancelProduct.BackColor = System.Drawing.Color.YellowGreen;
-            this.btnCancelProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancelProduct.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelProduct.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnCancelProduct.Location = new System.Drawing.Point(283, 272);
-            this.btnCancelProduct.Name = "btnCancelProduct";
-            this.btnCancelProduct.Size = new System.Drawing.Size(153, 42);
-            this.btnCancelProduct.TabIndex = 15;
-            this.btnCancelProduct.Text = "Cancel";
-            this.btnCancelProduct.UseVisualStyleBackColor = false;
-            this.btnCancelProduct.Click += new System.EventHandler(this.btnCancelProduct_Click);
             // 
             // btnNextComp
             // 
@@ -387,9 +404,9 @@
             this.btnNextComp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNextComp.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNextComp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnNextComp.Location = new System.Drawing.Point(442, 272);
+            this.btnNextComp.Location = new System.Drawing.Point(433, 324);
             this.btnNextComp.Name = "btnNextComp";
-            this.btnNextComp.Size = new System.Drawing.Size(153, 43);
+            this.btnNextComp.Size = new System.Drawing.Size(158, 43);
             this.btnNextComp.TabIndex = 14;
             this.btnNextComp.Text = "Next";
             this.btnNextComp.UseVisualStyleBackColor = false;
@@ -434,11 +451,26 @@
             this.txtProductPrice.Size = new System.Drawing.Size(202, 26);
             this.txtProductPrice.TabIndex = 18;
             // 
+            // btnCancelProduct
+            // 
+            this.btnCancelProduct.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCancelProduct.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnCancelProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCancelProduct.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancelProduct.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnCancelProduct.Location = new System.Drawing.Point(714, 490);
+            this.btnCancelProduct.Name = "btnCancelProduct";
+            this.btnCancelProduct.Size = new System.Drawing.Size(153, 42);
+            this.btnCancelProduct.TabIndex = 15;
+            this.btnCancelProduct.Text = "Cancel";
+            this.btnCancelProduct.UseVisualStyleBackColor = false;
+            this.btnCancelProduct.Click += new System.EventHandler(this.btnCancelProduct_Click);
+            // 
             // lblConfName
             // 
             this.lblConfName.AutoSize = true;
             this.lblConfName.Font = new System.Drawing.Font("Segoe MDL2 Assets", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblConfName.Location = new System.Drawing.Point(280, 11);
+            this.lblConfName.Location = new System.Drawing.Point(376, 28);
             this.lblConfName.Name = "lblConfName";
             this.lblConfName.Size = new System.Drawing.Size(45, 16);
             this.lblConfName.TabIndex = 2;
@@ -448,7 +480,7 @@
             // 
             this.lblConfdesc.AutoSize = true;
             this.lblConfdesc.Font = new System.Drawing.Font("Segoe MDL2 Assets", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblConfdesc.Location = new System.Drawing.Point(280, 59);
+            this.lblConfdesc.Location = new System.Drawing.Point(376, 76);
             this.lblConfdesc.Name = "lblConfdesc";
             this.lblConfdesc.Size = new System.Drawing.Size(73, 16);
             this.lblConfdesc.TabIndex = 3;
@@ -457,7 +489,7 @@
             // lblConfCost
             // 
             this.lblConfCost.Font = new System.Drawing.Font("Segoe MDL2 Assets", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblConfCost.Location = new System.Drawing.Point(280, 141);
+            this.lblConfCost.Location = new System.Drawing.Point(376, 158);
             this.lblConfCost.Name = "lblConfCost";
             this.lblConfCost.Size = new System.Drawing.Size(126, 19);
             this.lblConfCost.TabIndex = 4;
@@ -480,26 +512,13 @@
             this.btnUpdate.UseVisualStyleBackColor = false;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
-            // btnAddConf
-            // 
-            this.btnAddConf.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddConf.BackColor = System.Drawing.Color.Gainsboro;
-            this.btnAddConf.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddConf.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddConf.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnAddConf.Location = new System.Drawing.Point(283, 251);
-            this.btnAddConf.Name = "btnAddConf";
-            this.btnAddConf.Size = new System.Drawing.Size(215, 36);
-            this.btnAddConf.TabIndex = 15;
-            this.btnAddConf.Text = "Add Configuration";
-            this.btnAddConf.UseVisualStyleBackColor = false;
-            // 
             // txtConfName
             // 
             this.txtConfName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtConfName.Enabled = false;
             this.txtConfName.Font = new System.Drawing.Font("Franklin Gothic Book", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtConfName.ForeColor = System.Drawing.Color.Snow;
-            this.txtConfName.Location = new System.Drawing.Point(283, 33);
+            this.txtConfName.Location = new System.Drawing.Point(379, 50);
             this.txtConfName.Name = "txtConfName";
             this.txtConfName.Size = new System.Drawing.Size(216, 26);
             this.txtConfName.TabIndex = 16;
@@ -509,7 +528,7 @@
             this.redConfDesc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.redConfDesc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.redConfDesc.ForeColor = System.Drawing.SystemColors.Window;
-            this.redConfDesc.Location = new System.Drawing.Point(283, 78);
+            this.redConfDesc.Location = new System.Drawing.Point(379, 95);
             this.redConfDesc.Name = "redConfDesc";
             this.redConfDesc.Size = new System.Drawing.Size(216, 68);
             this.redConfDesc.TabIndex = 17;
@@ -520,7 +539,7 @@
             this.txtAddCost.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.txtAddCost.Font = new System.Drawing.Font("Franklin Gothic Book", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAddCost.ForeColor = System.Drawing.Color.Snow;
-            this.txtAddCost.Location = new System.Drawing.Point(283, 163);
+            this.txtAddCost.Location = new System.Drawing.Point(379, 180);
             this.txtAddCost.Name = "txtAddCost";
             this.txtAddCost.Size = new System.Drawing.Size(216, 26);
             this.txtAddCost.TabIndex = 18;
@@ -532,23 +551,9 @@
             this.lbComponentsConf.FormattingEnabled = true;
             this.lbComponentsConf.Location = new System.Drawing.Point(9, 36);
             this.lbComponentsConf.Name = "lbComponentsConf";
-            this.lbComponentsConf.Size = new System.Drawing.Size(248, 251);
+            this.lbComponentsConf.Size = new System.Drawing.Size(189, 251);
             this.lbComponentsConf.TabIndex = 19;
-            // 
-            // btnCancelConf
-            // 
-            this.btnCancelConf.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCancelConf.BackColor = System.Drawing.Color.YellowGreen;
-            this.btnCancelConf.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancelConf.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelConf.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnCancelConf.Location = new System.Drawing.Point(283, 315);
-            this.btnCancelConf.Name = "btnCancelConf";
-            this.btnCancelConf.Size = new System.Drawing.Size(153, 42);
-            this.btnCancelConf.TabIndex = 20;
-            this.btnCancelConf.Text = "Cancel";
-            this.btnCancelConf.UseVisualStyleBackColor = false;
-            this.btnCancelConf.Click += new System.EventHandler(this.btnCancelConf_Click);
+            this.lbComponentsConf.SelectedIndexChanged += new System.EventHandler(this.lbComponentsConf_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -565,27 +570,47 @@
             this.gbConfInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gbConfInfo.BackColor = System.Drawing.Color.Black;
+            this.gbConfInfo.Controls.Add(this.lblCompConfigs);
+            this.gbConfInfo.Controls.Add(this.lbConfs);
             this.gbConfInfo.Controls.Add(this.cmbConfStatus);
             this.gbConfInfo.Controls.Add(this.lblConfStatus);
             this.gbConfInfo.Controls.Add(this.label4);
-            this.gbConfInfo.Controls.Add(this.btnCancelConf);
             this.gbConfInfo.Controls.Add(this.lbComponentsConf);
             this.gbConfInfo.Controls.Add(this.txtAddCost);
             this.gbConfInfo.Controls.Add(this.redConfDesc);
             this.gbConfInfo.Controls.Add(this.txtConfName);
-            this.gbConfInfo.Controls.Add(this.btnAddConf);
             this.gbConfInfo.Controls.Add(this.btnUpdate);
             this.gbConfInfo.Controls.Add(this.lblConfCost);
             this.gbConfInfo.Controls.Add(this.lblConfdesc);
             this.gbConfInfo.Controls.Add(this.lblConfName);
             this.gbConfInfo.Cursor = System.Windows.Forms.Cursors.Default;
             this.gbConfInfo.ForeColor = System.Drawing.Color.Snow;
-            this.gbConfInfo.Location = new System.Drawing.Point(263, 115);
+            this.gbConfInfo.Location = new System.Drawing.Point(6, 7);
             this.gbConfInfo.Name = "gbConfInfo";
-            this.gbConfInfo.Size = new System.Drawing.Size(610, 373);
+            this.gbConfInfo.Size = new System.Drawing.Size(598, 373);
             this.gbConfInfo.TabIndex = 21;
             this.gbConfInfo.TabStop = false;
             this.gbConfInfo.Text = "Configuration Information";
+            // 
+            // lblCompConfigs
+            // 
+            this.lblCompConfigs.AutoSize = true;
+            this.lblCompConfigs.Font = new System.Drawing.Font("Segoe MDL2 Assets", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCompConfigs.Location = new System.Drawing.Point(201, 17);
+            this.lblCompConfigs.Name = "lblCompConfigs";
+            this.lblCompConfigs.Size = new System.Drawing.Size(158, 16);
+            this.lblCompConfigs.TabIndex = 27;
+            this.lblCompConfigs.Text = "Component Configurations:";
+            // 
+            // lbConfs
+            // 
+            this.lbConfs.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.lbConfs.ForeColor = System.Drawing.SystemColors.Window;
+            this.lbConfs.FormattingEnabled = true;
+            this.lbConfs.Location = new System.Drawing.Point(204, 36);
+            this.lbConfs.Name = "lbConfs";
+            this.lbConfs.Size = new System.Drawing.Size(166, 251);
+            this.lbConfs.TabIndex = 26;
             // 
             // cmbConfStatus
             // 
@@ -596,7 +621,7 @@
             this.cmbConfStatus.Items.AddRange(new object[] {
             "Active",
             "Discontinued"});
-            this.cmbConfStatus.Location = new System.Drawing.Point(283, 214);
+            this.cmbConfStatus.Location = new System.Drawing.Point(379, 231);
             this.cmbConfStatus.Name = "cmbConfStatus";
             this.cmbConfStatus.Size = new System.Drawing.Size(215, 29);
             this.cmbConfStatus.TabIndex = 25;
@@ -605,7 +630,7 @@
             // lblConfStatus
             // 
             this.lblConfStatus.Font = new System.Drawing.Font("Segoe MDL2 Assets", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblConfStatus.Location = new System.Drawing.Point(280, 192);
+            this.lblConfStatus.Location = new System.Drawing.Point(376, 209);
             this.lblConfStatus.Name = "lblConfStatus";
             this.lblConfStatus.Size = new System.Drawing.Size(126, 19);
             this.lblConfStatus.TabIndex = 24;
@@ -615,7 +640,7 @@
             // 
             this.lblModel.AutoSize = true;
             this.lblModel.Font = new System.Drawing.Font("Segoe MDL2 Assets", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblModel.Location = new System.Drawing.Point(280, 11);
+            this.lblModel.Location = new System.Drawing.Point(284, 20);
             this.lblModel.Name = "lblModel";
             this.lblModel.Size = new System.Drawing.Size(46, 16);
             this.lblModel.TabIndex = 2;
@@ -625,7 +650,7 @@
             // 
             this.lblDesc.AutoSize = true;
             this.lblDesc.Font = new System.Drawing.Font("Segoe MDL2 Assets", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDesc.Location = new System.Drawing.Point(280, 106);
+            this.lblDesc.Location = new System.Drawing.Point(284, 115);
             this.lblDesc.Name = "lblDesc";
             this.lblDesc.Size = new System.Drawing.Size(73, 16);
             this.lblDesc.TabIndex = 3;
@@ -634,7 +659,7 @@
             // lblManufacturer
             // 
             this.lblManufacturer.Font = new System.Drawing.Font("Segoe MDL2 Assets", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblManufacturer.Location = new System.Drawing.Point(280, 55);
+            this.lblManufacturer.Location = new System.Drawing.Point(284, 64);
             this.lblManufacturer.Name = "lblManufacturer";
             this.lblManufacturer.Size = new System.Drawing.Size(126, 19);
             this.lblManufacturer.TabIndex = 4;
@@ -649,7 +674,7 @@
             this.btnNextConf.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNextConf.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNextConf.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnNextConf.Location = new System.Drawing.Point(442, 315);
+            this.btnNextConf.Location = new System.Drawing.Point(432, 321);
             this.btnNextConf.Name = "btnNextConf";
             this.btnNextConf.Size = new System.Drawing.Size(153, 43);
             this.btnNextConf.TabIndex = 14;
@@ -657,26 +682,13 @@
             this.btnNextConf.UseVisualStyleBackColor = false;
             this.btnNextConf.Click += new System.EventHandler(this.btnNextConf_Click);
             // 
-            // btnAddComp
-            // 
-            this.btnAddComp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddComp.BackColor = System.Drawing.Color.Gainsboro;
-            this.btnAddComp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAddComp.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddComp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnAddComp.Location = new System.Drawing.Point(283, 252);
-            this.btnAddComp.Name = "btnAddComp";
-            this.btnAddComp.Size = new System.Drawing.Size(215, 33);
-            this.btnAddComp.TabIndex = 15;
-            this.btnAddComp.Text = "Add Component";
-            this.btnAddComp.UseVisualStyleBackColor = false;
-            // 
             // txtCompName
             // 
             this.txtCompName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtCompName.Enabled = false;
             this.txtCompName.Font = new System.Drawing.Font("Franklin Gothic Book", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCompName.ForeColor = System.Drawing.Color.Snow;
-            this.txtCompName.Location = new System.Drawing.Point(283, 33);
+            this.txtCompName.Location = new System.Drawing.Point(287, 42);
             this.txtCompName.Name = "txtCompName";
             this.txtCompName.Size = new System.Drawing.Size(216, 26);
             this.txtCompName.TabIndex = 16;
@@ -686,7 +698,7 @@
             this.redCompDesc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.redCompDesc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.redCompDesc.ForeColor = System.Drawing.SystemColors.Window;
-            this.redCompDesc.Location = new System.Drawing.Point(283, 125);
+            this.redCompDesc.Location = new System.Drawing.Point(287, 134);
             this.redCompDesc.Name = "redCompDesc";
             this.redCompDesc.Size = new System.Drawing.Size(216, 68);
             this.redCompDesc.TabIndex = 17;
@@ -695,9 +707,10 @@
             // txtCompManufacturer
             // 
             this.txtCompManufacturer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.txtCompManufacturer.Enabled = false;
             this.txtCompManufacturer.Font = new System.Drawing.Font("Franklin Gothic Book", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCompManufacturer.ForeColor = System.Drawing.Color.Snow;
-            this.txtCompManufacturer.Location = new System.Drawing.Point(283, 78);
+            this.txtCompManufacturer.Location = new System.Drawing.Point(287, 87);
             this.txtCompManufacturer.Name = "txtCompManufacturer";
             this.txtCompManufacturer.Size = new System.Drawing.Size(216, 26);
             this.txtCompManufacturer.TabIndex = 18;
@@ -711,21 +724,6 @@
             this.lbComponents.Name = "lbComponents";
             this.lbComponents.Size = new System.Drawing.Size(248, 251);
             this.lbComponents.TabIndex = 19;
-            // 
-            // btnCancelComp
-            // 
-            this.btnCancelComp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnCancelComp.BackColor = System.Drawing.Color.YellowGreen;
-            this.btnCancelComp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancelComp.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancelComp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.btnCancelComp.Location = new System.Drawing.Point(283, 315);
-            this.btnCancelComp.Name = "btnCancelComp";
-            this.btnCancelComp.Size = new System.Drawing.Size(153, 42);
-            this.btnCancelComp.TabIndex = 20;
-            this.btnCancelComp.Text = "Cancel";
-            this.btnCancelComp.UseVisualStyleBackColor = false;
-            this.btnCancelComp.Click += new System.EventHandler(this.btnCancelComp_Click);
             // 
             // lblProdComps
             // 
@@ -745,21 +743,19 @@
             this.gbCompInfo.Controls.Add(this.cmbCompStatus);
             this.gbCompInfo.Controls.Add(this.lblCompStatus);
             this.gbCompInfo.Controls.Add(this.lblProdComps);
-            this.gbCompInfo.Controls.Add(this.btnCancelComp);
             this.gbCompInfo.Controls.Add(this.lbComponents);
             this.gbCompInfo.Controls.Add(this.txtCompManufacturer);
             this.gbCompInfo.Controls.Add(this.redCompDesc);
             this.gbCompInfo.Controls.Add(this.txtCompName);
-            this.gbCompInfo.Controls.Add(this.btnAddComp);
             this.gbCompInfo.Controls.Add(this.btnNextConf);
             this.gbCompInfo.Controls.Add(this.lblManufacturer);
             this.gbCompInfo.Controls.Add(this.lblDesc);
             this.gbCompInfo.Controls.Add(this.lblModel);
             this.gbCompInfo.Cursor = System.Windows.Forms.Cursors.Default;
             this.gbCompInfo.ForeColor = System.Drawing.Color.Snow;
-            this.gbCompInfo.Location = new System.Drawing.Point(263, 115);
+            this.gbCompInfo.Location = new System.Drawing.Point(4, 12);
             this.gbCompInfo.Name = "gbCompInfo";
-            this.gbCompInfo.Size = new System.Drawing.Size(610, 373);
+            this.gbCompInfo.Size = new System.Drawing.Size(594, 373);
             this.gbCompInfo.TabIndex = 20;
             this.gbCompInfo.TabStop = false;
             this.gbCompInfo.Text = "Component Information";
@@ -773,7 +769,7 @@
             this.cmbCompStatus.Items.AddRange(new object[] {
             "Active",
             "Discontinued"});
-            this.cmbCompStatus.Location = new System.Drawing.Point(283, 217);
+            this.cmbCompStatus.Location = new System.Drawing.Point(287, 226);
             this.cmbCompStatus.Name = "cmbCompStatus";
             this.cmbCompStatus.Size = new System.Drawing.Size(215, 29);
             this.cmbCompStatus.TabIndex = 23;
@@ -782,11 +778,41 @@
             // lblCompStatus
             // 
             this.lblCompStatus.Font = new System.Drawing.Font("Segoe MDL2 Assets", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCompStatus.Location = new System.Drawing.Point(280, 195);
+            this.lblCompStatus.Location = new System.Drawing.Point(284, 204);
             this.lblCompStatus.Name = "lblCompStatus";
             this.lblCompStatus.Size = new System.Drawing.Size(126, 19);
             this.lblCompStatus.TabIndex = 22;
             this.lblCompStatus.Text = "Status:";
+            // 
+            // pnlConf
+            // 
+            this.pnlConf.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlConf.Controls.Add(this.gbConfInfo);
+            this.pnlConf.Location = new System.Drawing.Point(263, 116);
+            this.pnlConf.Name = "pnlConf";
+            this.pnlConf.Size = new System.Drawing.Size(604, 391);
+            this.pnlConf.TabIndex = 22;
+            // 
+            // pnlComp
+            // 
+            this.pnlComp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlComp.Controls.Add(this.gbCompInfo);
+            this.pnlComp.Location = new System.Drawing.Point(266, 107);
+            this.pnlComp.Name = "pnlComp";
+            this.pnlComp.Size = new System.Drawing.Size(604, 391);
+            this.pnlComp.TabIndex = 23;
+            // 
+            // pnlProduct
+            // 
+            this.pnlProduct.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlProduct.Controls.Add(this.gpProductInformation);
+            this.pnlProduct.Location = new System.Drawing.Point(263, 99);
+            this.pnlProduct.Name = "pnlProduct";
+            this.pnlProduct.Size = new System.Drawing.Size(607, 391);
+            this.pnlProduct.TabIndex = 24;
             // 
             // frmUpdateProduct
             // 
@@ -794,12 +820,13 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(885, 537);
-            this.Controls.Add(this.gbConfInfo);
-            this.Controls.Add(this.gpProductInformation);
+            this.Controls.Add(this.btnCancelProduct);
+            this.Controls.Add(this.pnlComp);
+            this.Controls.Add(this.pnlProduct);
+            this.Controls.Add(this.pnlConf);
             this.Controls.Add(this.pnlTop);
             this.Controls.Add(this.pnlMenu);
             this.Controls.Add(this.picLogo);
-            this.Controls.Add(this.gbCompInfo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmUpdateProduct";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -816,6 +843,9 @@
             this.gbConfInfo.PerformLayout();
             this.gbCompInfo.ResumeLayout(false);
             this.gbCompInfo.PerformLayout();
+            this.pnlConf.ResumeLayout(false);
+            this.pnlComp.ResumeLayout(false);
+            this.pnlProduct.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -850,30 +880,33 @@
         private System.Windows.Forms.Label lblConfdesc;
         private System.Windows.Forms.Label lblConfCost;
         private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.Button btnAddConf;
         private System.Windows.Forms.TextBox txtConfName;
         private System.Windows.Forms.RichTextBox redConfDesc;
         private System.Windows.Forms.TextBox txtAddCost;
         private System.Windows.Forms.ListBox lbComponentsConf;
-        private System.Windows.Forms.Button btnCancelConf;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.GroupBox gbConfInfo;
         private System.Windows.Forms.Label lblModel;
         private System.Windows.Forms.Label lblDesc;
         private System.Windows.Forms.Label lblManufacturer;
         private System.Windows.Forms.Button btnNextConf;
-        private System.Windows.Forms.Button btnAddComp;
         private System.Windows.Forms.TextBox txtCompName;
         private System.Windows.Forms.RichTextBox redCompDesc;
         private System.Windows.Forms.TextBox txtCompManufacturer;
         private System.Windows.Forms.ListBox lbComponents;
-        private System.Windows.Forms.Button btnCancelComp;
         private System.Windows.Forms.Label lblProdComps;
         private System.Windows.Forms.GroupBox gbCompInfo;
         private System.Windows.Forms.Label lblCompStatus;
         private System.Windows.Forms.ComboBox cmbConfStatus;
         private System.Windows.Forms.Label lblConfStatus;
         private System.Windows.Forms.ComboBox cmbCompStatus;
+        private System.Windows.Forms.ComboBox cmbProdStatus;
+        private System.Windows.Forms.Label lblProdStatus;
+        private System.Windows.Forms.Label lblCompConfigs;
+        private System.Windows.Forms.ListBox lbConfs;
+        private System.Windows.Forms.Panel pnlConf;
+        private System.Windows.Forms.Panel pnlComp;
+        private System.Windows.Forms.Panel pnlProduct;
     }
 }
 

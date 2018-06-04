@@ -12,21 +12,21 @@ namespace SHSApplication.Business_Layer
 {
     public class CallOperators:Person
     {
-        private string operatorStatus;
+        private string status;
 
         public CallOperators(string personId, string name, string surname, Address personAddress, Contact personContact,string operatorStatus):base(personId,name,surname,personAddress,personContact)
         {
-            this.OperatorStatus = operatorStatus;
+            this.Status = operatorStatus;
         }
 
         public CallOperators()
         {
 
         }
-        public string OperatorStatus
+        public string Status
         {
-            get { return operatorStatus; }
-            set { operatorStatus = value; }
+            get { return status; }
+            set { status = value.Trim(' '); }
         }
 
         public override bool Equals(object obj)
@@ -36,22 +36,22 @@ namespace SHSApplication.Business_Layer
                 return false;
             }
 
-            CallOperators co = (CallOperators)obj;
+            CallOperators co = obj as CallOperators;
             if ((object)co==null)
             {
                 return false;
             }
-            return base.Equals(obj)&&(this.OperatorStatus==co.OperatorStatus);
+            return base.Equals(obj)&&(this.Status==co.Status);
         }
 
         public override int GetHashCode()
         {
-            return base.GetHashCode()^this.OperatorStatus.GetHashCode();
+            return base.GetHashCode()^this.Status.GetHashCode();
         }
 
         public override string ToString()
         {
-            return base.ToString();
+            return string.Format("{0} {1}({2})", this.Name, this.Surname, this.PersonId);
         }
 
         public bool InsertCallOperator()
@@ -62,7 +62,7 @@ namespace SHSApplication.Business_Layer
             operator_details.Add(QueryBuilder.spAddCallOperator.sp_id, new string[] { DataAccesHelper.typeString, this.PersonId });
             operator_details.Add(QueryBuilder.spAddCallOperator.sp_name, new string[] { DataAccesHelper.typeString, this.Name });
             operator_details.Add(QueryBuilder.spAddCallOperator.sp_surname, new string[] { DataAccesHelper.typeString, this.Surname });
-            operator_details.Add(QueryBuilder.spAddCallOperator.sp_status, new string[] { DataAccesHelper.typeString, this.OperatorStatus });
+            operator_details.Add(QueryBuilder.spAddCallOperator.sp_status, new string[] { DataAccesHelper.typeString, this.Status });
             operator_details.Add(QueryBuilder.spAddCallOperator.sp_addrLine1, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressLine1 });
             operator_details.Add(QueryBuilder.spAddCallOperator.sp_addrLine2, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressLine2 });
             operator_details.Add(QueryBuilder.spAddCallOperator.sp_city, new string[] { DataAccesHelper.typeString, this.PersonAddress.City });
@@ -81,7 +81,7 @@ namespace SHSApplication.Business_Layer
             operator_details.Add(QueryBuilder.spAddCallOperator.sp_id, new string[] { DataAccesHelper.typeString, this.PersonId });
             operator_details.Add(QueryBuilder.spAddCallOperator.sp_name, new string[] { DataAccesHelper.typeString, this.Name });
             operator_details.Add(QueryBuilder.spAddCallOperator.sp_surname, new string[] { DataAccesHelper.typeString, this.Surname });
-            operator_details.Add(QueryBuilder.spAddCallOperator.sp_status, new string[] { DataAccesHelper.typeString, this.OperatorStatus });
+            operator_details.Add(QueryBuilder.spAddCallOperator.sp_status, new string[] { DataAccesHelper.typeString, this.Status });
             operator_details.Add(QueryBuilder.spAddCallOperator.sp_addrLine1, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressLine1 });
             operator_details.Add(QueryBuilder.spAddCallOperator.sp_addrLine2, new string[] { DataAccesHelper.typeString, this.PersonAddress.AddressLine2 });
             operator_details.Add(QueryBuilder.spAddCallOperator.sp_city, new string[] { DataAccesHelper.typeString, this.PersonAddress.City });
@@ -114,7 +114,7 @@ namespace SHSApplication.Business_Layer
                 c.Surname = item[DataAccesHelper.operatorSurname].ToString();
                 c.PersonAddress = new Address(item[DataAccesHelper.addressId].ToString(),item[DataAccesHelper.addrLine1].ToString(),item[DataAccesHelper.addrLine2].ToString(),item[DataAccesHelper.addrCity].ToString(),item[DataAccesHelper.addrPostalCode].ToString());
                 c.PersonContact = new Contact(item[DataAccesHelper.contactId].ToString(), item[DataAccesHelper.contactCell].ToString(), item[DataAccesHelper.contactEmail].ToString());
-                c.OperatorStatus = item[DataAccesHelper.operatorStatus].ToString();
+                c.Status = item[DataAccesHelper.operatorStatus].ToString();
                 callOperators.Add(c);
             }
 

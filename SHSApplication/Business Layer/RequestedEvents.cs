@@ -18,8 +18,9 @@ namespace SHSApplication.Business_Layer
         private string status;
         private string skillRequired;
         private DateTime completedDate;
+        private int scheduleOrder;
 
-        public RequestedEvents(int eventId, Client techLog_client, DateTime requestedDate, DateTime completedDate, string status, string remarks, string skillRequired)
+        public RequestedEvents(Client techLog_client, DateTime requestedDate, string status, string remarks, string skillRequired, DateTime completedDate, int eventId =0, int scheduleOrder=0)
         {
             this.EventId = eventId;
             this.TechLog_Client = techLog_client;
@@ -28,8 +29,22 @@ namespace SHSApplication.Business_Layer
             this.Remarks = remarks;
             this.Status = status;
             this.SkillRequired = skillRequired;
+            this.ScheduleOrder = scheduleOrder;
+        }
+        public RequestedEvents(Client techLog_client, DateTime requestedDate, string status, string remarks, string skillRequired,  int eventId = 0, int scheduleOrder = 0)
+        {
+            this.EventId = eventId;
+            this.TechLog_Client = techLog_client;
+            this.RequestedDate = requestedDate;
+            this.Remarks = remarks;
+            this.Status = status;
+            this.SkillRequired = skillRequired;
+            this.ScheduleOrder = scheduleOrder;
         }
 
+        public int ScheduleOrder
+        { get {return scheduleOrder; }
+          set {scheduleOrder = value; } }
         public DateTime CompletedDate
         {
             get { return completedDate; }
@@ -43,20 +58,20 @@ namespace SHSApplication.Business_Layer
         public string SkillRequired
         {
             get { return skillRequired; }
-            set { skillRequired = value; }
+            set { skillRequired = value.Trim(' '); }
         }
 
         public string Status
         {
             get { return status; }
-            set { status = value; }
+            set { status = value.Trim(' '); }
         }
 
 
         public string Remarks
         {
             get { return remarks; }
-            set { remarks = value; }
+            set { remarks = value.Trim(' '); }
         }
 
 
@@ -101,7 +116,7 @@ namespace SHSApplication.Business_Layer
 
         public override string ToString()
         {
-            return base.ToString();
+            return string.Format("{0}({1}):{2}",this.TechLog_Client.ClientIdentifier,this.RequestedDate.ToShortDateString(),this.SkillRequired);
         }
 
         public bool NewEvent()
@@ -110,12 +125,13 @@ namespace SHSApplication.Business_Layer
             Dictionary<string, string[]> event_details = new Dictionary<string, string[]>();
 
             event_details.Add(DataAccesHelper.eventId, new string[] { DataAccesHelper.typeInt, this.EventId.ToString() });
-            event_details.Add(DataAccesHelper.eventClientId, new string[] { DataAccesHelper.typeString, this.TechLog_Client.PersonId });
+            event_details.Add(DataAccesHelper.eventClientId, new string[] { DataAccesHelper.typeString, this.TechLog_Client.ClientIdentifier });
             event_details.Add(DataAccesHelper.eventReqDate, new string[] { DataAccesHelper.typeDateTime, this.RequestedDate.ToShortDateString() });
-            event_details.Add(DataAccesHelper.eventCompDate, new string[] { DataAccesHelper.typeDateTime, this.CompletedDate.ToShortDateString() });
+            if(this.CompletedDate.Year>=2018)event_details.Add(DataAccesHelper.eventCompDate, new string[] { DataAccesHelper.typeDateTime, this.CompletedDate.ToShortDateString() });
             event_details.Add(DataAccesHelper.eventRemarks, new string[] { DataAccesHelper.typeString, this.Remarks });
             event_details.Add(DataAccesHelper.eventStatus, new string[] { DataAccesHelper.typeString, this.Status });
             event_details.Add(DataAccesHelper.skillReq, new string[] { DataAccesHelper.typeString, this.SkillRequired });
+            event_details.Add(DataAccesHelper.eventScheduleOrder, new string[] { DataAccesHelper.typeInt, this.ScheduleOrder.ToString() });
 
             return dh.runQuery(DataAccesHelper.targetRequestedEvents, DataAccesHelper.requestInsert, event_details);
         }
@@ -126,14 +142,32 @@ namespace SHSApplication.Business_Layer
             Dictionary<string, string[]> event_details = new Dictionary<string, string[]>();
 
             event_details.Add(DataAccesHelper.eventId, new string[] { DataAccesHelper.typeInt, this.EventId.ToString() });
-            event_details.Add(DataAccesHelper.eventClientId, new string[] { DataAccesHelper.typeString, this.TechLog_Client.PersonId });
+            event_details.Add(DataAccesHelper.eventClientId, new string[] { DataAccesHelper.typeString, this.TechLog_Client.ClientIdentifier });
             event_details.Add(DataAccesHelper.eventReqDate, new string[] { DataAccesHelper.typeDateTime, this.RequestedDate.ToShortDateString() });
-            event_details.Add(DataAccesHelper.eventCompDate, new string[] { DataAccesHelper.typeDateTime, this.CompletedDate.ToShortDateString() });
+            if (this.CompletedDate.Year >= 2018) event_details.Add(DataAccesHelper.eventCompDate, new string[] { DataAccesHelper.typeDateTime, this.CompletedDate.ToShortDateString() });
             event_details.Add(DataAccesHelper.eventRemarks, new string[] { DataAccesHelper.typeString, this.Remarks });
             event_details.Add(DataAccesHelper.eventStatus, new string[] { DataAccesHelper.typeString, this.Status });
             event_details.Add(DataAccesHelper.skillReq, new string[] { DataAccesHelper.typeString, this.SkillRequired });
+            event_details.Add(DataAccesHelper.eventScheduleOrder, new string[] { DataAccesHelper.typeInt, this.ScheduleOrder.ToString() });
 
             return dh.runQuery(DataAccesHelper.targetRequestedEvents, DataAccesHelper.requestUpdate, event_details,DataAccesHelper.eventId+" = "+this.EventId);
+        }
+
+        public bool RemoveEvent()
+        {
+            Datahandler dh = Datahandler.getData();
+            Dictionary<string, string[]> event_details = new Dictionary<string, string[]>();
+
+            event_details.Add(DataAccesHelper.eventId, new string[] { DataAccesHelper.typeInt, this.EventId.ToString() });
+            event_details.Add(DataAccesHelper.eventClientId, new string[] { DataAccesHelper.typeString, this.TechLog_Client.ClientIdentifier });
+            event_details.Add(DataAccesHelper.eventReqDate, new string[] { DataAccesHelper.typeDateTime, this.RequestedDate.ToShortDateString() });
+            if (this.CompletedDate.Year >= 2018) event_details.Add(DataAccesHelper.eventCompDate, new string[] { DataAccesHelper.typeDateTime, this.CompletedDate.ToShortDateString() });
+            event_details.Add(DataAccesHelper.eventRemarks, new string[] { DataAccesHelper.typeString, this.Remarks });
+            event_details.Add(DataAccesHelper.eventStatus, new string[] { DataAccesHelper.typeString, this.Status });
+            event_details.Add(DataAccesHelper.skillReq, new string[] { DataAccesHelper.typeString, this.SkillRequired });
+            event_details.Add(DataAccesHelper.eventScheduleOrder, new string[] { DataAccesHelper.typeDateTime, this.ScheduleOrder.ToString() });
+
+            return dh.runQuery(DataAccesHelper.targetRequestedEvents, DataAccesHelper.requestDelete, event_details, DataAccesHelper.eventId + " = " + this.EventId);
         }
 
         public List<RequestedEvents> GetRequestedEvents()
@@ -146,18 +180,20 @@ namespace SHSApplication.Business_Layer
             {
                 RequestedEvents tl = new RequestedEvents();
                 tl.EventId = Convert.ToInt32(item[DataAccesHelper.eventId].ToString());
-                tl.TechLog_Client = new Client();
-                tl.TechLog_Client.PersonId = item[DataAccesHelper.eventClientId].ToString();
+                tl.TechLog_Client = new Client(item[DataAccesHelper.clientId].ToString(),item[DataAccesHelper.clientName].ToString(),item[DataAccesHelper.clientSurname].ToString(),new Address(),new Contact(),"","",item[DataAccesHelper.clientIdentifier].ToString());
                 tl.RequestedDate = Convert.ToDateTime(item[DataAccesHelper.eventReqDate].ToString());
-                tl.CompletedDate = Convert.ToDateTime(item[DataAccesHelper.eventCompDate].ToString());
+                try { tl.CompletedDate = Convert.ToDateTime(item[DataAccesHelper.eventCompDate].ToString()); } catch { }
                 tl.Remarks = item[DataAccesHelper.eventRemarks].ToString();
                 tl.SkillRequired = item[DataAccesHelper.skillReq].ToString();
                 tl.Status = item[DataAccesHelper.eventStatus].ToString();
+                tl.ScheduleOrder = Convert.ToInt32(item[DataAccesHelper.eventScheduleOrder].ToString());
                 events.Add(tl);
             }
 
             return events;
         }
+
+
 
     }
 }
