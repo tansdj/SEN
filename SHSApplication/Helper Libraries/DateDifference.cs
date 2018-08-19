@@ -15,12 +15,12 @@ namespace SHSApplication.Helper_Libraries
             if (start<end)
             {
                 m1 = (end.Month - start.Month);
-                m2 = (end.Year - start.Year);
+                m2 = (end.Year - start.Year)*12;
             }
             else
             {
                 m1 = (start.Month - end.Month);
-                m2 = (start.Year - end.Year);
+                m2 = (start.Year - end.Year)*12;
             }
 
             return m1 + m2;
